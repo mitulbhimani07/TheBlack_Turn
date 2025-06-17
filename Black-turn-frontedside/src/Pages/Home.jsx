@@ -1,0 +1,52 @@
+import React from 'react';
+import banner from "../assets/images/banner.png";
+
+function Home() {
+  return (
+    <div className="bg-[#edf5f7] min-h-screen flex items-center justify-center px-6 py-12 relative overflow-hidden">
+      {/* Half Circle Stroke Elements */}
+      <div className="absolute top-36 -left-4 w-55 h-55 -translate-x-1/2 -translate-y-1/2">
+        <div className="w-full h-full border-32 border-[#b8d4db] rounded-full opacity-30"></div>
+      </div>
+      <div className="absolute bottom-36 -right-4 w-55 h-55 translate-x-1/2 translate-y-1/2">
+        <div className="w-full h-full border-32 border-[#b8d4db] rounded-full opacity-30"></div>
+      </div>
+      
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
+        {/* Left Text Content */}
+        <div>
+          <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
+            Upload Unlimited Songs <br />
+            <span className="text-[#00758f]">Quality Service</span>
+          </h1>
+          <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
+            The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
+            share their creativity across more than 150 streaming platforms, including Spotify, Apple
+            Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
+            reach a wider audience, all while retaining an impressive 95% of your earnings. With our
+            user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
+            72 hours—ensuring your music is always at the forefront.
+          </p>
+          <button className="bg-[#00758f] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005f74] transition-all">
+            Explore the Possibilities
+          </button>
+        </div>
+        {/* Right Image Content */}
+         <div className="min-h-screen  flex items-center justify-center p-10">
+      <div className="relative w-96 h-96 flex justify-center items-center">
+        {/* Second border layer (furthest back) */}
+        <div className="absolute w-full h-full border-4 border-[#075c7c] rounded-xl top-10 left-10 z-0"></div>
+        
+        {/* First border layer (middle) */}
+        <div className="absolute w-full h-full border-4 border-[#075c7c] rounded-xl top-5 left-5 z-10"></div>
+        
+        {/* Main content box (front) */}
+        <img src={banner}  alt="" className='z-10' />
+      </div>
+    </div>
+      </div>
+    </div>
+  );
+}
+
+export default Home;
