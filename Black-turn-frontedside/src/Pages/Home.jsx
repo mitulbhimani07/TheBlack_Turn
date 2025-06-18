@@ -9,7 +9,7 @@ import card4 from "../assets/images/4.png"
 import card5 from "../assets/images/5.png"
 import card6 from "../assets/images/6.png"
 
-import { Music, Play, Radio, Smartphone, Headphones, Mic, Volume2, Disc } from 'lucide-react';
+import { Music, Monitor, Building, Database, ChevronRight, Play, CheckCircle, ArrowRight } from 'lucide-react';
 import ganna from '../assets/images/ganna.png'
 import wynkmusic from '../assets/images/wynk.png'
 import airtel from '../assets/images/airtel.png'
@@ -33,6 +33,7 @@ import youtube from '../assets/images/youtube.png'
 import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
 import report from '../assets/images/report.png'
+import { FaMusic, FaYoutube, FaSpotify, FaGooglePlay } from 'react-icons/fa';
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -40,8 +41,15 @@ function Home() {
   const [flip, setFlip] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
 
 
+  const steps = [
+  { id: 1, title: 'Earnings from music streaming', icon: Music },
+  { id: 2, title: 'theblackturn.com', icon: Monitor },
+  { id: 3, title: 'Bank', icon: Building },
+  { id: 4, title: 'Record labels', icon: Database },
+];
   // Main streaming platforms
   const mainPlatforms = [
     { icon: wynkmusic },
@@ -539,6 +547,101 @@ function Home() {
     </div>
   </div>
 </section>
+
+
+            {/* step section */}
+
+        <section className="bg-white py-20 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        {/* Desktop Flow */}
+        <div className="hidden lg:block">
+          <div className="relative">
+            {/* Connecting Dashed Line */}
+            <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
+
+            {/* Steps */}
+            <div className="relative z-10 grid grid-cols-4 gap-x-20 gap-y-8">
+              {steps.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <div
+                    key={step.id}
+                    className={`group cursor-pointer transition-all duration-500 ${
+                      activeStep === index ? 'scale-105' : 'hover:scale-102'
+                    }`}
+                    onMouseEnter={() => setActiveStep(index)}
+                  >
+                    <div
+                      className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
+                        activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                      }`}
+                    >
+                      {/* Step Number Badge */}
+                      <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
+                        <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
+                          {step.id}
+                        </div>
+                      </div>
+
+                      {/* Icon */}
+                      <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-xl font-bold text-black text-center">
+                        {step.title}
+                      </h3>
+
+                      {/* Arrow */}
+                      {index < steps.length - 1 && (
+                        <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 ">
+                          <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
+                            <ArrowRight className="w-4 h-4 text-white" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Flow */}
+        <div className="lg:hidden space-y-6">
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            return (
+              <div key={step.id} className="relative">
+                <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm flex flex-col justify-center">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
+                      {step.id}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-black mb-3">
+                    {step.title}
+                  </h3>
+                </div>
+
+                {/* Vertical Line */}
+                {index < steps.length - 1 && (
+                  <div className="flex justify-center py-4">
+                    <div className="w-0.5 h-8 bg-[#005f73]"></div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
 
     </>
 
