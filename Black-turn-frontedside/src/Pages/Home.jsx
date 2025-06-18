@@ -32,6 +32,7 @@ import vi from '../assets/images/vi.png'
 import youtube from '../assets/images/youtube.png'
 import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
+import report from '../assets/images/report.png'
 import { Check } from 'lucide-react';
 
 
