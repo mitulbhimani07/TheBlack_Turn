@@ -104,7 +104,7 @@ function Footer() {
           {/* Section 5: Google Play and Join */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
             <h3 className="text-lg font-semibold mb-4">GET IT ON</h3>
-            <a href="https://play.google.com/store/apps/details?id=com.theblackturn.app">
+            <a href="https://play.google.com/store/apps/details?id=com.theblackturn.app" target='_blank' rel="noopener noreferrer">
               <img src="https://freelogopng.com/images/all_img/1664287128google-play-store-logo-png.png" alt="Google Play" className="mb-4 rounded-lg w-50" />
             </a>
             <h3 className="text-lg font-semibold mb-4">Join - The Black Turn</h3>
