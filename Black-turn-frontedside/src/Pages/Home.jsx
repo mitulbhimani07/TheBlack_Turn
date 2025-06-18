@@ -33,6 +33,8 @@ import youtube from '../assets/images/youtube.png'
 import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
 import report from '../assets/images/report.png'
+import { Check } from 'lucide-react';
+
 import { FaMusic, FaYoutube, FaSpotify, FaGooglePlay } from 'react-icons/fa';
 
 function Home() {
@@ -147,6 +149,9 @@ function Home() {
       },
     }),
   };
+
+  const leftFeatures = featuress.slice(0, 3);
+  const rightFeatures = featuress.slice(3, 6);
 
   const features = [
     {
@@ -363,6 +368,7 @@ function Home() {
           </div>
         </div>
       </section>
+      {/* Distribute On​ section */}
 
       <div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
         <div className="max-w-6xl mx-auto">
@@ -505,48 +511,111 @@ function Home() {
         </div>
       </section>
 
+      {/* Featured For independent labels */}
+      <section className="bg-[#005f73] py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">
+              Featured For Independent Labels
+            </h2>
+          </div>
 
+          {/* Features Grid - Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2   max-w-5.5xl mx-auto">
+            {/* Left Column */}
+            <div className="space-y-4 sm:space-y-6">
+              {leftFeatures.map((feature, index) => (
+                <div
+                  key={index}
+                  className="flex items-center space-x-3 sm:space-x-4 text-white group hover:scale-105 transition-transform duration-300 md:mb-2 sm:mb-2 lg:mb-6"
+                >
+                  {/* Checkmark Icon */}
+                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center group-hover:bg-[#ccdfe3] transition-colors duration-300">
+                    <Check
+                      className="w-3 h-3 sm:w-4 sm:h-4 text-[#005f73] stroke-[3]"
+                    />
+                  </div>
 
+                  {/* Feature Text */}
+                  <span className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed group-hover:text-[#ccdfe3] transition-colors duration-300">
+                    {feature}
+                  </span>
+                </div>
+              ))}
+            </div>
 
+            {/* Right Column */}
+            <div className="space-y-4 sm:space-y-6">
+              {rightFeatures.map((feature, index) => (
+                <div
+                  key={index + 3}
+                  className="flex items-center space-x-3 sm:space-x-4 text-white group hover:scale-105 transition-transform duration-300 "
+                >
+                  {/* Checkmark Icon */}
+                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center group-hover:bg-[#ccdfe3] transition-colors duration-300">
+                    <Check
+                      className="w-3 h-3 sm:w-4 sm:h-4 text-[#005f73] stroke-[3]"
+                    />
+                  </div>
 
-      {/*REPORTING & REVENUE ANALYTICS ​ section */}
-      
-           <section className="bg-white py-16 px-6">
-  <div className="max-w-7xl mx-auto">
-    <div className="grid lg:grid-cols-2 gap-12 items-center">
-      {/* Left Content */}
-      <div className="space-y-6">
-        <div>
-          <h2 className="text-5xl font-bold text-slate-900 mb-4">
-            Reporting & Revenue Analytics
-          </h2>
-          <p className="text-slate-900 text-lg leading-relaxed font-medium">
-            Track Your Growth, Earnings & Opportunities – With The Black Turn
-          </p>
+                  {/* Feature Text */}
+                  <span className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed group-hover:text-[#ccdfe3] transition-colors duration-300">
+                    {feature}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div className="space-y-4">
-          <p className="text-slate-500 leading-relaxed">
-            Are you confused about which genre to work on, how much revenue did which
-            artist earn, or which DSP is giving you the best performance?
-          </p>
 
-          <p className="text-slate-500 leading-relaxed">
-            The Black Turn introduces a smart, auto-updated system that manages all revenue
-            and reporting in a single dashboard.
-          </p>
+      <section className="bg-white py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-5xl font-bold text-slate-900 mb-4">
+                  Reporting & Revenue Analytics
+                </h2>
+                <p className="text-slate-900 text-lg leading-relaxed font-medium">
+                  Track Your Growth, Earnings & Opportunities – With The Black Turn
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <p className="text-slate-500 leading-relaxed">
+                  Are you confused about which genre to work on, how much revenue did which
+                  artist earn, or which DSP is giving you the best performance?
+                </p>
+
+                <p className="text-slate-500 leading-relaxed">
+                  The Black Turn introduces a smart, auto-updated system that manages all revenue
+                  and reporting in a single dashboard.
+                </p>
+              </div>
+
+
+            </div>
+
+            {/* Right Analytics Dashboard */}
+            <div className="rounded-2xl p-6">
+              <img src={report} alt="Analytics Dashboard" />
+            </div>
+          </div>
         </div>
+      </section>
 
-       
-      </div>
 
-      {/* Right Analytics Dashboard */}
-      <div className="rounded-2xl p-6">
-        <img src={report} alt="Analytics Dashboard" />
-      </div>
-    </div>
-  </div>
-</section>
+
+
+
+
+
+
+
 
 
             {/* step section */}
