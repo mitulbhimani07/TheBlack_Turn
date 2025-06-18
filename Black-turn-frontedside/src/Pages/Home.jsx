@@ -32,6 +32,8 @@ import vi from '../assets/images/vi.png'
 import youtube from '../assets/images/youtube.png'
 import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
+import { Check } from 'lucide-react';
+
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -39,6 +41,16 @@ function Home() {
   const [flip, setFlip] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+
+  const featuress = [
+    "Fastest Approval Time",
+    "Unlimited Custom Caller Tune",
+    "Free ISRC and UPC code",
+    "Custom Record Label Get Your Custom C and P Line",
+    "Unlimited Forever Releases",
+    "Previously released song, accepted for Custom Caller Tune"
+  ];
+
 
 
   // Main streaming platforms
@@ -138,6 +150,9 @@ function Home() {
       },
     }),
   };
+
+  const leftFeatures = featuress.slice(0, 3);
+  const rightFeatures = featuress.slice(3, 6);
 
   const features = [
     {
@@ -354,6 +369,7 @@ function Home() {
           </div>
         </div>
       </section>
+      {/* Distribute On​ section */}
 
       <div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
         <div className="max-w-6xl mx-auto">
@@ -496,12 +512,72 @@ function Home() {
         </div>
       </section>
 
+      {/* Featured For independent labels */}
+      <section className="bg-[#005f73] py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">
+              Featured For Independent Labels
+            </h2>
+          </div>
+
+          {/* Features Grid - Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2   max-w-5.5xl mx-auto">
+            {/* Left Column */}
+            <div className="space-y-4 sm:space-y-6">
+              {leftFeatures.map((feature, index) => (
+                <div
+                  key={index}
+                  className="flex items-center space-x-3 sm:space-x-4 text-white group hover:scale-105 transition-transform duration-300 md:mb-2 sm:mb-2 lg:mb-6"
+                >
+                  {/* Checkmark Icon */}
+                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center group-hover:bg-[#ccdfe3] transition-colors duration-300">
+                    <Check
+                      className="w-3 h-3 sm:w-4 sm:h-4 text-[#005f73] stroke-[3]"
+                    />
+                  </div>
+
+                  {/* Feature Text */}
+                  <span className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed group-hover:text-[#ccdfe3] transition-colors duration-300">
+                    {feature}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-4 sm:space-y-6">
+              {rightFeatures.map((feature, index) => (
+                <div
+                  key={index + 3}
+                  className="flex items-center space-x-3 sm:space-x-4 text-white group hover:scale-105 transition-transform duration-300 "
+                >
+                  {/* Checkmark Icon */}
+                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center group-hover:bg-[#ccdfe3] transition-colors duration-300">
+                    <Check
+                      className="w-3 h-3 sm:w-4 sm:h-4 text-[#005f73] stroke-[3]"
+                    />
+                  </div>
+
+                  {/* Feature Text */}
+                  <span className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed group-hover:text-[#ccdfe3] transition-colors duration-300">
+                    {feature}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
 
 
 
-      {/* Distribute On​ section */}
-      
+
+
+
+
 
 
     </>
