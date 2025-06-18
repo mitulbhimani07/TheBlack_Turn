@@ -9,7 +9,7 @@ import card4 from "../assets/images/4.png"
 import card5 from "../assets/images/5.png"
 import card6 from "../assets/images/6.png"
 
-import { Music, Play, Radio, Smartphone, Headphones, Mic, Volume2, Disc } from 'lucide-react';
+import { Music, Monitor, Building, Database, ChevronRight, Play, CheckCircle, ArrowRight } from 'lucide-react';
 import ganna from '../assets/images/ganna.png'
 import wynkmusic from '../assets/images/wynk.png'
 import airtel from '../assets/images/airtel.png'
@@ -32,6 +32,10 @@ import vi from '../assets/images/vi.png'
 import youtube from '../assets/images/youtube.png'
 import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
+import report from '../assets/images/report.png'
+import { Check } from 'lucide-react';
+
+import { FaMusic, FaYoutube, FaSpotify, FaGooglePlay } from 'react-icons/fa';
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -39,8 +43,15 @@ function Home() {
   const [flip, setFlip] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
 
 
+  const steps = [
+  { id: 1, title: 'Earnings from music streaming', icon: Music },
+  { id: 2, title: 'theblackturn.com', icon: Monitor },
+  { id: 3, title: 'Bank', icon: Building },
+  { id: 4, title: 'Record labels', icon: Database },
+];
   // Main streaming platforms
   const mainPlatforms = [
     { icon: wynkmusic },
@@ -138,6 +149,9 @@ function Home() {
       },
     }),
   };
+
+  const leftFeatures = featuress.slice(0, 3);
+  const rightFeatures = featuress.slice(3, 6);
 
   const features = [
     {
@@ -356,6 +370,7 @@ function Home() {
           </div>
         </div>
       </section>
+      {/* Distribute On​ section */}
 
       <div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
         <div className="max-w-6xl mx-auto">
