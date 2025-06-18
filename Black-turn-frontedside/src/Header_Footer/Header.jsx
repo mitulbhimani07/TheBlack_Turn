@@ -204,7 +204,7 @@ function Header() {
                             <div>
                                 <button
                                     onClick={toggleMobileServices}
-                                    className="text-gray-700 hover:text-teal-700 hover:bg-teal-50 block px-4 py-3 rounded-lg text-base font-medium w-full text-left flex items-center justify-between transition-all duration-300"
+                                    className="text-gray-700 hover:text-teal-700 hover:bg-teal-50  px-4 py-3 rounded-lg text-base font-medium w-full text-left flex items-center justify-between transition-all duration-300"
                                 >
                                     Our Services
                                     <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />

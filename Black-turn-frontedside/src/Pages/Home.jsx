@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import banner from "../assets/images/banner.png";
 
 function Home() {
+  const texts = ['Quality Service', '150+ Store'];
+   const [index, setIndex] = useState(0);
+ const [flip, setFlip] = useState(false);
+
+   useEffect(() => {
+    const interval = setInterval(() => {
+      setFlip(true); // Start the flip
+
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % texts.length);
+        setFlip(false); // Reset flip
+      }, 500); // match duration with animation
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-[#edf5f7] min-h-screen flex items-center justify-center px-6 py-12 relative overflow-hidden">
       {/* Half Circle Stroke Elements */}
@@ -16,9 +33,20 @@ function Home() {
         {/* Left Text Content */}
         <div>
           <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
-            Upload Unlimited Songs <br />
-            <span className="text-[#00758f]">Quality Service</span>
-          </h1>
+      Upload Unlimited Songs <br />
+      <span
+        className={`inline-block transition-transform duration-500 transform ${
+          flip ? 'rotateX-180' : ''
+        } text-[#00758f]`}
+        style={{
+          display: 'inline-block',
+          transformStyle: 'preserve-3d',
+          perspective: '1000px',
+        }}
+      >
+        {texts[index]}
+      </span>
+    </h1>
           <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
             The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
             share their creativity across more than 150 streaming platforms, including Spotify, Apple
