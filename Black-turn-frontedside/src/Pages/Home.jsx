@@ -9,7 +9,7 @@ import card4 from "../assets/images/4.png"
 import card5 from "../assets/images/5.png"
 import card6 from "../assets/images/6.png"
 
-import { Music, Monitor, Building, Database, ChevronRight, Play, CheckCircle, ArrowRight } from 'lucide-react';
+import { Music, Monitor, Building, Database, ArrowRight } from 'lucide-react';
 import ganna from '../assets/images/ganna.png'
 import wynkmusic from '../assets/images/wynk.png'
 import airtel from '../assets/images/airtel.png'
@@ -32,10 +32,8 @@ import vi from '../assets/images/vi.png'
 import youtube from '../assets/images/youtube.png'
 import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
-import report from '../assets/images/report.png'
+import report from "../assets/images/report.png";
 import { Check } from 'lucide-react';
-
-import { FaMusic, FaYoutube, FaSpotify, FaGooglePlay } from 'react-icons/fa';
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -89,9 +87,7 @@ function Home() {
 
     return (
       <div className="group  transform transition-all duration-300">
-
         <img src={platform.icon} alt="" width='70px' />
-
       </div>
     );
   };
@@ -150,9 +146,6 @@ function Home() {
     }),
   };
 
-  const leftFeatures = featuress.slice(0, 3);
-  const rightFeatures = featuress.slice(3, 6);
-
   const features = [
     {
       icon: (
@@ -168,7 +161,7 @@ function Home() {
     {
       icon: (
         <svg width="38" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M30.9828 0.455575C33.3734 -0.950713 36.397 1.0884 35.9751 3.90098L31.8265 31.1126C31.6156 32.1674 31.0531 33.0111 30.139 33.5736C29.5765 33.8549 29.0139 33.9955 28.4514 33.9955C28.0295 33.9955 27.6077 33.9252 27.1858 33.7143L19.3106 30.4798L16.2167 34.6284C14.3182 37.23 10.1697 35.894 10.1697 32.5892V26.6828L2.08355 23.3781C-0.518086 22.3233 -0.729029 18.7373 1.73197 17.331L30.9828 0.455575ZM13.5448 32.5892L16.0761 29.1438L13.5448 28.0891V32.5892ZM28.4514 30.6204L32.6703 3.33846L3.41952 20.2139L10.9432 23.3781L25.8498 10.4402C26.8342 9.52613 28.2405 10.7918 27.5373 11.9168L17.623 26.1203L28.4514 30.6204Z" fill="#005F73" />
+          <path d="M30.9828 0.455575C33.3734 -0.950713 36.397 1.0884 35.9751 3.90098L31.8265 31.1126C31.6156 32.1674 31.0531 33.0111 30.139 33.5736C29.5765 33.8549 29.0139 33.9955 28.4514 33.9955C28.0295 33.9955 27.6077 33.9252 27.1858 33.7143L19.3106 30.4798L16.2167 34.6284C14.3182 37.23 10.1697 35.894 10.1697 32.5892V26.6828L2.08355 23.3781C-0.518086 22.3233 -0.729029 18.7373 1.73197 17.331L30.9828 0.455575ZM25.1421 32.5892L16.0761 29.1438L13.5448 28.0891V32.5892ZM28.4514 30.6204L32.6703 3.33846L3.41952 20.2139L10.9432 23.3781L25.8498 10.4402C26.8342 9.52613 28.2405 10.7918 27.5373 11.9168L17.623 26.1203L28.4514 30.6204Z" fill="#005F73" />
         </svg>
       ),
       title: 'Live All Stores & Caller Tune',
@@ -189,6 +182,14 @@ function Home() {
     },
   ];
 
+  const independentFeatures = [
+    "Fastest Approval Time",
+    "Free ISRC and UPC code",
+    "Unlimited Forever Releases",
+    "Unlimited Custom Caller Tune",
+    "Custom Record Label Get Your Custom C and P Line",
+    "Previously released song, accepted for Custom Caller Tune"
+  ];
 
   const services = [
     {
@@ -196,21 +197,18 @@ function Home() {
       title: "Fastest Approval Time",
       description: "Get your music approved in as few with our streamlined process and automated systems. Live We Stored your content maximum (1 to 3 Days) Maximum 10 Days!",
       icon: card1
-
     },
     {
       id: 2,
       title: "Custom CRBT (Call Ring Back Tune)",
       description: "Create 1:24 Current Caller tune for Airtel, VI, Jio etc So Engr Hunme Other caller tune Ma, 15-30 boot max 75-90 days",
       icon: card2
-
     },
     {
       id: 3,
       title: "Free ISRC and UPC code",
       description: "Free ISRC and UPC code we provide We Also provide ISRC code UPC code code For your every Audio & Video Album.",
       icon: card3
-
     },
     {
       id: 4,
@@ -223,7 +221,6 @@ function Home() {
       title: "Custom Record Label",
       description: "Get Your Own Label our store Label we use Label Distribution out if you want your record with unlimited artist...",
       icon: card5
-
     },
     {
       id: 6,
@@ -235,9 +232,6 @@ function Home() {
 
   return (
     <>
-
-
-
       {/* Custom Cursor */}
       <div
         className="fixed pointer-events-none z-50 mix-blend-difference"
@@ -259,13 +253,6 @@ function Home() {
           style={{ transform: 'translate(-50%, -50%)' }}
         />
       </div>
-
-      {/* Hide default cursor */}
-      <style jsx>{`
-        * {
-          cursor: none !important;
-        }
-      `}</style>
 
       <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
         {/* Half Circle Stroke Elements - Responsive positioning */}
@@ -368,19 +355,17 @@ function Home() {
           </div>
         </div>
       </section>
-      {/* Distribute On​ section */}
 
+      {/* Distribute On​ section */}
       <div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-800 ">Distribute On</h1>
-
           </div>
 
           {/* Music Streaming Platforms */}
           <div className=" backdrop-blur-md rounded-3xl  mb-10 ">
-            {/* <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Music Streaming Platforms</h2> */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-6 justify-items-center">
               {mainPlatforms.map((platform, index) => (
                 <div
@@ -396,7 +381,6 @@ function Home() {
           {/* Mobile Carrier Platforms */}
           <div className=" backdrop-blur-md ">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">Caller Tune Distribution for India's All Cellular Networks</h2>
-            {/* <p className="text-gray-500 text-center mb-6">Reach users via major Indian telecom operators</p> */}
             <div className="grid grid-cols-2 sm:grid-cols-4 justify-items-center max-w-3xl mx-auto pt-4">
               {carrierPlatforms.map((platform, index) => (
                 <div
@@ -410,6 +394,7 @@ function Home() {
           </div>
         </div>
       </div>
+
       {/* 150 stores */}
       <section className="bg-white py-10 sm:py-10 lg:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -440,21 +425,15 @@ function Home() {
             {/* Right Image Placeholder */}
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
               <div className="w-full flex items-center justify-center max-w-md lg:max-w-lg xl:max-w-xl">
-                <img src={right} height={400} width={450} />
+                <img src={right} height={400} width={450} alt="150+ stores" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-
-
       {/* what we do */}
-
-      <section className="bg-white  relative overflow-hidden pb-16">
-        {/* Decorative Backgrounds */}
-
-
+      <section className="bg-white relative overflow-hidden pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Header */}
           <motion.div
@@ -471,7 +450,7 @@ function Home() {
 
           {/* Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 40 }}
@@ -479,17 +458,17 @@ function Home() {
                 transition={{
                   duration: 0.6,
                   ease: "easeOut",
-                  delay: index * 0.15,
+                  delay: service.id * 0.15,
                 }}
                 viewport={{ once: true }}
               >
                 <div
-                  className="group relative flex flex-col  text-left bg-white/70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-md border border-white/50 
-              hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 ease-out cursor-pointer overflow-hidden h-[380px] w-full justify-around "
+                  className="group relative flex flex-col text-left bg-white/70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-md border border-white/50 
+              hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 ease-out cursor-pointer overflow-hidden h-[380px] w-full justify-around"
                 >
                   {/* Icon */}
-                  <div className="items-center justify-center   transition-all duration-500 group-hover:scale-110">
-                    <img src={service.icon} alt="" />
+                  <div className="items-center justify-center transition-all duration-500 group-hover:scale-110">
+                    <img src={service.icon} alt={service.title} />
                   </div>
 
                   {/* Content */}
@@ -522,23 +501,21 @@ function Home() {
           </div>
 
           {/* Features Grid - Two Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2   max-w-5.5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Left Column */}
             <div className="space-y-4 sm:space-y-6">
-              {leftFeatures.map((feature, index) => (
+              {independentFeatures.slice(0, 3).map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-center space-x-3 sm:space-x-4 text-white group hover:scale-105 transition-transform duration-300 md:mb-2 sm:mb-2 lg:mb-6"
+                  className="flex items-center space-x-3 sm:space-x-4 text-white group  transition-transform duration-300 md:mb-2 sm:mb-2 lg:mb-6"
                 >
                   {/* Checkmark Icon */}
-                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center group-hover:bg-[#ccdfe3] transition-colors duration-300">
-                    <Check
-                      className="w-3 h-3 sm:w-4 sm:h-4 text-[#005f73] stroke-[3]"
-                    />
+                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center  transition-colors duration-300">
+                    <Check className="w-3 h-3 sm:w-4 sm:h-4 text-[#005f73] stroke-[3]" />
                   </div>
 
                   {/* Feature Text */}
-                  <span className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed group-hover:text-[#ccdfe3] transition-colors duration-300">
+                  <span className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed  transition-colors duration-300">
                     {feature}
                   </span>
                 </div>
@@ -547,20 +524,18 @@ function Home() {
 
             {/* Right Column */}
             <div className="space-y-4 sm:space-y-6">
-              {rightFeatures.map((feature, index) => (
+              {independentFeatures.slice(3).map((feature, index) => (
                 <div
-                  key={index + 3}
-                  className="flex items-center space-x-3 sm:space-x-4 text-white group hover:scale-105 transition-transform duration-300 "
+                  key={index}
+                  className="flex items-center space-x-3 sm:space-x-4 text-white group transition-transform duration-300"
                 >
                   {/* Checkmark Icon */}
-                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center group-hover:bg-[#ccdfe3] transition-colors duration-300">
-                    <Check
-                      className="w-3 h-3 sm:w-4 sm:h-4 text-[#005f73] stroke-[3]"
-                    />
+                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center  transition-colors duration-300">
+                    <Check className="w-3 h-3 sm:w-4 sm:h-4 text-[#005f73] stroke-[3]" />
                   </div>
 
                   {/* Feature Text */}
-                  <span className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed group-hover:text-[#ccdfe3] transition-colors duration-300">
+                  <span className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed  transition-colors duration-300">
                     {feature}
                   </span>
                 </div>
@@ -570,7 +545,7 @@ function Home() {
         </div>
       </section>
 
-
+      {/* Reporting & Revenue Analytics */}
       <section className="bg-white py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -596,8 +571,6 @@ function Home() {
                   and reporting in a single dashboard.
                 </p>
               </div>
-
-
             </div>
 
             {/* Right Analytics Dashboard */}
@@ -608,114 +581,98 @@ function Home() {
         </div>
       </section>
 
+      {/* step section */}
+      <section className="bg-white py-20 px-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          {/* Desktop Flow */}
+          <div className="hidden lg:block">
+            <div className="relative">
+              {/* Connecting Dashed Line */}
+              <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
 
-
-
-
-
-
-
-
-
-
-            {/* step section */}
-
-        <section className="bg-white py-20 px-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        {/* Desktop Flow */}
-        <div className="hidden lg:block">
-          <div className="relative">
-            {/* Connecting Dashed Line */}
-            <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
-
-            {/* Steps */}
-            <div className="relative z-10 grid grid-cols-4 gap-x-20 gap-y-8">
-              {steps.map((step, index) => {
-                const Icon = step.icon;
-                return (
-                  <div
-                    key={step.id}
-                    className={`group cursor-pointer transition-all duration-500 ${
-                      activeStep === index ? 'scale-105' : 'hover:scale-102'
-                    }`}
-                    onMouseEnter={() => setActiveStep(index)}
-                  >
+              {/* Steps */}
+              <div className="relative z-10 grid grid-cols-4 gap-x-20 gap-y-8">
+                {steps.map((step, index) => {
+                  const Icon = step.icon;
+                  return (
                     <div
-                      className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
-                        activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                      key={step.id}
+                      className={`group cursor-pointer transition-all duration-500 ${
+                        activeStep === index ? 'scale-105' : 'hover:scale-102'
                       }`}
+                      onMouseEnter={() => setActiveStep(index)}
                     >
-                      {/* Step Number Badge */}
-                      <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
-                        <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
-                          {step.id}
-                        </div>
-                      </div>
-
-                      {/* Icon */}
-                      <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                        <Icon className="w-8 h-8 text-white" />
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="text-xl font-bold text-black text-center">
-                        {step.title}
-                      </h3>
-
-                      {/* Arrow */}
-                      {index < steps.length - 1 && (
-                        <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 ">
-                          <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
-                            <ArrowRight className="w-4 h-4 text-white" />
+                      <div
+                        className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
+                          activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                        }`}
+                      >
+                        {/* Step Number Badge */}
+                        <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
+                          <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
+                            {step.id}
                           </div>
                         </div>
-                      )}
+
+                        {/* Icon */}
+                        <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-xl font-bold text-black text-center">
+                          {step.title}
+                        </h3>
+
+                        {/* Arrow */}
+                        {index < steps.length - 1 && (
+                          <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 ">
+                            <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
+                              <ArrowRight className="w-4 h-4 text-white" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Mobile Flow */}
-        <div className="lg:hidden space-y-6">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div key={step.id} className="relative">
-                <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm flex flex-col justify-center">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-6 h-6 text-white" />
+          {/* Mobile Flow */}
+          <div className="lg:hidden space-y-6">
+            {steps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.id} className="relative">
+                  <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm flex flex-col justify-center">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
+                        {step.id}
+                      </div>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
-                      {step.id}
-                    </div>
+                    <h3 className="text-xl font-bold text-black mb-3">
+                      {step.title}
+                    </h3>
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-3">
-                    {step.title}
-                  </h3>
+
+                  {/* Vertical Line */}
+                  {step.id < steps.length && (
+                    <div className="flex justify-center py-4">
+                      <div className="w-0.5 h-8 bg-[#005f73]"></div>
+                    </div>
+                  )}
                 </div>
-
-                {/* Vertical Line */}
-                {index < steps.length - 1 && (
-                  <div className="flex justify-center py-4">
-                    <div className="w-0.5 h-8 bg-[#005f73]"></div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
-
-
+      </section>
     </>
-
-
-
   );
 }
 
