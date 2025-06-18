@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import banner from "../assets/images/banner.png";
+import right from "../assets/images/right.png";
 import { motion } from 'framer-motion';
+import card1 from "../assets/images/1.png"
+import card2 from "../assets/images/2.png"
+import card3 from "../assets/images/3.png"
+import card4 from "../assets/images/4.png"
+import card5 from "../assets/images/5.png"
+import card6 from "../assets/images/6.png"
+
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -74,6 +82,50 @@ function Home() {
     },
   ];
 
+
+  const services = [
+    {
+      id: 1,
+      title: "Fastest Approval Time",
+      description: "Get your music approved in as few with our streamlined process and automated systems. Live We Stored your content maximum (1 to 3 Days) Maximum 10 Days!",
+      icon: card1
+
+    },
+    {
+      id: 2,
+      title: "Custom CRBT (Call Ring Back Tune)",
+      description: "Create 1:24 Current Caller tune for Airtel, VI, Jio etc So Engr Hunme Other caller tune Ma, 15-30 boot max 75-90 days",
+      icon: card2
+
+    },
+    {
+      id: 3,
+      title: "Free ISRC and UPC code",
+      description: "Free ISRC and UPC code we provide We Also provide ISRC code UPC code code For your every Audio & Video Album.",
+      icon: card3
+
+    },
+    {
+      id: 4,
+      title: "95% Royalty",
+      description: "Get Your Monthly Royalty with no changes and clean. Royalty Respect with out any percentage we don't take anything.",
+      icon: card4
+    },
+    {
+      id: 5,
+      title: "Custom Record Label",
+      description: "Get Your Own Label our store Label we use Label Distribution out if you want your record with unlimited artist...",
+      icon: card5
+
+    },
+    {
+      id: 6,
+      title: "One Time Payment",
+      description: "Pay Once Your song Live for Life Time No yearly charges with unlimited tracks, UPI, PhonePe, UPI, PhonePe, etc.",
+      icon: card6
+    }
+  ];
+
   return (
     <>
       <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
@@ -136,11 +188,11 @@ function Home() {
       </div>
 
       {/* distribution your mmusic */}
-      <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-[32px] font-bold text-black mb-4">
+            <h2 className="text-[42px] font-bold text-black mb-4">
               DISTRIBUTE YOUR MUSIC WORLDWIDE
             </h2>
             <p className="text-gray-400 text-base sm:text-lg max-w-2xl font-light mx-auto">
@@ -177,6 +229,108 @@ function Home() {
           </div>
         </div>
       </section>
+      {/* 150 stores */}
+      <section className="bg-white py-10 sm:py-10 lg:py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+            {/* Left Content */}
+            <div className="order-2 lg:order-1">
+              <h2 className="text-[42px] sm:text-[40px] lg:text-[42px] font-bold text-black mb-6">
+                150+ Stores
+              </h2>
+              <p className="text-gray-600 text-sm font-bold mb-4">
+                Release Song On National And International Platforms.
+              </p>
+              <p className="text-gray-700 text-base leading-relaxed mb-8 max-w-lg">
+                Unlimited music distribution - Get your music on Gaana, JioSaavn,
+                Wynk Music, Spotify, iTunes/Apple Music, Shazam, Tidal, Amazon,
+                YouTube Music, Deezer, and 150+ more digital music platforms worldwide.
+                Earn more sales and get more fans and more money. We provide a
+                stable tune for you to think of all about money, there your data we
+                never touch your fan base, and own friends. As an 100% safe music
+                person - we know you hear Distribute, license & monetize of all in one
+                place.
+              </p>
+              <button className="bg-[#005f73] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 transform hover:scale-105">
+                Join Now
+              </button>
+            </div>
+
+            {/* Right Image Placeholder */}
+            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+              <div className="w-full flex items-center justify-center max-w-md lg:max-w-lg xl:max-w-xl">
+                <img src={right} height={400} width={450} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* what we do */}
+
+      <section className="bg-white  relative overflow-hidden">
+        {/* Decorative Backgrounds */}
+
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-clip-text text-black mb-4">
+              What We Do
+            </h2>
+          </motion.div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
+                  delay: index * 0.15,
+                }}
+                viewport={{ once: true }}
+              >
+                <div
+                  className="group relative flex flex-col  text-left bg-white/70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-md border border-white/50 
+              hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 ease-out cursor-pointer overflow-hidden h-[380px] w-full justify-around "
+                >
+                  {/* Icon */}
+                  <div className="items-center justify-center   transition-all duration-500 group-hover:scale-110">
+                    <img src={service.icon} alt="" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#001219] mb-4 group-hover:text-[#005f73] transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  {/* Bottom Border Accent */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#005f73] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-3xl"></div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
 
 
 
