@@ -7,6 +7,7 @@ function Header() {
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const servicesButtonRef = useRef(null);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -23,14 +24,13 @@ function Header() {
         setIsMobileServicesOpen(!isMobileServicesOpen);
     };
 
-    const closeDropdown = () => {
-        setIsServicesOpen(false);
-    };
-
     // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            if (dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                servicesButtonRef.current &&
+                !servicesButtonRef.current.contains(event.target)) {
                 setIsServicesOpen(false);
             }
         };
@@ -63,12 +63,12 @@ function Header() {
     ];
 
     return (
-        <header className="bg-[#ebf4f5] sticky top-0 z-50 ">
+        <header className="bg-[#ebf4f5] sticky top-0 z-50 shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo Space */}
                     <div className="flex items-center">
-                        <div className="flex-shrink-0 w-48 ">
+                        <div className="flex-shrink-0 w-48 h-16  rounded-lg flex items-center justify-center">
                             <svg width="200" height="61" viewBox="0 0 330 81" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M43.6734 25.899C49.0095 25.8667 54.3457 25.8425 59.6819 25.8277C62.1602 25.8207 64.6383 25.811 67.1165 25.7952C69.2789 25.7814 71.4412 25.7726 73.6036 25.7696C74.7465 25.7678 75.8891 25.7629 77.032 25.7536C86.2073 25.6814 86.2073 25.6814 90.4417 27.2745C90.6936 27.3673 90.9455 27.4601 91.205 27.5557C98.1029 30.3614 103.149 35.8572 106.102 42.5787C108.682 49.089 109.089 56.5109 106.308 63.0474C105.03 65.9308 103.583 68.6057 101.446 70.9479C101.179 71.2506 100.911 71.5534 100.636 71.8654C96.1788 76.6386 89.9562 79.8197 83.3825 80.2957C82.4675 80.3185 81.5549 80.3212 80.6397 80.3155C80.2927 80.3161 79.9457 80.3166 79.5882 80.3173C78.4346 80.3184 77.281 80.3146 76.1273 80.3108C75.2967 80.3106 74.4662 80.3108 73.6356 80.3111C71.8521 80.3113 70.0686 80.3094 68.2851 80.3055C65.7065 80.2999 63.1279 80.2981 60.5493 80.2972C56.3649 80.2957 52.1805 80.2912 47.9961 80.2846C43.9332 80.2783 39.8703 80.2735 35.8073 80.2705C35.5566 80.2704 35.3058 80.2702 35.0475 80.27C33.7894 80.2691 32.5313 80.2682 31.2733 80.2674C20.8488 80.2603 10.4244 80.2481 0 80.2328C0.326995 79.8486 0.654375 79.4647 0.981915 79.081C1.16418 78.8672 1.34645 78.6534 1.53424 78.4331C2.19494 77.6744 2.89239 76.9634 3.60945 76.2579C3.88672 75.9833 4.164 75.7087 4.44968 75.4258C5.02102 74.8634 5.59237 74.301 6.16373 73.7386C7.62365 72.2926 9.03753 70.8369 10.3583 69.262C10.5715 69.0239 10.7847 68.7859 11.0043 68.5407C11.122 68.347 11.2397 68.1534 11.361 67.9538C12.3289 66.6367 13.1107 66.1838 14.7365 65.9117C16.5028 65.797 18.2695 65.8249 20.0384 65.845C20.721 65.844 21.4035 65.8419 22.086 65.8388C23.5538 65.8345 25.0214 65.8377 26.4892 65.8468C28.8117 65.8612 31.1341 65.8588 33.4567 65.8541C37.1318 65.8486 40.8068 65.8546 44.482 65.8653C51.0592 65.8843 57.6364 65.8873 64.2136 65.8813C66.5206 65.8797 68.8275 65.8841 71.1344 65.8934C72.5721 65.8983 74.0098 65.8991 75.4474 65.8988C76.112 65.8997 76.7766 65.9023 77.4411 65.9068C82.4722 65.94 86.6075 65.698 90.4336 62.0458C93.0137 59.2516 94.4387 55.9165 94.309 52.0651C93.91 48.6768 92.3425 45.5202 89.8829 43.1577C86.4886 40.5247 83.2227 40.1394 79.0777 40.3896C77.6244 40.4732 76.1698 40.5136 74.715 40.5583C74.4131 40.5681 74.1112 40.5778 73.8001 40.5878C56.9289 41.1076 56.9289 41.1076 52.5139 37.3129C50.7623 35.5931 49.3323 33.6124 48.1143 31.4869C47.3893 30.256 46.566 29.2534 45.5949 28.2136C44.9148 27.4723 44.2991 26.6864 43.6734 25.899Z" fill="black" />
                                 <path d="M44.7705 0.334487C45.5029 0.334778 46.2353 0.334614 46.9677 0.33403C48.9455 0.333736 50.9232 0.33978 52.9009 0.347002C54.9717 0.353473 57.0425 0.354059 59.1133 0.355282C63.03 0.358482 66.9466 0.36694 70.8632 0.377307C75.3242 0.388858 79.7851 0.394516 84.2461 0.399689C93.4182 0.410458 102.59 0.428592 111.763 0.451606C111.654 1.05499 111.546 1.6583 111.437 2.26157C111.377 2.59755 111.316 2.93352 111.254 3.27968C111.039 4.42593 110.777 5.55468 110.493 6.68586C110.388 7.10499 110.283 7.52412 110.175 7.95595C110.068 8.3804 109.96 8.80485 109.85 9.24216C109.741 9.67857 109.632 10.115 109.52 10.5646C108.714 13.7711 108.714 13.7711 108.324 14.5509C107.795 14.5512 107.795 14.5512 107.256 14.5514C98.6707 14.5564 90.0857 14.5712 81.5008 14.5963C77.3491 14.6082 73.1975 14.6169 69.0458 14.6181C65.4261 14.6192 61.8065 14.6262 58.1869 14.6405C56.2713 14.6478 54.3557 14.6521 52.44 14.6493C50.6347 14.6467 48.8295 14.6522 47.0242 14.6637C46.3638 14.6665 45.7034 14.6664 45.043 14.6632C41.3692 14.6469 38.3743 14.7821 35.0762 16.6142C34.7155 16.8095 34.7155 16.8095 34.3475 17.0087C32.067 18.3254 30.7822 20.9173 29.7675 23.2555C29.1452 27.3348 29.419 30.6869 31.851 34.069C33.0726 35.6669 34.4736 37.0521 35.9145 38.4509C36.4164 38.9407 36.9174 39.4315 37.4176 39.9231C37.6368 40.1361 37.856 40.3491 38.0818 40.5686C38.7461 41.257 39.3719 41.9594 39.9969 42.683C41.1949 44.0618 42.4582 45.3559 43.758 46.6383C43.9836 46.8625 44.2091 47.0868 44.4416 47.3179C45.1518 48.024 45.8632 48.729 46.5749 49.4337C47.5211 50.3708 48.4662 51.309 49.4106 52.2479C49.6287 52.4631 49.8468 52.6784 50.0715 52.9002C50.5818 53.4075 51.0832 53.9236 51.5827 54.4415C51.5827 54.555 51.5827 54.6685 51.5827 54.7854C34.1732 56.7092 34.1732 56.7092 29.1531 53.1698C25.9132 50.5243 23.3076 47.233 20.977 43.7811C20.8216 43.5531 20.6662 43.3251 20.5061 43.0902C16.0683 36.5259 14.0419 29.5769 15.3445 21.6542C16.2791 17.0495 18.5122 12.5313 21.6647 9.04872C21.8602 8.82176 22.0557 8.59479 22.2571 8.36095C25.1859 5.17725 29.2592 2.81038 33.3568 1.48326C33.6068 1.39828 33.8568 1.31331 34.1143 1.22576C37.6309 0.179979 41.139 0.314177 44.7705 0.334487Z" fill="#005A5D" />
@@ -95,68 +95,85 @@ function Header() {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center space-x-1">
-                        {[
-                            { name: 'Home', path: '/' },
-                            { name: 'Pricing', path: '/pricing' },
-                            { name: 'Contact', path: '/contact' },
-                        ].map((item) => (
-                            <Link
-                                key={item.name}
-                                to={item.path}
-                                className="text-gray-700 hover:text-[#005f73] hover:bg-[#005f73]/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:shadow-md"
-                            >
-                                {item.name}
-                            </Link>
-                        ))}
+                        <Link
+                            to="/"
+                            className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group"
+                        >
+                            <span className="text-gray-700 group-hover:text-[#005f73]">Home</span>
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#005f73] transition-all duration-300 group-hover:w-full"></span>
+                        </Link>
 
-                        {/* Our Services Dropdown */}
+                        {/* Our Services Dropdown - Fixed this section */}
                         <div className="relative" ref={dropdownRef}>
                             <button
-                                onClick={toggleServices}
+                                ref={servicesButtonRef}
                                 onMouseEnter={() => setIsServicesOpen(true)}
-                                className="text-gray-700 hover:text-[#005f73] hover:bg-[#005f73]/10 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-300 hover:shadow-md group"
+                                onMouseLeave={() => setIsServicesOpen(false)}
+                                onClick={toggleServices}
+                                className="relative px-4 py-2 rounded-lg text-sm font-medium flex items-center transition-all duration-300 group"
                             >
-                                Our Services
-                                <ChevronDown className={`ml-2 h-4 w-4 transition-all duration-300 ${isServicesOpen ? 'rotate-180 text-[#005f73]' : 'group-hover:text-[#005f73]'}`} />
+                                <span className="text-gray-700 group-hover:text-[#005f73]">Our Services</span>
+                                <ChevronDown className={`ml-2 h-4 w-4 transition-all duration-300 ${isServicesOpen ? 'rotate-180 text-[#005f73]' : 'text-gray-500 group-hover:text-[#005f73]'}`} />
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#005f73] transition-all duration-300 group-hover:w-full"></span>
                             </button>
-                            {isServicesOpen && (
-                                <div
-                                    className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 overflow-hidden animate-in slide-in-from-top-2 duration-200"
-                                    onMouseLeave={() => setIsServicesOpen(false)}
-                                >
-                                    <div className="p-2">
-                                        {serviceItems.map((item, index) => (
-                                            <Link
-                                                key={index}
-                                                to={item.route}
-                                                onClick={closeDropdown}
-                                                className="flex items-start p-4 rounded-lg hover:bg-[#005f73]/10 transition-all duration-300 group border-l-4 border-transparent hover:border-[#005f73] hover:shadow-md"
-                                            >
-                                                <span className="text-2xl mr-4 group-hover:scale-110 transition-transform duration-300">
-                                                    {item.icon}
-                                                </span>
-                                                <div className="flex-1 min-w-0">
-                                                    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[#005f73] transition-colors duration-300">
-                                                        {item.title}
-                                                    </h3>
-                                                    <p className="text-xs text-gray-500 mt-1 group-hover:text-[#005f73] transition-colors duration-300">
-                                                        {item.description}
-                                                    </p>
-                                                </div>
-                                                <ChevronDown className="h-4 w-4 text-gray-400 group-hover:text-[#005f73] transform rotate-[-90deg] transition-all duration-300 group-hover:translate-x-1" />
-                                            </Link>
-                                        ))}
-                                    </div>
+
+                            {/* Smooth dropdown animation */}
+                            <div
+                                className={`absolute top-full left-0 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 overflow-hidden transition-all duration-300 ease-out ${isServicesOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
+                                onMouseEnter={() => setIsServicesOpen(true)}
+                                onMouseLeave={() => setIsServicesOpen(false)}
+                                style={{
+                                    transformOrigin: 'top center',
+                                }}
+                            >
+                                <div className="p-2">
+                                    {serviceItems.map((item, index) => (
+                                        <Link
+                                            key={index}
+                                            to={item.route}
+                                            onClick={() => setIsServicesOpen(false)}
+                                            className="flex items-start p-4 rounded-lg hover:bg-[#005f73]/10 transition-all duration-300 group border-l-4 border-transparent hover:border-[#005f73] hover:shadow-sm"
+                                        >
+                                            <span className="text-2xl mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                {item.icon}
+                                            </span>
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-[#005f73] transition-colors duration-300">
+                                                    {item.title}
+                                                </h3>
+                                                <p className="text-xs text-gray-500 mt-1 group-hover:text-[#005f73] transition-colors duration-300">
+                                                    {item.description}
+                                                </p>
+                                            </div>
+                                            <ChevronDown className="h-4 w-4 text-gray-400 group-hover:text-[#005f73] transform rotate-[-90deg] transition-all duration-300 group-hover:translate-x-1" />
+                                        </Link>
+                                    ))}
                                 </div>
-                            )}
+                            </div>
                         </div>
+
+                        <Link
+                            to="/pricing"
+                            className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group"
+                        >
+                            <span className="text-gray-700 group-hover:text-[#005f73]">Pricing</span>
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#005f73] transition-all duration-300 group-hover:w-full"></span>
+                        </Link>
+
+                        <Link
+                            to="/contact"
+                            className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group"
+                        >
+                            <span className="text-gray-700 group-hover:text-[#005f73]">Contact</span>
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#005f73] transition-all duration-300 group-hover:w-full"></span>
+                        </Link>
                     </nav>
 
                     {/* Register/Login Button */}
                     <div className="hidden md:flex items-center">
                         <Link
                             to="/auth"
-                            className="bg-[#005f73] text-white px-6 py-3.5 rounded-[5px] text-sm font-medium transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                            className="bg-[#005f73] hover:bg-[#004d5f] text-white px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 flex items-center shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-95"
                         >
                             <svg
                                 className="w-5 h-5 mr-2 text-white"
@@ -176,25 +193,29 @@ function Header() {
                         </Link>
                     </div>
 
-
                     {/* Mobile menu button */}
                     <div className="md:hidden">
                         <button
                             onClick={toggleMenu}
-                            className="text-gray-700 hover:text-teal-700 focus:outline-none focus:text-teal-700 p-2 rounded-lg hover:bg-white/50 transition-all duration-300"
+                            className="text-gray-700 hover:text-[#005f73] focus:outline-none p-2 rounded-lg hover:bg-[#005f73]/10 transition-all duration-300"
+                            aria-label="Toggle menu"
                         >
-                            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                            {isMenuOpen ? (
+                                <X className="h-6 w-6 transition-transform duration-300 rotate-180" />
+                            ) : (
+                                <Menu className="h-6 w-6 transition-transform duration-300" />
+                            )}
                         </button>
                     </div>
                 </div>
 
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
-                    <div className="md:hidden animate-in slide-in-from-top-2 duration-200">
-                        <div className="px-2 pt-4 pb-3 space-y-2 bg-white/80 backdrop-blur-sm rounded-xl mt-2 shadow-lg border border-gray-100">
+                    <div className="md:hidden transition-all duration-300 ease-out">
+                        <div className="px-2 pt-2 pb-4 space-y-1 bg-white/95 backdrop-blur-sm rounded-xl mt-2 shadow-xl border border-gray-100">
                             <Link
                                 to="/"
-                                className="text-gray-700 hover:text-teal-700 hover:bg-teal-50 block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
+                                className="block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 hover:bg-[#005f73]/10 hover:text-[#005f73]"
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 Home
@@ -204,68 +225,69 @@ function Header() {
                             <div>
                                 <button
                                     onClick={toggleMobileServices}
-                                    className="text-gray-700 hover:text-teal-700 hover:bg-teal-50 block px-4 py-3 rounded-lg text-base font-medium w-full text-left flex items-center justify-between transition-all duration-300"
+                                    className="w-full flex justify-between items-center px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 hover:bg-[#005f73]/10 hover:text-[#005f73]"
                                 >
-                                    Our Services
+                                    <span>Our Services</span>
                                     <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
                                 </button>
 
-                                {isMobileServicesOpen && (
-                                    <div className="mt-2 ml-4 space-y-1 animate-in slide-in-from-top-1 duration-200">
-                                        {serviceItems.map((item, index) => (
-                                            <Link
-                                                key={index}
-                                                to={item.route}
-                                                onClick={() => {
-                                                    setIsMenuOpen(false);
-                                                    setIsMobileServicesOpen(false);
-                                                }}
-                                                className="flex items-center px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-teal-50 hover:to-cyan-50 transition-all duration-300 group border-l-4 border-transparent hover:border-teal-500"
-                                            >
-                                                <span className="text-lg mr-3 group-hover:scale-110 transition-transform duration-300">
-                                                    {item.icon}
-                                                </span>
-                                                <div>
-                                                    <h3 className="text-sm font-medium text-gray-700 group-hover:text-teal-700 transition-colors duration-300">
-                                                        {item.title}
-                                                    </h3>
-                                                    <p className="text-xs text-gray-500 group-hover:text-teal-600 transition-colors duration-300">
-                                                        {item.description}
-                                                    </p>
-                                                </div>
-                                            </Link>
-                                        ))}
-                                        
-                                    </div>
-                                )}
+                                <div
+                                    className={`overflow-hidden transition-all duration-300 ease-out ${isMobileServicesOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                                >
+                                    {serviceItems.map((item, index) => (
+                                        <Link
+                                            key={index}
+                                            to={item.route}
+                                            onClick={() => {
+                                                setIsMenuOpen(false);
+                                                setIsMobileServicesOpen(false);
+                                            }}
+                                            className="flex items-center px-4 py-3 rounded-lg transition-all duration-300 hover:bg-[#005f73]/10 hover:text-[#005f73] group"
+                                        >
+                                            <span className="text-lg mr-3 group-hover:scale-110 transition-transform duration-300">
+                                                {item.icon}
+                                            </span>
+                                            <div>
+                                                <h3 className="text-sm font-medium">
+                                                    {item.title}
+                                                </h3>
+                                                <p className="text-xs text-gray-500 group-hover:text-[#005f73] transition-colors duration-300">
+                                                    {item.description}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
 
                             <Link
                                 to="/pricing"
-                                className="text-gray-700 hover:text-teal-700 hover:bg-teal-50 block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
+                                className="block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 hover:bg-[#005f73]/10 hover:text-[#005f73]"
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 Pricing
                             </Link>
                             <Link
                                 to="/contact"
-                                className="text-gray-700 hover:text-teal-700 hover:bg-teal-50 block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
+                                className="block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 hover:bg-[#005f73]/10 hover:text-[#005f73]"
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 Contact
                             </Link>
 
                             {/* Mobile Register/Login Button */}
-                            <div className="px-4 py-3">
+                            <div className="px-2 pt-2">
                                 <Link
                                     to="/auth"
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="bg-[#005f73] hover:from-teal-700 hover:to-teal-800 text-white px-4 py-3  text-sm font-medium transition-all duration-300 flex items-center justify-center w-full shadow-lg hover:shadow-xl"
+                                    className="block w-full text-center bg-[#005f73] hover:bg-[#004d5f] text-white px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
                                 >
-                                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                    Register / Login
+                                    <div className="flex items-center justify-center">
+                                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                        </svg>
+                                        Register / Login
+                                    </div>
                                 </Link>
                             </div>
                         </div>
