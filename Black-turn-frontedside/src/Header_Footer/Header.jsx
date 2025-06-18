@@ -63,8 +63,8 @@ function Header() {
     ];
 
     return (
-        <header className="bg-[#ebf4f5] sticky top-0 z-50 shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+        <header className="bg-[#ebf4f5] sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-2 py-2">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo Space */}
                     <div className="flex items-center">
