@@ -41,46 +41,46 @@ function Home() {
   const [isHovering, setIsHovering] = useState(false);
 
 
- // Main streaming platforms
+  // Main streaming platforms
   const mainPlatforms = [
-    {  icon: wynkmusic},
-    {  icon: ganna},
-    { icon: jiosavan},
-    {  icon: facebook },
-    {  icon: instagram},
-    {  icon: applemusic  },
-     {  icon: spotify},
-    {  icon: vector },
-    {  icon: amazonmusic },
-    {  icon: youtube},
+    { icon: wynkmusic },
+    { icon: ganna },
+    { icon: jiosavan },
+    { icon: facebook },
+    { icon: instagram },
+    { icon: applemusic },
+    { icon: spotify },
+    { icon: vector },
+    { icon: amazonmusic },
+    { icon: youtube },
     { icon: digital },
-    {  icon: shazam},
-     {  icon: kkbox},
-      {  icon: resso},
-       {  icon: napster},
-        {  icon: Soundcloud},
-         {  icon: iheartradio},
-         {icon:audiblemagic}
+    { icon: shazam },
+    { icon: kkbox },
+    { icon: resso },
+    { icon: napster },
+    { icon: Soundcloud },
+    { icon: iheartradio },
+    { icon: audiblemagic }
   ];
 
- 
+
   // Mobile carrier platforms
   const carrierPlatforms = [
-    {  icon: jio},
-    { icon:airtel},
-    {  icon:vi},
-    {  icon: bsnl},
+    { icon: jio },
+    { icon: airtel },
+    { icon: vi },
+    { icon: bsnl },
   ];
 
-   const PlatformCard = ({ platform, size = 'normal' }) => {
+  const PlatformCard = ({ platform, size = 'normal' }) => {
     const sizeClasses = size === 'large' ? 'w-20 h-20' : 'w-16 h-16';
     const textSize = size === 'large' ? 'text-xs' : 'text-xs';
-    
+
     return (
       <div className="group  transform transition-all duration-300">
-       
+
         <img src={platform.icon} alt="" width='70px' />
-       
+
       </div>
     );
   };
@@ -221,9 +221,9 @@ function Home() {
 
   return (
     <>
-  
-   
-    
+
+
+
       {/* Custom Cursor */}
       <div
         className="fixed pointer-events-none z-50 mix-blend-difference"
@@ -235,15 +235,13 @@ function Home() {
       >
         {/* Outer cursor */}
         <div
-          className={`w-10 h-10 border-2 border-white rounded-full transition-all duration-300 ease-out ${
-            isHovering ? 'scale-150 opacity-60' : 'scale-100 opacity-40'
-          }`}
+          className={`w-10 h-10 border-2 border-white rounded-full transition-all duration-300 ease-out ${isHovering ? 'scale-150 opacity-60' : 'scale-100 opacity-40'
+            }`}
         />
         {/* Inner cursor */}
         <div
-          className={`absolute top-1/2 left-1/2 w-15 h-15 bg-[white] rounded-full transition-all duration-150 ease-out ${
-            isHovering ? 'scale-0' : 'scale-100'
-          }`}
+          className={`absolute top-1/2 left-1/2 w-15 h-15 bg-[white] rounded-full transition-all duration-150 ease-out ${isHovering ? 'scale-0' : 'scale-100'
+            }`}
           style={{ transform: 'translate(-50%, -50%)' }}
         />
       </div>
@@ -255,7 +253,7 @@ function Home() {
         }
       `}</style>
 
-    <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+      <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
         {/* Half Circle Stroke Elements - Responsive positioning */}
         <div className="absolute top-20 sm:top-36 -left-2 sm:-left-4 w-32 h-32 sm:w-40 sm:h-40 lg:w-55 lg:h-55 -translate-x-1/2 -translate-y-1/2">
           <div className="w-full h-full border-20 sm:border-46 lg:border-32 border-[#b8d4db] rounded-full opacity-30"></div>
@@ -356,6 +354,47 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-800 ">Distribute On</h1>
+
+          </div>
+
+          {/* Music Streaming Platforms */}
+          <div className=" backdrop-blur-md rounded-3xl  mb-10 ">
+            {/* <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Music Streaming Platforms</h2> */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-6 justify-items-center">
+              {mainPlatforms.map((platform, index) => (
+                <div
+                  key={index}
+                  className="group w-20 h-20 flex items-center justify-center rounded-xl bg-white hover:scale-105 transition transform shadow-md hover:shadow-lg border border-gray-200 hover:border-[#648f94]"
+                >
+                  <img src={platform.icon} alt="platform" className="w-12 h-12 object-contain transition duration-300 group-hover:scale-110" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Carrier Platforms */}
+          <div className=" backdrop-blur-md ">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">Caller Tune Distribution for India's All Cellular Networks</h2>
+            {/* <p className="text-gray-500 text-center mb-6">Reach users via major Indian telecom operators</p> */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 justify-items-center max-w-3xl mx-auto pt-4">
+              {carrierPlatforms.map((platform, index) => (
+                <div
+                  key={index}
+                  className="group w-24 h-24 flex items-center justify-center rounded-2xl bg-white hover:scale-105 transition transform shadow-md hover:shadow-lg border border-gray-200 hover:border-[#648f94]"
+                >
+                  <img src={platform.icon} alt="carrier" className="w-16 h-16 object-contain transition duration-300 group-hover:scale-110" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
       {/* 150 stores */}
       <section className="bg-white py-10 sm:py-10 lg:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -397,7 +436,7 @@ function Home() {
 
       {/* what we do */}
 
-      <section className="bg-white  relative overflow-hidden">
+      <section className="bg-white  relative overflow-hidden pb-16">
         {/* Decorative Backgrounds */}
 
 
@@ -461,47 +500,8 @@ function Home() {
 
 
 
-    {/* Distribute On​ section */}
-<div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
-  <div className="max-w-6xl mx-auto">
-    {/* Header */}
-    <div className="text-center mb-12">
-      <h1 className="text-4xl font-bold text-gray-800 ">Distribute On</h1>
+      {/* Distribute On​ section */}
       
-    </div>
-
-    {/* Music Streaming Platforms */}
-    <div className=" backdrop-blur-md rounded-3xl  mb-10 ">
-      {/* <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Music Streaming Platforms</h2> */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-6 justify-items-center">
-        {mainPlatforms.map((platform, index) => (
-          <div
-            key={index}
-            className="group w-20 h-20 flex items-center justify-center rounded-xl bg-white hover:scale-105 transition transform shadow-md hover:shadow-lg border border-gray-200 hover:border-[#648f94]"
-          >
-            <img src={platform.icon} alt="platform" className="w-12 h-12 object-contain transition duration-300 group-hover:scale-110" />
-          </div>
-        ))}
-      </div>
-    </div>
-
-    {/* Mobile Carrier Platforms */}
-    <div className=" backdrop-blur-md ">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">Caller Tune Distribution for India's All Cellular Networks</h2>
-      {/* <p className="text-gray-500 text-center mb-6">Reach users via major Indian telecom operators</p> */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 justify-items-center max-w-3xl mx-auto pt-4">
-        {carrierPlatforms.map((platform, index) => (
-          <div
-            key={index}
-            className="group w-24 h-24 flex items-center justify-center rounded-2xl bg-white hover:scale-105 transition transform shadow-md hover:shadow-lg border border-gray-200 hover:border-[#648f94]"
-          >
-            <img src={platform.icon} alt="carrier" className="w-16 h-16 object-contain transition duration-300 group-hover:scale-110" />
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
 
 
     </>
