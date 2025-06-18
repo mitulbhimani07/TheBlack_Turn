@@ -150,8 +150,8 @@ function Home() {
     }),
   };
 
-  const leftFeatures = featuress.slice(0, 3);
-  const rightFeatures = featuress.slice(3, 6);
+  // const leftFeatures = featuress.slice(0, 3);
+  // const rightFeatures = featuress.slice(3, 6);
 
   const features = [
     {
@@ -594,7 +594,6 @@ function Home() {
                   No Per Year Charges
                 </li>
               </ul>
-
               <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Upload Now
               </button>
