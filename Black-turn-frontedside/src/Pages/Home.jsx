@@ -1,6 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import banner from "../assets/images/banner.png";
 import { motion } from 'framer-motion';
+import { Music, Play, Radio, Smartphone, Headphones, Mic, Volume2, Disc } from 'lucide-react';
+import ganna from '../assets/images/ganna.png'
+import wynkmusic from '../assets/images/wynk.png'
+import airtel from '../assets/images/airtel.png'
+import amazonmusic from '../assets/images/amazon music.png'
+import bsnl from '../assets/images/bsnl.png'
+import digital from '../assets/images/digital.png'
+import facebook from '../assets/images/Facebook.png'
+import iheartradio from '../assets/images/iheartradio.png'
+import instagram from '../assets/images/instagram.png'
+import jio from '../assets/images/jio.png'
+import jiosavan from '../assets/images/jiosavan.png'
+import kkbox from '../assets/images/kkbox.png'
+import napster from '../assets/images/napster.png'
+import resso from '../assets/images/resso.png'
+import shazam from '../assets/images/shazam.png'
+import Soundcloud from '../assets/images/soundcloud.png'
+import spotify from '../assets/images/spotify.png'
+import vector from '../assets/images/Vector.png'
+import vi from '../assets/images/vi.png'
+import youtube from '../assets/images/youtube.png'
+import applemusic from '../assets/images/apple_music.png'
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -8,6 +30,58 @@ function Home() {
   const [flip, setFlip] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+
+
+ // Main streaming platforms
+  const mainPlatforms = [
+    {  icon: wynkmusic},
+    {  icon: ganna},
+    { icon: jiosavan},
+    {  icon: facebook },
+    {  icon: instagram},
+    {  icon: applemusic  },
+     {  icon: spotify},
+    {  icon: vector },
+    {  icon: amazonmusic },
+    {  icon: youtube},
+    { icon: digital },
+    {  icon: shazam},
+     {  icon: kkbox},
+      {  icon: resso},
+       {  icon: napster},
+        {  icon: Soundcloud},
+         {  icon: iheartradio},
+  ];
+
+ 
+  // Mobile carrier platforms
+  const carrierPlatforms = [
+    { name: 'Jio', icon: <Smartphone className="w-5 h-5" />, color: 'bg-blue-600', textColor: 'text-white' },
+    { name: 'Airtel', icon: <Radio className="w-5 h-5" />, color: 'bg-red-500', textColor: 'text-white' },
+    { name: 'Vi', icon: <Volume2 className="w-5 h-5" />, color: 'bg-purple-600', textColor: 'text-white' },
+    { name: 'BSNL', icon: <Mic className="w-5 h-5" />, color: 'bg-green-600', textColor: 'text-white' },
+  ];
+
+   const PlatformCard = ({ platform, size = 'normal' }) => {
+    const sizeClasses = size === 'large' ? 'w-20 h-20' : 'w-16 h-16';
+    const textSize = size === 'large' ? 'text-xs' : 'text-xs';
+    
+    return (
+      <div className="group cursor-pointer transform transition-all duration-300 hover:scale-110 hover:rotate-2">
+        {/* <div className={`${sizeClasses} ${platform.color} rounded-2xl shadow-lg flex items-center justify-center mb-2 group-hover:shadow-xl transition-all duration-300`}>
+          {typeof platform.icon === 'string' ? (
+            <span className="text-2xl">{platform.icon}</span>
+          ) : (
+            <div className={platform.textColor}>{platform.icon}</div>
+          )}
+        </div> */}
+        <img src={platform.icon} alt="" width='70px' />
+        {/* <p className={`${textSize} font-medium text-gray-700 text-center group-hover:text-gray-900 transition-colors duration-300`}>
+          {platform.name}
+        </p> */}
+      </div>
+    );
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -101,6 +175,9 @@ function Home() {
 
   return (
     <>
+  
+    <>
+    
       {/* Custom Cursor */}
       <div
         className="fixed pointer-events-none z-50 mix-blend-difference"
@@ -132,7 +209,7 @@ function Home() {
         }
       `}</style>
 
-      <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+    <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
         {/* Half Circle Stroke Elements - Responsive positioning */}
         <div className="absolute top-20 sm:top-36 -left-2 sm:-left-4 w-32 h-32 sm:w-40 sm:h-40 lg:w-55 lg:h-55 -translate-x-1/2 -translate-y-1/2">
           <div className="w-full h-full border-20 sm:border-46 lg:border-32 border-[#b8d4db] rounded-full opacity-30"></div>
@@ -234,6 +311,51 @@ function Home() {
         </div>
       </section>
     </>
+
+
+
+    {/* Distribute On​ section */}
+
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">Distribute On​</h1>
+          {/* <p className="text-gray-600 text-lg">Reach millions of listeners across all major platforms</p> */}
+        </div>
+
+        {/* Main Distribution Grid */}
+        <div className="bg-white rounded-3xl shadow-2xl p-8 mb-8 border border-gray-100">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Music Streaming Platforms</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 justify-items-center">
+            {mainPlatforms.map((platform, index) => (
+              <PlatformCard key={index} platform={platform} />
+            ))}
+          </div>
+        </div>
+
+      
+
+        {/* Mobile Carriers Section */}
+        <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2 text-center">Mobile Carrier Distribution</h2>
+          <p className="text-gray-500 text-center mb-6">Reach users through India's major cellular networks</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center max-w-2xl mx-auto">
+            {carrierPlatforms.map((platform, index) => (
+              <PlatformCard key={index} platform={platform} size="large" />
+            ))}
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+
+    </>
+
+
+
   );
 }
 
