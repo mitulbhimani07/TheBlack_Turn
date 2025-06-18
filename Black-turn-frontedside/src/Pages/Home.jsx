@@ -573,6 +573,44 @@ function Home() {
       </section>
 
 
+      <section className="bg-white py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-5xl font-bold text-slate-900 mb-4">
+                  Reporting & Revenue Analytics
+                </h2>
+                <p className="text-slate-900 text-lg leading-relaxed font-medium">
+                  Track Your Growth, Earnings & Opportunities – With The Black Turn
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <p className="text-slate-500 leading-relaxed">
+                  Are you confused about which genre to work on, how much revenue did which
+                  artist earn, or which DSP is giving you the best performance?
+                </p>
+
+                <p className="text-slate-500 leading-relaxed">
+                  The Black Turn introduces a smart, auto-updated system that manages all revenue
+                  and reporting in a single dashboard.
+                </p>
+              </div>
+
+
+            </div>
+
+            {/* Right Analytics Dashboard */}
+            <div className="rounded-2xl p-6">
+              <img src={report} alt="Analytics Dashboard" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+
 
 
 
