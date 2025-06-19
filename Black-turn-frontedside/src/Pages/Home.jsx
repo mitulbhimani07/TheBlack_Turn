@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import banner from "../assets/images/banner.png";
 import right from "../assets/images/right.png";
-import { motion } from 'framer-motion';
+import { motion,AnimatePresence  } from 'framer-motion';
 import card1 from "../assets/images/1.png"
 import card2 from "../assets/images/2.png"
 import card3 from "../assets/images/3.png"
@@ -265,7 +265,9 @@ function Home() {
     }
   ];
 
-  const itemVariants = {
+
+
+const itemVariants = {
   hidden: { 
     opacity: 0, 
     y: 30,
@@ -317,50 +319,11 @@ const sectionVariants = {
   }
 };
 
-  const CustomPrevArrow = ({ onClick }) => (
-    <button
-      onClick={onClick}
-      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
-      aria-label="Previous testimonial"
-    >
-      <ChevronLeft className="w-6 h-6 text-gray-700" />
-    </button>
-  );
 
-  const CustomNextArrow = ({ onClick }) => (
-    <button
-      onClick={onClick}
-      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
-      aria-label="Next testimonial"
-    >
-      <ChevronRight className="w-6 h-6 text-gray-700" />
-    </button>
-  );
 
-  const sliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    loop: true,
-    autoplaySpeed: 1000,
-    pauseOnHover: true,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
-    dotsClass: "slick-dots custom-dots",
-    customPaging: (i) => (
-      <button
-        className="w-3 h-3 rounded-full transition-all duration-200 bg-gray-300 hover:bg-gray-400"
-        aria-label={`Go to testimonial ${i + 1}`}
-      />
-    )
+ const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
   };
-
-  //  const nextSlide = () => {
-  //     setCurrentSlide((prev) => (prev + 1) % testimonials.length);
-  //   };
 
   //   const prevSlide = () => {
   //     setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
@@ -1349,50 +1312,52 @@ const sectionVariants = {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">Music Distribution</h1>
-         
-         
         </div>
 
         <div className="space-y-4">
           {according.map((item, index) => {
-  const isActive = activeIndex === index;
-  return (
-    <div
-      key={index}
-      className="bg-white rounded-xl shadow-md transition-all border border-gray-200"
-    >
-      <button
-        onClick={() => toggleAccordion(index)}
-        className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
-      >
-        <div className="flex items-center space-x-4">
-          <h3 className={`text-xl font-semibold transition-colors duration-300 ${isActive ? 'text-slate-900' : 'text-gray-800'}`}>
-            {item.title}
-          </h3>
-        </div>
-       {isActive ? (
-  <div className="bg-[#004D5F] text-white p-2 rounded-full">
-    <Minus size={15} />
-  </div>
-) : (
-  <div className="bg-[#004D5F] text-white p-2 rounded-full">
-    <Plus size={15} />
-  </div>
-)}
+            const isActive = activeIndex === index;
+            return (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-md transition-all border border-gray-200"
+              >
+                <button
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
+                >
+                  <div className="flex items-center space-x-4">
+                    <h3
+                      className={`text-xl font-semibold transition-colors duration-300 ${
+                        isActive ? 'text-slate-900' : 'text-gray-800'
+                      }`}
+                    >
+                      {item.title}
+                    </h3>
+                  </div>
+                  <div className="bg-[#004D5F] text-white p-2 rounded-full">
+                    {isActive ? <Minus size={15} /> : <Plus size={15} />}
+                  </div>
+                </button>
 
-      </button>
-      {isActive && (
-        <div className="px-5 pb-5 text-gray-700">
-          {item.description}
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden px-5 pb-5 text-gray-700"
+                    >
+                      <div>{item.description}</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
-      )}
-    </div>
-  );
-})}
-
-        </div>
-
-       
       </div>
     </section>
 <section className="pb-16 max-w-7xl mx-auto bg-white">
@@ -1585,7 +1550,7 @@ const sectionVariants = {
                       <span className="text-5xl font-extrabold">₹4,999</span>
                       <span className="opacity-80">per year /-</span>
                     </div>
-                    <p className="text-gray-900 mb-6">Features</p>
+                    <p className="text-white mb-6">Features</p>
                     <ul className="space-y-4 opacity-90 mb-8 flex-grow">
                       <li className="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
