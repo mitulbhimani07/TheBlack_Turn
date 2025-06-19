@@ -13,3 +13,9 @@
   );
   overflow: hidden;
 }
+
+.slick-dots li.slick-active button {
+  background-color: #14b8a6 !important; /* teal-500 */
+  transform: scale(1.25);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
