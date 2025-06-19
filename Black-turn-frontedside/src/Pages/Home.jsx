@@ -8,6 +8,7 @@ import card3 from "../assets/images/3.png"
 import card4 from "../assets/images/4.png"
 import card5 from "../assets/images/5.png"
 import card6 from "../assets/images/6.png"
+import businessowner from "../assets/images/businessOwner.png"
 
 import { Music, Play, Radio, Smartphone, Headphones, Mic, Volume2, Disc } from 'lucide-react';
 import ganna from '../assets/images/ganna.png'
@@ -51,6 +52,45 @@ function Home() {
     "Unlimited Forever Releases",
     "Previously released song, accepted for Custom Caller Tune"
   ];
+
+  const cardsData = [
+    {
+      id: 1,
+      title: "Auto Payment & Reporting System",
+      features: [
+        "Now you don't have to email or follow-up on the phone.",
+        "All reports and payments are automatically available in your dashboard on time and without any manual hassle.",
+        "Whether it's INR, USD, Euro or any other currency we are able to process payment in your desired currency.",
+        "No more conversion tensions for international artists and labels."
+      ],
+      delay: 0.1,
+      gridClass: ""
+    },
+    {
+      id: 2,
+      title: "Detailed DSP-Wise Reports",
+      features: [
+        "Customized reports for every digital store (Spotify, Apple Music, JioSaavn, YouTube etc.).",
+        "By viewing monthly or DSP-wise breakdown, you can get a clear analysis of how much revenue is being generated from which platform.",
+        "Interactive charts and graphs in the dashboard that visually represent your revenue growth and regional performance."
+      ],
+      delay: 0.2,
+      gridClass: ""
+    },
+    {
+      id: 3,
+      title: "Growth & Trend Analysis",
+      features: [
+        "Detailed analytics on genre-wise, region-wise or time period basis, so you can make informed decisions for future releases.",
+        "Detailed insights will reveal which audience your content reached and which areas you can improve in.",
+        "100% Transparency & Security",
+        "Detailed record of every transaction available for you."
+      ],
+      delay: 0.3,
+      gridClass: "md:col-span-2 lg:col-span-1"
+    }
+  ];
+
 
 
 
@@ -598,8 +638,6 @@ function Home() {
                   and reporting in a single dashboard.
                 </p>
               </div>
-
-
             </div>
 
             {/* Right Analytics Dashboard */}
@@ -609,6 +647,170 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* reporting system */}
+      {/* Reporting System */}
+      <section className="bg-white py-16 px-6 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            {/* Add your header content here */}
+          </motion.div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+            {cardsData.map((card) => (
+              <motion.div
+                key={card.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: card.delay }}
+                viewport={{ once: true }}
+                className={`group ${card.gridClass}`}
+              >
+                <div className="bg-[#005f73] rounded-2xl p-6 sm:p-8 text-white h-full hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 ease-out cursor-pointer shadow-lg hover:shadow-2xl">
+                  <div className="mb-6">
+                    <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-[#ccdfe3] transition-colors duration-300">
+                      {card.title}
+                    </h3>
+                  </div>
+                  <ul className="space-y-3 text-sm sm:text-base">
+                    {card.features.map((feature, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* dicision making simplified */}
+      <div className="w-full py-16 bg-white">
+  <div className="w-[90%] mx-auto relative">
+    <motion.section
+      className="bg-[#005f73] relative rounded-3xl overflow-visible"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Decorative Circles */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden rounded-3xl">
+        <div className="absolute top-[-3rem] left-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-20">
+          <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
+        </div>
+        <div className="absolute bottom-[-3rem] right-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-25">
+          <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-8 md:px-16 lg:px-24">
+        <div className="flex flex-col lg:flex-row justify-between gap-8">
+
+          {/* Animated Text Block */}
+          <motion.div
+            className="flex-1 text-white px-4 lg:px-8 space-y-6 pt-22"
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <div className="space-y-3">
+              <p className="text-[#b8dce3] text-sm sm:text-base font-medium">
+                Elevate Your Music Career with The Black Turn
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                Decision-Making
+                <br />
+                Simplified
+              </h2>
+            </div>
+            <div className="space-y-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#d4eaf0]">
+              <p>
+                Now, decision making is even easier – based on data-driven insights,
+                decide which genre to focus on, which platform is giving the best royalty,
+                and what your next steps will be. Each feature empowers you to effectively manage your growth,
+                without the hassle of follow-up.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Animated Image Block */}
+          <motion.div
+            className="flex-1 flex justify-center lg:justify-end relative z-20"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <div className="relative h-[500px] flex items-end">
+              <motion.div
+                className="relative w-72 sm:w-80 lg:w-96 h-[550px] -mt-12"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 200 }}
+              >
+                <img
+                  src={businessowner}
+                  alt="Professional man with tablet"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+
+              {/* Floating Circles */}
+              <div className="absolute top-8 right-8 w-4 h-4 bg-white opacity-60 rounded-full animate-pulse"></div>
+              <div className="absolute top-20 right-16 w-3 h-3 bg-[#4db8cb] opacity-70 rounded-full animate-pulse delay-300"></div>
+              <div className="absolute top-32 right-4 w-2 h-2 bg-white opacity-50 rounded-full animate-pulse delay-700"></div>
+            </div>
+          </motion.div>
+
+        </div>
+      </div>
+    </motion.section>
+  </div>
+</div>
+
+{/* best music distribution */}
+ <section className="bg-[#005f73] py-16 sm:py-20 lg:py-24">
+    <motion.div
+      className="max-w-4xl mx-auto text-center text-white px-4 sm:px-6 lg:px-8"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+    >
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
+        Best Music Distribution India
+      </h2>
+      <span className='text-[24px] font-medium '>Why Think</span>
+      <p className="text-[18px] sm:text-lg lg:text-xl mb-8">
+        Distribute Your Music Today! – Pay After Work Done
+      </p>
+      <motion.button
+        className="bg-white text-[#005f73] px-12 py-3 rounded-md font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Join Now
+      </motion.button>
+    </motion.div>
+  </section>
+
+
+
+
+
+
+
+
 
 
 
