@@ -34,7 +34,9 @@ import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
 import report from '../assets/images/report.png'
 import { Check } from 'lucide-react';
-
+import { IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
+import MusicDistribution from '../assets/images/Music_Distribution.png';
+import MobileOperatorLicensing from '../assets/images/Mobile_Operator_Licensing.png';
 import { FaMusic, FaYoutube, FaSpotify, FaGooglePlay } from 'react-icons/fa';
 
 function Home() {
@@ -47,11 +49,11 @@ function Home() {
 
 
   const steps = [
-  { id: 1, title: 'Earnings from music streaming', icon: Music },
-  { id: 2, title: 'theblackturn.com', icon: Monitor },
-  { id: 3, title: 'Bank', icon: Building },
-  { id: 4, title: 'Record labels', icon: Database },
-];
+    { id: 1, title: 'Earnings from music streaming', icon: Music },
+    { id: 2, title: 'theblackturn.com', icon: Monitor },
+    { id: 3, title: 'Bank', icon: Building },
+    { id: 4, title: 'Record labels', icon: Database },
+  ];
   // Main streaming platforms
   const mainPlatforms = [
     { icon: wynkmusic },
@@ -513,6 +515,94 @@ function Home() {
         </div>
       </section>
       {/* Distribute On​ section */}
+
+      <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8">
+          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+            {/* Left Text Content */}
+            <div>
+              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
+                Make money with worldwide music distribution
+              </p>
+              <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
+                Upload Unlimited Songs <br />
+
+              </h1>
+              <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
+                The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
+                share their creativity across more than 150 streaming platforms, including Spotify, Apple
+                Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
+                reach a wider audience, all while retaining an impressive 95% of your earnings. With our
+                user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
+                72 hours—ensuring your music is always at the forefront.
+              </p>
+              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                Join Now
+              </button>
+            </div>
+
+            {/* Right Image Content */}
+            <div className="flex items-center justify-center p-4 sm:p-6 lg:p-8 xl:p-10 order-1 lg:order-2">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+                {/* Second border layer (furthest back) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 right-2 sm:right-3 lg:right-4 xl:right-5 z-0"></div>
+
+                {/* First border layer (middle) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 right-4 sm:right-6 lg:right-8 xl:right-10 z-10"></div>
+
+                {/* Main content box (front) */}
+                <img
+                  src={MusicDistribution}
+                  alt="Music Distribution Banner"
+                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Music Distribution Plans Section */}
+      <div className="bg-[#ebf4f5] lg:-mt-40 flex items-center justify-center px-4 sm:px-6 lg:py-10 lg:px-8 relative overflow-hidden">
+        <div className="flex items-center justify-center px-4 sm:px-6 md:px-8">
+          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+
+            {/* Left Text Content */}
+            {/* Right Image Content */}
+            <div>
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+                {/* Second border layer (furthest back) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 left-2 sm:left-3 lg:left-4 xl:left-5 z-0"></div>
+
+                {/* First border layer (middle) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 left-4 sm:left-6 lg:left-8 xl:left-10 z-10"></div>
+
+                {/* Main content box (front) */}
+                <img
+                  src={MobileOperatorLicensing}
+                  alt="Music Distribution Banner"
+                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+            <div className=" items-center justify-center order-1 lg:order-2">
+              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
+                Caller Tune Distribution India               </p>
+              <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
+                Mobile Operator Licensing <br />
+
+              </h1>
+              <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
+                Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
+              </p>
+              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                Join Now
+              </button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
       {/* Music Distribution Plans Section */}
       <section className="bg-[#EBF4F5] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -759,6 +849,111 @@ function Home() {
                 Add On Now
               </button>
             </motion.div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Pricing Card - Now with Gradient and enhanced shadow */}
+          <div className="bg-gradient-to-br from-[#EBF4F5] to-[#B8D8D8] rounded-2xl p-8 shadow-xl border border-gray-200">
+
+            {/* Header */}
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-extrabold text-black tracking-tight mb-4">
+                Music Distribution Plans Without CT
+              </h2>
+              <p className="text-gray-600 text-lg">A straightforward plan for your music release.</p>
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+              {/* Plan Details */}
+              <div className="text-center md:text-left mb-6 md:mb-0">
+                <h3 className="text-3xl font-bold text-gray-800">Single Song</h3>
+                <p className="text-gray-600 text-lg">Without Caller Tune</p>
+              </div>
+              {/* Price */}
+              <div className="text-center md:text-right">
+                <span className="text-6xl font-extrabold text-[#005f73]">₹599</span>
+                <span className="text-gray-600 ml-2 text-lg">/ Per Song</span>
+              </div>
+            </div>
+
+            {/* Features - With clearer icons */}
+            <div className="mb-10">
+              <div className="border-t border-gray-300 pt-6">
+                <ul className="space-y-4 text-gray-700 text-base">
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>All Major Music Live Stream Platforms</span>
+                  </li>
+                  {/* Correctly showing "No Caller Tune" as an exclusion */}
+                  <li className="flex items-center text-gray-500">
+                    <IoCloseCircle className="h-6 w-6 text-red-500 mr-3 flex-shrink-0" />
+                    <span>No Caller Tune Facility</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>Lifetime Song Availability</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>95% Royalties</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>4 Monthly Payment / Report</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>YouTube Content ID</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>24 Hour Approval</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="text-center">
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 95, 115, 0.3)" }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#005f73] text-white px-10 py-4 rounded-xl font-semibold text-lg shadow-lg"
+              >
+                UPLOAD NOW
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Process Steps - Redesigned for better visual appeal */}
+          <div className="mt-16 text-center">
+            <h3 className="text-3xl font-bold text-gray-800 mb-8">A Simple Two-Step Process</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+
+              {/* Step 1 */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-start">
+                <div className="bg-[#EBF4F5] text-[#005f73] font-bold rounded-full h-10 w-10 flex items-center justify-center mr-5 flex-shrink-0">1</div>
+                <div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">Choose & Upload</h4>
+                  <p className="text-gray-600">
+                    Select the plan and upload your audio file & artwork. It's a quick and easy process.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-start">
+                <div className="bg-[#EBF4F5] text-[#005f73] font-bold rounded-full h-10 w-10 flex items-center justify-center mr-5 flex-shrink-0">2</div>
+                <div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">Pay & Track</h4>
+                  <p className="text-gray-600">
+                    After filling in the details, simply pay to submit. You can track your order status from your account page.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
