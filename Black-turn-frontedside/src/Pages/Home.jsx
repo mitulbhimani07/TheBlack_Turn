@@ -83,7 +83,27 @@ function Home() {
   const [expandedIndex, setExpandedIndex] = useState(null);
 
 
-
+const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    loop: true,
+    autoplaySpeed: 1000,
+    pauseOnHover: true,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
+    dotsClass: "slick-dots custom-dots",
+    customPaging: (i) => (
+      <button
+        className="w-3 h-3 rounded-full transition-all duration-200 bg-gray-300 hover:bg-gray-400"
+        aria-label={`Go to testimonial ${i + 1}`}
+      />
+    )
+  };
+  
   const steps = [
       { id: 1, title: 'Earnings from music streaming', icon: Music },
       { id: 2, title: 'theblackturn.com', icon: Monitor },
