@@ -8,7 +8,7 @@ import card3 from "../assets/images/3.png"
 import card4 from "../assets/images/4.png"
 import card5 from "../assets/images/5.png"
 import card6 from "../assets/images/6.png"
-
+import {  Headphones,  Disc, Phone, Wallet, Mic2, DollarSign, Repeat, ChevronDown, Minus, Plus } from 'lucide-react';
 import { Music, Monitor, Building, Database, ArrowRight } from 'lucide-react';
 import ganna from '../assets/images/ganna.png'
 import wynkmusic from '../assets/images/wynk.png'
@@ -33,7 +33,12 @@ import youtube from '../assets/images/youtube.png'
 import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
 import report from "../assets/images/report.png";
+import silder from "../assets/images/silder1.png";
+import leftqoute from "../assets/images/leftqoute.png";
+import rightquote from "../assets/images/rightquote.png";
 import { Check } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { FaQuoteRight } from 'react-icons/fa';
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -42,6 +47,7 @@ function Home() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+    const [currentSlide, setCurrentSlide] = React.useState(0);
 
 
   const steps = [
@@ -50,6 +56,107 @@ function Home() {
   { id: 3, title: 'Bank', icon: Building },
   { id: 4, title: 'Record labels', icon: Database },
 ];
+
+const testimonials = [
+    {
+      id: 1,
+      title: "The Pawsitive Effects",
+      content: "Amazing budget service with instant response. But I must say that The Black Turn platform helped me a lot to generate my first revenue.",
+      date: "18. June, 2021.",
+      rating: 5
+    },
+    {
+      id: 2,
+      title: "Creative Breakthroughs",
+      content: "The platform exceeded my expectations. The tools and community support helped me reach new heights in my artistic journey and generate consistent income.",
+      date: "22. July, 2021.",
+      rating: 5
+    },
+    {
+      id: 3,
+      title: "Digital Art Success",
+      content: "Outstanding experience! The Black Turn platform provided me with all the resources I needed to monetize my digital art and connect with collectors worldwide.",
+      date: "15. August, 2021.",
+      rating: 5
+    }
+  ];
+
+
+ const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  // React.useEffect(() => {
+  //   const interval = setInterval(nextSlide, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  const PawAvatar = () => (
+    <div className="relative w-44 h-44">
+      {/* Background cards - stack effect */}
+      <div className="absolute -left-4 -top-4 w-full h-full bg-white rounded-tl-lg border-2 border-gray-900 transform shadow-sm"></div>
+
+
+      <div className="absolute top-4 -right-4 w-full h-full bg-white rounded-br-lg border-2 border-gray-900 transform shadow-sm"></div>
+
+      
+      {/* Main card */}
+      
+        {/* Paw print design */}
+        <div className="relative w-full h-full flex items-center justify-center">
+         <img src={silder} alt="" width='500px'/>
+        </div>
+      
+    </div>
+  );
+
+const according = [
+    {
+      title: "All platforms",
+      description: "Domestic Full Track Services Amazon, Gaana, Jio Saavn, Hungama Wynk. International Full Track Services:Alibaba, Apple(Itune), Audible Magic, Awa, Boomplay, Deezer, Facebook, Iheart, Imusic Corp, Jaxsta, Kkbox, Kuack Media, Napster, Netease, Pandora, Resso, Snap, Soundcloud, Spotify, Touch Tunes, youtube music."
+    },
+    {
+      title:"Custom Label",
+      description: "Distribute Music Using Your Own Label Name, and Get Your Custom C and P Line, Custom Label Name, Unlimited Lifetime Releases, with Unlimited artists."
+
+    },
+    {
+      title:"Song live Time",
+      description: "We deliver on all platforms minimum (1-3 Days) Maximum(5-8 Days) .Get your song live in 3 hours. mail or contact us."
+
+    },
+    {
+      title: "Customize Caller Tune For All Networks",
+      description: "We Distribute Music on all major Telecom operators – Jio, Airtel, Idea, Vodafone, Bsnl."
+    },
+    {
+      title: "Pay once, use lifetime",
+      description: "Pay Once for song distribution and your song live for a lifetime"
+    },
+    {
+      title: "95% revenue share",
+      description: "Your Song Play Anywhere Anytime You Get Paid 95% Revenue Your 5% our."
+    },
+    {
+      title: "24/7 Phone Support",
+      description: "Call Any Time : +919729786689 Mail us : contact@theblackturn.com"
+    },
+    {
+      title: "Old Song(Already Released Song) Caller Tune",
+      description: "Want to create a Caller tune for your previous released song. Call Us Now"
+    }
+  ];
+
+   const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   // Main streaming platforms
   const mainPlatforms = [
     { icon: wynkmusic },
@@ -81,16 +188,7 @@ function Home() {
     { icon: bsnl },
   ];
 
-  const PlatformCard = ({ platform, size = 'normal' }) => {
-    const sizeClasses = size === 'large' ? 'w-20 h-20' : 'w-16 h-16';
-    const textSize = size === 'large' ? 'text-xs' : 'text-xs';
 
-    return (
-      <div className="group  transform transition-all duration-300">
-        <img src={platform.icon} alt="" width='70px' />
-      </div>
-    );
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -672,6 +770,180 @@ function Home() {
           </div>
         </div>
       </section>
+
+
+      {/* according section */}
+
+        <section className="py-20 px-4 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">Music Distribution</h1>
+         
+         
+        </div>
+
+        <div className="space-y-4">
+          {according.map((item, index) => {
+  const isActive = activeIndex === index;
+  return (
+    <div
+      key={index}
+      className="bg-white rounded-xl shadow-md transition-all border border-gray-200"
+    >
+      <button
+        onClick={() => toggleAccordion(index)}
+        className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
+      >
+        <div className="flex items-center space-x-4">
+          <h3 className={`text-xl font-semibold transition-colors duration-300 ${isActive ? 'text-slate-900' : 'text-gray-800'}`}>
+            {item.title}
+          </h3>
+        </div>
+       {isActive ? (
+  <div className="bg-[#004D5F] text-white p-2 rounded-full">
+    <Minus size={15} />
+  </div>
+) : (
+  <div className="bg-[#004D5F] text-white p-2 rounded-full">
+    <Plus size={15} />
+  </div>
+)}
+
+      </button>
+      {isActive && (
+        <div className="px-5 pb-5 text-gray-700">
+          {item.description}
+        </div>
+      )}
+    </div>
+  );
+})}
+
+        </div>
+
+       
+      </div>
+    </section>
+
+
+
+
+    {/* silder section */}
+     <div className="min-h-screen bg-white py-16 px-4 relative overflow-hidden">
+      {/* Large decorative quotes */}
+      <div className="absolute top-65 left-55   z-10">
+        <img src={leftqoute} alt="" />
+      </div>
+      <div className="absolute bottom-35 right-55  z-10">
+        <img src={rightquote} alt="" />
+      </div>
+      
+     <div className="bg-white py-16 px-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Hear What Our Artists Are Achieving
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Join a community of thriving musicians who trust The Black Turn to amplify their reach and revenue.
+          </p>
+        </div>
+
+        {/* Slider Container */}
+        <div className="relative">
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {testimonials.map((testimonial) => (
+                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+                  <div className="max-w-5xl mx-auto">
+                    {/* Main testimonial card with proper background */}
+                    <div className="relative mx-6 my-8">
+                      {/* Decorative background card - positioned properly with border */}
+                      <div className="absolute -top-4 -left-4 -right-4 -bottom-4 bg-[#EBF4F5] rounded-2xl transform -rotate-3 shadow-md border-2 border-gray-200"></div>
+                      
+                      {/* Main content card */}
+                      <div className="relative bg-white rounded-2xl p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10">
+                        <div className="grid md:grid-cols-5 gap-8 items-center">
+                          {/* Left Side - Paw Avatar */}
+                          <div className="md:col-span-2 flex justify-center">
+                            <PawAvatar />
+                          </div>
+
+                          {/* Right Side - Content */}
+                          <div className="md:col-span-3 space-y-6">
+                            <div className="flex items-center justify-between flex-wrap gap-4">
+                              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                                {testimonial.title}
+                              </h3>
+                              
+                              {/* Star Rating */}
+                              <div className="flex items-center gap-1">
+                                {[...Array(testimonial.rating)].map((_, i) => (
+                                  <Star key={i} className="w-5 h-5 fill-orange-400 text-orange-400" />
+                                ))}
+                                <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                  <span className="text-white text-sm font-bold">G</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <p className="text-gray-700 text-lg leading-relaxed">
+                              "{testimonial.content}"
+                            </p>
+
+                            <p className="text-gray-500 font-medium text-base">
+                              {testimonial.date}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-700" />
+          </button>
+          
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-6 h-6 text-gray-700" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-8 space-x-3">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  index === currentSlide 
+                    ? 'bg-teal-500 scale-125 shadow-md' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
     </>
   );
 }
