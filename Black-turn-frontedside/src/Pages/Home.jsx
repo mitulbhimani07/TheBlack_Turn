@@ -9,7 +9,7 @@ import card4 from "../assets/images/4.png"
 import card5 from "../assets/images/5.png"
 import card6 from "../assets/images/6.png"
 import businessowner from "../assets/images/businessOwner.png"
-import {  Headphones,  Disc, Phone, Wallet, Mic2, DollarSign, Repeat, ChevronDown, Minus, Plus } from 'lucide-react';
+import { Headphones, Disc, Phone, Wallet, Mic2, DollarSign, Repeat, ChevronDown, Minus, Plus } from 'lucide-react';
 import { Music, Monitor, Building, Database, ArrowRight } from 'lucide-react';
 import ganna from '../assets/images/ganna.png'
 import wynkmusic from '../assets/images/wynk.png'
@@ -35,11 +35,23 @@ import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
 import report from "../assets/images/report.png";
 import silder from "../assets/images/silder1.png";
+import client1 from '../assets/images/client1.jpeg';
+import client2 from '../assets/images/client2.jpeg';
+import client3 from '../assets/images/client3.jpeg';
+import client4 from '../assets/images/client4.jpeg';
+import client5 from '../assets/images/client5.jpeg';
+import client6 from '../assets/images/client6.jpeg';
+import client7 from '../assets/images/client7.jpg';
 import leftqoute from "../assets/images/leftqoute.png";
 import rightquote from "../assets/images/rightquote.png";
 import { Check } from 'lucide-react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { FaQuoteRight } from 'react-icons/fa';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import { img } from 'framer-motion/client';
+
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -48,85 +60,174 @@ function Home() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-    const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
 
 
   const steps = [
-  { id: 1, title: 'Earnings from music streaming', icon: Music },
-  { id: 2, title: 'theblackturn.com', icon: Monitor },
-  { id: 3, title: 'Bank', icon: Building },
-  { id: 4, title: 'Record labels', icon: Database },
-];
+    { id: 1, title: 'Earnings from music streaming', icon: Music },
+    { id: 2, title: 'theblackturn.com', icon: Monitor },
+    { id: 3, title: 'Bank', icon: Building },
+    { id: 4, title: 'Record labels', icon: Database },
+  ];
 
-const testimonials = [
+  const testimonials = [
     {
       id: 1,
-      title: "The Pawsitive Effects",
-      content: "Amazing budget service with instant response. But I must say that The Black Turn platform helped me a lot to generate my first revenue.",
+      title: "YT World",
+      content: "Hello, Team The Black Turn,The attention to detail with which you helped me understand the initial concept of digital distribution platform and how can I make more revenue is in a league of its own 👏. I am incredibly pleased with the quality of customer service provided to me🤟🤟🤟🤟.The best service provider I have ever met. 😊😊😊😊😊😊",
       date: "18. June, 2021.",
+      img:client1,
       rating: 5
     },
     {
       id: 2,
-      title: "Creative Breakthroughs",
-      content: "The platform exceeded my expectations. The tools and community support helped me reach new heights in my artistic journey and generate consistent income.",
-      date: "22. July, 2021.",
+      title: "SITA MAHLI",
+      content: "I am from Jharkhand It's music distribution company we got very good and very honest. Above all, it has a very fast service which is india's most best music distributer.I am very satisfied with this company.",
+      date: "17. June, 2021.",
+      img:client2,
       rating: 5
     },
     {
       id: 3,
-      title: "Digital Art Success",
-      content: "Outstanding experience! The Black Turn platform provided me with all the resources I needed to monetize my digital art and connect with collectors worldwide.",
-      date: "15. August, 2021.",
+      title: "GOVIND MAHALI",
+      content: "I am from Jharkhand Good music distributer",
+      date: "17.June, 2021.",
+      img:client3,
+      rating: 5
+    },
+     {
+      id: 4,
+      title: "RDX karan",
+      content: "very good and fast service, very polite staff",
+      date: "17.June, 2021.",
+      img:client4,
+      rating: 5
+    },
+     {
+      id: 5,
+      title: "Knowledge Jinni",
+      content: "I researched several digital distribution platforms, but among them all, I really liked The Black Turn Platform. Among the many reasons I chose The Black Trun is for a few reasons such as It is the only platform that provides us with free caller tune conversions, through which we can increase our revenue. The second is free ISRC and UPC codes, ISRC and UPC codes are a paid service on many platforms, while this important service is free on The Black Turn. Third, the only paid platform gives us up to 95% of revenue which is a huge amount for me, and best of all Instant service, reply and solution. Industry Khatam Bhai..... Industry Khatam..... Guys, I must say The Black Turn Rocks Man...",
+      date: "16.June, 2021.",
+      img:client5,
+      rating: 5
+    },
+     {
+      id: 6,
+      title: "Illusion Studio",
+      content: "It's a lovely team to work with. Honest and trustworthy ❤️",
+      date: "15.June, 2021.",
+      img:client6,
+      rating: 5
+    },
+     {
+      id: 7,
+      title: "The Pawsitive Effects",
+      content: "Amazing budget service with instant response. But I must say that The Black Turn platform helped me a lot to generate my first revenue.",
+      date: "15.June, 2021.",
+      img:silder,
+      rating: 5
+    },
+    {
+      id: 8,
+      title: "Mudit Chauhan",
+      content: "In the digital distribution industry where customers are worried about how to start, how to manage, the black turn does it all for you. It is the only easy-to-use platform of its kind where uploading songs is a game and generating handsome revenue seems like My Dreams Come True.... The Black Turn Rocks..... Highly Recommended",
+      date: "14.June, 2021.",
+      img:client7,
+      rating: 5
+    },
+    {
+      id: 9,
+      title: "Ankur Chauhan",
+      content: "This Is One Of best Music Distribution company Plus apni indian company hai Apni indian company ko support kare guys Thank You So Much The Black Turn 🙌🙌",
+      date: "11.June, 2021.",
+      img:client7,
       rating: 5
     }
   ];
 
 
- const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+  const CustomPrevArrow = ({ onClick }) => (
+    <button
+      onClick={onClick}
+      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
+      aria-label="Previous testimonial"
+    >
+      <ChevronLeft className="w-6 h-6 text-gray-700" />
+    </button>
+  );
+
+  const CustomNextArrow = ({ onClick }) => (
+    <button
+      onClick={onClick}
+      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
+      aria-label="Next testimonial"
+    >
+      <ChevronRight className="w-6 h-6 text-gray-700" />
+    </button>
+  );
+
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    loop: true,
+    autoplaySpeed: 1000,
+    pauseOnHover: true,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
+    dotsClass: "slick-dots custom-dots",
+    customPaging: (i) => (
+      <button
+        className="w-3 h-3 rounded-full transition-all duration-200 bg-gray-300 hover:bg-gray-400"
+        aria-label={`Go to testimonial ${i + 1}`}
+      />
+    )
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  //  const nextSlide = () => {
+  //     setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+  //   };
+
+  //   const prevSlide = () => {
+  //     setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  //   };
 
   // React.useEffect(() => {
   //   const interval = setInterval(nextSlide, 5000);
   //   return () => clearInterval(interval);
   // }, []);
 
-  const PawAvatar = () => (
-    <div className="relative w-44 h-44">
-      {/* Background cards - stack effect */}
-      <div className="absolute -left-4 -top-4 w-full h-full bg-white rounded-tl-lg border-2 border-gray-900 transform shadow-sm"></div>
+  const PawAvatar = ({ img }) => (
+  <div className="relative w-44 h-44">
+    {/* Background cards - stack effect */}
+    <div className="absolute -left-4 -top-4 w-full h-full bg-white rounded-tl-lg border-2 border-gray-900 transform shadow-sm"></div>
+    <div className="absolute top-4 -right-4 w-full h-full bg-white rounded-br-lg border-2 border-gray-900 transform shadow-sm"></div>
 
-
-      <div className="absolute top-4 -right-4 w-full h-full bg-white rounded-br-lg border-2 border-gray-900 transform shadow-sm"></div>
-
-      
-      {/* Main card */}
-      
-        {/* Paw print design */}
-        <div className="relative w-full h-full flex items-center justify-center">
-         <img src={silder} alt="" width='500px'/>
-        </div>
-      
+    {/* Main avatar image */}
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-lg  bg-white ">
+      <img src={img} alt="Client Avatar" className="object-cover w-full h-full rounded-lg" />
     </div>
-  );
+  </div>
+);
 
-const according = [
+
+  const according = [
     {
       title: "All platforms",
       description: "Domestic Full Track Services Amazon, Gaana, Jio Saavn, Hungama Wynk. International Full Track Services:Alibaba, Apple(Itune), Audible Magic, Awa, Boomplay, Deezer, Facebook, Iheart, Imusic Corp, Jaxsta, Kkbox, Kuack Media, Napster, Netease, Pandora, Resso, Snap, Soundcloud, Spotify, Touch Tunes, youtube music."
     },
     {
-      title:"Custom Label",
+      title: "Custom Label",
       description: "Distribute Music Using Your Own Label Name, and Get Your Custom C and P Line, Custom Label Name, Unlimited Lifetime Releases, with Unlimited artists."
 
     },
     {
-      title:"Song live Time",
+      title: "Song live Time",
       description: "We deliver on all platforms minimum (1-3 Days) Maximum(5-8 Days) .Get your song live in 3 hours. mail or contact us."
 
     },
@@ -152,7 +253,7 @@ const according = [
     }
   ];
 
-   const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -723,270 +824,267 @@ const according = [
       </section>
 
       {/* step section */}
-      <section className="bg-white py-20 px-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          {/* Desktop Flow */}
-          <div className="hidden lg:block">
-            <div className="relative">
-              {/* Connecting Dashed Line */}
-              <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
+      <section className="bg-white py-20 px-4 sm:px-6 md:px-8 overflow-hidden">
+  <div className="max-w-7xl mx-auto">
+    {/* Desktop & Tablet Flow */}
+    <div className="hidden md:block">
+      <div className="relative">
+        {/* Connecting Dashed Line */}
+        <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
 
-              {/* Steps */}
-              <div className="relative z-10 grid grid-cols-4 gap-x-20 gap-y-8">
-                {steps.map((step, index) => {
-                  const Icon = step.icon;
-                  return (
-                    <div
-                      key={step.id}
-                      className={`group cursor-pointer transition-all duration-500 ${
-                        activeStep === index ? 'scale-105' : 'hover:scale-102'
-                      }`}
-                      onMouseEnter={() => setActiveStep(index)}
-                    >
-                      <div
-                        className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
-                          activeStep === index ? 'shadow-2xl shadow-current/20' : ''
-                        }`}
-                      >
-                        {/* Step Number Badge */}
-                        <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
-                          <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
-                            {step.id}
-                          </div>
-                        </div>
-
-                        {/* Icon */}
-                        <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                          <Icon className="w-8 h-8 text-white" />
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="text-xl font-bold text-black text-center">
-                          {step.title}
-                        </h3>
-
-                        {/* Arrow */}
-                        {index < steps.length - 1 && (
-                          <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 ">
-                            <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
-                              <ArrowRight className="w-4 h-4 text-white" />
-                            </div>
-                          </div>
-                        )}
-                      </div>
+        {/* Steps */}
+        <div className="relative z-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-8 xl:gap-x-16 gap-y-10">
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            return (
+              <div
+                key={step.id}
+                className={`group cursor-pointer transition-all duration-500 ${activeStep === index ? 'scale-105' : 'hover:scale-102'}`}
+                onMouseEnter={() => setActiveStep(index)}
+              >
+                <div
+                  className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 flex flex-col justify-center items-center transition-all duration-500 ${
+                    activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                  }`}
+                >
+                  {/* Step Number Badge */}
+                  <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
+                    <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
+                      {step.id}
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Flow */}
-          <div className="lg:hidden space-y-6">
-            {steps.map((step) => {
-              const Icon = step.icon;
-              return (
-                <div key={step.id} className="relative">
-                  <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm flex flex-col justify-center">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
-                        {step.id}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-black mb-3">
-                      {step.title}
-                    </h3>
                   </div>
 
-                  {/* Vertical Line */}
-                  {step.id < steps.length && (
-                    <div className="flex justify-center py-4">
-                      <div className="w-0.5 h-8 bg-[#005f73]"></div>
+                  {/* Icon */}
+                  <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-black text-center">{step.title}</h3>
+
+                  {/* Arrow */}
+                  {index < steps.length - 1 && (
+                    <div className="hidden lg:block absolute right-[-40px] top-1/2 transform -translate-y-1/2">
+                      <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
+                        <ArrowRight className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    {/* Mobile Flow */}
+    <div className="block md:hidden space-y-6 mt-10">
+      {steps.map((step) => {
+        const Icon = step.icon;
+        return (
+          <div key={step.id} className="relative">
+            <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 flex flex-col justify-center text-center">
+              <div className="flex items-center gap-4 mb-4 justify-center">
+                <div className="w-12 h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-6 h-6 text-white" />
+                </div>
+                <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
+                  {step.id}
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-black mb-3">{step.title}</h3>
+            </div>
+
+            {/* Vertical Line */}
+            {step.id < steps.length && (
+              <div className="flex justify-center py-4">
+                <div className="w-0.5 h-8 bg-[#005f73]"></div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+
+
+      {/* according section */}
+
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">Music Distribution</h1>
+
+
+          </div>
+
+          <div className="space-y-4">
+            {according.map((item, index) => {
+              const isActive = activeIndex === index;
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-md transition-all border border-gray-200"
+                >
+                  <button
+                    onClick={() => toggleAccordion(index)}
+                    className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <h3 className={`text-xl font-semibold transition-colors duration-300 ${isActive ? 'text-slate-900' : 'text-gray-800'}`}>
+                        {item.title}
+                      </h3>
+                    </div>
+                    {isActive ? (
+                      <div className="bg-[#004D5F] text-white p-2 rounded-full">
+                        <Minus size={15} />
+                      </div>
+                    ) : (
+                      <div className="bg-[#004D5F] text-white p-2 rounded-full">
+                        <Plus size={15} />
+                      </div>
+                    )}
+
+                  </button>
+                  {isActive && (
+                    <div className="px-5 pb-5 text-gray-700">
+                      {item.description}
                     </div>
                   )}
                 </div>
               );
             })}
+
           </div>
+
+
         </div>
       </section>
 
 
-      {/* according section */}
-
-        <section className="py-20 px-4 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Music Distribution</h1>
-         
-         
-        </div>
-
-        <div className="space-y-4">
-          {according.map((item, index) => {
-  const isActive = activeIndex === index;
-  return (
-    <div
-      key={index}
-      className="bg-white rounded-xl shadow-md transition-all border border-gray-200"
-    >
-      <button
-        onClick={() => toggleAccordion(index)}
-        className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
-      >
-        <div className="flex items-center space-x-4">
-          <h3 className={`text-xl font-semibold transition-colors duration-300 ${isActive ? 'text-slate-900' : 'text-gray-800'}`}>
-            {item.title}
-          </h3>
-        </div>
-       {isActive ? (
-  <div className="bg-[#004D5F] text-white p-2 rounded-full">
-    <Minus size={15} />
-  </div>
-) : (
-  <div className="bg-[#004D5F] text-white p-2 rounded-full">
-    <Plus size={15} />
-  </div>
-)}
-
-      </button>
-      {isActive && (
-        <div className="px-5 pb-5 text-gray-700">
-          {item.description}
-        </div>
-      )}
-    </div>
-  );
-})}
-
-        </div>
-
-       
-      </div>
-    </section>
 
 
-
-
-    {/* silder section */}
-     <div className="min-h-screen bg-white py-16 px-4 relative overflow-hidden">
+      {/* silder section */}
+      <div className="relative px-4 sm:px-6 md:px-8 py-12 overflow-hidden">
       {/* Large decorative quotes */}
-      <div className="absolute top-65 left-55   z-10">
-        <img src={leftqoute} alt="" />
-      </div>
-      <div className="absolute bottom-35 right-55  z-10">
-        <img src={rightquote} alt="" />
-      </div>
-      
-     <div className="bg-white py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Hear What Our Artists Are Achieving
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Join a community of thriving musicians who trust The Black Turn to amplify their reach and revenue.
-          </p>
-        </div>
+     <div className="absolute top-8 left-8 md:top-15 md:left-56 lg:left-[15rem] z-10 hidden md:block">
+  <img src={leftqoute} alt="left quote" className="w-12 md:w-20" />
+</div>
 
-        {/* Slider Container */}
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-            >
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                  <div className="max-w-5xl mx-auto">
-                    {/* Main testimonial card with proper background */}
-                    <div className="relative mx-6 my-8">
-                      {/* Decorative background card - positioned properly with border */}
-                      <div className="absolute -top-4 -left-4 -right-4 -bottom-4 bg-[#EBF4F5] rounded-2xl transform -rotate-3 shadow-md border-2 border-gray-200"></div>
-                      
-                      {/* Main content card */}
-                      <div className="relative bg-white rounded-2xl p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10">
-                        <div className="grid md:grid-cols-5 gap-8 items-center">
-                          {/* Left Side - Paw Avatar */}
-                          <div className="md:col-span-2 flex justify-center">
-                            <PawAvatar />
-                          </div>
+<div className="absolute bottom-10 right-8 md:bottom-16 md:right-60 lg:right-[15rem] z-10 hidden md:block">
+  <img src={rightquote} alt="right quote" className="w-12 md:w-20" />
+</div>
 
-                          {/* Right Side - Content */}
-                          <div className="md:col-span-3 space-y-6">
-                            <div className="flex items-center justify-between flex-wrap gap-4">
-                              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-                                {testimonial.title}
-                              </h3>
-                              
-                              {/* Star Rating */}
-                              <div className="flex items-center gap-1">
-                                {[...Array(testimonial.rating)].map((_, i) => (
-                                  <Star key={i} className="w-5 h-5 fill-orange-400 text-orange-400" />
-                                ))}
-                                <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                                  <span className="text-white text-sm font-bold">G</span>
-                                </div>
-                              </div>
-                            </div>
 
-                            <p className="text-gray-700 text-lg leading-relaxed">
-                              "{testimonial.content}"
-                            </p>
+      <Slider {...sliderSettings}>
+        {testimonials.map((testimonial, index) => {
+          const isExpanded = expandedIndex === index;
 
-                            <p className="text-gray-500 font-medium text-base">
-                              {testimonial.date}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+          return (
+            <div key={testimonial.id}>
+  <div className="px-2 sm:px-4">
+    <div className="max-w-6xl mx-auto">
+      {/* Card container */}
+      <div className="relative px-4 sm:px-6 py-6 sm:py-8 h-full">
+        {/* Decorative background */}
+        <div
+          className="absolute bg-[#EBF4F5] rounded-2xl transform -rotate-5"
+          style={{
+            top: "1rem",
+            left: "1rem",
+            right: "1rem",
+            bottom: "1rem",
+            zIndex: 1,
+          }}
+        ></div>
+
+        {/* Main card */}
+        <div className="relative bg-white rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10 h-full min-h-[300px] md:min-h-[350px] flex flex-col justify-between">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 items-center h-full">
+            {/* Left - Avatar */}
+            <div className="md:col-span-2 flex justify-center h-full">
+              <PawAvatar img={testimonial.img} />
+            </div>
+
+            {/* Right - Content */}
+            <div className="md:col-span-3 flex flex-col justify-between space-y-4 sm:space-y-6 h-full">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
+                  {testimonial.title}
+                </h3>
+
+                <div className="flex items-center gap-1">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-orange-400 text-orange-400"
+                    />
+                  ))}
+                  <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center p-1">
+                    <Check className="text-white w-4 h-4" />
                   </div>
                 </div>
-              ))}
+              </div>
+
+              <div className="flex-1">
+                <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-2">
+                  "
+                  {isExpanded
+                    ? testimonial.content
+                    : `${testimonial.content.slice(0, 180)}...`}
+                  "
+                </p>
+                {testimonial.content.length > 180 && (
+                  <button
+                    onClick={() =>
+                      setExpandedIndex(isExpanded ? null : index)
+                    }
+                    className="text-teal-600 hover:underline text-sm font-medium"
+                  >
+                    {isExpanded ? "Show Less" : "Read More"}
+                  </button>
+                )}
+              </div>
+
+              <p className="text-gray-500 font-medium text-sm sm:text-base mt-2">
+                {testimonial.date}
+              </p>
             </div>
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-700" />
-          </button>
-          
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-6 h-6 text-gray-700" />
-          </button>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 space-x-3">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                  index === currentSlide 
-                    ? 'bg-teal-500 scale-125 shadow-md' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+          );
+        })}
+      </Slider>
+
+      {/* Slick custom style */}
+      <style jsx global>{`
+        .slick-slider {
+          overflow: visible !important;
+        }
+        .slick-list {
+          overflow: visible !important;
+          padding: 2rem 0 !important;
+        }
+        .slick-track {
+          overflow: visible !important;
+        }
+        .slick-slide {
+          overflow: visible !important;
+        }
+        .slick-slide > div {
+          overflow: visible !important;
+        }
+      `}</style>
     </div>
+
 
       {/* reporting system */}
       {/* Reporting System */}
@@ -1037,112 +1135,112 @@ const according = [
 
       {/* dicision making simplified */}
       <div className="w-full py-16 bg-white">
-  <div className="w-[90%] mx-auto relative">
-    <motion.section
-      className="bg-[#005f73] relative rounded-3xl overflow-visible"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      {/* Decorative Circles */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden rounded-3xl">
-        <div className="absolute top-[-3rem] left-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-20">
-          <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
-        </div>
-        <div className="absolute bottom-[-3rem] right-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-25">
-          <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
+        <div className="w-[90%] mx-auto relative">
+          <motion.section
+            className="bg-[#005f73] relative rounded-3xl overflow-visible"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Decorative Circles */}
+            <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden rounded-3xl">
+              <div className="absolute top-[-3rem] left-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-20">
+                <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
+              </div>
+              <div className="absolute bottom-[-3rem] right-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-25">
+                <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
+              </div>
+            </div>
+
+            {/* Main Content */}
+            <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-8 md:px-16 lg:px-24">
+              <div className="flex flex-col lg:flex-row justify-between gap-8">
+
+                {/* Animated Text Block */}
+                <motion.div
+                  className="flex-1 text-white px-4 lg:px-8 space-y-6 pt-22"
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                >
+                  <div className="space-y-3">
+                    <p className="text-[#b8dce3] text-sm sm:text-base font-medium">
+                      Elevate Your Music Career with The Black Turn
+                    </p>
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                      Decision-Making
+                      <br />
+                      Simplified
+                    </h2>
+                  </div>
+                  <div className="space-y-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#d4eaf0]">
+                    <p>
+                      Now, decision making is even easier – based on data-driven insights,
+                      decide which genre to focus on, which platform is giving the best royalty,
+                      and what your next steps will be. Each feature empowers you to effectively manage your growth,
+                      without the hassle of follow-up.
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Animated Image Block */}
+                <motion.div
+                  className="flex-1 flex justify-center lg:justify-end relative z-20"
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.3 }}
+                >
+                  <div className="relative h-[500px] flex items-end">
+                    <motion.div
+                      className="relative w-72 sm:w-80 lg:w-96 h-[550px] -mt-12"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 200 }}
+                    >
+                      <img
+                        src={businessowner}
+                        alt="Professional man with tablet"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+
+                    {/* Floating Circles */}
+                    <div className="absolute top-8 right-8 w-4 h-4 bg-white opacity-60 rounded-full animate-pulse"></div>
+                    <div className="absolute top-20 right-16 w-3 h-3 bg-[#4db8cb] opacity-70 rounded-full animate-pulse delay-300"></div>
+                    <div className="absolute top-32 right-4 w-2 h-2 bg-white opacity-50 rounded-full animate-pulse delay-700"></div>
+                  </div>
+                </motion.div>
+
+              </div>
+            </div>
+          </motion.section>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-8 md:px-16 lg:px-24">
-        <div className="flex flex-col lg:flex-row justify-between gap-8">
-
-          {/* Animated Text Block */}
-          <motion.div
-            className="flex-1 text-white px-4 lg:px-8 space-y-6 pt-22"
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+      {/* best music distribution */}
+      <section className="bg-[#005f73] py-16 sm:py-20 lg:py-24">
+        <motion.div
+          className="max-w-4xl mx-auto text-center text-white px-4 sm:px-6 lg:px-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
+            Best Music Distribution India
+          </h2>
+          <span className='text-[24px] font-medium '>Why Think</span>
+          <p className="text-[18px] sm:text-lg lg:text-xl mb-8">
+            Distribute Your Music Today! – Pay After Work Done
+          </p>
+          <motion.button
+            className="bg-white text-[#005f73] px-12 py-3 rounded-md font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <div className="space-y-3">
-              <p className="text-[#b8dce3] text-sm sm:text-base font-medium">
-                Elevate Your Music Career with The Black Turn
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-                Decision-Making
-                <br />
-                Simplified
-              </h2>
-            </div>
-            <div className="space-y-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#d4eaf0]">
-              <p>
-                Now, decision making is even easier – based on data-driven insights,
-                decide which genre to focus on, which platform is giving the best royalty,
-                and what your next steps will be. Each feature empowers you to effectively manage your growth,
-                without the hassle of follow-up.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Animated Image Block */}
-          <motion.div
-            className="flex-1 flex justify-center lg:justify-end relative z-20"
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <div className="relative h-[500px] flex items-end">
-              <motion.div
-                className="relative w-72 sm:w-80 lg:w-96 h-[550px] -mt-12"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 200 }}
-              >
-                <img
-                  src={businessowner}
-                  alt="Professional man with tablet"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-
-              {/* Floating Circles */}
-              <div className="absolute top-8 right-8 w-4 h-4 bg-white opacity-60 rounded-full animate-pulse"></div>
-              <div className="absolute top-20 right-16 w-3 h-3 bg-[#4db8cb] opacity-70 rounded-full animate-pulse delay-300"></div>
-              <div className="absolute top-32 right-4 w-2 h-2 bg-white opacity-50 rounded-full animate-pulse delay-700"></div>
-            </div>
-          </motion.div>
-
-        </div>
-      </div>
-    </motion.section>
-  </div>
-</div>
-
-{/* best music distribution */}
- <section className="bg-[#005f73] py-16 sm:py-20 lg:py-24">
-    <motion.div
-      className="max-w-4xl mx-auto text-center text-white px-4 sm:px-6 lg:px-8"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-    >
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
-        Best Music Distribution India
-      </h2>
-      <span className='text-[24px] font-medium '>Why Think</span>
-      <p className="text-[18px] sm:text-lg lg:text-xl mb-8">
-        Distribute Your Music Today! – Pay After Work Done
-      </p>
-      <motion.button
-        className="bg-white text-[#005f73] px-12 py-3 rounded-md font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Join Now
-      </motion.button>
-    </motion.div>
-  </section>
+            Join Now
+          </motion.button>
+        </motion.div>
+      </section>
 
 
 
