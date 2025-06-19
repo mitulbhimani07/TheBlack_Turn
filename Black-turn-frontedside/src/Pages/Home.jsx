@@ -45,7 +45,9 @@ import client7 from '../assets/images/client7.jpg';
 import leftqoute from "../assets/images/leftqoute.png";
 import rightquote from "../assets/images/rightquote.png";
 import { Check } from 'lucide-react';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
+import MusicDistribution from '../assets/images/Music_Distribution.png';
+import MobileOperatorLicensing from '../assets/images/Mobile_Operator_Licensing.png';import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { FaQuoteRight } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -66,11 +68,11 @@ function Home() {
 
 
   const steps = [
-    { id: 1, title: 'Earnings from music streaming', icon: Music },
-    { id: 2, title: 'theblackturn.com', icon: Monitor },
-    { id: 3, title: 'Bank', icon: Building },
-    { id: 4, title: 'Record labels', icon: Database },
-  ];
+      { id: 1, title: 'Earnings from music streaming', icon: Music },
+      { id: 2, title: 'theblackturn.com', icon: Monitor },
+      { id: 3, title: 'Bank', icon: Building },
+      { id: 4, title: 'Record labels', icon: Database },
+    ];
 
   const testimonials = [
     {
@@ -732,6 +734,94 @@ function Home() {
         </div>
       </section>
 
+
+      <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8">
+          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+            {/* Left Text Content */}
+            <div>
+              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
+                Make money with worldwide music distribution
+              </p>
+              <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
+                Upload Unlimited Songs <br />
+
+              </h1>
+              <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
+                The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
+                share their creativity across more than 150 streaming platforms, including Spotify, Apple
+                Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
+                reach a wider audience, all while retaining an impressive 95% of your earnings. With our
+                user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
+                72 hours—ensuring your music is always at the forefront.
+              </p>
+              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                Join Now
+              </button>
+            </div>
+
+            {/* Right Image Content */}
+            <div className="flex items-center justify-center p-4 sm:p-6 lg:p-8 xl:p-10 order-1 lg:order-2">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+                {/* Second border layer (furthest back) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 right-2 sm:right-3 lg:right-4 xl:right-5 z-0"></div>
+
+                {/* First border layer (middle) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 right-4 sm:right-6 lg:right-8 xl:right-10 z-10"></div>
+
+                {/* Main content box (front) */}
+                <img
+                  src={MusicDistribution}
+                  alt="Music Distribution Banner"
+                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Music Distribution Plans Section */}
+      <div className="bg-[#ebf4f5] lg:-mt-40 flex items-center justify-center px-4 sm:px-6 lg:py-10 lg:px-8 relative overflow-hidden">
+        <div className="flex items-center justify-center px-4 sm:px-6 md:px-8">
+          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+
+            {/* Left Text Content */}
+            {/* Right Image Content */}
+            <div>
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+                {/* Second border layer (furthest back) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 left-2 sm:left-3 lg:left-4 xl:left-5 z-0"></div>
+
+                {/* First border layer (middle) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 left-4 sm:left-6 lg:left-8 xl:left-10 z-10"></div>
+
+                {/* Main content box (front) */}
+                <img
+                  src={MobileOperatorLicensing}
+                  alt="Music Distribution Banner"
+                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+            <div className=" items-center justify-center order-1 lg:order-2">
+              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
+                Caller Tune Distribution India               </p>
+              <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
+                Mobile Operator Licensing <br />
+
+              </h1>
+              <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
+                Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
+              </p>
+              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                Join Now
+              </button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
       {/* Featured For independent labels */}
       <section className="bg-[#005f73] py-12 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -824,7 +914,7 @@ function Home() {
       </section>
 
       {/* step section */}
-      <section className="bg-white py-20 px-4 sm:px-6 md:px-8 overflow-hidden">
+      <section className="bg-white pt-20 px-4 sm:px-6 md:px-8 overflow-hidden">
   <div className="max-w-7xl mx-auto">
     {/* Desktop & Tablet Flow */}
     <div className="hidden md:block">
@@ -908,6 +998,133 @@ function Home() {
     </div>
   </div>
 </section>
+      <section className="bg-white py-16 px-6 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            {/* Add your header content here */}
+          </motion.div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+            {cardsData.map((card) => (
+              <motion.div
+                key={card.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: card.delay }}
+                viewport={{ once: true }}
+                className={`group ${card.gridClass}`}
+              >
+                <div className="bg-[#005f73] rounded-2xl p-6 sm:p-8 text-white h-full hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 ease-out cursor-pointer shadow-lg hover:shadow-2xl">
+                  <div className="mb-6">
+                    <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-[#ccdfe3] transition-colors duration-300">
+                      {card.title}
+                    </h3>
+                  </div>
+                  <ul className="space-y-3 text-sm sm:text-base">
+                    {card.features.map((feature, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+            {/* dicision making simplified */}
+      <div className="w-full pb-16 bg-white">
+  <div className="w-[90%] mx-auto relative">
+    <motion.section
+      className="bg-[#005f73] relative rounded-3xl overflow-visible"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Decorative Circles */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden rounded-3xl">
+        <div className="absolute top-[-3rem] left-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-20">
+          <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
+        </div>
+        <div className="absolute bottom-[-3rem] right-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-25">
+          <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-8 md:px-16 lg:px-24">
+        <div className="flex flex-col lg:flex-row justify-between gap-8">
+
+          {/* Animated Text Block */}
+          <motion.div
+            className="flex-1 text-white px-4 lg:px-8 space-y-6 pt-22"
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <div className="space-y-3">
+              <p className="text-[#b8dce3] text-sm sm:text-base font-medium">
+                Elevate Your Music Career with The Black Turn
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                Decision-Making
+                <br />
+                Simplified
+              </h2>
+            </div>
+            <div className="space-y-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#d4eaf0]">
+              <p>
+                Now, decision making is even easier – based on data-driven insights,
+                decide which genre to focus on, which platform is giving the best royalty,
+                and what your next steps will be. Each feature empowers you to effectively manage your growth,
+                without the hassle of follow-up.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Animated Image Block */}
+          <motion.div
+            className="flex-1 flex justify-center lg:justify-end relative z-20"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <div className="relative h-[500px] flex items-end">
+              <motion.div
+                className="relative w-72 sm:w-80 lg:w-96 h-[550px] -mt-12"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 200 }}
+              >
+                <img
+                  src={businessowner}
+                  alt="Professional man with tablet"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+
+              {/* Floating Circles */}
+              <div className="absolute top-8 right-8 w-4 h-4 bg-white opacity-60 rounded-full animate-pulse"></div>
+              <div className="absolute top-20 right-16 w-3 h-3 bg-[#4db8cb] opacity-70 rounded-full animate-pulse delay-300"></div>
+              <div className="absolute top-32 right-4 w-2 h-2 bg-white opacity-50 rounded-full animate-pulse delay-700"></div>
+            </div>
+          </motion.div>
+
+        </div>
+      </div>
+    </motion.section>
+  </div>
+</div>
 
 
 
@@ -964,6 +1181,31 @@ function Home() {
         </div>
       </section>
 
+
+<section className="bg-[#005f73] py-16 sm:py-20 lg:py-24">
+    <motion.div
+      className="max-w-4xl mx-auto text-center text-white px-4 sm:px-6 lg:px-8"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+    >
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
+        Best Music Distribution India
+      </h2>
+      <span className='text-[24px] font-medium '>Why Think</span>
+      <p className="text-[18px] sm:text-lg lg:text-xl mb-8">
+        Distribute Your Music Today! – Pay After Work Done
+      </p>
+      <motion.button
+        className="bg-white text-[#005f73] px-12 py-3 rounded-md font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Join Now
+      </motion.button>
+    </motion.div>
+  </section>
 
 
 
@@ -1152,95 +1394,286 @@ function Home() {
               </div>
             </div>
 
-            {/* Main Content */}
-            <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-8 md:px-16 lg:px-24">
-              <div className="flex flex-col lg:flex-row justify-between gap-8">
+          {/* Process Steps - Redesigned for better visual appeal */}
+          <div className="mt-16 text-center">
+            <h3 className="text-3xl font-bold text-gray-800 mb-8">A Simple Two-Step Process</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
 
-                {/* Animated Text Block */}
-                <motion.div
-                  className="flex-1 text-white px-4 lg:px-8 space-y-6 pt-22"
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                >
-                  <div className="space-y-3">
-                    <p className="text-[#b8dce3] text-sm sm:text-base font-medium">
-                      Elevate Your Music Career with The Black Turn
-                    </p>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-                      Decision-Making
-                      <br />
-                      Simplified
-                    </h2>
-                  </div>
-                  <div className="space-y-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#d4eaf0]">
-                    <p>
-                      Now, decision making is even easier – based on data-driven insights,
-                      decide which genre to focus on, which platform is giving the best royalty,
-                      and what your next steps will be. Each feature empowers you to effectively manage your growth,
-                      without the hassle of follow-up.
-                    </p>
-                  </div>
-                </motion.div>
+              {/* Step 1 */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-start">
+                <div className="bg-[#EBF4F5] text-[#005f73] font-bold rounded-full h-10 w-10 flex items-center justify-center mr-5 flex-shrink-0">1</div>
+                <div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">Choose & Upload</h4>
+                  <p className="text-gray-600">
+                    Select the plan and upload your audio file & artwork. It's a quick and easy process.
+                  </p>
+                </div>
+              </div>
 
-                {/* Animated Image Block */}
-                <motion.div
-                  className="flex-1 flex justify-center lg:justify-end relative z-20"
-                  initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 1, delay: 0.3 }}
-                >
-                  <div className="relative h-[500px] flex items-end">
-                    <motion.div
-                      className="relative w-72 sm:w-80 lg:w-96 h-[550px] -mt-12"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 200 }}
-                    >
-                      <img
-                        src={businessowner}
-                        alt="Professional man with tablet"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-
-                    {/* Floating Circles */}
-                    <div className="absolute top-8 right-8 w-4 h-4 bg-white opacity-60 rounded-full animate-pulse"></div>
-                    <div className="absolute top-20 right-16 w-3 h-3 bg-[#4db8cb] opacity-70 rounded-full animate-pulse delay-300"></div>
-                    <div className="absolute top-32 right-4 w-2 h-2 bg-white opacity-50 rounded-full animate-pulse delay-700"></div>
-                  </div>
-                </motion.div>
-
+              {/* Step 2 */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-start">
+                <div className="bg-[#EBF4F5] text-[#005f73] font-bold rounded-full h-10 w-10 flex items-center justify-center mr-5 flex-shrink-0">2</div>
+                <div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">Pay & Track</h4>
+                  <p className="text-gray-600">
+                    After filling in the details, simply pay to submit. You can track your order status from your account page.
+                  </p>
+                </div>
               </div>
             </div>
-          </motion.section>
+          </div>
         </div>
-      </div>
-
-      {/* best music distribution */}
-      <section className="bg-[#005f73] py-16 sm:py-20 lg:py-24">
-        <motion.div
-          className="max-w-4xl mx-auto text-center text-white px-4 sm:px-6 lg:px-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
-            Best Music Distribution India
-          </h2>
-          <span className='text-[24px] font-medium '>Why Think</span>
-          <p className="text-[18px] sm:text-lg lg:text-xl mb-8">
-            Distribute Your Music Today! – Pay After Work Done
-          </p>
-          <motion.button
-            className="bg-white text-[#005f73] px-12 py-3 rounded-md font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Join Now
-          </motion.button>
-        </motion.div>
       </section>
+
+
+      <section className="bg-[#EBF4F5] py-16">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl font-bold text-black mb-4">
+                    Music Distribution Plans
+                  </h2>
+                  <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+                    Choose the perfect plan to distribute your music to the world.
+                  </p>
+                </div>
+      
+                {/* Pricing Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
+                  {/* Plan 1: Single Song */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 h-full flex flex-col"
+                  >
+                    <h3 className="text-2xl font-bold text-black mb-2">Single Song</h3>
+                    <p className="text-gray-500 mb-6">All Stores + Caller Tune</p>
+      
+                    <div className="mb-6">
+                      <span className="text-5xl font-extrabold text-[#005f73]">₹799</span>
+                      <span className="text-gray-500">Per User /song</span>
+                    </div>
+                    <p className="text-gray-900 mb-6">Features</p>
+                    <ul className="space-y-4 text-gray-700 mb-8 flex-grow">
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        All Music Live Stream Platforms
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Caller Tune Facility
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Song Availability Lifetime
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        95% Royalties
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        4 Monthly Payment / Report
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        24 Hour Approval
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        YouTube Content ID
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        No Per Year Charges
+                      </li>
+                    </ul>
+                    <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+                      Upload Now
+                    </button>
+                  </motion.div>
+      
+                  {/* Plan 2: Custom Label (Recommended) */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="group bg-[#005f73] text-white rounded-2xl p-8 shadow-2xl transition-all duration-300 transform scale-105 relative border-2 border-[#005f73] h-full flex flex-col"
+                  >
+                    <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#00A9B7] text-white px-4 py-1 rounded-full text-sm font-semibold">
+                      Recommended
+                    </div>
+      
+                    <h3 className="text-2xl font-bold mb-2">Custom Label</h3>
+                    <p className="opacity-80 mb-6">All Stores + Caller Tune</p>
+      
+                    <div className="mb-6">
+                      <span className="text-5xl font-extrabold">₹4,999</span>
+                      <span className="opacity-80">per year /-</span>
+                    </div>
+                    <p className="text-gray-900 mb-6">Features</p>
+                    <ul className="space-y-4 opacity-90 mb-8 flex-grow">
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        All Music Live Stream Platforms
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Caller Tune Facility
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Bulk Upload Facility
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Song Availability Lifetime
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Unlimited Song's Releases
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Lifetime 95% Revenue
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        4 Monthly Payment / Report
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        YouTube Content ID
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        24 Hour Approval
+                      </li>
+                    </ul>
+      
+                    <button className="w-full bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+                      Join Now
+                    </button>
+                  </motion.div>
+      
+                  {/* Plan 3: Previously Released Song */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 h-full flex flex-col"
+                  >
+                    <h3 className="text-2xl font-bold text-black mb-2">Previously Released</h3>
+                    <p className="text-gray-500 mb-6">Song Caller Tune</p>
+      
+                    <div className="mb-6">
+                      <span className="text-5xl font-extrabold text-[#005f73]">₹499</span>
+                      <span className="text-gray-500">/ per song</span>
+                    </div>
+                    <p className="text-gray-900 mb-6">Features</p>
+      
+                    <ul className="space-y-4 text-gray-700 mb-8 flex-grow">
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Caller Tune Live in 3-5 days
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Caller Tunes on JIO, Vi, BSNL, Airtel
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        ISRC - Caller Tune Sync
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Previously released song
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        No yearly fee
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        95% Lifetime revenue
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        CRBT Codes
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-15 w-15 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        JioSaavn ( If Song is Already Live on Jiosaavn Take Down from Jiosaavn we distribute it again On JioSaavn With JioCRBT )
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-15 w-15 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Wynk ( If Song is Already Live on Wynk Take Down from Wynk we distribute it again On Wynk With Airtel CRBT )
+                      </li>
+                    </ul>
+      
+                    <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+                      Add On Now
+                    </button>
+                  </motion.div>
+                </div>
+              </div>
+            </section>
 
 
 
