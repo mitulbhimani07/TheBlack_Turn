@@ -9,7 +9,7 @@ import card4 from "../assets/images/4.png"
 import card5 from "../assets/images/5.png"
 import card6 from "../assets/images/6.png"
 import businessowner from "../assets/images/businessOwner.png"
-import {  Headphones,  Disc, Phone, Wallet, Mic2, DollarSign, Repeat, ChevronDown, Minus, Plus } from 'lucide-react';
+import { Headphones, Disc, Phone, Wallet, Mic2, DollarSign, Repeat, ChevronDown, Minus, Plus } from 'lucide-react';
 import { Music, Monitor, Building, Database, ArrowRight } from 'lucide-react';
 import ganna from '../assets/images/ganna.png'
 import wynkmusic from '../assets/images/wynk.png'
@@ -35,6 +35,13 @@ import applemusic from '../assets/images/apple_music.png'
 import audiblemagic from '../assets/images/audiblemagic.png'
 import report from "../assets/images/report.png";
 import silder from "../assets/images/silder1.png";
+import client1 from '../assets/images/client1.jpeg';
+import client2 from '../assets/images/client2.jpeg';
+import client3 from '../assets/images/client3.jpeg';
+import client4 from '../assets/images/client4.jpeg';
+import client5 from '../assets/images/client5.jpeg';
+import client6 from '../assets/images/client6.jpeg';
+import client7 from '../assets/images/client7.jpg';
 import leftqoute from "../assets/images/leftqoute.png";
 import rightquote from "../assets/images/rightquote.png";
 import { Check } from 'lucide-react';
@@ -42,6 +49,11 @@ import { IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
 import MusicDistribution from '../assets/images/Music_Distribution.png';
 import MobileOperatorLicensing from '../assets/images/Mobile_Operator_Licensing.png';import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { FaQuoteRight } from 'react-icons/fa';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import { img } from 'framer-motion/client';
+
 
 function Home() {
   const texts = ['Quality Service', '150+ Store'];
@@ -50,36 +62,89 @@ function Home() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-    const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
 
 
   const steps = [
-    { id: 1, title: 'Earnings from music streaming', icon: Music },
-    { id: 2, title: 'theblackturn.com', icon: Monitor },
-    { id: 3, title: 'Bank', icon: Building },
-    { id: 4, title: 'Record labels', icon: Database },
-  ];
+      { id: 1, title: 'Earnings from music streaming', icon: Music },
+      { id: 2, title: 'theblackturn.com', icon: Monitor },
+      { id: 3, title: 'Bank', icon: Building },
+      { id: 4, title: 'Record labels', icon: Database },
+    ];
 
-const testimonials = [
+  const testimonials = [
     {
       id: 1,
-      title: "The Pawsitive Effects",
-      content: "Amazing budget service with instant response. But I must say that The Black Turn platform helped me a lot to generate my first revenue.",
+      title: "YT World",
+      content: "Hello, Team The Black Turn,The attention to detail with which you helped me understand the initial concept of digital distribution platform and how can I make more revenue is in a league of its own 👏. I am incredibly pleased with the quality of customer service provided to me🤟🤟🤟🤟.The best service provider I have ever met. 😊😊😊😊😊😊",
       date: "18. June, 2021.",
+      img:client1,
       rating: 5
     },
     {
       id: 2,
-      title: "Creative Breakthroughs",
-      content: "The platform exceeded my expectations. The tools and community support helped me reach new heights in my artistic journey and generate consistent income.",
-      date: "22. July, 2021.",
+      title: "SITA MAHLI",
+      content: "I am from Jharkhand It's music distribution company we got very good and very honest. Above all, it has a very fast service which is india's most best music distributer.I am very satisfied with this company.",
+      date: "17. June, 2021.",
+      img:client2,
       rating: 5
     },
     {
       id: 3,
-      title: "Digital Art Success",
-      content: "Outstanding experience! The Black Turn platform provided me with all the resources I needed to monetize my digital art and connect with collectors worldwide.",
-      date: "15. August, 2021.",
+      title: "GOVIND MAHALI",
+      content: "I am from Jharkhand Good music distributer",
+      date: "17.June, 2021.",
+      img:client3,
+      rating: 5
+    },
+     {
+      id: 4,
+      title: "RDX karan",
+      content: "very good and fast service, very polite staff",
+      date: "17.June, 2021.",
+      img:client4,
+      rating: 5
+    },
+     {
+      id: 5,
+      title: "Knowledge Jinni",
+      content: "I researched several digital distribution platforms, but among them all, I really liked The Black Turn Platform. Among the many reasons I chose The Black Trun is for a few reasons such as It is the only platform that provides us with free caller tune conversions, through which we can increase our revenue. The second is free ISRC and UPC codes, ISRC and UPC codes are a paid service on many platforms, while this important service is free on The Black Turn. Third, the only paid platform gives us up to 95% of revenue which is a huge amount for me, and best of all Instant service, reply and solution. Industry Khatam Bhai..... Industry Khatam..... Guys, I must say The Black Turn Rocks Man...",
+      date: "16.June, 2021.",
+      img:client5,
+      rating: 5
+    },
+     {
+      id: 6,
+      title: "Illusion Studio",
+      content: "It's a lovely team to work with. Honest and trustworthy ❤️",
+      date: "15.June, 2021.",
+      img:client6,
+      rating: 5
+    },
+     {
+      id: 7,
+      title: "The Pawsitive Effects",
+      content: "Amazing budget service with instant response. But I must say that The Black Turn platform helped me a lot to generate my first revenue.",
+      date: "15.June, 2021.",
+      img:silder,
+      rating: 5
+    },
+    {
+      id: 8,
+      title: "Mudit Chauhan",
+      content: "In the digital distribution industry where customers are worried about how to start, how to manage, the black turn does it all for you. It is the only easy-to-use platform of its kind where uploading songs is a game and generating handsome revenue seems like My Dreams Come True.... The Black Turn Rocks..... Highly Recommended",
+      date: "14.June, 2021.",
+      img:client7,
+      rating: 5
+    },
+    {
+      id: 9,
+      title: "Ankur Chauhan",
+      content: "This Is One Of best Music Distribution company Plus apni indian company hai Apni indian company ko support kare guys Thank You So Much The Black Turn 🙌🙌",
+      date: "11.June, 2021.",
+      img:client7,
       rating: 5
     }
   ];
@@ -144,46 +209,41 @@ const sectionVariants = {
     setCurrentSlide((prev) => (prev + 1) % testimonials.length);
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  //   const prevSlide = () => {
+  //     setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  //   };
 
   // React.useEffect(() => {
   //   const interval = setInterval(nextSlide, 5000);
   //   return () => clearInterval(interval);
   // }, []);
 
-  const PawAvatar = () => (
-    <div className="relative w-44 h-44">
-      {/* Background cards - stack effect */}
-      <div className="absolute -left-4 -top-4 w-full h-full bg-white rounded-tl-lg border-2 border-gray-900 transform shadow-sm"></div>
+  const PawAvatar = ({ img }) => (
+  <div className="relative w-44 h-44">
+    {/* Background cards - stack effect */}
+    <div className="absolute -left-4 -top-4 w-full h-full bg-white rounded-tl-lg border-2 border-gray-900 transform shadow-sm"></div>
+    <div className="absolute top-4 -right-4 w-full h-full bg-white rounded-br-lg border-2 border-gray-900 transform shadow-sm"></div>
 
-
-      <div className="absolute top-4 -right-4 w-full h-full bg-white rounded-br-lg border-2 border-gray-900 transform shadow-sm"></div>
-
-      
-      {/* Main card */}
-      
-        {/* Paw print design */}
-        <div className="relative w-full h-full flex items-center justify-center">
-         <img src={silder} alt="" width='500px'/>
-        </div>
-      
+    {/* Main avatar image */}
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-lg  bg-white ">
+      <img src={img} alt="Client Avatar" className="object-cover w-full h-full rounded-lg" />
     </div>
-  );
+  </div>
+);
 
-const according = [
+
+  const according = [
     {
       title: "All platforms",
       description: "Domestic Full Track Services Amazon, Gaana, Jio Saavn, Hungama Wynk. International Full Track Services:Alibaba, Apple(Itune), Audible Magic, Awa, Boomplay, Deezer, Facebook, Iheart, Imusic Corp, Jaxsta, Kkbox, Kuack Media, Napster, Netease, Pandora, Resso, Snap, Soundcloud, Spotify, Touch Tunes, youtube music."
     },
     {
-      title:"Custom Label",
+      title: "Custom Label",
       description: "Distribute Music Using Your Own Label Name, and Get Your Custom C and P Line, Custom Label Name, Unlimited Lifetime Releases, with Unlimited artists."
 
     },
     {
-      title:"Song live Time",
+      title: "Song live Time",
       description: "We deliver on all platforms minimum (1-3 Days) Maximum(5-8 Days) .Get your song live in 3 hours. mail or contact us."
 
     },
@@ -209,7 +269,7 @@ const according = [
     }
   ];
 
-   const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -428,7 +488,7 @@ const according = [
   ];
 
   return (
-    <>
+   <>
       {/* Custom Cursor */}
       <div
         className="fixed pointer-events-none z-50 mix-blend-difference"
@@ -1658,123 +1718,157 @@ const according = [
 
 
     {/* silder section */}
-     <div className="min-h-screen bg-white py-16 px-4 relative overflow-hidden">
+      <div className="relative px-4 sm:px-6 md:px-8 py-12 overflow-hidden">
       {/* Large decorative quotes */}
-      <div className="absolute top-65 left-55   z-10">
-        <img src={leftqoute} alt="" />
-      </div>
-      <div className="absolute bottom-35 right-55  z-10">
-        <img src={rightquote} alt="" />
-      </div>
-      
-     <div className="bg-white py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Hear What Our Artists Are Achieving
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Join a community of thriving musicians who trust The Black Turn to amplify their reach and revenue.
-          </p>
-        </div>
+     <div className="absolute top-8 left-8 md:top-15 md:left-56 lg:left-[15rem] z-10 hidden md:block">
+  <img src={leftqoute} alt="left quote" className="w-12 md:w-20" />
+</div>
 
-        {/* Slider Container */}
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-            >
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                  <div className="max-w-5xl mx-auto">
-                    {/* Main testimonial card with proper background */}
-                    <div className="relative mx-6 my-8">
-                      {/* Decorative background card - positioned properly with border */}
-                      <div className="absolute -top-4 -left-4 -right-4 -bottom-4 bg-[#EBF4F5] rounded-2xl transform -rotate-3 shadow-md border-2 border-gray-200"></div>
-                      
-                      {/* Main content card */}
-                      <div className="relative bg-white rounded-2xl p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10">
-                        <div className="grid md:grid-cols-5 gap-8 items-center">
-                          {/* Left Side - Paw Avatar */}
-                          <div className="md:col-span-2 flex justify-center">
-                            <PawAvatar />
-                          </div>
+<div className="absolute bottom-10 right-8 md:bottom-16 md:right-60 lg:right-[15rem] z-10 hidden md:block">
+  <img src={rightquote} alt="right quote" className="w-12 md:w-20" />
+</div>
 
-                          {/* Right Side - Content */}
-                          <div className="md:col-span-3 space-y-6">
-                            <div className="flex items-center justify-between flex-wrap gap-4">
-                              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-                                {testimonial.title}
-                              </h3>
-                              
-                              {/* Star Rating */}
-                              <div className="flex items-center gap-1">
-                                {[...Array(testimonial.rating)].map((_, i) => (
-                                  <Star key={i} className="w-5 h-5 fill-orange-400 text-orange-400" />
-                                ))}
-                                <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                                  <span className="text-white text-sm font-bold">G</span>
-                                </div>
-                              </div>
-                            </div>
 
-                            <p className="text-gray-700 text-lg leading-relaxed">
-                              "{testimonial.content}"
-                            </p>
+      <Slider {...sliderSettings}>
+        {testimonials.map((testimonial, index) => {
+          const isExpanded = expandedIndex === index;
 
-                            <p className="text-gray-500 font-medium text-base">
-                              {testimonial.date}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+          return (
+            <div key={testimonial.id}>
+  <div className="px-2 sm:px-4">
+    <div className="max-w-6xl mx-auto">
+      {/* Card container */}
+      <div className="relative px-4 sm:px-6 py-6 sm:py-8 h-full">
+        {/* Decorative background */}
+        <div
+          className="absolute bg-[#EBF4F5] rounded-2xl transform -rotate-5"
+          style={{
+            top: "1rem",
+            left: "1rem",
+            right: "1rem",
+            bottom: "1rem",
+            zIndex: 1,
+          }}
+        ></div>
+
+        {/* Main card */}
+        <div className="relative bg-white rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10 h-full min-h-[300px] md:min-h-[350px] flex flex-col justify-between">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 items-center h-full">
+            {/* Left - Avatar */}
+            <div className="md:col-span-2 flex justify-center h-full">
+              <PawAvatar img={testimonial.img} />
+            </div>
+
+            {/* Right - Content */}
+            <div className="md:col-span-3 flex flex-col justify-between space-y-4 sm:space-y-6 h-full">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
+                  {testimonial.title}
+                </h3>
+
+                <div className="flex items-center gap-1">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-orange-400 text-orange-400"
+                    />
+                  ))}
+                  <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center p-1">
+                    <Check className="text-white w-4 h-4" />
                   </div>
                 </div>
-              ))}
+              </div>
+
+              <div className="flex-1">
+                <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-2">
+                  "
+                  {isExpanded
+                    ? testimonial.content
+                    : `${testimonial.content.slice(0, 180)}...`}
+                  "
+                </p>
+                {testimonial.content.length > 180 && (
+                  <button
+                    onClick={() =>
+                      setExpandedIndex(isExpanded ? null : index)
+                    }
+                    className="text-teal-600 hover:underline text-sm font-medium"
+                  >
+                    {isExpanded ? "Show Less" : "Read More"}
+                  </button>
+                )}
+              </div>
+
+              <p className="text-gray-500 font-medium text-sm sm:text-base mt-2">
+                {testimonial.date}
+              </p>
             </div>
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-700" />
-          </button>
-          
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-6 h-6 text-gray-700" />
-          </button>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 space-x-3">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                  index === currentSlide 
-                    ? 'bg-teal-500 scale-125 shadow-md' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+          );
+        })}
+      </Slider>
+
+      {/* Slick custom style */}
+      <style jsx global>{`
+        .slick-slider {
+          overflow: visible !important;
+        }
+        .slick-list {
+          overflow: visible !important;
+          padding: 2rem 0 !important;
+        }
+        .slick-track {
+          overflow: visible !important;
+        }
+        .slick-slide {
+          overflow: visible !important;
+        }
+        .slick-slide > div {
+          overflow: visible !important;
+        }
+      `}</style>
     </div>
 
-      </>
+
+      {/* reporting system */}
+      {/* Reporting System */}
+      
+
+
+
+{/* best music distribution */}
+ 
+      
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </>
+
+
 
 
 
