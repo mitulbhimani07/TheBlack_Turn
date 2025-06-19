@@ -110,6 +110,44 @@ function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  const cardsData = [
+    {
+      id: 1,
+      title: "Auto Payment & Reporting System",
+      features: [
+        "Now you don't have to email or follow-up on the phone.",
+        "All reports and payments are automatically available in your dashboard on time and without any manual hassle.",
+        "Whether it's INR, USD, Euro or any other currency we are able to process payment in your desired currency.",
+        "No more conversion tensions for international artists and labels."
+      ],
+      delay: 0.1,
+      gridClass: ""
+    },
+    {
+      id: 2,
+      title: "Detailed DSP-Wise Reports",
+      features: [
+        "Customized reports for every digital store (Spotify, Apple Music, JioSaavn, YouTube etc.).",
+        "By viewing monthly or DSP-wise breakdown, you can get a clear analysis of how much revenue is being generated from which platform.",
+        "Interactive charts and graphs in the dashboard that visually represent your revenue growth and regional performance."
+      ],
+      delay: 0.2,
+      gridClass: ""
+    },
+    {
+      id: 3,
+      title: "Growth & Trend Analysis",
+      features: [
+        "Detailed analytics on genre-wise, region-wise or time period basis, so you can make informed decisions for future releases.",
+        "Detailed insights will reveal which audience your content reached and which areas you can improve in.",
+        "100% Transparency & Security",
+        "Detailed record of every transaction available for you."
+      ],
+      delay: 0.3,
+      gridClass: "md:col-span-2 lg:col-span-1"
+    }
+  ];
+
   // Custom cursor effect
   useEffect(() => {
     const handleMouseMove = (e) => {
