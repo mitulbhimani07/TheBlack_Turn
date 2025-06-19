@@ -53,6 +53,23 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { img } from 'framer-motion/client';
+import figure from '../assets/images/fun.png';
+import figure1 from '../assets/images/great.png';
+import figure2 from '../assets/images/creative vision.png';
+import figure3 from '../assets/images/showcase.png';
+import figure4 from '../assets/images/Figure.png';
+import figure5 from '../assets/images/Figure1.png';
+import figure6 from '../assets/images/Figure2.png';
+import figure7 from '../assets/images/Figure3.png';
+import figure8 from '../assets/images/Figure4.png';
+import figure9 from '../assets/images/Figure5.png';
+import figure10 from '../assets/images/Figure6.png';
+import figure11 from '../assets/images/Figure7.png';
+import figure12 from '../assets/images/Figure8.png';
+import figure13 from '../assets/images/Figure9.png';
+import figure14 from '../assets/images/Figure10.png';
+import figure15 from '../assets/images/Figure11.png';
+
 
 
 function Home() {
@@ -73,6 +90,105 @@ function Home() {
       { id: 3, title: 'Bank', icon: Building },
       { id: 4, title: 'Record labels', icon: Database },
     ];
+
+    const clients = [
+    {
+      id: 1,
+      name: "Pop FM",
+      logo: figure,
+      alt: "Pop FM Logo"
+    },
+    {
+      id: 2,
+      name: "Client Name",
+      logo: figure1,
+      alt: "Client Logo"
+    },
+    {
+      id: 3,
+      name: "Sports Club",
+      logo: figure2,
+      alt: "Sports Club Logo"
+    },
+    {
+      id: 4,
+      name: "Gold Records",
+      logo: figure3,
+      alt: "Gold Records Logo"
+    },
+    {
+      id: 5,
+      name: "Radio Raabta",
+      logo: figure4,
+      alt: "Radio Raabta Logo"
+    },
+    {
+      id: 6,
+      name: "Orange Music",
+      logo: figure5,
+      alt: "Orange Music Logo"
+    },
+    {
+      id: 7,
+      name: "Music Label",
+      logo: figure6,
+      alt: "Music Label Logo"
+    },
+    {
+      id: 8,
+      name: "PTF Studio",
+      logo: figure7,
+      alt: "PTF Studio Logo"
+    },
+    {
+      id: 9,
+      name: "Gaming Co",
+      logo: figure8,
+      alt: "Gaming Company Logo"
+    },
+    {
+      id: 10,
+      name: "Madly Records",
+      logo: figure9,
+      alt: "Madly Records Logo"
+    },
+    {
+      id: 11,
+      name: "News Channel",
+      logo: figure10,
+      alt: "News Channel Logo"
+    },
+    {
+      id: 12,
+      name: "HK Media",
+      logo: figure11,
+      alt: "HK Media Logo"
+    },
+    {
+      id: 13,
+      name: "Sunset Co",
+      logo: figure12,
+      alt: "Sunset Company Logo"
+    },
+    {
+      id: 14,
+      name: "Tech Solutions",
+      logo: figure13,
+      alt: "Tech Solutions Logo"
+    },
+    {
+      id: 15,
+      name: "Creative Hub",
+      logo: figure14,
+      alt: "Creative Hub Logo"
+    },
+    {
+      id: 16,
+      name: "Magadhi Music",
+      logo: figure15,
+      alt: "Magadhi Music Logo"
+    }
+  ];
 
   const testimonials = [
     {
@@ -1748,136 +1864,171 @@ const sectionVariants = {
   </section>
 
 
-  {/* We Have A Great Client List in The Showcase */}
+   {/* We Have A Great Client List in The Showcase section */}
+      <section className="py-16 px-4">
+      <div className="max-w-3xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            We Have A Great Client List in The Showcase
+          </h2>
+         
+        </div>
+
+        {/* Client Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {clients.map((client) => (
+            <div
+              key={client.id}
+              className="bg-white rounded-lg border-2 border-slate-200 p-6 shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer group"
+            >
+              <div className="flex items-center justify-center h-20">
+                <img
+                  src={client.logo}
+                  alt={client.alt}
+                  className="max-w-full max-h-full object-contain  group-hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
 
 
 
     {/* silder section */}
-      <div className="relative px-4 sm:px-6 md:px-8 py-12 overflow-hidden">
-      {/* Large decorative quotes */}
-     <div className="absolute top-8 left-8 md:top-15 md:left-56 lg:left-[15rem] z-10 hidden md:block">
-  <img src={leftqoute} alt="left quote" className="w-12 md:w-20" />
-</div>
+     <div className="bg-white py-20 px-4 sm:px-6 md:px-8 overflow-hidden">
+  {/* Section Header */}
+  <div className="max-w-4xl mx-auto text-center mb-12">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+      Hear What Our Artists Are Achieving
+    </h1>
+    <p className="mt-4 text-base sm:text-lg text-gray-600">
+      Join a community of thriving musicians who trust The Black Turn to amplify their reach and revenue.
+    </p>
+  </div>
 
-<div className="absolute bottom-10 right-8 md:bottom-16 md:right-60 lg:right-[15rem] z-10 hidden md:block">
-  <img src={rightquote} alt="right quote" className="w-12 md:w-20" />
-</div>
+  {/* Decorative Quotes */}
+  <div className="relative">
+    <div className="absolute top-8 left-8 md:top-8 md:left-56 lg:left-[10rem] z-10 hidden md:block">
+      <img src={leftqoute} alt="left quote" className="w-12 md:w-20" />
+    </div>
+    <div className="absolute bottom-10 right-8 md:bottom-8 md:right-60 lg:right-[10rem] z-10 hidden md:block">
+      <img src={rightquote} alt="right quote" className="w-12 md:w-20" />
+    </div>
 
+    {/* Testimonial Slider */}
+    <Slider {...sliderSettings}>
+      {testimonials.map((testimonial, index) => {
+        const isExpanded = expandedIndex === index;
 
-      <Slider {...sliderSettings}>
-        {testimonials.map((testimonial, index) => {
-          const isExpanded = expandedIndex === index;
+        return (
+          <div key={testimonial.id}>
+            <div className="px-2 sm:px-4">
+              <div className="max-w-6xl mx-auto">
+                <div className="relative px-4 sm:px-6 py-6 sm:py-8 h-full">
+                  {/* Background Card */}
+                  <div
+                    className="absolute bg-[#EBF4F5] rounded-2xl transform -rotate-5"
+                    style={{
+                      top: "1rem",
+                      left: "1rem",
+                      right: "1rem",
+                      bottom: "1rem",
+                      zIndex: 1,
+                    }}
+                  ></div>
 
-          return (
-            <div key={testimonial.id}>
-  <div className="px-2 sm:px-4">
-    <div className="max-w-6xl mx-auto">
-      {/* Card container */}
-      <div className="relative px-4 sm:px-6 py-6 sm:py-8 h-full">
-        {/* Decorative background */}
-        <div
-          className="absolute bg-[#EBF4F5] rounded-2xl transform -rotate-5"
-          style={{
-            top: "1rem",
-            left: "1rem",
-            right: "1rem",
-            bottom: "1rem",
-            zIndex: 1,
-          }}
-        ></div>
+                  {/* Main Card */}
+                  <div className="relative bg-white rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10 h-full min-h-[300px] md:min-h-[350px] flex flex-col justify-between">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 items-center h-full">
+                      {/* Avatar */}
+                      <div className="md:col-span-2 flex justify-center h-full">
+                        <PawAvatar img={testimonial.img} />
+                      </div>
 
-        {/* Main card */}
-        <div className="relative bg-white rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10 h-full min-h-[300px] md:min-h-[350px] flex flex-col justify-between">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 items-center h-full">
-            {/* Left - Avatar */}
-            <div className="md:col-span-2 flex justify-center h-full">
-              <PawAvatar img={testimonial.img} />
-            </div>
+                      {/* Testimonial Content */}
+                      <div className="md:col-span-3 flex flex-col justify-between space-y-4 sm:space-y-6 h-full">
+                        <div className="flex items-center justify-between flex-wrap gap-4">
+                          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
+                            {testimonial.title}
+                          </h3>
 
-            {/* Right - Content */}
-            <div className="md:col-span-3 flex flex-col justify-between space-y-4 sm:space-y-6 h-full">
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
-                  {testimonial.title}
-                </h3>
+                          <div className="flex items-center gap-1">
+                            {[...Array(testimonial.rating)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className="w-5 h-5 fill-orange-400 text-orange-400"
+                              />
+                            ))}
+                            <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center p-1">
+                              <Check className="text-white w-4 h-4" />
+                            </div>
+                          </div>
+                        </div>
 
-                <div className="flex items-center gap-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 fill-orange-400 text-orange-400"
-                    />
-                  ))}
-                  <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center p-1">
-                    <Check className="text-white w-4 h-4" />
+                        <div className="flex-1">
+                          <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-2">
+                            "
+                            {isExpanded
+                              ? testimonial.content
+                              : `${testimonial.content.slice(0, 180)}...`}
+                            "
+                          </p>
+                          {testimonial.content.length > 180 && (
+                            <button
+                              onClick={() =>
+                                setExpandedIndex(isExpanded ? null : index)
+                              }
+                              className="text-teal-600 hover:underline text-sm font-medium"
+                            >
+                              {isExpanded ? "Show Less" : "Read More"}
+                            </button>
+                          )}
+                        </div>
+
+                        <p className="text-gray-500 font-medium text-sm sm:text-base mt-2">
+                          {testimonial.date}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div className="flex-1">
-                <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-2">
-                  "
-                  {isExpanded
-                    ? testimonial.content
-                    : `${testimonial.content.slice(0, 180)}...`}
-                  "
-                </p>
-                {testimonial.content.length > 180 && (
-                  <button
-                    onClick={() =>
-                      setExpandedIndex(isExpanded ? null : index)
-                    }
-                    className="text-teal-600 hover:underline text-sm font-medium"
-                  >
-                    {isExpanded ? "Show Less" : "Read More"}
-                  </button>
-                )}
-              </div>
-
-              <p className="text-gray-500 font-medium text-sm sm:text-base mt-2">
-                {testimonial.date}
-              </p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        );
+      })}
+    </Slider>
+
+    {/* Custom Slick Styles */}
+    <style jsx global>{`
+      .slick-slider {
+        overflow: visible !important;
+      }
+      .slick-list {
+        overflow: visible !important;
+        padding: 2rem 0 !important;
+      }
+      .slick-track {
+        overflow: visible !important;
+      }
+      .slick-slide {
+        overflow: visible !important;
+      }
+      .slick-slide > div {
+        overflow: visible !important;
+      }
+    `}</style>
   </div>
 </div>
 
-          );
-        })}
-      </Slider>
-
-      {/* Slick custom style */}
-      <style jsx global>{`
-        .slick-slider {
-          overflow: visible !important;
-        }
-        .slick-list {
-          overflow: visible !important;
-          padding: 2rem 0 !important;
-        }
-        .slick-track {
-          overflow: visible !important;
-        }
-        .slick-slide {
-          overflow: visible !important;
-        }
-        .slick-slide > div {
-          overflow: visible !important;
-        }
-      `}</style>
-    </div>
 
 
-      {/* reporting system */}
-      {/* Reporting System */}
-      
-
-
-
-{/* best music distribution */}
+     
+    
  
       
 
