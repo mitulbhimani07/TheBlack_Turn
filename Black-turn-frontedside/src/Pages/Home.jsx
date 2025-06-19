@@ -244,6 +244,9 @@ const according = [
     }),
   };
 
+  // const leftFeatures = featuress.slice(0, 3);
+  // const rightFeatures = featuress.slice(3, 6);
+
   const features = [
     {
       icon: (
@@ -453,6 +456,7 @@ const according = [
           </div>
         </div>
       </section>
+      {/* Distribute On​ section */}
 
       {/* Distribute On​ section */}
       <div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
