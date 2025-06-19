@@ -149,6 +149,57 @@ function Home() {
     }
   ];
 
+  const itemVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 30,
+    scale: 0.8
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 10
+    }
+  }
+};
+
+const headerVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: -50 
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
+      duration: 0.8
+    }
+  }
+};
+
+const sectionVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 40 
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 80,
+      damping: 12,
+      duration: 0.6
+    }
+  }
+};
 
   const CustomPrevArrow = ({ onClick }) => (
     <button
@@ -474,7 +525,7 @@ function Home() {
   ];
 
   return (
-    <>
+   <>
       {/* Custom Cursor */}
       <div
         className="fixed pointer-events-none z-50 mix-blend-difference"
@@ -602,42 +653,171 @@ function Home() {
 
       {/* Distribute On​ section */}
       <div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-800 ">Distribute On</h1>
-          </div>
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.div 
+          className="text-center mb-12"
+          initial="hidden"
+          animate="visible"
+          variants={headerVariants}
+        >
+          <motion.h1 
+            className="text-4xl font-bold text-gray-800"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ 
+              type: "spring",
+              stiffness: 100,
+              damping: 10,
+              delay: 0.2 
+            }}
+          >
+            Distribute On
+          </motion.h1>
+        </motion.div>
 
-          {/* Music Streaming Platforms */}
-          <div className=" backdrop-blur-md rounded-3xl  mb-10 ">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-6 justify-items-center">
-              {mainPlatforms.map((platform, index) => (
-                <div
-                  key={index}
-                  className="group w-20 h-20 flex items-center justify-center rounded-xl bg-white hover:scale-105 transition transform shadow-md hover:shadow-lg border border-gray-200 hover:border-[#648f94]"
-                >
-                  <img src={platform.icon} alt="platform" className="w-12 h-12 object-contain transition duration-300 group-hover:scale-110" />
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Music Streaming Platforms */}
+        <motion.div 
+          className="backdrop-blur-md rounded-3xl mb-10"
+          initial="hidden"
+          animate="visible"
+          variants={sectionVariants}
+        >
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-6 justify-items-center"
+            variants={containerVariants}
+          >
+            {mainPlatforms.map((platform, index) => (
+              <motion.div
+                key={index}
+                className="group w-20 h-20 flex items-center justify-center rounded-xl bg-white shadow-md border border-gray-200"
+                variants={itemVariants}
+                whileHover={{ 
+                  scale: 1.1,
+                  borderColor: "#648f94",
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.img 
+                  src={platform.icon} 
+                  alt={platform.name} 
+                  className="w-12 h-12 object-contain"
+                  whileHover={{ 
+                    scale: 1.2,
+                    rotate: [0, -5, 5, 0],
+                    transition: { duration: 0.3 }
+                  }}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
 
-          {/* Mobile Carrier Platforms */}
-          <div className=" backdrop-blur-md ">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">Caller Tune Distribution for India's All Cellular Networks</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 justify-items-center max-w-3xl mx-auto pt-4">
-              {carrierPlatforms.map((platform, index) => (
-                <div
-                  key={index}
-                  className="group w-24 h-24 flex items-center justify-center rounded-2xl bg-white hover:scale-105 transition transform shadow-md hover:shadow-lg border border-gray-200 hover:border-[#648f94]"
-                >
-                  <img src={platform.icon} alt="carrier" className="w-16 h-16 object-contain transition duration-300 group-hover:scale-110" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* Mobile Carrier Platforms */}
+        <motion.div 
+          className="backdrop-blur-md"
+          initial="hidden"
+          animate="visible"
+          variants={sectionVariants}
+          transition={{ delay: 0.4 }}
+        >
+          <motion.h2 
+            className="text-2xl font-semibold text-gray-800 mb-4 text-center"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ 
+              type: "spring",
+              stiffness: 100,
+              damping: 12,
+              delay: 0.6 
+            }}
+          >
+            Caller Tune Distribution for India's All Cellular Networks
+          </motion.h2>
+          
+          <motion.div 
+            className="grid grid-cols-2 sm:grid-cols-4 justify-items-center max-w-3xl mx-auto pt-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.8 }}
+          >
+            {carrierPlatforms.map((platform, index) => (
+              <motion.div
+                key={index}
+                className="group w-24 h-24 flex items-center justify-center rounded-2xl bg-white shadow-md border border-gray-200"
+                variants={itemVariants}
+                whileHover={{ 
+                  scale: 1.15,
+                  borderColor: "#648f94",
+                  boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
+                  y: -5,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <motion.img 
+                  src={platform.icon} 
+                  alt={platform.name} 
+                  className="w-16 h-16 object-contain"
+                  whileHover={{ 
+                    scale: 1.3,
+                    rotate: 360,
+                    transition: { duration: 0.6 }
+                  }}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Floating Animation for Background Elements */}
+        <motion.div
+          className="fixed top-20 left-10 w-4 h-4 bg-[#648f94] rounded-full opacity-20"
+          animate={{
+            y: [0, -20, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <motion.div
+          className="fixed top-40 right-20 w-6 h-6 bg-[#648f94] rounded-full opacity-15"
+          animate={{
+            y: [0, 30, 0],
+            x: [0, 10, 0],
+            scale: [1, 0.8, 1],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        
+        <motion.div
+          className="fixed bottom-40 left-1/4 w-3 h-3 bg-[#648f94] rounded-full opacity-25"
+          animate={{
+            y: [0, -15, 0],
+            x: [0, -15, 0],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
       </div>
+    </div>
 
       {/* 150 stores */}
       <section className="bg-white py-10 sm:py-10 lg:py-14">
@@ -707,7 +887,7 @@ function Home() {
                 viewport={{ once: true }}
               >
                 <div
-                  className="group relative flex flex-col text-left bg-white/70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-md border border-white/50 
+                  className="group relative flex flex-col text-left bg-white/70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-md 
               hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 ease-out cursor-pointer overflow-hidden h-[380px] w-full justify-around"
                 >
                   {/* Icon */}
@@ -735,93 +915,7 @@ function Home() {
       </section>
 
 
-      <div className="bg-[#ebf4f5] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
-        <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8">
-          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
-            {/* Left Text Content */}
-            <div>
-              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
-                Make money with worldwide music distribution
-              </p>
-              <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
-                Upload Unlimited Songs <br />
-
-              </h1>
-              <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
-                The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
-                share their creativity across more than 150 streaming platforms, including Spotify, Apple
-                Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
-                reach a wider audience, all while retaining an impressive 95% of your earnings. With our
-                user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
-                72 hours—ensuring your music is always at the forefront.
-              </p>
-              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
-                Join Now
-              </button>
-            </div>
-
-            {/* Right Image Content */}
-            <div className="flex items-center justify-center p-4 sm:p-6 lg:p-8 xl:p-10 order-1 lg:order-2">
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
-                {/* Second border layer (furthest back) */}
-                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 right-2 sm:right-3 lg:right-4 xl:right-5 z-0"></div>
-
-                {/* First border layer (middle) */}
-                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 right-4 sm:right-6 lg:right-8 xl:right-10 z-10"></div>
-
-                {/* Main content box (front) */}
-                <img
-                  src={MusicDistribution}
-                  alt="Music Distribution Banner"
-                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Music Distribution Plans Section */}
-      <div className="bg-[#ebf4f5] lg:-mt-40 flex items-center justify-center px-4 sm:px-6 lg:py-10 lg:px-8 relative overflow-hidden">
-        <div className="flex items-center justify-center px-4 sm:px-6 md:px-8">
-          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
-
-            {/* Left Text Content */}
-            {/* Right Image Content */}
-            <div>
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
-                {/* Second border layer (furthest back) */}
-                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 left-2 sm:left-3 lg:left-4 xl:left-5 z-0"></div>
-
-                {/* First border layer (middle) */}
-                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 left-4 sm:left-6 lg:left-8 xl:left-10 z-10"></div>
-
-                {/* Main content box (front) */}
-                <img
-                  src={MobileOperatorLicensing}
-                  alt="Music Distribution Banner"
-                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
-                />
-              </div>
-            </div>
-            <div className=" items-center justify-center order-1 lg:order-2">
-              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
-                Caller Tune Distribution India               </p>
-              <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
-                Mobile Operator Licensing <br />
-
-              </h1>
-              <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
-                Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
-              </p>
-              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
-                Join Now
-              </button>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
+      
       {/* Featured For independent labels */}
       <section className="bg-[#005f73] py-12 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -914,90 +1008,96 @@ function Home() {
       </section>
 
       {/* step section */}
-      <section className="bg-white pt-20 px-4 sm:px-6 md:px-8 overflow-hidden">
-  <div className="max-w-7xl mx-auto">
-    {/* Desktop & Tablet Flow */}
-    <div className="hidden md:block">
-      <div className="relative">
-        {/* Connecting Dashed Line */}
-        <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
+      <section className="bg-white pt-20 px-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          {/* Desktop Flow */}
+          <div className="hidden lg:block">
+            <div className="relative">
+              {/* Connecting Dashed Line */}
+              <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
 
-        {/* Steps */}
-        <div className="relative z-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-8 xl:gap-x-16 gap-y-10">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={step.id}
-                className={`group cursor-pointer transition-all duration-500 ${activeStep === index ? 'scale-105' : 'hover:scale-102'}`}
-                onMouseEnter={() => setActiveStep(index)}
-              >
-                <div
-                  className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 flex flex-col justify-center items-center transition-all duration-500 ${
-                    activeStep === index ? 'shadow-2xl shadow-current/20' : ''
-                  }`}
-                >
-                  {/* Step Number Badge */}
-                  <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
-                    <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
-                      {step.id}
-                    </div>
-                  </div>
+              {/* Steps */}
+              <div className="relative z-10 grid grid-cols-4 gap-x-20 gap-y-8">
+                {steps.map((step, index) => {
+                  const Icon = step.icon;
+                  return (
+                    <div
+                      key={step.id}
+                      className={`group cursor-pointer transition-all duration-500 ${
+                        activeStep === index ? 'scale-105' : 'hover:scale-102'
+                      }`}
+                      onMouseEnter={() => setActiveStep(index)}
+                    >
+                      <div
+                        className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
+                          activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                        }`}
+                      >
+                        {/* Step Number Badge */}
+                        <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
+                          <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
+                            {step.id}
+                          </div>
+                        </div>
 
-                  {/* Icon */}
-                  <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
+                        {/* Icon */}
+                        <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-black text-center">{step.title}</h3>
+                        {/* Title */}
+                        <h3 className="text-xl font-bold text-black text-center">
+                          {step.title}
+                        </h3>
 
-                  {/* Arrow */}
-                  {index < steps.length - 1 && (
-                    <div className="hidden lg:block absolute right-[-40px] top-1/2 transform -translate-y-1/2">
-                      <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
-                        <ArrowRight className="w-4 h-4 text-white" />
+                        {/* Arrow */}
+                        {index < steps.length - 1 && (
+                          <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 ">
+                            <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
+                              <ArrowRight className="w-4 h-4 text-white" />
+                            </div>
+                          </div>
+                        )}
                       </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Flow */}
+          <div className="lg:hidden space-y-6">
+            {steps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.id} className="relative">
+                  <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm flex flex-col justify-center">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
+                        {step.id}
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-black mb-3">
+                      {step.title}
+                    </h3>
+                  </div>
+
+                  {/* Vertical Line */}
+                  {step.id < steps.length && (
+                    <div className="flex justify-center py-4">
+                      <div className="w-0.5 h-8 bg-[#005f73]"></div>
                     </div>
                   )}
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-
-    {/* Mobile Flow */}
-    <div className="block md:hidden space-y-6 mt-10">
-      {steps.map((step) => {
-        const Icon = step.icon;
-        return (
-          <div key={step.id} className="relative">
-            <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 flex flex-col justify-center text-center">
-              <div className="flex items-center gap-4 mb-4 justify-center">
-                <div className="w-12 h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
-                  {step.id}
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-black mb-3">{step.title}</h3>
-            </div>
-
-            {/* Vertical Line */}
-            {step.id < steps.length && (
-              <div className="flex justify-center py-4">
-                <div className="w-0.5 h-8 bg-[#005f73]"></div>
-              </div>
-            )}
+              );
+            })}
           </div>
-        );
-      })}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
       <section className="bg-white py-16 px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -1127,303 +1227,142 @@ function Home() {
 </div>
 
 
-
       {/* according section */}
 
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">Music Distribution</h1>
+        <section className="py-20 px-4 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">Music Distribution</h1>
+         
+         
+        </div>
 
+        <div className="space-y-4">
+          {according.map((item, index) => {
+  const isActive = activeIndex === index;
+  return (
+    <div
+      key={index}
+      className="bg-white rounded-xl shadow-md transition-all border border-gray-200"
+    >
+      <button
+        onClick={() => toggleAccordion(index)}
+        className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
+      >
+        <div className="flex items-center space-x-4">
+          <h3 className={`text-xl font-semibold transition-colors duration-300 ${isActive ? 'text-slate-900' : 'text-gray-800'}`}>
+            {item.title}
+          </h3>
+        </div>
+       {isActive ? (
+  <div className="bg-[#004D5F] text-white p-2 rounded-full">
+    <Minus size={15} />
+  </div>
+) : (
+  <div className="bg-[#004D5F] text-white p-2 rounded-full">
+    <Plus size={15} />
+  </div>
+)}
 
-          </div>
-
-          <div className="space-y-4">
-            {according.map((item, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl shadow-md transition-all border border-gray-200"
-                >
-                  <button
-                    onClick={() => toggleAccordion(index)}
-                    className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
-                  >
-                    <div className="flex items-center space-x-4">
-                      <h3 className={`text-xl font-semibold transition-colors duration-300 ${isActive ? 'text-slate-900' : 'text-gray-800'}`}>
-                        {item.title}
-                      </h3>
-                    </div>
-                    {isActive ? (
-                      <div className="bg-[#004D5F] text-white p-2 rounded-full">
-                        <Minus size={15} />
-                      </div>
-                    ) : (
-                      <div className="bg-[#004D5F] text-white p-2 rounded-full">
-                        <Plus size={15} />
-                      </div>
-                    )}
-
-                  </button>
-                  {isActive && (
-                    <div className="px-5 pb-5 text-gray-700">
-                      {item.description}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-
-          </div>
-
+      </button>
+      {isActive && (
+        <div className="px-5 pb-5 text-gray-700">
+          {item.description}
+        </div>
+      )}
+    </div>
+  );
+})}
 
         </div>
-      </section>
 
+       
+      </div>
+    </section>
+<section className="pb-16 max-w-7xl mx-auto bg-white">
+  {/* Music Distribution Section */}
+  <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+    <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+      {/* Left Text Content */}
+      <div className="space-y-6">
+        <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
+          Make money with worldwide music distribution
+        </p>
+        <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] leading-tight">
+          Upload Unlimited Songs
+        </h1>
+        <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] leading-relaxed">
+          The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
+          share their creativity across more than 150 streaming platforms, including Spotify, Apple
+          Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
+          reach a wider audience, all while retaining an impressive 95% of your earnings. With our
+          user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
+          72 hours—ensuring your music is always at the forefront.
+        </p>
+        <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+          Join Now
+        </button>
+      </div>
 
-<section className="bg-[#005f73] py-16 sm:py-20 lg:py-24">
-    <motion.div
-      className="max-w-4xl mx-auto text-center text-white px-4 sm:px-6 lg:px-8"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-    >
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
-        Best Music Distribution India
-      </h2>
-      <span className='text-[24px] font-medium '>Why Think</span>
-      <p className="text-[18px] sm:text-lg lg:text-xl mb-8">
-        Distribute Your Music Today! – Pay After Work Done
-      </p>
-      <motion.button
-        className="bg-white text-[#005f73] px-12 py-3 rounded-md font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Join Now
-      </motion.button>
-    </motion.div>
-  </section>
+      {/* Right Image Content */}
+      <div className="flex items-center justify-center">
+        <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+          {/* Second border layer (furthest back) */}
+          <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 right-2 sm:right-3 lg:right-4 xl:right-5 z-0"></div>
 
+          {/* First border layer (middle) */}
+          <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 right-4 sm:right-6 lg:right-8 xl:right-10 z-10"></div>
 
-
-      {/* silder section */}
-      <div className="relative px-4 sm:px-6 md:px-8 py-12 overflow-hidden">
-      {/* Large decorative quotes */}
-     <div className="absolute top-8 left-8 md:top-15 md:left-56 lg:left-[15rem] z-10 hidden md:block">
-  <img src={leftqoute} alt="left quote" className="w-12 md:w-20" />
-</div>
-
-<div className="absolute bottom-10 right-8 md:bottom-16 md:right-60 lg:right-[15rem] z-10 hidden md:block">
-  <img src={rightquote} alt="right quote" className="w-12 md:w-20" />
-</div>
-
-
-      <Slider {...sliderSettings}>
-        {testimonials.map((testimonial, index) => {
-          const isExpanded = expandedIndex === index;
-
-          return (
-            <div key={testimonial.id}>
-  <div className="px-2 sm:px-4">
-    <div className="max-w-6xl mx-auto">
-      {/* Card container */}
-      <div className="relative px-4 sm:px-6 py-6 sm:py-8 h-full">
-        {/* Decorative background */}
-        <div
-          className="absolute bg-[#EBF4F5] rounded-2xl transform -rotate-5"
-          style={{
-            top: "1rem",
-            left: "1rem",
-            right: "1rem",
-            bottom: "1rem",
-            zIndex: 1,
-          }}
-        ></div>
-
-        {/* Main card */}
-        <div className="relative bg-white rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10 h-full min-h-[300px] md:min-h-[350px] flex flex-col justify-between">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 items-center h-full">
-            {/* Left - Avatar */}
-            <div className="md:col-span-2 flex justify-center h-full">
-              <PawAvatar img={testimonial.img} />
-            </div>
-
-            {/* Right - Content */}
-            <div className="md:col-span-3 flex flex-col justify-between space-y-4 sm:space-y-6 h-full">
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
-                  {testimonial.title}
-                </h3>
-
-                <div className="flex items-center gap-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 fill-orange-400 text-orange-400"
-                    />
-                  ))}
-                  <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center p-1">
-                    <Check className="text-white w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex-1">
-                <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-2">
-                  "
-                  {isExpanded
-                    ? testimonial.content
-                    : `${testimonial.content.slice(0, 180)}...`}
-                  "
-                </p>
-                {testimonial.content.length > 180 && (
-                  <button
-                    onClick={() =>
-                      setExpandedIndex(isExpanded ? null : index)
-                    }
-                    className="text-teal-600 hover:underline text-sm font-medium"
-                  >
-                    {isExpanded ? "Show Less" : "Read More"}
-                  </button>
-                )}
-              </div>
-
-              <p className="text-gray-500 font-medium text-sm sm:text-base mt-2">
-                {testimonial.date}
-              </p>
-            </div>
-          </div>
+          {/* Main content box (front) */}
+          <img
+            src={MusicDistribution}
+            alt="Music Distribution Banner"
+            className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+          />
         </div>
       </div>
     </div>
   </div>
-</div>
 
-          );
-        })}
-      </Slider>
+  {/* Mobile Operator Licensing Section */}
+  <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+    <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+      {/* Left Image Content */}
+      <div className="flex items-center justify-start">
+        <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+          {/* Second border layer (furthest back) */}
+          <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 left-2 sm:left-3 lg:left-4 xl:left-5 z-0"></div>
 
-      {/* Slick custom style */}
-      <style jsx global>{`
-        .slick-slider {
-          overflow: visible !important;
-        }
-        .slick-list {
-          overflow: visible !important;
-          padding: 2rem 0 !important;
-        }
-        .slick-track {
-          overflow: visible !important;
-        }
-        .slick-slide {
-          overflow: visible !important;
-        }
-        .slick-slide > div {
-          overflow: visible !important;
-        }
-      `}</style>
+          {/* First border layer (middle) */}
+          <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 left-4 sm:left-6 lg:left-8 xl:left-10 z-10"></div>
+
+          {/* Main content box (front) */}
+          <img
+            src={MobileOperatorLicensing}
+            alt="Mobile Operator Licensing Banner"
+            className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+          />
+        </div>
+      </div>
+
+      {/* Right Text Content */}
+      <div className="space-y-6">
+        <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
+          Caller Tune Distribution India
+        </p>
+        <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] leading-tight">
+          Mobile Operator Licensing
+        </h1>
+        <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] leading-relaxed">
+          Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
+        </p>
+        <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+          Join Now
+        </button>
+      </div>
     </div>
-
-
-      {/* reporting system */}
-      {/* Reporting System */}
-      <section className="bg-white py-16 px-6 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            {/* Add your header content here */}
-          </motion.div>
-
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
-            {cardsData.map((card) => (
-              <motion.div
-                key={card.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: card.delay }}
-                viewport={{ once: true }}
-                className={`group ${card.gridClass}`}
-              >
-                <div className="bg-[#005f73] rounded-2xl p-6 sm:p-8 text-white h-full hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 ease-out cursor-pointer shadow-lg hover:shadow-2xl">
-                  <div className="mb-6">
-                    <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-[#ccdfe3] transition-colors duration-300">
-                      {card.title}
-                    </h3>
-                  </div>
-                  <ul className="space-y-3 text-sm sm:text-base">
-                    {card.features.map((feature, index) => (
-                      <li key={index} className="flex items-start space-x-2">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* dicision making simplified */}
-      <div className="w-full py-16 bg-white">
-        <div className="w-[90%] mx-auto relative">
-          <motion.section
-            className="bg-[#005f73] relative rounded-3xl overflow-visible"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Decorative Circles */}
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden rounded-3xl">
-              <div className="absolute top-[-3rem] left-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-20">
-                <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
-              </div>
-              <div className="absolute bottom-[-3rem] right-[-4rem] w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-25">
-                <div className="w-full h-full border-32 border-[#66c1d1] rounded-full"></div>
-              </div>
-            </div>
-
-          {/* Process Steps - Redesigned for better visual appeal */}
-          <div className="mt-16 text-center">
-            <h3 className="text-3xl font-bold text-gray-800 mb-8">A Simple Two-Step Process</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-
-              {/* Step 1 */}
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-start">
-                <div className="bg-[#EBF4F5] text-[#005f73] font-bold rounded-full h-10 w-10 flex items-center justify-center mr-5 flex-shrink-0">1</div>
-                <div>
-                  <h4 className="text-xl font-semibold text-gray-900 mb-2">Choose & Upload</h4>
-                  <p className="text-gray-600">
-                    Select the plan and upload your audio file & artwork. It's a quick and easy process.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-start">
-                <div className="bg-[#EBF4F5] text-[#005f73] font-bold rounded-full h-10 w-10 flex items-center justify-center mr-5 flex-shrink-0">2</div>
-                <div>
-                  <h4 className="text-xl font-semibold text-gray-900 mb-2">Pay & Track</h4>
-                  <p className="text-gray-600">
-                    After filling in the details, simply pay to submit. You can track your order status from your account page.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  </div>
+</section>
 
 
       <section className="bg-[#EBF4F5] py-16">
@@ -1676,6 +1615,276 @@ function Home() {
             </section>
 
 
+            <section className=" py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Pricing Card - Now with Gradient and enhanced shadow */}
+          <div className="bg-gradient-to-br from-[#EBF4F5] to-[#B8D8D8] rounded-2xl p-8 shadow-xl border border-gray-200">
+
+            {/* Header */}
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-extrabold text-black tracking-tight mb-4">
+                Music Distribution Plans Without CT
+              </h2>
+              <p className="text-gray-600 text-lg">A straightforward plan for your music release.</p>
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+              {/* Plan Details */}
+              <div className="text-center md:text-left mb-6 md:mb-0">
+                <h3 className="text-3xl font-bold text-gray-800">Single Song</h3>
+                <p className="text-gray-600 text-lg">Without Caller Tune</p>
+              </div>
+              {/* Price */}
+              <div className="text-center md:text-right">
+                <span className="text-6xl font-extrabold text-[#005f73]">₹599</span>
+                <span className="text-gray-600 ml-2 text-lg">/ Per Song</span>
+              </div>
+            </div>
+
+            {/* Features - With clearer icons */}
+            <div className="mb-10">
+              <div className="border-t border-gray-300 pt-6">
+                <ul className="space-y-4 text-gray-700 text-base">
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>All Major Music Live Stream Platforms</span>
+                  </li>
+                  {/* Correctly showing "No Caller Tune" as an exclusion */}
+                  <li className="flex items-center text-gray-500">
+                    <IoCloseCircle className="h-6 w-6 text-red-500 mr-3 flex-shrink-0" />
+                    <span>No Caller Tune Facility</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>Lifetime Song Availability</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>95% Royalties</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>4 Monthly Payment / Report</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>YouTube Content ID</span>
+                  </li>
+                  <li className="flex items-center">
+                    <IoCheckmarkCircle className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                    <span>24 Hour Approval</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="text-center">
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 95, 115, 0.3)" }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#005f73] text-white px-10 py-4 rounded-xl font-semibold text-lg shadow-lg"
+              >
+                UPLOAD NOW
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Process Steps - Redesigned for better visual appeal */}
+          <div className="mt-16 text-center">
+            <h3 className="text-3xl font-bold text-gray-800 mb-8">A Simple Two-Step Process</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+
+              {/* Step 1 */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-start">
+                <div className="bg-[#EBF4F5] text-[#005f73] font-bold rounded-full h-10 w-10 flex items-center justify-center mr-5 flex-shrink-0">1</div>
+                <div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">Choose & Upload</h4>
+                  <p className="text-gray-600">
+                    Select the plan and upload your audio file & artwork. It's a quick and easy process.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-start">
+                <div className="bg-[#EBF4F5] text-[#005f73] font-bold rounded-full h-10 w-10 flex items-center justify-center mr-5 flex-shrink-0">2</div>
+                <div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">Pay & Track</h4>
+                  <p className="text-gray-600">
+                    After filling in the details, simply pay to submit. You can track your order status from your account page.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+<section className="bg-[#005f73] py-16 sm:py-20 lg:py-24">
+    <motion.div
+      className="max-w-4xl mx-auto text-center text-white px-4 sm:px-6 lg:px-8"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+    >
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
+        Best Music Distribution India
+      </h2>
+      <span className='text-[24px] font-medium '>Why Think</span>
+      <p className="text-[18px] sm:text-lg lg:text-xl mb-8">
+        Distribute Your Music Today! – Pay After Work Done
+      </p>
+      <motion.button
+        className="bg-white text-[#005f73] px-12 py-3 rounded-md font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Join Now
+      </motion.button>
+    </motion.div>
+  </section>
+
+
+  {/* We Have A Great Client List in The Showcase */}
+
+
+
+    {/* silder section */}
+      <div className="relative px-4 sm:px-6 md:px-8 py-12 overflow-hidden">
+      {/* Large decorative quotes */}
+     <div className="absolute top-8 left-8 md:top-15 md:left-56 lg:left-[15rem] z-10 hidden md:block">
+  <img src={leftqoute} alt="left quote" className="w-12 md:w-20" />
+</div>
+
+<div className="absolute bottom-10 right-8 md:bottom-16 md:right-60 lg:right-[15rem] z-10 hidden md:block">
+  <img src={rightquote} alt="right quote" className="w-12 md:w-20" />
+</div>
+
+
+      <Slider {...sliderSettings}>
+        {testimonials.map((testimonial, index) => {
+          const isExpanded = expandedIndex === index;
+
+          return (
+            <div key={testimonial.id}>
+  <div className="px-2 sm:px-4">
+    <div className="max-w-6xl mx-auto">
+      {/* Card container */}
+      <div className="relative px-4 sm:px-6 py-6 sm:py-8 h-full">
+        {/* Decorative background */}
+        <div
+          className="absolute bg-[#EBF4F5] rounded-2xl transform -rotate-5"
+          style={{
+            top: "1rem",
+            left: "1rem",
+            right: "1rem",
+            bottom: "1rem",
+            zIndex: 1,
+          }}
+        ></div>
+
+        {/* Main card */}
+        <div className="relative bg-white rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl border-2 border-gray-300 z-10 h-full min-h-[300px] md:min-h-[350px] flex flex-col justify-between">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 items-center h-full">
+            {/* Left - Avatar */}
+            <div className="md:col-span-2 flex justify-center h-full">
+              <PawAvatar img={testimonial.img} />
+            </div>
+
+            {/* Right - Content */}
+            <div className="md:col-span-3 flex flex-col justify-between space-y-4 sm:space-y-6 h-full">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
+                  {testimonial.title}
+                </h3>
+
+                <div className="flex items-center gap-1">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-orange-400 text-orange-400"
+                    />
+                  ))}
+                  <div className="ml-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center p-1">
+                    <Check className="text-white w-4 h-4" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex-1">
+                <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-2">
+                  "
+                  {isExpanded
+                    ? testimonial.content
+                    : `${testimonial.content.slice(0, 180)}...`}
+                  "
+                </p>
+                {testimonial.content.length > 180 && (
+                  <button
+                    onClick={() =>
+                      setExpandedIndex(isExpanded ? null : index)
+                    }
+                    className="text-teal-600 hover:underline text-sm font-medium"
+                  >
+                    {isExpanded ? "Show Less" : "Read More"}
+                  </button>
+                )}
+              </div>
+
+              <p className="text-gray-500 font-medium text-sm sm:text-base mt-2">
+                {testimonial.date}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+          );
+        })}
+      </Slider>
+
+      {/* Slick custom style */}
+      <style jsx global>{`
+        .slick-slider {
+          overflow: visible !important;
+        }
+        .slick-list {
+          overflow: visible !important;
+          padding: 2rem 0 !important;
+        }
+        .slick-track {
+          overflow: visible !important;
+        }
+        .slick-slide {
+          overflow: visible !important;
+        }
+        .slick-slide > div {
+          overflow: visible !important;
+        }
+      `}</style>
+    </div>
+
+
+      {/* reporting system */}
+      {/* Reporting System */}
+      
+
+
+
+{/* best music distribution */}
+ 
+      
+
+
+      
+
+
 
 
 
@@ -1693,6 +1902,8 @@ function Home() {
 
 
     </>
+
+
 
 
 
