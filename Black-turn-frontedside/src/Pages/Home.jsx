@@ -82,6 +82,25 @@ function Home() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [expandedIndex, setExpandedIndex] = useState(null);
 
+const CustomPrevArrow = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
+    aria-label="Previous testimonial"
+  >
+    <ChevronLeft className="w-6 h-6 text-gray-700" />
+  </button>
+);
+
+const CustomNextArrow = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 z-10 border border-gray-200 hover:bg-gray-50"
+    aria-label="Next testimonial"
+  >
+    <ChevronRight className="w-6 h-6 text-gray-700" />
+  </button>
+);
 
 const sliderSettings = {
     dots: false,
@@ -103,7 +122,7 @@ const sliderSettings = {
       />
     )
   };
-  
+
   const steps = [
       { id: 1, title: 'Earnings from music streaming', icon: Music },
       { id: 2, title: 'theblackturn.com', icon: Monitor },
