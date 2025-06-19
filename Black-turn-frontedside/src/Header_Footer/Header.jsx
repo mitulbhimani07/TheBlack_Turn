@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,6 +10,13 @@ function Header() {
     const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
     const dropdownRef = useRef(null);
     const servicesButtonRef = useRef(null);
+      const { pathname } = useLocation();
+
+
+    useEffect(() => {
+    // Scroll to top when pathname changes
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
