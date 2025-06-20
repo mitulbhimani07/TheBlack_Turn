@@ -4,12 +4,14 @@ import banner from "../../assets/images/callertune.png";
 import distribute from "../../assets/images/distribute.png"
 import { Zap, Shield, Headphones } from "lucide-react";
 import { Globe, Upload, BarChart3, Clock } from 'lucide-react';
+import { FaApple, FaMusic, FaSpotify } from "react-icons/fa";
+import section from "../../assets/images/section.png"
 
 
 
 const CallerTuneDistribution = () => {
   const [isSticky, setIsSticky] = useState(false);
-    const [expandedCards, setExpandedCards] = useState({});
+  const [expandedCards, setExpandedCards] = useState({});
 
 
   useEffect(() => {
@@ -26,22 +28,22 @@ const CallerTuneDistribution = () => {
   }, []);
 
   const features = [
-  {
-    icon: <Zap />,
-    title: "Ultra Fast Delivery",
-    subtitle: "We Deliver Caller Tune 5-8 Days",
-  },
-  {
-    icon: <Shield />,
-    title: "Fully Customize Caller Tune",
-    subtitle: "Create Customize Caller Tune For Your Fans",
-  },
-  {
-    icon: <Headphones />,
-    title: "Earn",
-    subtitle: "Earn Money, From Caller Tune",
-  }
-];
+    {
+      icon: <Zap />,
+      title: "Ultra Fast Delivery",
+      subtitle: "We Deliver Caller Tune 5-8 Days",
+    },
+    {
+      icon: <Shield />,
+      title: "Fully Customize Caller Tune",
+      subtitle: "Create Customize Caller Tune For Your Fans",
+    },
+    {
+      icon: <Headphones />,
+      title: "Earn",
+      subtitle: "Earn Money, From Caller Tune",
+    }
+  ];
 
 
 
@@ -94,7 +96,7 @@ const CallerTuneDistribution = () => {
       isHover: false
     },
     {
-      number: "02", 
+      number: "02",
       icon: <Upload />,
       title: "Earning & Payouts",
       subtitle: "Whatever revenue you generate from playing or downloading your song or tune, the black turn collects it from all networks and DSP and transfers your royalty to your bank account. We keep collecting your royalty for lifetime and transfer it to you. You do not have to manually follow up or send mail. We have auto payment here, so whenever your payment comes, it will be received directly in your bank account. We are smart to make payment in all currencies like: USD, Euro etc.",
@@ -115,7 +117,7 @@ const CallerTuneDistribution = () => {
       isHover: false
     }
   ];
-   const toggleReadMore = (index) => {
+  const toggleReadMore = (index) => {
     setExpandedCards(prev => ({
       ...prev,
       [index]: !prev[index]
@@ -191,54 +193,54 @@ const CallerTuneDistribution = () => {
 
       {/* Features Section */}
       <div className="bg-white py-20 px-4">
-      <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">
 
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div key={index} className="group relative">
-              <div className="bg-white rounded-xl p-5 shadow-xl hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-500 border border-[#005f73]/10 relative overflow-hidden cursor-pointer">
-                {/* Background gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#005f73]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+          <div className="grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="group relative">
+                <div className="bg-white rounded-xl p-5 shadow-xl hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-500 border border-[#005f73]/10 relative overflow-hidden cursor-pointer">
+                  {/* Background gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#005f73]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
 
-                <div className="relative z-10">
-                  <div className="flex justify-center mb-6">
-                    <div className="w-20 h-20 bg-[#ebf4f5] rounded-2xl  flex items-center justify-center group-hover:bg-[#005f73] transition-colors duration-300">
-                      <div className="text-[#005f73] group-hover:text-white w-8 h-8 ml-2 mt-2 transition-colors duration-300">
-                        {feature.icon}
+                  <div className="relative z-10">
+                    <div className="flex justify-center mb-6">
+                      <div className="w-20 h-20 bg-[#ebf4f5] rounded-2xl  flex items-center justify-center group-hover:bg-[#005f73] transition-colors duration-300">
+                        <div className="text-[#005f73] group-hover:text-white w-8 h-8 ml-2 mt-2 transition-colors duration-300">
+                          {feature.icon}
+                        </div>
                       </div>
                     </div>
+
+                    <h4 className="text-[#005f73] text-2xl font-bold mb-3 text-center group-hover:text-[#0a7084] transition-colors duration-300">
+                      {feature.title}
+                    </h4>
+
+                    <p className="text-gray-500 text-lg font-medium mb-4 text-center">
+                      {feature.subtitle}
+                    </p>
+
+                    <p className="text-gray-400 text-center leading-relaxed">
+                      {feature.description}
+                    </p>
+
+                    {/* Decorative elements */}
+                    <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-[#005f73]/10 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-[#ebf4f5] to-transparent rounded-full opacity-50" />
                   </div>
-
-                  <h4 className="text-[#005f73] text-2xl font-bold mb-3 text-center group-hover:text-[#0a7084] transition-colors duration-300">
-                    {feature.title}
-                  </h4>
-
-                  <p className="text-gray-500 text-lg font-medium mb-4 text-center">
-                    {feature.subtitle}
-                  </p>
-
-                  <p className="text-gray-400 text-center leading-relaxed">
-                    {feature.description}
-                  </p>
-
-                  {/* Decorative elements */}
-                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-[#005f73]/10 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-[#ebf4f5] to-transparent rounded-full opacity-50" />
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <button className="bg-gradient-to-r from-[#005f73] to-[#0a7084] text-white px-12 py-4 rounded-full text-lg font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 border-2 border-transparent hover:border-white/20 hover:scale-105">
-            Get Started Today
-          </button>
+          {/* Call to Action */}
+          <div className="text-center mt-16">
+            <button className="bg-gradient-to-r from-[#005f73] to-[#0a7084] text-white px-12 py-4 rounded-full text-lg font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 border-2 border-transparent hover:border-white/20 hover:scale-105">
+              Get Started Today
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
       {/* Sticky Section */}
       <div id="sticky-section" className="relative min-h-screen">
@@ -258,7 +260,7 @@ const CallerTuneDistribution = () => {
               {/* Distribution Icon */}
               <div className="absolute -bottom-5 -right-6 w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-indigo-500">
                 <div className="relative">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8  rounded-full flex items-center justify-center"><FaMusic />
                     <span className="text-white text-lg">♪</span>
                   </div>
                   <div className="absolute top-0 left-0 w-8 h-8 border-2 border-green-500 rounded-full animate-ping"></div>
@@ -328,296 +330,282 @@ const CallerTuneDistribution = () => {
       </div>
 
       {/* Music distribution with CRBT */}
-       <div className="bg-white py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#005f73] mb-4">
-            Music Distribution Features
-          </h2>
-          <div className="flex justify-center items-center">
-            <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center">
-              <div className="w-4 h-4 bg-white rounded-full"></div>
+      <div className="bg-white py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#005f73] mb-4">
+              Music Distribution Features
+            </h2>
+            <div className="flex justify-center items-center">
+              <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center">
+                <div className="w-4 h-4 bg-white rounded-full"></div>
+              </div>
+              <div className="w-16 h-0.5 bg-[#005f73]"></div>
+              <div className="w-4 h-4 bg-[#005f73] rounded-full"></div>
+              <div className="w-16 h-0.5 bg-[#005f73]"></div>
             </div>
-            <div className="w-16 h-0.5 bg-[#005f73]"></div>
-            <div className="w-4 h-4 bg-[#005f73] rounded-full"></div>
-            <div className="w-16 h-0.5 bg-[#005f73]"></div>
           </div>
-        </div>
 
-        {/* Cards Grid - 2 columns */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {featuress.map((feature, index) => (
-            <div key={index} className="group relative">
-              <div className={`bg-white rounded-xl p-8 shadow-xl border-2 transition-all duration-500 cursor-pointer relative overflow-hidden ${
-                feature.isHover 
-                  ? 'border-[#005f73] shadow-2xl transform -translate-y-2 scale-105' 
+          {/* Cards Grid - 2 columns */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {featuress.map((feature, index) => (
+              <div key={index} className="group relative">
+                <div className={`bg-white rounded-xl p-8 shadow-xl border-2 transition-all duration-500 cursor-pointer relative overflow-hidden ${feature.isHover
+                  ? 'border-[#005f73] shadow-2xl transform -translate-y-2 scale-105'
                   : 'border-gray-200 hover:border-[#005f73] hover:shadow-2xl hover:-translate-y-2 hover:scale-105'
-              }`}>
-                
-                {/* Large Number Background */}
-                <div className={`absolute top-4 right-4 text-8xl font-bold opacity-10 transition-all duration-500 ${
-                  feature.isHover ? 'text-[#005f73]' : 'text-gray-300 group-hover:text-[#005f73]'
-                }`}>
-                  {feature.number}
-                </div>
-
-                {/* Background gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-[#005f73]/5 to-transparent rounded-xl transition-opacity duration-500 ${
-                  feature.isHover ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                }`} />
-
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="flex justify-start mb-6">
-                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 ${
-                      feature.isHover 
-                        ? 'bg-[#005f73]' 
-                        : 'bg-[#ebf4f5] group-hover:bg-[#005f73]'
-                    }`}>
-                      <div className={`w-8 h-8 transition-colors duration-300 ${
-                        feature.isHover 
-                          ? 'text-white' 
-                          : 'text-[#005f73] group-hover:text-white ml-2 mt-2'
-                      }`}>
-                        {feature.icon}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                    feature.isHover 
-                      ? 'text-[#005f73]' 
-                      : 'text-[#005f73] group-hover:text-[#0a7084]'
                   }`}>
-                    {feature.title}
-                  </h3>
 
-                  {/* Description with Read More functionality */}
-                  <div className="mb-4">
-                    <p className="text-gray-600 leading-relaxed text-sm">
-                      {truncateText(feature.subtitle, expandedCards[index])}
-                    </p>
-                    
-                    {/* Read More Button */}
-                    {feature.subtitle.split(' ').length > 15 && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleReadMore(index);
-                        }}
-                        className="mt-2 text-[#005f73] hover:text-[#0a7084] text-sm font-medium transition-colors duration-200 flex items-center gap-1"
-                      >
-                        {expandedCards[index] ? 'Read Less' : 'Read More'}
-                        <span className={`transform transition-transform duration-200 ${expandedCards[index] ? 'rotate-180' : ''}`}>
-                          ▼
-                        </span>
-                      </button>
-                    )}
+                  {/* Large Number Background */}
+                  <div className={`absolute top-4 right-4 text-8xl font-bold opacity-10 transition-all duration-500 ${feature.isHover ? 'text-[#005f73]' : 'text-gray-300 group-hover:text-[#005f73]'
+                    }`}>
+                    {feature.number}
                   </div>
 
-                  {/* Decorative corner elements */}
-                  <div className={`absolute top-6 left-6 w-16 h-16 bg-gradient-to-br from-[#005f73]/10 to-transparent rounded-full transition-opacity duration-500 ${
-                    feature.isHover ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                  }`} />
-                  <div className="absolute bottom-6 right-6 w-12 h-12 bg-gradient-to-tr from-[#ebf4f5] to-transparent rounded-full opacity-50" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+                  {/* Background gradient overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-br from-[#005f73]/5 to-transparent rounded-xl transition-opacity duration-500 ${feature.isHover ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                    }`} />
 
-    {/* Caller Tune Distribution */}
-     <div className="bg-white py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Image Side */}
-          <div className="w-full md:w-1/2">
-            <div className="relative">
-              <img
-                src={distribute}
-                alt="Caller Tune Distribution India"
-                className="w-full h-auto rounded-2xl shadow-2xl"
-              />
-            </div>
-          </div>
-
-          {/* Content Side */}
-          <div className="w-full md:w-1/2">
-            <div className="max-w-lg">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#005f73]">
-                Caller Tune Distribution India
-              </h2>
-              
-              <p className="text-gray-800 leading-relaxed mb-6 text-[18px] font-light">
-                If you pay once, your song or caller tune will be available on all platforms and 
-                networks for life time. After paying once, you can earn from your song for life 
-                time. And your song will never be removed from streaming platforms or CRBT Music 
-                Distribution and we will have 100% rights over it. We will never change or keep 
-                your rights with us.
-              </p>
-
-              {/* Learn More Button */}
-              <div className="flex justify-start">
-                <button className="bg-gradient-to-r from-[#005f73] to-[#0a7084] text-white px-8 py-3 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2">
-                  Learn More
-                  <span className="text-lg">→</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* ISRC and UPC */}
-        <div className="bg-gradient-to-br from-gray-50 to-blue-50 py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Main Container with Border */}
-        <div className="bg-white rounded-3xl shadow-2xl border-2  border-gradient-to-r from-[#005f73] to-[#0a7084] p-8 md:p-12 relative overflow-hidden">
-          
-          {/* Background Decorative Elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#005f73]/10 to-transparent rounded-full -translate-y-32 translate-x-32"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-full translate-y-24 -translate-x-24"></div>
-          
-          {/* Content Grid */}
-          <div className="relative z-10 grid md:grid-cols-3 gap-8 items-center">
-            
-            {/* Left Column - ISRC & UPC */}
-            <div className="space-y-8">
-              {/* ISRC Card */}
-              <div className="bg-gradient-to-r from-[#005f73] to-[#0a7084] rounded-2xl p-6 text-white shadow-xl transform hover:scale-105 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                    <BarChart3 className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold">ISRC and UPC</h3>
-                </div>
-                <p className="text-blue-100 text-sm leading-relaxed">
-                  We Provide Free ISRC & UPC for Audio.
-                </p>
-              </div>
-
-              {/* 100% Rights Card */}
-              <div className="bg-white rounded-2xl p-6 border-2 border-[#005f73]/20 shadow-xl transform hover:scale-105 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-[#005f73]/10 rounded-xl flex items-center justify-center">
-                    <div className="w-6 h-6 border-2 border-[#005f73] rounded-full flex items-center justify-center">
-                      <span className="text-[#005f73] font-bold text-xs">©</span>
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <div className="flex justify-start mb-6">
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 ${feature.isHover
+                        ? 'bg-[#005f73]'
+                        : 'bg-[#ebf4f5] group-hover:bg-[#005f73]'
+                        }`}>
+                        <div className={`w-8 h-8 transition-colors duration-300 ${feature.isHover
+                          ? 'text-white'
+                          : 'text-[#005f73] group-hover:text-white ml-2 mt-2'
+                          }`}>
+                          {feature.icon}
+                        </div>
+                      </div>
                     </div>
+
+                    {/* Title */}
+                    <h3 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${feature.isHover
+                      ? 'text-[#005f73]'
+                      : 'text-[#005f73] group-hover:text-[#0a7084]'
+                      }`}>
+                      {feature.title}
+                    </h3>
+
+                    {/* Description with Read More functionality */}
+                    <div className="mb-4">
+                      <p className="text-gray-600 leading-relaxed text-sm">
+                        {truncateText(feature.subtitle, expandedCards[index])}
+                      </p>
+
+                      {/* Read More Button */}
+                      {feature.subtitle.split(' ').length > 15 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleReadMore(index);
+                          }}
+                          className="mt-2 text-[#005f73] hover:text-[#0a7084] text-sm font-medium transition-colors duration-200 flex items-center gap-1"
+                        >
+                          {expandedCards[index] ? 'Read Less' : 'Read More'}
+                          <span className={`transform transition-transform duration-200 ${expandedCards[index] ? 'rotate-180' : ''}`}>
+                            ▼
+                          </span>
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Decorative corner elements */}
+                    <div className={`absolute top-6 left-6 w-16 h-16 bg-gradient-to-br from-[#005f73]/10 to-transparent rounded-full transition-opacity duration-500 ${feature.isHover ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                      }`} />
+                    <div className="absolute bottom-6 right-6 w-12 h-12 bg-gradient-to-tr from-[#ebf4f5] to-transparent rounded-full opacity-50" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#005f73]">100% RIGHTS</h3>
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  KEEP YOUR ALL RIGHTS ON YOUR SONG AND REVENUE
-                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Caller Tune Distribution */}
+      <div className="bg-white py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-12 items-center">
+            {/* Image Side */}
+            <div className="w-full md:w-1/2">
+              <div className="relative ml-20 ">
+                <img
+                  src={section}
+                  alt="Caller Tune Distribution India"
+                  className=" rounded-2xl shadow-2xl h-[500px] w-[400px]"
+                />
               </div>
             </div>
 
-            {/* Center Column - Phone Mockups */}
-            <div className="flex justify-center">
-              <div className="relative">
-                {/* Main Phone */}
+            {/* Content Side */}
+            <div className="w-full md:w-1/2">
+              <div className="max-w-lg">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#005f73]">
+                  Caller Tune Distribution India
+                </h2>
+
+                <p className="text-gray-800 leading-relaxed mb-6 text-[18px] font-light">
+                  If you pay once, your song or caller tune will be available on all platforms and
+                  networks for life time. After paying once, you can earn from your song for life
+                  time. And your song will never be removed from streaming platforms or CRBT Music
+                  Distribution and we will have 100% rights over it. We will never change or keep
+                  your rights with us.
+                </p>
+
+                {/* Learn More Button */}
+                <div className="flex justify-start">
+                  <button className="bg-gradient-to-r from-[#005f73] to-[#0a7084] text-white px-8 py-3 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                    Learn More
+                    <span className="text-lg">→</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ISRC and UPC */}
+      <div className="bg-gradient-to-br from-gray-50 to-blue-50 py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Main Container with Border */}
+          <div className="bg-white rounded-3xl shadow-2xl border-2 border-[#005f73]  border-gradient-to-r from-[#005f73] to-[#0a7084] p-8 md:p-12 relative overflow-hidden">
+
+            {/* Background Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#005f73]/15 to-transparent rounded-full -translate-y-32 translate-x-32"></div>
+            <div className="absolute bottom-8 left-5 w-48 h-48 bg-gradient-to-tr from-blue-500/15 to-transparent rounded-full translate-y-24 -translate-x-24"></div>
+
+            {/* Content Grid */}
+            <div className="relative z-10 grid md:grid-cols-3 gap-8 items-center">
+
+              {/* Left Column - ISRC & UPC */}
+              <div className="space-y-8">
+                {/* ISRC Card */}
+                <div className="bg-white rounded-2xl p-6 border-2 border-[#005f73]/20 shadow-xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-[#005f73]/10 rounded-xl flex items-center justify-center">
+                      <BarChart3 className="w-6 h-6 text-black" />
+                    </div>
+                    <h3 className="text-xl text-[#005f73] font-bold">ISRC and UPC</h3>
+                  </div>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    We Provide Free ISRC & UPC for Audio.
+                  </p>
+                </div>
+
+                {/* 100% Rights Card */}
+                <div className="bg-white rounded-2xl p-6 border-2 border-[#005f73]/20 shadow-xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-[#005f73]/10 rounded-xl flex items-center justify-center">
+                      <div className="w-6 h-6 border-2 border-[#005f73] rounded-full flex items-center justify-center">
+                        <span className="text-[#005f73] font-bold text-xs">©</span>
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-[#005f73]">100% RIGHTS</h3>
+                  </div>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    KEEP YOUR ALL RIGHTS ON YOUR SONG AND REVENUE
+                  </p>
+                </div>
+              </div>
+
+              {/* Center Column - Phone Mockups */}
+              <div className="flex justify-center">
                 <div className="relative">
-                  <div className="w-64 h-[480px] bg-gradient-to-b from-gray-900 to-black rounded-[3rem] p-2 shadow-2xl">
-                    <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-                      {/* Phone Screen Content */}
-                      <div className="bg-gradient-to-b from-orange-500 to-red-500 h-32 relative">
-                        <div className="absolute top-4 left-4 text-white">
-                          <div className="text-sm font-medium">Music Platforms</div>
-                          <div className="text-xs opacity-80">Your Music Everywhere</div>
+                  {/* Main Phone */}
+                  <div className="relative">
+                    <div className="w-64 h-[480px] bg-gradient-to-b from-gray-900 to-black rounded-[3rem] p-2 shadow-2xl">
+                      <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
+                        {/* Phone Screen Content */}
+                        <div className="bg-gradient-to-b from-orange-500 to-red-500 h-32 relative">
+                          <div className="absolute top-4 left-4 text-white">
+                            <div className="text-sm font-medium">Music Platforms</div>
+                            <div className="text-xs opacity-80">Your Music Everywhere</div>
+                          </div>
                         </div>
-                      </div>
-                      
-                      {/* Music App Interface */}
-                      <div className="p-4 bg-gray-900 text-white h-full">
-                        <div className="space-y-3">
-                          <div className="flex items-center gap-3 bg-gray-800 rounded-lg p-3">
-                            <div className="w-8 h-8 bg-green-500 rounded"></div>
-                            <div>
-                              <div className="text-xs font-medium">Your Song</div>
-                              <div className="text-xs text-gray-400">Spotify</div>
+
+                        {/* Music App Interface */}
+                        <div className="p-4 bg-gray-900 text-white h-full">
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-3 bg-gray-800 rounded-lg p-3">
+                              <div className="w-8 h-8 bg-green-500 rounded flex items-center justify-center">
+                                <FaSpotify className="text-white" />
+                              </div>
+                              <div>
+                                <div className="text-xs font-medium">Your Song</div>
+                                <div className="text-xs text-gray-400">Spotify</div>
+                              </div>
                             </div>
-                          </div>
-                          <div className="flex items-center gap-3 bg-gray-800 rounded-lg p-3">
-                            <div className="w-8 h-8 bg-purple-500 rounded"></div>
-                            <div>
-                              <div className="text-xs font-medium">Your Track</div>
-                              <div className="text-xs text-gray-400">Apple Music</div>
+                            <div className="flex items-center gap-3 bg-gray-800 rounded-lg p-3">
+                              <div className="w-8 h-8 bg-purple-500 rounded flex items-center justify-center"><FaApple /></div>
+                              <div>
+                                <div className="text-xs font-medium">Your Track</div>
+                                <div className="text-xs text-gray-400">Apple Music</div>
+                              </div>
                             </div>
-                          </div>
-                          <div className="flex items-center gap-3 bg-gray-800 rounded-lg p-3">
-                            <div className="w-8 h-8 bg-blue-500 rounded"></div>
-                            <div>
-                              <div className="text-xs font-medium">Your Tune</div>
-                              <div className="text-xs text-gray-400">JioSaavn</div>
+                            <div className="flex items-center gap-3 bg-gray-800 rounded-lg p-3">
+                              <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center"><FaMusic/></div>
+                              <div>
+                                <div className="text-xs font-medium">Your Tune</div>
+                                <div className="text-xs text-gray-400">JioSaavn</div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
+                    {/* Floating Elements */}
+
                   </div>
-                  
-                  {/* Floating Elements */}
-                  
+
+                  {/* Second Phone (Partially Hidden) */}
+
+                </div>
+              </div>
+
+              {/* Right Column - Royalties & Availability */}
+              <div className="space-y-8">
+                {/* Royalties Card */}
+                <div className="bg-white rounded-2xl p-6 border-2 border-[#005f73]/20 shadow-xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-14 h-12 bg-[#005f73]/10  rounded-xl flex items-center justify-center">
+                      <div className="text-black font-bold">$</div>
+                    </div>
+                    <h3 className="text-xl text-[#005f73] font-bold">You keep 100% of your royalties!</h3>
+                  </div>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    The Black Turn never takes a cut of your deals.
+                  </p>
                 </div>
 
-                {/* Second Phone (Partially Hidden) */}
-                <div className="absolute -right-8 top-8 w-48 h-72 bg-gradient-to-b from-gray-800 to-black rounded-[2rem] p-1.5 shadow-xl opacity-70 transform rotate-12">
-                  <div className="w-full h-full bg-gray-700 rounded-[1.5rem] overflow-hidden">
-                    <div className="bg-gradient-to-b from-blue-600 to-purple-600 h-full flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <div className="text-lg font-bold mb-2">CRBT</div>
-                        <div className="text-sm">Available on All Networks</div>
+                {/* Availability Card */}
+                <div className="bg-white rounded-2xl p-6 border-2 border-[#005f73]/20 shadow-xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-[#005f73]/10 rounded-xl flex items-center justify-center">
+                      <div className="w-6 h-6 text-black">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
                       </div>
                     </div>
+                    <h3 className="text-xl font-bold text-[#005f73]">Caller Tune Availability</h3>
                   </div>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Pay Once And Your Song Caller Tune Available For LifeTime
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Right Column - Royalties & Availability */}
-            <div className="space-y-8">
-              {/* Royalties Card */}
-              <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-6 text-white shadow-xl transform hover:scale-105 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                    <div className="text-white font-bold">$</div>
-                  </div>
-                  <h3 className="text-xl font-bold">You keep 100% of your royalties!</h3>
-                </div>
-                <p className="text-green-100 text-sm leading-relaxed">
-                  The Black Turn never takes a cut of your deals.
-                </p>
-              </div>
+            {/* Bottom Statistics Bar */}
 
-              {/* Availability Card */}
-              <div className="bg-white rounded-2xl p-6 border-2 border-green-500/20 shadow-xl transform hover:scale-105 transition-all duration-300">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
-                    <div className="w-6 h-6 text-green-600">
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-green-600">Caller Tune Availability</h3>
-                </div>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Pay Once And Your Song Caller Tune Available For LifeTime
-                </p>
-              </div>
-            </div>
           </div>
-
-          {/* Bottom Statistics Bar */}
-          
         </div>
       </div>
-    </div>
 
 
 
