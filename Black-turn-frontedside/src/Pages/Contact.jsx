@@ -7,17 +7,17 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: <Home className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
-      title: "Visit Us",
+      title: "AHMEDABAD OFFICE",
       description: "BLOCK-A-602TITANIUM BUSINESS PARK, MAKARBA RAILWAY CROSSING, B/H.DIVYA BHASKAR PRESS, AHMEDABAD-380007.",
     },
     {
       icon: <Home className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
-      title: "Visit Us",
+      title: "DELHI OFFICE",
       description: "Registered address 704, 7th floor, palm Court, Mehrauli-Gurgaon Road, Sector 16, Gurugram,Haryana, 122007",
     },
     {
       icon: <Mail className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
-      title: "Email & Phone",
+      title: "EMAIL & PHONE",
       description: (
         <div>
           <div>contact@theblackturn.in</div>
@@ -27,7 +27,7 @@ const Contact = () => {
     },
     {
       icon: <Globe className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
-      title: "Find Us Online",
+      title: "FIND US ONLINE",
       description: "www.theblackturn.in",
     },
   ];
@@ -50,7 +50,7 @@ const Contact = () => {
       {/* Banner Section */}
       <div className="relative bg-cover bg-center h-[359px] flex items-center justify-center text-center"
         style={{ backgroundImage: `url(${banner})` }}>
-        <div className="absolute inset-0 bg-black bg-opacity-80"></div>
+        <div className="absolute inset-0 bg-opacity-80"></div>
         <div className="relative z-10 px-4">
           <h1 className="text-white text-3xl md:text-5xl font-bold mb-4">
             Contact Us
@@ -83,7 +83,7 @@ const Contact = () => {
               >
                 <div className="mb-4 flex justify-center">{item.icon}</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-base">{item.description}</p>
+                <p className="text-gray-600 text-base uppercase">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -106,7 +106,7 @@ const Contact = () => {
           >
             <iframe
               title="Company Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3471.6933377730883!2d76.58374631501848!3d28.90862508228337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390dc8e80e9243a5%3A0x1bd853c8cf33279!2sEkta%20Colony%2C%20Rohtak%2C%20Haryana%20124001!5e0!3m2!1sen!2sin!4v1718794375467!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.7153213181423!2d72.49919907531311!3d22.99749357919135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9b2a41bde76d%3A0xdf3dc198626a6d56!2sTitanium%20Business%20Park!5e0!3m2!1sen!2sin!4v1750412098467!5m2!1sen!2sin"
               width="100%"
               height="450"
               style={{ border: 0 }}
