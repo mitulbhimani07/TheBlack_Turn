@@ -43,10 +43,8 @@ const Contact = () => {
   return (
     <>
       {/* Banner Section */}
-      <div
-        className="relative bg-cover bg-center h-[359px] flex items-center justify-center text-center"
-        style={{ backgroundImage: `url(${banner})` }}
-      >
+      <div className="relative bg-cover bg-center h-[359px] flex items-center justify-center text-center"
+        style={{ backgroundImage: `url(${banner})` }}>
         <div className="absolute inset-0  bg-opacity-60"></div>
         <div className="relative z-10 px-4">
           <h1 className="text-white text-3xl md:text-5xl font-bold mb-4">
