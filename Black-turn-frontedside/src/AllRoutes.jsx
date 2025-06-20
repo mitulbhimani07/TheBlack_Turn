@@ -6,6 +6,8 @@ import Contact from './Pages/Contact'
 import MusicDistribution from './Pages/OurServices/MusicDistribution'
 import MusicVideoDistributionInIndia from './Pages/OurServices/MusicVideoDistributionInIndia'
 import CallerTuneDistribution from './Pages/OurServices/CallerTuneDistribution'
+import Signin from './Pages/Authentication/Signin'
+import Signp from './Pages/Authentication/SignUp'
 
 function AllRoutes() {
   return (
@@ -17,6 +19,10 @@ function AllRoutes() {
             <Route path="/services/music-distribution" element={<MusicDistribution/>} />
             <Route path="/services/music-video-distribution" element={<MusicVideoDistributionInIndia/>} />
             <Route path="/services/caller-tune-distribution" element={<CallerTuneDistribution/>} />
+            {/* signin  */}
+              <Route path='/Signin' element={<Signin/>} />
+              <Route path='*' element={<h1>404 Not Found</h1>} />
+              <Route path='/Signup' element={<Signp/>} />
         </Routes>
     </div>
   )
