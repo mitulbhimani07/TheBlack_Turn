@@ -6,6 +6,8 @@ import { Zap, Shield, Headphones } from "lucide-react";
 import { Globe, Upload, BarChart3, Clock } from 'lucide-react';
 import { FaApple, FaMusic, FaSpotify } from "react-icons/fa";
 import section from "../../assets/images/section.png"
+import { Music, Radio, Smartphone } from 'lucide-react';
+
 
 
 
@@ -130,6 +132,72 @@ const CallerTuneDistribution = () => {
     if (words.length == 12) return text; // Roughly 3 lines worth of text
     return words.slice(0, 12).join(' ') + '...';
   };
+
+
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabData = [
+    {
+      id: 'music-distribution',
+      title: 'Music Distribution',
+      icon: <Music className="w-5 h-5" />,
+      heading: 'Global Music Distribution',
+      description: 'Distribute your music to all major streaming platforms worldwide including Spotify, Apple Music, Amazon Music, and 200+ other digital stores. Reach millions of listeners across the globe.',
+      features: [
+        'Distribution to 200+ platforms',
+        'Worldwide reach in 100+ countries',
+        'Keep 100% of your rights',
+        'Real-time analytics dashboard'
+      ],
+      image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop',
+      bgColor: 'from-purple-500 to-pink-500'
+    },
+    {
+      id: 'caller-tune',
+      title: 'Caller Tune (CRBT)',
+      icon: <Headphones className="w-5 h-5" />,
+      heading: 'Caller Tune Distribution India',
+      description: 'Get your songs as caller tunes on all major Indian telecom networks. Create multiple CRBT versions from your track and earn royalties every time someone sets your tune.',
+      features: [
+        'Available on Jio, Airtel, Vi, BSNL',
+        'Multiple CRBT versions per song',
+        'Lifetime availability after one payment',
+        'Earn from every download/play'
+      ],
+      image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=600&h=400&fit=crop',
+      bgColor: 'from-blue-500 to-cyan-500'
+    },
+    {
+      id: 'radio-distribution',
+      title: 'Radio Distribution',
+      icon: <Radio className="w-5 h-5" />,
+      heading: 'Radio & Broadcasting',
+      description: 'Get your music played on radio stations and broadcast networks. We help you reach traditional media channels and expand your audience through terrestrial and digital radio.',
+      features: [
+        'Radio station partnerships',
+        'Digital radio platforms',
+        'Broadcast licensing support',
+        'Airplay tracking & reporting'
+      ],
+      image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&h=400&fit=crop',
+      bgColor: 'from-orange-500 to-red-500'
+    },
+    {
+      id: 'mobile-apps',
+      title: 'Mobile Apps',
+      icon: <Smartphone className="w-5 h-5" />,
+      heading: 'Mobile App Integration',
+      description: 'Integrate your music into mobile applications, games, and digital experiences. Reach users through in-app music features and create new revenue streams.',
+      features: [
+        'App store optimization',
+        'In-app music integration',
+        'Gaming platform distribution',
+        'Mobile-first analytics'
+      ],
+      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop',
+      bgColor: 'from-green-500 to-teal-500'
+    }
+  ];
 
   return (
     <>
@@ -606,6 +674,147 @@ const CallerTuneDistribution = () => {
           </div>
         </div>
       </div>
+      {/*tablist  */}
+<div className="bg-white py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#005f73] mb-4">
+            Our Distribution Services
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Choose from our comprehensive suite of music distribution services to grow your audience and maximize your earnings.
+          </p>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex flex-wrap justify-center mb-12 bg-gray-100 rounded-2xl p-2 max-w-4xl mx-auto">
+          {tabData.map((tab, index) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(index)}
+              className={`flex items-center gap-2 px-4 md:px-6 py-3 rounded-xl transition-all duration-300 font-medium text-sm md:text-base whitespace-nowrap ${
+                activeTab === index
+                  ? 'bg-[#005f73] text-white shadow-lg transform scale-105'
+                  : 'text-gray-600 hover:text-[#005f73] hover:bg-gray-200'
+              }`}
+            >
+              {tab.icon}
+              <span className="hidden sm:inline">{tab.title}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        <div className="relative">
+          {tabData.map((tab, index) => (
+            <div
+              key={tab.id}
+              className={`transition-all duration-500 ${
+                activeTab === index 
+                  ? 'opacity-100 transform translate-y-0' 
+                  : 'opacity-0 absolute inset-0 transform translate-y-4 pointer-events-none'
+              }`}
+            >
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Content Side */}
+                <div className="order-2 md:order-1">
+                  <div className="max-w-lg">
+                    {/* Tab Indicator */}
+                    <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white mb-6 bg-gradient-to-r ${tab.bgColor}`}>
+                      {tab.icon}
+                      {tab.title}
+                    </div>
+
+                    {/* Heading */}
+                    <h3 className="text-3xl md:text-4xl font-bold text-[#005f73] mb-6">
+                      {tab.heading}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                      {tab.description}
+                    </p>
+
+                    {/* Features List */}
+                    <div className="space-y-3 mb-8">
+                      {tab.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center gap-3">
+                          <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${tab.bgColor} flex items-center justify-center flex-shrink-0`}>
+                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-gray-700">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* CTA Button */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button className={`bg-gradient-to-r ${tab.bgColor} text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105`}>
+                        Get Started
+                      </button>
+                      <button className="border-2 border-[#005f73] text-[#005f73] px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300">
+                        Learn More
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Image Side */}
+                <div className="order-1 md:order-2">
+                  <div className="relative">
+                    {/* Main Image Container */}
+                    <div className={`relative bg-gradient-to-br ${tab.bgColor} rounded-3xl p-8 shadow-2xl transform hover:scale-105 transition-all duration-500`}>
+                      <img
+                        src={tab.image}
+                        alt={tab.title}
+                        className="rounded-2xl object-cover w-full h-80 md:h-96"
+                      />
+                      
+                      {/* Floating Icon */}
+                      <div className="absolute -top-4 -right-4 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl">
+                        <div className={`text-2xl bg-gradient-to-r ${tab.bgColor} bg-clip-text text-transparent`}>
+                          {tab.icon}
+                        </div>
+                      </div>
+                      
+                      {/* Decorative Elements */}
+                      <div className="absolute -bottom-2 -left-2 w-24 h-24 bg-white/20 rounded-full blur-xl"></div>
+                      <div className="absolute top-4 left-4 w-16 h-16 bg-white/10 rounded-full"></div>
+                    </div>
+
+                    {/* Background Decorative Circle */}
+                    <div className={`absolute -z-10 top-8 right-8 w-32 h-32 bg-gradient-to-br ${tab.bgColor} opacity-20 rounded-full blur-2xl`}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Stats */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { number: '200+', label: 'Platforms' },
+            { number: '100+', label: 'Countries' },
+            { number: '24/7', label: 'Support' },
+            { number: '100%', label: 'Rights Retained' }
+          ].map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-[#005f73] mb-2">
+                {stat.number}
+              </div>
+              <div className="text-gray-600 font-medium">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
 
 
 
