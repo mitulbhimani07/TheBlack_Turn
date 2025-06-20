@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react'; // Importing icons from lucide-react
-
+import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <div className="bg-gray-100 font-inter text-gray-800">
@@ -11,24 +11,14 @@ function Footer() {
             <span className="font-semibold text-lg">24*7 HELP & SUPPORTS</span>
           </div>
           <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
-            <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone-call mr-2 text-white">
-                <path d="M22 16.92V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h3.08" />
-                <path d="M15.21 9.53 19.5 4l-.94-.94C18.23 2.19 16.92 2 15.21 2s-3.02.19-4.32.75L9 3.53l-.94-.94c-1.28-1.28-3.32-1.42-4.48-.94L2 2.5v16.14a2.9 2.9 0 0 0 2.9 2.9H20a2.9 2.9 0 0 0 2.9-2.9V9.53z" />
-                <path d="M14.5 4.5l-4.7 4.7" />
-                <path d="M18.5 8.5l-4.7 4.7" />
-                <path d="M19 14a5 5 0 0 1 0 10l-4-4a5 5 0 0 1-5-5" />
-                <path d="M18 17a1 1 0 0 0 1 1h.01" />
-              </svg>
-              <span>+91 92431 81112</span>
-            </div>
+            
             <div className="flex items-center">
               <Phone size={24} className="mr-2 text-white" />
-              <span>+91 92431 81112</span>
+              <span>+91 9274466809</span>
             </div>
             <div className="flex items-center">
               <Mail size={24} className="mr-2 text-white" />
-              <span>contact@theblackturn.com</span>
+              <span>contact@theblackturn.in</span>
             </div>
           </div>
         </div>
@@ -104,17 +94,24 @@ function Footer() {
           {/* Section 5: Google Play and Join */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
             <h3 className="text-lg font-semibold mb-4">GET IT ON</h3>
-            <a href="https://play.google.com/store/apps/details?id=com.theblackturn.app" target='_blank' rel="noopener noreferrer">
-              <img src="https://freelogopng.com/images/all_img/1664287128google-play-store-logo-png.png" alt="Google Play" className="mb-4 rounded-lg w-50" />
+            <div className='grid grid-cols-2 gap-4 mb-4'>
+              <a href="https://play.google.com/store/apps/details?id=com.theblackturn.app" target='_blank' rel="noopener noreferrer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/640px-Google_Play_Store_badge_EN.svg.png" alt="Google Play" className="mb-4 w-50 h-12" />
             </a>
+            <a href="https://apps.apple.com/us/app/the-black-turn/id6702028842" target='_blank' rel="noopener noreferrer">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHa_WRP2WzpDAF6fFAZ2f4faUWU1ocWm27FY4OdG22jYnagGra32AwHMrj6kw4apI93p8&usqp=CAU" alt="app store" className="mb-4 w-50 h-12" />
+            </a>
+            </div>
             <h3 className="text-lg font-semibold mb-4">Join - The Black Turn</h3>
             <p className="text-sm text-gray-600 mb-4">
-              Start Today And Pay After Work Done. #1 Best Music Distribution Company in India.
-              <br />#Proudlyindian🏳️‍🌈
+              BLOCK-A-602TITANIUM BUSINESS PARK, MAKARBA RAILWAY CROSSING, B/H.DIVYA BHASKAR PRESS, AHMEDABAD-380007.
             </p>
-            <button className="bg-[#005f73] hover:bg-[#004d5f] text-white px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 flex items-center shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-95">
+            <p className="text-sm text-gray-600 mb-4">
+              Registered address 704, 7th floor, palm Court, Mehrauli-Gurgaon Road, Sector 16, Gurugram,Haryana, 122007
+            </p>
+            <Link to='/contact' className="bg-[#005f73] hover:bg-[#004d5f] text-white px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 flex items-center shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-95">
               Join
-            </button>
+            </Link>
           </div>
         </div>
 

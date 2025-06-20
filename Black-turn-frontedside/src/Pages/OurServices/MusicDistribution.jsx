@@ -12,7 +12,8 @@ import { GrDocumentPerformance } from "react-icons/gr";
 import { TfiShoppingCartFull } from "react-icons/tfi";
 import { BiSolidTimer } from "react-icons/bi";
 import { MdOutlineStart } from "react-icons/md";
-
+import { Database, Youtube, BarChart3 } from 'lucide-react';
+import royalite from '../../assets/images/royalti.png'; // Adjust the path as necessary
 import logoApp from '../../assets/images/logo.png'
 const MusicDistribution = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ const MusicDistribution = () => {
     { name: 'TikTok', icon: 'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84bbc47506465f6295da49c812' },
     { name: 'YouTube Music', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSECPDlHPpKnx9hyK38AiGDqrB01lhenL__Fg&s' },
     { name: 'iTunes', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRR6gBlhkyFJJZcGTY4xS_aM-MHvl9WQ2hbg&s' },
-    { name: 'Spotify', icon: 'https://images.squarespace-cdn.com/content/v1/6042529f1fe38f0b0503be5c/1616072527567-YHOUT1L2JW6ROBTME3SQ/spotify-playlist.jpeg' },
+    { name: 'Spotify', icon: 'https://m.media-amazon.com/images/I/51rttY7a+9L._h1_.png' },
     { name: 'Amazon Music', icon: 'https://www.emubands.com/es/wp-content/uploads/sites/2/2018/02/Amazon-Music-Logo.jpg' },
     { name: 'Google Play', icon: 'https://downloadr2.apkmirror.com/wp-content/uploads/2019/08/5d5b289388c6d.png' },
     { name: 'YouTube', icon: 'https://yt3.googleusercontent.com/Bg5wS82KGryRmcsn1YbPThtbXoTmj2XJ9_7LmuE2RF6wbKJBkovfRypbSz6UD3gEu_nHiwGZtQ=s900-c-k-c0x00ffffff-no-rj' },
@@ -132,6 +133,23 @@ const MusicDistribution = () => {
       title: '24*7 HELP & SUPPORTS',
       description: 'WE ALWAYS AVAILABEL HERE FOR HELP & SUPPORT.',
     },
+  ];
+  const feature = [
+    {
+      icon: <Database className="w-8 h-8 text-[#005f73]" />,
+      title: "IRSC and UPC",
+      description: "We provide you ISRC for every song, every song UPC. Use our provided ISRC&UPC anywhere."
+    },
+    {
+      icon: <Youtube className="w-8 h-8 text-[#005f73]" />,
+      title: "YouTube Content ID",
+      description: "Make money from your music on YouTube, Monetize Your Audio & Video With Content ID"
+    },
+    {
+      icon: <BarChart3 className="w-8 h-8 text-[#005f73]" />,
+      title: "Analytics and Statistics",
+      description: "Get The Real Statistics And Report, Get Paid When the Song Play Anywhere Anytime."
+    }
   ];
 
   return (
@@ -709,7 +727,7 @@ const MusicDistribution = () => {
 
               {/* CTA Button */}
               <a href='https://api.whatsapp.com/send/?phone=919729786689&text=Hi,%20The%20Black%20Turn%20-%20Query%20For%20Music%20Distribution' target='_blank' rel="noopener noreferrer" className="group relative px-8 py-4 border-3 border-[#005D71] text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center space-x-2">
-                <MdOutlineStart  className="w-4 h-4" />
+                <MdOutlineStart className="w-4 h-4" />
                 <span className="text-sm font-medium tracking-wider uppercase">Start Today</span>
               </a>
             </div>
@@ -722,31 +740,68 @@ const MusicDistribution = () => {
         </div>
       </section>
       {/* Upload Music Section */}
-<section className="py-20 bg-[] text-[#005f73]">
-  <div className="container mx-auto px-6 max-w-6xl">
-    <div className="flex flex-col lg:flex-row gap-12 items-center">
-      {/* Left Content */}
-      <div className="flex-1">
-        <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-You keep 100% of your royalties!
-        </h2>
-        <p className="text-gray-700 mb-6 text-lg">
-          The Black Turn never takes a cut of your deals. Each penny you gain is put right into you’re the Black Turn account. At Black Turn, we know that your money matters and we respect your passion for music.Comprehensive Sales Data
-        </p>
-        
-        <p className="text-gray-700 mb-8 text-lg">
-          Discover out precisely where fans are downloading and spilling your music so you’ll be able to increment showcasing endeavors and arrange visits around those cities. We make sure that you reach the audience which you are targeting and deliver your music to them.
-        </p>
-      </div>
-      {/* Right Image - Placeholder for music upload illustration */}
-      <div className="flex-1">
-        <div className="bg-gray-700 rounded-xl p-8 aspect-square flex items-center justify-center">
-          <img src="https://theblackturn.com/wp-content/uploads/2021/03/floating-effect.svg" alt="" />
+      <section className="py-20 bg-[] text-[#005f73]">
+        <div className="container mx-auto  max-w-5xl">
+          <div className="flex flex-col lg:flex-row gap-20 items-center">
+            {/* Left Content */}
+            <div className="flex-1">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                You keep 100% of your royalties!
+              </h2>
+              <p className="text-gray-700 mb-6 text-lg">
+                The Black Turn never takes a cut of your deals. Each penny you gain is put right into you’re the Black Turn account. At Black Turn, we know that your money matters and we respect your passion for music.Comprehensive Sales Data
+              </p>
+
+              <p className="text-gray-700 mb-8 text-lg">
+                Discover out precisely where fans are downloading and spilling your music so you’ll be able to increment showcasing endeavors and arrange visits around those cities. We make sure that you reach the audience which you are targeting and deliver your music to them.
+              </p>
+            </div>
+            {/* Right Image - Placeholder for music upload illustration */}
+            <div className="flex-1">
+              <div className="bg-gray-700 rounded-xl  aspect-square flex items-center justify-center">
+                <img src={royalite} alt="" />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+        {/* IRSC and UPC */}
+        {/* Features Section */}
+        <div className="mt-20 lg:px-12">
+          <div className="grid md:grid-cols-3 gap-8">
+            {feature.map((feature, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl p-6 border border-gray-100 shadow-lg transition duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:border-[#005f73]"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 p-3 bg-gray-50 rounded-lg">
+                    {feature.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-[#005f73] mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="py-20 bg-[#005f73] text-white">
+        <div className="container mx-auto max-w-5xl">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-8 text-center">
+            What We Do
+          </h2>
+          <div className='border-3 border-dotted w-50 mx-auto'></div>
+          <div className="flex justify-center">
+            
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

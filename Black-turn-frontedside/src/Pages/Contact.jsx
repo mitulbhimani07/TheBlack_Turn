@@ -8,22 +8,27 @@ const Contact = () => {
     {
       icon: <Home className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
       title: "Visit Us",
-      description: "Ekta Colony, Beniwal Nagar, Rohtak 124001, Haryana, India",
+      description: "BLOCK-A-602TITANIUM BUSINESS PARK, MAKARBA RAILWAY CROSSING, B/H.DIVYA BHASKAR PRESS, AHMEDABAD-380007.",
+    },
+    {
+      icon: <Home className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
+      title: "Visit Us",
+      description: "Registered address 704, 7th floor, palm Court, Mehrauli-Gurgaon Road, Sector 16, Gurugram,Haryana, 122007",
     },
     {
       icon: <Mail className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
       title: "Email & Phone",
       description: (
         <div>
-          <div>contact@theblackturn.com</div>
-          <div>+91 9729786689</div>
+          <div>contact@theblackturn.in</div>
+          <div>+91 9274466809</div>
         </div>
       ),
     },
     {
       icon: <Globe className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
       title: "Find Us Online",
-      description: "www.theblackturn.com",
+      description: "www.theblackturn.in",
     },
   ];
 
@@ -43,10 +48,8 @@ const Contact = () => {
   return (
     <>
       {/* Banner Section */}
-      <div
-        className="relative bg-cover bg-center h-[359px] flex items-center justify-center text-center"
-        style={{ backgroundImage: `url(${banner})` }}
-      >
+      <div className="relative bg-cover bg-center h-[359px] flex items-center justify-center text-center"
+        style={{ backgroundImage: `url(${banner})` }}>
         <div className="absolute inset-0 bg-black bg-opacity-80"></div>
         <div className="relative z-10 px-4">
           <h1 className="text-white text-3xl md:text-5xl font-bold mb-4">
@@ -68,7 +71,7 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
             {contactInfo.map((item, index) => (
               <motion.div
                 key={index}
