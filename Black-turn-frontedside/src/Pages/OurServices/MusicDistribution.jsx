@@ -151,7 +151,59 @@ const MusicDistribution = () => {
       description: "Get The Real Statistics And Report, Get Paid When the Song Play Anywhere Anytime."
     }
   ];
-
+  const whatWeDoItems
+    = [
+      {
+        title: 'Fastest Approval Time',
+        description: 'We approve your song very fast with no time. We deliver on all platforms minimum (3-5 Days) Maximum(8-10 Days)',
+        icon: 'https://theblackturn.com/wp-content/uploads/2021/03/on-deman-asset-loading1.svg',
+      },
+      {
+        title: 'Custom CRBT (Call Ring Back Tune)',
+        description: 'Creates 1-4 custom caller tone for Airtel, VI, Bsnl, & 4s sec single JioTune. Deliver caller tune Min. (3-5 days) max. (5-8 days)',
+        icon: 'https://theblackturn.com/wp-content/uploads/2021/03/line-icon2.svg',
+      },
+      {
+        title: 'Free ISRC and UPC code',
+        description: 'If you are a new artist no worry we provide a fresh unlimited artist UPC or ISRC code for your every Audio & Video Album.',
+        icon: 'https://theblackturn.com/wp-content/uploads/2021/03/site-sync-vector.svg',
+      },
+      {
+        title: '95% Royalty',
+        description: 'Get Your Monthly Reports with no changes we send you original reports with cut our percentage we don’t hide anything.',
+        icon: 'https://theblackturn.com/wp-content/uploads/2021/03/floating-effect.svg',
+      },
+      {
+        title: 'Custom Record Label',
+        description: 'Get Your Custom C and P Line, Custom Label Name, Unlimited Lifetime Releases, with Unlimited artist.',
+        icon: 'https://theblackturn.com/wp-content/uploads/2021/03/live-copy.svg',
+      },
+      {
+        title: 'One Time Payment',
+        description: 'Pay Once Your song lives for Life Time. Accepted Payment through NEFT PayTM, GPay, PayPal, UPI, PhonePe, etc.',
+        icon: 'https://theblackturn.com/wp-content/uploads/2021/03/section-nesting.svg',
+      },
+    ];
+  const steps = [
+    {
+      title: 'Create',
+      description: 'You make your music how you like it! Your music, your fashion, your stream, your way! Anything it is, we need to listen to it!',
+      icon: '🧩',
+      link: '#',
+    },
+    {
+      title: 'Distribute',
+      description: 'So numerous Computerized Benefit Suppliers to select from. Transfer your music utilizing our computerized dispersion benefit, and select as numerous suppliers as suits you!',
+      icon: '📤',
+      link: '#',
+    },
+    {
+      title: 'Earn',
+      description: 'Simply include your installment strategy and get paid for making music you cherish and sharing it all-inclusive! Eminences are a go!',
+      icon: '💰',
+      link: '#',
+    },
+  ];
   return (
     <div className="min-h-screen bg-[#ebf4f5] text-white">
       <div className=" flex flex-col px-20 lg:flex-row min-h-screen ">
@@ -791,16 +843,76 @@ const MusicDistribution = () => {
           </div>
         </div>
       </section>
-      <section className="py-20 bg-[#005f73] text-white">
-        <div className="container mx-auto max-w-5xl">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-8 text-center">
-            What We Do
-          </h2>
-          <div className='border-3 border-dotted w-50 mx-auto'></div>
-          <div className="flex justify-center">
-            
+
+      <section className="bg-[#005f73] mx-16 rounded-3xl py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center text-black px-4">
+          <h2 className="text-2xl font-medium text-white mb-2 tracking-wider uppercase">What We Do</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-10">
+            {whatWeDoItems.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300"
+              >
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className="w-20 h-20 mb-4 object-contain"
+                />
+                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-700">{item.description}</p>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Bottom Content */}
+        <div className="mt-20 max-w-5xl mx-auto text-center px-4">
+          <h2 className="text-2xl font-bold mb-4">Digital Music Distribution</h2>
+          <p className="text-white leading-relaxed">
+            <strong>Copyright Protection:</strong> Take control of your sound. Make beyond any doubt individuals do not take credit for or monetize your substance without your assent. Choose how you’d like reuploaded substance to be managed on numerous stages. We help to do so for you.
+          </p>
+          <p className="text-white mt-4 leading-relaxed">
+            <strong>Record Label Tools:</strong> Our client entrance has a full suite of devices, permitting total administration of your specialists and resources. Take advantage of full analytics, income detailing, music dispersion, and rights administration.
+          </p>
+        </div>
+      </section>
+      <section className="bg-gray-100 py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#005f73] mb-2">
+            HOW TO SELL YOUR MUSIC ONLINE
+          </h2>
+          <p className="text-gray-600 text-lg mb-12">
+            Get your music online and make it go worldwide!
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {steps.map((step, index) => (
+              <div
+                key={index}
+                className="group bg-white rounded-2xl shadow-md hover:bg-[#005f73] hover:shadow-lg transition duration-300 p-8 text-left"
+              >
+                <div className="text-4xl text-indigo-600 group-hover:text-white mb-4 transition-colors duration-300">
+                  {step.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-[#005f73] group-hover:text-white transition-colors duration-300">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 group-hover:text-gray-100 mb-4 transition-colors duration-300">
+                  {step.description}
+                </p>
+                <a
+                  href={step.link}
+                  className="text-indigo-600 group-hover:text-white font-medium hover:underline transition-colors duration-300"
+                >
+                  Discover
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section>
+        
       </section>
     </div>
   );
