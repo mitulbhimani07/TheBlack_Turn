@@ -181,7 +181,7 @@ function Header() {
                     {/* Register/Login Button */}
                     <div className="hidden md:flex items-center">
                         <Link
-                            to="/auth"
+                            to="/Signin"
                             className="bg-[#005f73] hover:bg-[#004d5f] text-white px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 flex items-center shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-95"
                         >
                             <svg
@@ -287,7 +287,7 @@ function Header() {
                             {/* Mobile Register/Login Button */}
                             <div className="px-2 pt-2">
                                 <Link
-                                    to="/auth"
+                                    to="/Signin"
                                     onClick={() => setIsMenuOpen(false)}
                                     className="block w-full text-center bg-[#005f73] hover:bg-[#004d5f] text-white px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg"
                                 >
