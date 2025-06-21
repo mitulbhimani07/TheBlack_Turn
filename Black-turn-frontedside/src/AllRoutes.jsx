@@ -8,6 +8,8 @@ import MusicVideoDistributionInIndia from './Pages/OurServices/MusicVideoDistrib
 import CallerTuneDistribution from './Pages/OurServices/CallerTuneDistribution'
 import Signin from './Pages/Authentication/Signin'
 import Signp from './Pages/Authentication/SignUp'
+import Aboutus from './Pages/Aboutus'
+import TermsandConditions from './Pages/TermsandConditions'
 
 function AllRoutes() {
   return (
@@ -16,6 +18,8 @@ function AllRoutes() {
             <Route path="/" element={<Home/>} />
             <Route path="/pricing" element={<Pricing/>} />
             <Route path="/contact" element={<Contact/>}/>
+            <Route path='/about' element={<Aboutus/>}/>
+            <Route path='/terms&conditions' element={<TermsandConditions/>}/>
             <Route path="/services/music-distribution" element={<MusicDistribution/>} />
             <Route path="/services/music-video-distribution" element={<MusicVideoDistributionInIndia/>} />
             <Route path="/services/caller-tune-distribution" element={<CallerTuneDistribution/>} />

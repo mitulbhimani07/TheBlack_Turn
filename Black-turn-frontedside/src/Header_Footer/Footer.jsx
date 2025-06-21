@@ -83,8 +83,8 @@ function Footer() {
           <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4">Pages</h3>
             <ul className="space-y-2 text-gray-600">
-              <li><a href="#" className="hover:text-[#005f73]">About Us</a></li>
-              <li><a href="#" className="hover:text-[#005f73]">Terms and Conditions Page</a></li>
+              <li><Link to='/about' className="hover:text-[#005f73]">About Us</Link></li>
+              <li><Link to='/terms&conditions' className="hover:text-[#005f73]">Terms and Conditions Page</Link></li>
               <li><a href="#" className="hover:text-[#005f73]">Refund Policy</a></li>
               <li><a href="#" className="hover:text-[#005f73]">Contact Us</a></li>
               <li><a href="#" className="hover:text-[#005f73]">Privacy Policy</a></li>
