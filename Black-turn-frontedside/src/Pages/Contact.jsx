@@ -20,7 +20,7 @@ const Contact = () => {
       title: "EMAIL & PHONE",
       description: (
         <div>
-          <div>contact@theblackturn.in</div>
+          <div>support@theblackturn.in</div>
           <div>+91 9274466809</div>
         </div>
       ),
