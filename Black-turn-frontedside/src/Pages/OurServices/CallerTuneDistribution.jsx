@@ -7,6 +7,12 @@ import { Globe, Upload, BarChart3, Clock } from 'lucide-react';
 import { FaApple, FaMusic, FaSpotify } from "react-icons/fa";
 import section from "../../assets/images/section.png"
 import { Music, Radio, Smartphone } from 'lucide-react';
+import tablist1 from "../../assets/images/tablist1.png"
+import tablist2 from "../../assets/images/tablist2.png"
+import tablist3 from "../../assets/images/tablist3.png"
+import tablist4 from "../../assets/images/tablist4.png"
+
+
 
 
 
@@ -137,9 +143,9 @@ const CallerTuneDistribution = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const tabData = [
-    {
+  {
     id: 'caller-tune-original',
-    title: 'Caller Tune (CRBT)',
+    title: 'Caller Tune',
     icon: <Headphones className="w-5 h-5" />,
     heading: "India's All Network Caller Tune (Ring Back Tone) CUSTOMISED CALLER TUNES",
     description: '',
@@ -147,55 +153,57 @@ const CallerTuneDistribution = () => {
       '📄 CRBT Codes - Get CRBT code for any user can set your song caller tune using CRBT codes',
       '🎵 Maximum Caller Tune - Get Maximum Caller tune for one song according to the time of your song'
     ],
-    image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=600&h=400&fit=crop',
-    bgColor: 'from-cyan-500 to-blue-500'
+    image: tablist1,
+    bgColor: 'black'
   },
-    {
-      id: 'caller-tune',
-      title: 'Caller Tune (CRBT)',
-      icon: <Headphones className="w-5 h-5" />,
-      heading: 'Caller Tune Distribution India',
-      description: 'Get your songs as caller tunes on all major Indian telecom networks. Create multiple CRBT versions from your track and earn royalties every time someone sets your tune.',
-      features: [
-        'Available on Jio, Airtel, Vi, BSNL',
-        'Multiple CRBT versions per song',
-        'Lifetime availability after one payment',
-        'Earn from every download/play'
-      ],
-      image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=600&h=400&fit=crop',
-      bgColor: '#ebf4f5'
-    },
-    {
-      id: 'radio-distribution',
-      title: 'Radio Distribution',
-      icon: <Radio className="w-5 h-5" />,
-      heading: 'Radio & Broadcasting',
-      description: 'Get your music played on radio stations and broadcast networks. We help you reach traditional media channels and expand your audience through terrestrial and digital radio.',
-      features: [
-        'Radio station partnerships',
-        'Digital radio platforms',
-        'Broadcast licensing support',
-        'Airplay tracking & reporting'
-      ],
-      image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&h=400&fit=crop',
-      bgColor: '#ebf4f5'
-    },
-    {
-      id: 'mobile-apps',
-      title: 'Mobile Apps',
-      icon: <Smartphone className="w-5 h-5" />,
-      heading: 'Mobile App Integration',
-      description: 'Integrate your music into mobile applications, games, and digital experiences. Reach users through in-app music features and create new revenue streams.',
-      features: [
-        'App store optimization',
-        'In-app music integration',
-        'Gaming platform distribution',
-        'Mobile-first analytics'
-      ],
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop',
-      bgColor: '#ebf4f5'
-    }
-  ];
+  {
+    id: 'caller-tune',
+    title: 'Caller Tune (CRBT)',
+    icon: <Headphones className="w-5 h-5" />,
+    heading: 'Mobile Operator Licensing CRBT Codes',
+    description: 'Access caller tune via multiple channels, including SMS, USSD, WAP, and an online portal. We also provide you CRBT codes through which any user can set the caller tune of your song by sending a request via SMS from his phone. The more users use the caller tune of your song, the more you earn.',
+    features: [
+      'Multi-channel access: SMS, USSD, WAP, and online portal',
+      'CRBT codes for easy song activation via SMS',
+      'User-driven song setting boosts your royalty',
+      'Available across Jio, Airtel, Vi, BSNL'
+    ],
+    image: tablist2,
+    bgColor: 'black'
+  },
+  {
+    id: 'crbt-distribution-india',
+    title: 'CRBT Distribution',
+    icon: <Radio className="w-5 h-5" />,
+    heading: 'CRBT Distribution India',
+    description: 'Caller Ring Back Tone (CRBT) solutions to enable your song for Caller Tune. If you are a singer and want your song to be made into Jio, Vi, Airtel, or BSNL caller tune, then you should take help of a call ring back tune solution provider company. The Black Turn uploads your song on all telecom networks and makes caller tune of your song and also generates CRBT codes.',
+    features: [
+      'Enable your song for CRBT/caller tune',
+      'Get listed on Jio, Vi, Airtel, and BSNL',
+      'Full support for song upload & CRBT generation',
+      'Professional CRBT code generation service'
+    ],
+    image: tablist3,
+    bgColor: 'black'
+  },
+  {
+    id: 'caller-tune-versions',
+    title: 'Caller Tune Creation',
+    icon: <Smartphone className="w-5 h-5" />,
+    heading: 'Distribute Your Song with the Caller Tune',
+    description: 'You can make many caller ring back tunes from your song depending on its duration. We help you create multiple versions from the most impactful parts of your track — such as the main line — to ensure maximum public appeal. This increases your song’s streaming performance and boosts its overall growth.',
+    features: [
+      'Create multiple CRBT versions from one song',
+      'Caller tune segments optimized by song duration',
+      'Highlight the most liked/main line for popularity',
+      'Boosts both caller tune usage and song streaming'
+    ],
+    image: tablist4,
+    bgColor: 'black'
+  }
+];
+
+
 
   return (
     <>
@@ -399,14 +407,7 @@ const CallerTuneDistribution = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-[#005f73] mb-4">
               Music Distribution Features
             </h2>
-            <div className="flex justify-center items-center">
-              <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
-              </div>
-              <div className="w-16 h-0.5 bg-[#005f73]"></div>
-              <div className="w-4 h-4 bg-[#005f73] rounded-full"></div>
-              <div className="w-16 h-0.5 bg-[#005f73]"></div>
-            </div>
+
           </div>
 
           {/* Cards Grid - 2 columns */}
@@ -647,7 +648,7 @@ const CallerTuneDistribution = () => {
                 {/* Availability Card */}
                 <div className="bg-white rounded-2xl p-6 border-2 border-[#005f73]/20 shadow-xl transform hover:scale-105 transition-all duration-300">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 bg-[#005f73]/10 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-[#005f73] rounded-xl flex items-center justify-center">
                       <div className="w-6 h-6 text-black">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
@@ -682,7 +683,7 @@ const CallerTuneDistribution = () => {
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center mb-12 bg-gray-100 rounded-2xl p-2 max-w-4xl mx-auto">
+          <div className="flex flex-wrap  mb-10 bg-gray-100 rounded-2xl justify-between p-2 max-w-5xl mx-auto">
             {tabData.map((tab, index) => (
               <button
                 key={tab.id}
@@ -708,7 +709,7 @@ const CallerTuneDistribution = () => {
                     : 'opacity-0 absolute inset-0 transform translate-y-4 pointer-events-none'
                   }`}
               >
-                <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="grid md:grid-cols-2 gap-12 items-center justify-center">
                   {/* Content Side */}
                   <div className="order-2 md:order-1">
                     <div className="max-w-lg">
@@ -732,7 +733,7 @@ const CallerTuneDistribution = () => {
                       <div className="space-y-3 mb-8">
                         {tab.features.map((feature, idx) => (
                           <div key={idx} className="flex items-center gap-3">
-                            <div className={`w-5 h-5 rounded-full bg-gradient-to-r ${tab.bgColor} flex items-center justify-center flex-shrink-0`}>
+                            <div className={`w-5 h-5 rounded-full bg-[#005f73] flex items-center justify-center flex-shrink-0`}>
                               <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                               </svg>
@@ -751,19 +752,15 @@ const CallerTuneDistribution = () => {
                   <div className="order-1 md:order-2">
                     <div className="relative">
                       {/* Main Image Container */}
-                      <div className={`relative bg-gradient-to-br ${tab.bgColor} rounded-3xl p-8 shadow-2xl transform hover:scale-105 transition-all duration-500`}>
+                      <div className={`relative  rounded-[10px] shadow-xl transform  transition-all duration-500`}>
                         <img
                           src={tab.image}
                           alt={tab.title}
-                          className="rounded-2xl object-cover w-full h-80 md:h-96"
+                          className="rounded-xl object-cover w-full h-90 md:h-96"
                         />
 
                         {/* Floating Icon */}
-                        <div className="absolute -top-4 -right-4 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl">
-                          <div className={`text-2xl bg-gradient-to-r ${tab.bgColor} bg-clip-text text-transparent`}>
-                            {tab.icon}
-                          </div>
-                        </div>
+                        
 
                         {/* Decorative Elements */}
                         <div className="absolute -bottom-2 -left-2 w-24 h-24 bg-white/20 rounded-full blur-xl"></div>
@@ -779,26 +776,292 @@ const CallerTuneDistribution = () => {
             ))}
           </div>
 
-          {/* Bottom Stats */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: '200+', label: 'Platforms' },
-              { number: '100+', label: 'Countries' },
-              { number: '24/7', label: 'Support' },
-              { number: '100%', label: 'Rights Retained' }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#005f73] mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600 font-medium">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
+          
+          
         </div>
       </div>
+
+      {/* pricing */}
+      <section className="bg-[#EBF4F5] py-16">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl font-bold text-black mb-4">
+                    Music Distribution Plans
+                  </h2>
+                  <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+                    Choose the perfect plan to distribute your music to the world.
+                  </p>
+                </div>
+      
+                {/* Pricing Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
+                  {/* Plan 1: Single Song */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 h-full flex flex-col"
+                  >
+                    <h3 className="text-2xl font-bold text-black mb-2">Single Song</h3>
+                    <p className="text-gray-500 mb-6">All Stores + Caller Tune</p>
+      
+                    <div className="mb-6">
+                      <span className="text-5xl font-extrabold text-[#005f73]">₹799</span>
+                      <span className="text-gray-500">Per User /song</span>
+                    </div>
+                    <p className="text-gray-900 mb-6">Features</p>
+                    <ul className="space-y-4 text-gray-700 mb-8 flex-grow">
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        All Music Live Stream Platforms
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Caller Tune Facility
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Song Availability Lifetime
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        95% Royalties
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        4 Monthly Payment / Report
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        24 Hour Approval
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        YouTube Content ID
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        No Per Year Charges
+                      </li>
+                    </ul>
+                    <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+                      Upload Now
+                    </button>
+                  </motion.div>
+      
+                  {/* Plan 2: Custom Label (Recommended) */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="group bg-[#005f73] text-white rounded-2xl p-8 shadow-2xl transition-all duration-300 transform scale-105 relative border-2 border-[#005f73] h-full flex flex-col"
+                  >
+                    <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#00A9B7] text-white px-4 py-1 rounded-full text-sm font-semibold">
+                      Recommended
+                    </div>
+      
+                    <h3 className="text-2xl font-bold mb-2">Custom Label</h3>
+                    <p className="opacity-80 mb-6">All Stores + Caller Tune</p>
+      
+                    <div className="mb-6">
+                      <span className="text-5xl font-extrabold">₹4,999</span>
+                      <span className="opacity-80">per year /-</span>
+                    </div>
+                    <p className="text-white mb-6">Features</p>
+                    <ul className="space-y-4 opacity-90 mb-8 flex-grow">
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        All Music Live Stream Platforms
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Caller Tune Facility
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Bulk Upload Facility
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Song Availability Lifetime
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Unlimited Song's Releases
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Lifetime 95% Revenue
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        4 Monthly Payment / Report
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        YouTube Content ID
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        24 Hour Approval
+                      </li>
+                    </ul>
+      
+                    <button className="w-full bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+                      Join Now
+                    </button>
+                  </motion.div>
+      
+                  {/* Plan 3: Previously Released Song */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="group bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 h-full flex flex-col"
+                  >
+                    <h3 className="text-2xl font-bold text-black mb-2">Previously Released</h3>
+                    <p className="text-gray-500 mb-6">Song Caller Tune</p>
+      
+                    <div className="mb-6">
+                      <span className="text-5xl font-extrabold text-[#005f73]">₹499</span>
+                      <span className="text-gray-500">/ per song</span>
+                    </div>
+                    <p className="text-gray-900 mb-6">Features</p>
+      
+                    <ul className="space-y-4 text-gray-700 mb-8 flex-grow">
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Caller Tune Live in 3-5 days
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Caller Tunes on JIO, Vi, BSNL, Airtel
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        ISRC - Caller Tune Sync
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Previously released song
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        No yearly fee
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        95% Lifetime revenue
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        CRBT Codes
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-15 w-15 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        JioSaavn ( If Song is Already Live on Jiosaavn Take Down from Jiosaavn we distribute it again On JioSaavn With JioCRBT )
+                      </li>
+                      <li className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-15 w-15 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Wynk ( If Song is Already Live on Wynk Take Down from Wynk we distribute it again On Wynk With Airtel CRBT )
+                      </li>
+                    </ul>
+      
+                    <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+                      Add On Now
+                    </button>
+                  </motion.div>
+                </div>
+              </div>
+            </section>
+
+
+            {/* Pay After Work Done */}
+
+            {/* Pay After Work Done Section */}
+<div 
+  className="relative py-24 bg-cover bg-center bg-no-repeat"
+  style={{ 
+    backgroundImage: `url(${banner})`,
+    backgroundAttachment: 'fixed'
+  }}
+>
+  {/* Gradient Overlay - Sky Blue */}
+  <div className="absolute inset-0 bg-[#005f73]/20 text-white"></div>
+  
+  <div className="relative z-10 container mx-auto px-4 text-center">
+    {/* Main Heading */}
+    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+      Pay After Work Done
+    </h2>
+    
+    {/* Subheading */}
+    <h3 className="text-3xl md:text-4xl font-bold text-white mb-8">
+      Distribute Your Music Today! - Pay After Work Done
+    </h3>
+    
+    {/* Start Now Button */}
+    <button className="bg-[#005f73] text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+      Start Now
+    </button>
+  </div>
+</div>
 
 
 
