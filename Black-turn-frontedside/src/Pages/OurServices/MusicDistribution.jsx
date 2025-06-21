@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Play, Menu, X, Music, Users, Globe, TrendingUp, DollarSign, CalendarDays, UserCog, RefreshCw, Award, ArrowRight } from 'lucide-react';
+import { Phone, Shield, CheckCircle, Star, Clock } from 'lucide-react';
 import musicdistribution from '../../assets/images/music-distribution.png'; // Adjust the path as necessary
+
 import { motion } from 'framer-motion';
 import { IoCheckmarkCircle, IoCloseCircle, IoMusicalNotesSharp, IoWalletSharp } from 'react-icons/io5';
 import { MdWifiCalling } from "react-icons/md";
@@ -912,7 +914,172 @@ const MusicDistribution = () => {
         </div>
       </section>
       <section>
-        
+        {/* Hero Section */}
+        <div className="relative overflow-hidden mx-10 rounded-2xl my-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+          <div className="relative max-w-7xl mx-auto px-6 py-20">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-full mb-8 shadow-2xl">
+                <span className="text-3xl font-bold text-white">₹</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Pay After Work Done
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto leading-relaxed">
+                #1 First time in India pay after work is done. We want to increase our customer trust for us.
+              </p>
+              <p className="text-2xl md:text-3xl font-semibold text-[#005f73] mb-12">
+                Your trust is our success.
+              </p>
+            </div>
+
+            {/* Main Action Cards */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20">
+              <div className="group bg-gradient-to-br from-[#005f73] to-[#0a9396] p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
+                <div className="text-center">
+                  <Phone className="w-12 h-12 mx-auto mb-6 text-white" />
+                  <h3 className="text-3xl font-bold mb-4 text-white">Let's talk!</h3>
+                  <p className="text-lg mb-8 text-gray-100 leading-relaxed">
+                    For More Info Call Now. We Talk in Hindi, English, Punjabi, Haryanvi, Bhojpuri
+                  </p>
+                  <a href="tel:9274466809" className="bg-white text-[#005f73] px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    CALL NOW
+                  </a>
+                </div>
+              </div>
+
+              <div className="group bg-gradient-to-br from-gray-900 to-black border-2 border-[#005f73] p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
+                <div className="text-center">
+                  <Shield className="w-12 h-12 mx-auto mb-6 text-[#005f73]" />
+                  <h3 className="text-3xl font-bold mb-4 text-white">Why Think ?</h3>
+                  <p className="text-lg mb-8 text-gray-300 leading-relaxed">
+                    Pay After Work Done.
+                  </p>
+                  <button className="bg-[#005f73] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#0a9396] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    GET PRICE
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       {/* FAQ Section */}
+      <div className="py-20 bg-gradient-to-b from-black to-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Frequently Asked <span className="text-[#005f73]">Questions</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Get answers to common questions about our pay-after-work service
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                WHAT ABOUT MY WORK RIGHTS?
+              </h3>
+              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                Take control of your project. Make beyond any doubt you understand and accept how your work will be managed without your consent. Choose how you'd like your completed work to be managed on numerous platforms and maintained with full quality standards.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                HOW DOES OUR WORK PROCESS FUNCTION?
+              </h3>
+              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                Get your project online and make it reach the right audience! Our comprehensive work management system covers the complete course of action for developing your project success and delivery. Through our network of over 150 quality assurance checkpoints, we ensure your work meets the highest standards before completion.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                WHAT IS THE BEST WAY TO START WORK?
+              </h3>
+              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                We value every project and put in maximum effort to deliver the best results. Our work advancement team guarantees the most excellent outcomes. We work around the clock utilizing our network of experts, professionals, and specialists to deliver outstanding results. We value your unique requirements and ensure they reach completion successfully.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                HOW DO I START A WORK SERVICE?
+              </h3>
+              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                We are not a mass service company. We invest our time into our clients! We support our customers to reach their potential. As a matter of fact, we take full responsibility for the work delivered with complete partnership with our clients throughout the entire process.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                HOW MUCH DO WE CHARGE FOR SERVICES?
+              </h3>
+              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                We never take advance payment from our clients. Every service you receive is delivered first, and payment is made only after your complete satisfaction. We believe that your satisfaction matters, and we respect your investment in our services. Quality work first, payment after - that's our commitment.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                HOW DO I GET A SERVICE QUOTE?
+              </h3>
+              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                With so many different service providers to select from, it can be challenging but definitely worth it. Contact us using our multiple communication channels, and get personalized quotes that suit your needs. We help you reach out to all types of solutions so that everyone can benefit from our unique services and competitive pricing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+        {/* Language Support Section */}
+        <div className="py-20 bg-gradient-to-b  from-gray-900 to-black">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                We Speak <span className="text-[#005f73]">Your Language</span>
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+                Communication without barriers. Talk to us in your preferred language.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-5 gap-6 max-w-4xl mx-auto">
+              {['Hindi', 'English', 'Punjabi', 'Haryanvi', 'Bhojpuri'].map((language, index) => (
+                <div key={index} className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 text-center">
+                  <h3 className="text-xl font-semibold text-white mb-2">{language}</h3>
+                  <div className="w-12 h-1 bg-[#005f73] mx-auto rounded-full"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {/* CTA Section */}
+        <div className="py-20 bg-black">
+          <div className="max-w-4xl mx-auto px-6 text-center ">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Ready to Experience the <span className="text-[#005f73]">Difference</span>?
+            </h2>
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+              Join thousands of satisfied customers who chose trust over traditional payment methods.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <button className="group bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white px-10 py-5 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-[#005f73]/30 transition-all duration-300 flex items-center gap-3">
+                Get Started Today
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+              {/* Call Now Button */}
+                <a href="tel:9274466809" className="group border-2 border-[#005f73] text-[#005f73] px-10 py-5 rounded-full font-semibold text-lg hover:bg-[#005f73] hover:text-white transition-all duration-300 flex items-center gap-3">
+                  <Phone className="w-5 h-5" />
+                  Call Now
+                </a>
+             
+
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
