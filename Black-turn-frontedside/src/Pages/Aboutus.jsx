@@ -7,7 +7,6 @@ import youtube from '../assets/images/youtube.png'
 import twitter from '../assets/images/twitter.png'
 
 function Aboutus() {
-
     const platforms = [
     {
       name: 'Facebook',
@@ -34,8 +33,6 @@ function Aboutus() {
       link:'https://in.pinterest.com/theblackturn/'
     }
   ];
-
-
   return (
     <>
         {/* Banner Section */}

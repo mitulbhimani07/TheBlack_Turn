@@ -95,7 +95,7 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-800">Our Location</h3>
-            <p className="text-gray-600">Ekta Colony, Beniwal Nagar, Rohtak 124001, Haryana, India</p>
+            <p className="text-gray-600">Registered address 704, 7th floor, palm Court, Mehrauli-Gurgaon Road, Sector 16, Gurugram,Haryana, 122007</p>
           </div>
           <motion.div
             className="w-full md:w-[95%] mx-auto rounded-2xl overflow-hidden shadow-lg border-4 border-[#005f73]/20 hover:ring-4 hover:ring-[#005f73]/30 transition duration-300"
