@@ -11,6 +11,7 @@ import tablist1 from "../../assets/images/tablist1.png"
 import tablist2 from "../../assets/images/tablist2.png"
 import tablist3 from "../../assets/images/tablist3.png"
 import tablist4 from "../../assets/images/tablist4.png"
+import { Link } from "react-router-dom";
 
 
 
@@ -563,8 +564,8 @@ const CallerTuneDistribution = () => {
                 <div className="bg-white rounded-2xl p-6 border-2 border-[#005f73]/20 shadow-xl transform hover:scale-105 transition-all duration-300">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 bg-[#005f73]/10 rounded-xl flex items-center justify-center">
-                      <div className="w-6 h-6 border-2 border-[#005f73] rounded-full flex items-center justify-center">
-                        <span className="text-[#005f73] font-bold text-xs">©</span>
+                      <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center">
+                        <span className="text-black font-bold text-xs">©</span>
                       </div>
                     </div>
                     <h3 className="text-xl font-bold text-[#005f73]">100% RIGHTS</h3>
@@ -648,7 +649,7 @@ const CallerTuneDistribution = () => {
                 {/* Availability Card */}
                 <div className="bg-white rounded-2xl p-6 border-2 border-[#005f73]/20 shadow-xl transform hover:scale-105 transition-all duration-300">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 bg-[#005f73] rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-[#005f73]/10 rounded-xl flex items-center justify-center">
                       <div className="w-6 h-6 text-black">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
@@ -1047,19 +1048,19 @@ const CallerTuneDistribution = () => {
   
   <div className="relative z-10 container mx-auto px-4 text-center">
     {/* Main Heading */}
-    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
       Pay After Work Done
     </h2>
     
     {/* Subheading */}
-    <h3 className="text-3xl md:text-4xl font-bold text-white mb-8">
+    <h3 className="text-2xl md:text-3xl font-bold text-white mb-12">
       Distribute Your Music Today! - Pay After Work Done
     </h3>
     
     {/* Start Now Button */}
-    <button className="bg-[#005f73] text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+    <Link to="/pricing" className="bg-[#005f73] text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
       Start Now
-    </button>
+    </Link>
   </div>
 </div>
 
