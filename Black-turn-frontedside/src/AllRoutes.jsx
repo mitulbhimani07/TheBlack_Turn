@@ -12,6 +12,7 @@ import Signp from './Pages/Authentication/SignUp'
 import Aboutus from './Pages/Aboutus'
 import TermsandConditions from './Pages/TermsandConditions'
 import Refunds from './Pages/Refunds'
+import Blog from './Pages/Blog'
 import Privacy from './Pages/Privacy'
 
 function AllRoutes() {
@@ -24,6 +25,7 @@ function AllRoutes() {
             <Route path='/about' element={<Aboutus/>}/>
             <Route path='/Refund' element={<Refunds/>}/>
             <Route path='/privacy' element={<Privacy/>}/>
+            <Route path="/blog" element={<Blog/>} />
             <Route path='/terms&conditions' element={<TermsandConditions/>}/>
             <Route path="/services/music-distribution" element={<MusicDistribution/>} />
             <Route path="/services/music-video-distribution" element={<MusicVideoDistributionInIndia/>} />

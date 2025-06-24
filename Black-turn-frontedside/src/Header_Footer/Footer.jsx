@@ -79,7 +79,8 @@ function Footer() {
               <li><a href="#" className="hover:text-[#005f73]">FB & Insta Artist Profile Link</a></li>
               <li><a href="#" className="hover:text-[#005f73]">Instagram Stories</a></li>
               <li><a href="#" className="hover:text-[#005f73]">FB - Community</a></li>
-              <li><a href="#" className="hover:text-[#005f73]">Blog</a></li>
+              <li><a href="#" className="hover:text-[#005f73]">Contact Us</a></li>
+              <li><Link to="/blog" className="hover:text-[#005f73]">Blog</Link></li>
             </ul>
           </div>
 
