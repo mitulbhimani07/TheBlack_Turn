@@ -52,7 +52,7 @@ import { FaQuoteRight } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import { img } from 'framer-motion/client';
+import { img, link } from 'framer-motion/client';
 import figure from '../assets/images/fun.png';
 import figure1 from '../assets/images/great.png';
 import figure2 from '../assets/images/creative vision.png';
@@ -136,97 +136,113 @@ function Home() {
       id: 1,
       name: "Pop FM",
       logo: figure,
-      alt: "Pop FM Logo"
+      alt: "Pop FM Logo",
+      link:'https://www.youtube.com/c/Funmoji'
     },
     {
       id: 2,
       name: "Client Name",
       logo: figure1,
-      alt: "Client Logo"
+      alt: "Client Logo",
+      link:'https://www.youtube.com/@SonaDeyYt'
     },
     {
       id: 3,
       name: "Sports Club",
       logo: figure2,
-      alt: "Sports Club Logo"
+      alt: "Sports Club Logo",
+      link:'https://www.youtube.com/user/3verma'
     },
     {
       id: 4,
       name: "Gold Records",
       logo: figure3,
-      alt: "Gold Records Logo"
+      alt: "Gold Records Logo",
+      link:'https://www.youtube.com/c/SriPurushottam'
     },
     {
       id: 5,
       name: "Radio Raabta",
       logo: figure4,
-      alt: "Radio Raabta Logo"
+      alt: "Radio Raabta Logo",
+      link:'https://www.facebook.com/radioraabta908/'
     },
     {
       id: 6,
       name: "Orange Music",
       logo: figure5,
-      alt: "Orange Music Logo"
+      alt: "Orange Music Logo",
+      link:'https://www.youtube.com/c/RadioSaiGlobalHarmony'
     },
     {
       id: 7,
       name: "Music Label",
       logo: figure6,
-      alt: "Music Label Logo"
+      alt: "Music Label Logo",
+      link:'https://www.youtube.com/@AppyRaja'
     },
     {
       id: 8,
       name: "PTF Studio",
       logo: figure7,
-      alt: "PTF Studio Logo"
+      alt: "PTF Studio Logo",
+      link:'https://www.youtube.com/c/PTFStudio'
     },
     {
       id: 9,
       name: "Gaming Co",
       logo: figure8,
-      alt: "Gaming Company Logo"
+      alt: "Gaming Company Logo",
+      link:'https://www.youtube.com/c/SwaduStaffFilms'
     },
     {
       id: 10,
       name: "Madly Records",
       logo: figure9,
-      alt: "Madly Records Logo"
+      alt: "Madly Records Logo",
+      link:'https://www.youtube.com/@mashqtalks'
     },
     {
       id: 11,
       name: "News Channel",
       logo: figure10,
-      alt: "News Channel Logo"
+      alt: "News Channel Logo",
+      link:'https://www.youtube.com/@ArambhFilms'
     },
     {
       id: 12,
       name: "HK Media",
       logo: figure11,
-      alt: "HK Media Logo"
+      alt: "HK Media Logo",
+      link:'https://www.youtube.com/@HKProductionHomdev'
     },
     {
       id: 13,
       name: "Sunset Co",
       logo: figure12,
-      alt: "Sunset Company Logo"
+      alt: "Sunset Company Logo",
+      link:'https://www.youtube.com/channel/UC2XC5z9YsGy0CQXUolBr4nQ'
     },
     {
       id: 14,
       name: "Tech Solutions",
       logo: figure13,
-      alt: "Tech Solutions Logo"
+      alt: "Tech Solutions Logo",
+      link:'https://www.youtube.com/c/MEHFILMUSICS'
     },
     {
       id: 15,
       name: "Creative Hub",
       logo: figure14,
-      alt: "Creative Hub Logo"
+      alt: "Creative Hub Logo",
+      link:'https://www.youtube.com/c/GMCMUSICDevotional'
     },
     {
       id: 16,
       name: "Magadhi Music",
       logo: figure15,
-      alt: "Magadhi Music Logo"
+      alt: "Magadhi Music Logo",
+      link:'https://www.youtube.com/c/MagadhMusic1'
     }
   ];
 
@@ -1320,8 +1336,8 @@ function Home() {
                   <div className="relative h-[500px] flex items-end">
                     <motion.div
                       className="relative w-72 sm:w-80 lg:w-96 h-[550px] -mt-12"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 200 }}
+                      // whileHover={{ scale: 1.02 }}
+                      // transition={{ type: "spring", stiffness: 200 }}
                     >
                       <img
                         src={businessowner}
@@ -1377,20 +1393,22 @@ function Home() {
                     </div>
                   </button>
 
-                  <AnimatePresence initial={false}>
-                    {isActive && (
-                      <motion.div
+                  {isActive && (
+                      <div
                         key="content"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        // transition={{ duration: 0.3 }}
                         className="overflow-hidden px-5 pb-5 text-gray-700"
                       >
                         <div>{item.description}</div>
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
+
+                  {/* <AnimatePresence initial={false}>
+                    
+                  </AnimatePresence> */}
                 </div>
               );
             })}
@@ -1399,86 +1417,95 @@ function Home() {
       </section>
       <section className="pb-16 max-w-7xl mx-auto bg-white">
         {/* Music Distribution Section */}
-        <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
-          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
-            {/* Left Text Content */}
-            <div className="space-y-6">
-              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
-                Make money with worldwide music distribution
-              </p>
-              <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] leading-tight">
-                Upload Unlimited Songs
-              </h1>
-              <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] leading-relaxed">
-                The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
-                share their creativity across more than 150 streaming platforms, including Spotify, Apple
-                Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
-                reach a wider audience, all while retaining an impressive 95% of your earnings. With our
-                user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
-                72 hours—ensuring your music is always at the forefront.
-              </p>
-              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
-                Join Now
-              </button>
-            </div>
+        <div className=" flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+  {/* Left Text Content */}
+  <div className="space-y-6 text-center xl:text-left">
+    <p className="text-gray-700 text-base md:text-[19px] max-w-[650px] mx-auto xl:mx-0">
+      Make money with worldwide music distribution
+    </p>
 
-            {/* Right Image Content */}
-            <div className="flex items-center justify-center">
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
-                {/* Second border layer (furthest back) */}
-                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 right-2 sm:right-3 lg:right-4 xl:right-5 z-0"></div>
+    <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] mx-auto xl:mx-0 leading-tight">
+      Upload Unlimited Songs
+    </h1>
 
-                {/* First border layer (middle) */}
-                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 right-4 sm:right-6 lg:right-8 xl:right-10 z-10"></div>
+    <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0 leading-relaxed">
+      The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
+      share their creativity across more than 150 streaming platforms, including Spotify, Apple
+      Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
+      reach a wider audience, all while retaining an impressive 95% of your earnings. With our
+      user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
+      72 hours—ensuring your music is always at the forefront.
+    </p>
 
-                {/* Main content box (front) */}
-                <img
-                  src={MusicDistribution}
-                  alt="Music Distribution Banner"
-                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
-                />
-              </div>
-            </div>
-          </div>
+    <div className="mx-auto xl:mx-0 w-fit">
+      <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+        Join Now
+      </button>
+    </div>
+  </div>
+
+  {/* Right Image Content */}
+  <div className="flex items-center justify-center">
+    <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+      {/* Second border layer (furthest back) */}
+      <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 right-2 sm:right-3 lg:right-4 xl:right-5 z-0"></div>
+
+      {/* First border layer (middle) */}
+      <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 right-4 sm:right-6 lg:right-8 xl:right-10 z-10"></div>
+
+      {/* Main content box (front) */}
+      <img
+        src={MusicDistribution}
+        alt="Music Distribution Banner"
+        className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+      />
+    </div>
+  </div>
+</div>
+
         </div>
 
         {/* Mobile Operator Licensing Section */}
-        <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
-          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
-            {/* Left Image Content */}
-            <div className="flex items-center justify-start">
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
-                {/* Second border layer (furthest back) */}
-                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 left-2 sm:left-3 lg:left-4 xl:left-5 z-0"></div>
+        <div className=" flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+  {/* Right Text Content (comes first on sm & lg, second on xl) */}
+  <div className="space-y-6 order-1 lg:order-1 xl:order-2 text-center xl:text-left">
+    <p className="text-gray-700 text-base md:text-[19px] max-w-[650px] mx-auto xl:mx-0">
+      Caller Tune Distribution India
+    </p>
+    <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] mx-auto xl:mx-0 leading-tight">
+      Mobile Operator Licensing
+    </h1>
+    <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0 leading-relaxed">
+      Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
+    </p>
+    <div className="mx-auto xl:mx-0 w-fit">
+      <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+        Join Now
+      </button>
+    </div>
+  </div>
 
-                {/* First border layer (middle) */}
-                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 left-4 sm:left-6 lg:left-8 xl:left-10 z-10"></div>
+  {/* Left Image Content (comes second on sm & lg, first on xl) */}
+  <div className="flex items-center justify-center order-2 lg:order-2 xl:order-1">
+    <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+      {/* Second border layer (furthest back) */}
+      <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 left-2 sm:left-3 lg:left-4 xl:left-5 z-0"></div>
 
-                {/* Main content box (front) */}
-                <img
-                  src={MobileOperatorLicensing}
-                  alt="Mobile Operator Licensing Banner"
-                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
-                />
-              </div>
-            </div>
+      {/* First border layer (middle) */}
+      <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 left-4 sm:left-6 lg:left-8 xl:left-10 z-10"></div>
 
-            {/* Right Text Content */}
-            <div className="space-y-6">
-              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px]">
-                Caller Tune Distribution India
-              </p>
-              <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] leading-tight">
-                Mobile Operator Licensing
-              </h1>
-              <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] leading-relaxed">
-                Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
-              </p>
-              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
-                Join Now
-              </button>
-            </div>
-          </div>
+      {/* Main content box (front) */}
+      <img
+        src={MobileOperatorLicensing}
+        alt="Mobile Operator Licensing Banner"
+        className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+      />
+    </div>
+  </div>
+</div>
+
         </div>
       </section>
 
@@ -1879,21 +1906,27 @@ function Home() {
 
           {/* Client Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-            {clients.map((client) => (
-              <div
-                key={client.id}
-                className="bg-white rounded-lg border-2 border-slate-200 p-6 shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer group"
-              >
-                <div className="flex items-center justify-center h-20">
-                  <img
-                    src={client.logo}
-                    alt={client.alt}
-                    className="max-w-full max-h-full object-contain  group-hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+  {clients.map((client) => (
+    <a
+      key={client.id}
+      href={client.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block"
+    >
+      <div className="bg-white rounded-lg border-2 border-slate-200 p-6 shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer group">
+        <div className="flex items-center justify-center h-20">
+          <img
+            src={client.logo}
+            alt={client.alt}
+            className="max-w-full max-h-full object-contain group-hover:grayscale-0 transition-all duration-300"
+          />
+        </div>
+      </div>
+    </a>
+  ))}
+</div>
+
 
         </div>
       </section>
