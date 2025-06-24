@@ -1127,94 +1127,167 @@ function Home() {
       </section>
 
       {/* step section */}
-      <section className="bg-white pt-20 px-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          {/* Desktop Flow */}
-          <div className="hidden lg:block">
-            <div className="relative">
-              {/* Connecting Dashed Line */}
-              <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
+       <section className="bg-white pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto flex justify-center">
+        <div className="w-full flex justify-center">
+        {/* Desktop Flow - Hidden on mobile and tablet */}
+        <div className="hidden xl:block w-full flex justify-center">
+          <div className="relative max-w-6xl w-full flex justify-center">
+            {/* Connecting Dashed Line */}
+            <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
 
-              {/* Steps */}
-              <div className="relative z-10 grid grid-cols-4 gap-x-20 gap-y-8">
-                {steps.map((step, index) => {
-                  const Icon = step.icon;
-                  return (
+            {/* Steps */}
+            <div className="relative z-10 grid grid-cols-4 gap-x-12 2xl:gap-x-20 gap-y-8 justify-center items-center w-full">
+              {steps.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <div
+                    key={step.id}
+                    className={`group cursor-pointer transition-all duration-500 ${
+                      activeStep === index ? 'scale-105' : 'hover:scale-102'
+                    }`}
+                    onMouseEnter={() => setActiveStep(index)}
+                  >
                     <div
-                      key={step.id}
-                      className={`group cursor-pointer transition-all duration-500 ${activeStep === index ? 'scale-105' : 'hover:scale-102'
-                        }`}
-                      onMouseEnter={() => setActiveStep(index)}
+                      className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
+                        activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                      }`}
                     >
-                      <div
-                        className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${activeStep === index ? 'shadow-2xl shadow-current/20' : ''
-                          }`}
-                      >
-                        {/* Step Number Badge */}
-                        <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
-                          <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
-                            {step.id}
-                          </div>
+                      {/* Step Number Badge */}
+                      <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
+                        <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
+                          {step.id}
                         </div>
-
-                        {/* Icon */}
-                        <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                          <Icon className="w-8 h-8 text-white" />
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="text-xl font-bold text-black text-center">
-                          {step.title}
-                        </h3>
-
-                        {/* Arrow */}
-                        {index < steps.length - 1 && (
-                          <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 ">
-                            <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
-                              <ArrowRight className="w-4 h-4 text-white" />
-                            </div>
-                          </div>
-                        )}
                       </div>
+
+                      {/* Icon */}
+                      <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-xl font-bold text-black text-center">
+                        {step.title}
+                      </h3>
+
+                      {/* Arrow */}
+                      {index < steps.length - 1 && (
+                        <div className="absolute right-[-30px] 2xl:right-[-50px] top-1/2 transform -translate-y-1/2">
+                          <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
+                            <ArrowRight className="w-4 h-4 text-white" />
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
+        </div>
 
-          {/* Mobile Flow */}
-          <div className="lg:hidden space-y-6">
-            {steps.map((step) => {
+        {/* Tablet Flow - 2 columns for medium to large tablets */}
+        <div className="hidden md:block xl:hidden w-full flex justify-center">
+          <div className="grid grid-cols-2 gap-6 lg:gap-8 max-w-4xl w-full justify-center items-center">
+            {steps.map((step, index) => {
               const Icon = step.icon;
+              const isEven = index % 2 === 0;
+              const isLastRow = index >= steps.length - 2;
+              
               return (
                 <div key={step.id} className="relative">
-                  <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm flex flex-col justify-center">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-6 h-6 text-white" />
+                  <div
+                    className={`group cursor-pointer transition-all duration-500 ${
+                      activeStep === index ? 'scale-105' : 'hover:scale-102'
+                    }`}
+                    onMouseEnter={() => setActiveStep(index)}
+                  >
+                    <div
+                      className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-56 lg:h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
+                        activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                      }`}
+                    >
+                      {/* Step Number Badge */}
+                      <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
+                        <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
+                          {step.id}
+                        </div>
                       </div>
-                      <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
-                        {step.id}
+
+                      {/* Icon */}
+                      <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                        <Icon className="w-7 h-7 lg:w-8 lg:h-8 text-white" />
                       </div>
+
+                      {/* Title */}
+                      <h3 className="text-lg lg:text-xl font-bold text-black text-center">
+                        {step.title}
+                      </h3>
                     </div>
-                    <h3 className="text-xl font-bold text-black mb-3">
-                      {step.title}
-                    </h3>
                   </div>
 
-                  {/* Vertical Line */}
-                  {step.id < steps.length && (
-                    <div className="flex justify-center py-4">
-                      <div className="w-0.5 h-8 bg-[#005f73]"></div>
-                    </div>
+                  {/* Connecting Lines for Tablet */}
+                  {index < steps.length - 1 && (
+                    <>
+                      {/* Horizontal line to next item in same row */}
+                      {!isEven && index < steps.length - 1 && (
+                        <div className="absolute right-[-24px] top-1/2 transform -translate-y-1/2 hidden">
+                          <div className="w-12 h-0.5 bg-[#00b4d8] border-dashed"></div>
+                        </div>
+                      )}
+                      
+                      {/* Vertical line down to next row */}
+                      {isEven && !isLastRow && (
+                        <div className="absolute bottom-[-24px] left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+                          <div className="w-0.5 h-6 bg-[#00b4d8]"></div>
+                          <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md -mt-1">
+                            <ArrowRight className="w-4 h-4 text-white transform rotate-90" />
+                          </div>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               );
             })}
           </div>
         </div>
-      </section>
+
+        {/* Mobile Flow - Single column for small screens */}
+        <div className="md:hidden space-y-6 w-full flex flex-col items-center justify-center">
+          <div className="w-full max-w-md space-y-6">
+          {steps.map((step) => {
+            const Icon = step.icon;
+            return (
+              <div key={step.id} className="relative w-full flex flex-col items-center">
+                <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-56 sm:h-64 p-4 sm:p-6 backdrop-blur-sm flex flex-col justify-center w-full max-w-sm">
+                  <div className="flex items-center gap-4 mb-4 justify-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
+                      {step.id}
+                    </div>
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-black mb-3 text-center">
+                    {step.title}
+                  </h3>
+                </div>
+
+                {/* Vertical Line */}
+                {step.id < steps.length && (
+                  <div className="flex justify-center py-4">
+                    <div className="w-0.5 h-8 bg-[#005f73]"></div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+        </div>
+      </div>
+    </section>
       <section className="bg-white py-16 px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
