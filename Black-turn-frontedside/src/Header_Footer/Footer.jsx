@@ -23,7 +23,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5  mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4  mb-8">
           {/* Section 1: Logo and Description */}
           <div className="col-span-1">
             <div className="flex items-center mb-4">
@@ -50,9 +50,14 @@ function Footer() {
                 <path d="M218.023 58.2242C218.711 58.9120 218.711 58.9120 219.055 60.9753C217.353 60.9753 215.650 60.9753 213.896 60.9753C214.010 60.6348 214.123 60.2944 214.240 59.9436C215.602 60.0571 216.964 60.1706 218.367 60.2875C218.254 59.6066 218.140 58.9257 218.023 58.2242Z" fill="#1A595B" />
               </svg>
             </div>
-            <p className="text-sm text-gray-600">
-              A prominent Indian music distribution platform empowering artists globally.
-            </p>
+   <p className="max-w-sm md:max-w-md lg:max-w-lg text-sm text-gray-600 leading-relaxed">
+  A prominent Indian music distribution platform empowering artists globally.
+</p>
+
+
+
+
+
           </div>
 
           {/* Section 2: Get Started */}
@@ -86,7 +91,7 @@ function Footer() {
               <li><Link to='/terms&conditions' className="hover:text-[#005f73]">Terms and Conditions Page</Link></li>
               <li><Link to='/Refund' className="hover:text-[#005f73]">Refund Policy</Link></li>
               <li><Link to="/contact" className="hover:text-[#005f73]">Contact Us</Link></li>
-              <li><a href="#" className="hover:text-[#005f73]">Privacy Policy</a></li>
+              <li><Link to='/privacy' className="hover:text-[#005f73]">Privacy Policy</Link></li>
             </ul>
           </div>
 
