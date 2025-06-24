@@ -71,7 +71,7 @@ function Blog() {
               <img 
                 src={post.image} 
                 alt={post.title}
-                className="w-full h-64 lg:h-48 object-cover hover:scale-105 transition-transform duration-300"
+                className="w-full h-74 lg:h-68 object-cover hover:scale-105 transition-transform duration-300"
               />
               {post.badge && (
                 <div className="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -98,7 +98,7 @@ function Blog() {
               {post.description}
             </p>
 
-            <button className="inline-flex items-center px-6 py-3 border-2 border-green-500 text-green-600 font-medium rounded-lg hover:bg-green-500 hover:text-white transition-all duration-300 group">
+            <button className="inline-flex items-center px-6 py-3 border-2 border-[#005f73] text-[#005f73] font-medium rounded-lg hover:bg-[#005f73] hover:text-white transition-all duration-300 group">
               <svg className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
