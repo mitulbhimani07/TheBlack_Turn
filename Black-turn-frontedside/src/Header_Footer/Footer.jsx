@@ -75,7 +75,7 @@ function Footer() {
               <li><a href="#" className="hover:text-[#005f73]">Instagram Stories</a></li>
               <li><a href="#" className="hover:text-[#005f73]">FB - Community</a></li>
               <li><a href="#" className="hover:text-[#005f73]">Contact Us</a></li>
-              <li><a href="#" className="hover:text-[#005f73]">About</a></li>
+              <li><a href="#" className="hover:text-[#005f73]">Blog</a></li>
             </ul>
           </div>
 
@@ -103,10 +103,10 @@ function Footer() {
             </a>
             </div>
             <h3 className="text-lg font-semibold mb-4">Join - The Black Turn</h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-gray-600 mb-4 lowercase">
               BLOCK-A-602TITANIUM BUSINESS PARK, MAKARBA RAILWAY CROSSING, B/H.DIVYA BHASKAR PRESS, AHMEDABAD-380007.
             </p>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-gray-600 mb-4 lowercase">
               Registered address 704, 7th floor, palm Court, Mehrauli-Gurgaon Road, Sector 16, Gurugram,Haryana, 122007
             </p>
             <Link to='/contact' className="bg-[#005f73] hover:bg-[#004d5f] text-white px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 flex items-center shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-95">
