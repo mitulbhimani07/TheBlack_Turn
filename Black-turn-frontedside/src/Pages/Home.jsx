@@ -678,33 +678,39 @@ function Home() {
 
         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
           {/* Left Text Content */}
-          <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px]">
-              Upload Unlimited Songs <br />
-              <span
-                className={`inline-block leading-normal transition-transform duration-500 transform ${flip ? 'rotateX-180' : ''
-                  } text-[#00758f]`}
-                style={{
-                  display: 'inline-block',
-                  transformStyle: 'preserve-3d',
-                  perspective: '1000px',
-                }}
-              >
-                {texts[index]}
-              </span>
-            </h1>
-            <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
-              The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
-              share their creativity across more than 150 streaming platforms, including Spotify, Apple
-              Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
-              reach a wider audience, all while retaining an impressive 95% of your earnings. With our
-              user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
-              72 hours—ensuring your music is always at the forefront.
-            </p>
-            <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
-              Explore the Possibilities
-            </button>
-          </div>
+          <div className="text-center xl:text-left">
+  <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px] mx-auto xl:mx-0">
+    Upload Unlimited Songs <br />
+    <span
+      className={`inline-block leading-normal transition-transform duration-500 transform ${
+        flip ? 'rotateX-180' : ''
+      } text-[#00758f]`}
+      style={{
+        display: 'inline-block',
+        transformStyle: 'preserve-3d',
+        perspective: '1000px',
+      }}
+    >
+      {texts[index]}
+    </span>
+  </h1>
+
+  <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0">
+    The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
+    share their creativity across more than 150 streaming platforms, including Spotify, Apple
+    Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
+    reach a wider audience, all while retaining an impressive 95% of your earnings. With our
+    user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
+    72 hours—ensuring your music is always at the forefront.
+  </p>
+
+  <div className="mx-auto xl:mx-0 w-fit">
+    <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+      Explore the Possibilities
+    </button>
+  </div>
+</div>
+
 
           {/* Right Image Content */}
           <div className="flex items-center justify-center p-4 sm:p-6 lg:p-8 xl:p-10 order-1 lg:order-2">
@@ -728,50 +734,52 @@ function Home() {
 
       {/* distribution your mmusic */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-[42px] font-bold text-black mb-4">
-              DISTRIBUTE YOUR MUSIC WORLDWIDE
-            </h2>
-            <p className="text-gray-400 text-base sm:text-lg max-w-2xl font-light mx-auto">
-              Seamlessly Share Your Sound with the World for just{' '}
-              <span className="text-[#00758f] font-semibold">₹799/month</span>
-            </p>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Header */}
+    <div className="text-center mb-12 sm:mb-16">
+      <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold text-black mb-4 leading-tight">
+        DISTRIBUTE YOUR MUSIC WORLDWIDE
+      </h2>
+      <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl font-light mx-auto px-2">
+        Seamlessly Share Your Sound with the World for just{' '}
+        <span className="text-[#00758f] font-semibold">₹799/month</span>
+      </p>
+    </div>
+
+    {/* Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
+      {features.map((item, index) => (
+        <motion.div
+          key={index}
+          custom={index}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={containerVariants}
+          className="hover-target group bg-white border-2 border-[#005f73] rounded-2xl p-6 sm:p-8 text-center shadow-md hover:border-[#00758f] transform hover:-translate-y-2 transition-all duration-500 ease-in-out"
+        >
+          {/* Icon */}
+          <div className="w-16 h-16 rounded-xl bg-[#ccdfe3] backdrop-blur-md flex items-center justify-center mb-6 mx-auto border border-[#ccdfe3] shadow-sm transition-all duration-300 group-hover:scale-110">
+            {item.icon}
           </div>
 
-          {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((item, index) => (
-              <motion.div
-                key={index}
-                custom={index}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={containerVariants}
-                className="hover-target group bg-white border-2 border-[#005f73] rounded-2xl p-4 sm:p-8 text-center shadow-md hover:border-[#00758f] transform hover:-translate-y-2 transition-all duration-500 ease-in-out"
-              >
-                {/* Icon */}
-                <div className="w-16 h-16 rounded-xl bg-[#ccdfe3] backdrop-blur-md flex items-center justify-center mb-6 mx-auto border border-[#ccdfe3] shadow-sm transition-all duration-300 group-hover:scale-110">
-                  {item.icon}
-                </div>
+          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-black mb-2 transition-colors duration-300 group-hover:text-[#005f73]">
+            {item.title}
+          </h3>
+          <p className="text-gray-600 text-sm sm:text-base leading-relaxed group-hover:text-[#333] transition-colors duration-300">
+            {item.description}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
-                <h3 className="text-lg sm:text-xl font-semibold text-black mb-2 transition-colors duration-300 group-hover:text-[#005f73]">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base leading-relaxed group-hover:text-[#333] transition-colors duration-300">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
       {/* Distribute On​ section */}
 
       {/* Distribute On​ section */}
-      <div className="min-h-screen bg-[#EBF4F5] py-16 px-6">
+      <div className=" bg-[#EBF4F5] py-16 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div
@@ -803,7 +811,7 @@ function Home() {
             variants={sectionVariants}
           >
             <motion.div
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-6 justify-items-center"
+              className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-9 gap-6 justify-items-center"
               variants={containerVariants}
             >
               {mainPlatforms.map((platform, index) => (
@@ -812,22 +820,15 @@ function Home() {
                   className="group w-20 h-20 flex items-center justify-center rounded-xl bg-white shadow-md border border-gray-200"
                   variants={itemVariants}
                   whileHover={{
-                    scale: 1.1,
                     borderColor: "#648f94",
                     boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
-                    transition: { type: "spring", stiffness: 300 }
                   }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   <motion.img
                     src={platform.icon}
                     alt={platform.name}
                     className="w-12 h-12 object-contain"
-                    whileHover={{
-                      scale: 1.2,
-                      rotate: [0, -5, 5, 0],
-                      transition: { duration: 0.3 }
-                    }}
+                   
                   />
                 </motion.div>
               ))}
@@ -866,26 +867,19 @@ function Home() {
               {carrierPlatforms.map((platform, index) => (
                 <motion.div
                   key={index}
-                  className="group w-24 h-24 flex items-center justify-center rounded-2xl bg-white shadow-md border border-gray-200"
+                  className="group w-24 mt-7 h-24 flex items-center justify-center rounded-2xl bg-white shadow-md border border-gray-200"
                   variants={itemVariants}
                   whileHover={{
-                    scale: 1.15,
                     borderColor: "#648f94",
                     boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
-                    y: -5,
-                    transition: { type: "spring", stiffness: 300 }
+                    
                   }}
-                  whileTap={{ scale: 0.9 }}
                 >
                   <motion.img
                     src={platform.icon}
                     alt={platform.name}
                     className="w-16 h-16 object-contain"
-                    whileHover={{
-                      scale: 1.3,
-                      rotate: 360,
-                      transition: { duration: 0.6 }
-                    }}
+                   
                   />
                 </motion.div>
               ))}
@@ -943,27 +937,33 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
             {/* Left Content */}
-            <div className="order-2 lg:order-1">
-              <h2 className="text-[42px] sm:text-[40px] lg:text-[42px] font-bold text-black mb-6">
-                150+ Stores
-              </h2>
-              <p className="text-gray-600 text-sm font-bold mb-4">
-                Release Song On National And International Platforms.
-              </p>
-              <p className="text-gray-700 text-base leading-relaxed mb-8 max-w-lg">
-                Unlimited music distribution - Get your music on Gaana, JioSaavn,
-                Wynk Music, Spotify, iTunes/Apple Music, Shazam, Tidal, Amazon,
-                YouTube Music, Deezer, and 150+ more digital music platforms worldwide.
-                Earn more sales and get more fans and more money. We provide a
-                stable tune for you to think of all about money, there your data we
-                never touch your fan base, and own friends. As an 100% safe music
-                person - we know you hear Distribute, license & monetize of all in one
-                place.
-              </p>
-              <button className="bg-[#005f73] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 transform hover:scale-105">
-                Join Now
-              </button>
-            </div>
+           <div className="order-2 lg:order-1 text-center xl:text-left">
+  <h2 className="text-[32px] sm:text-[36px] lg:text-[42px] font-bold text-black mb-6 mx-auto xl:mx-0 max-w-2xl">
+    150+ Stores
+  </h2>
+
+  <p className="text-gray-600 text-sm font-bold mb-4 mx-auto xl:mx-0 max-w-xl">
+    Release Song On National And International Platforms.
+  </p>
+
+  <p className="text-gray-700 text-base leading-relaxed mb-8 mx-auto xl:mx-0 max-w-lg">
+    Unlimited music distribution - Get your music on Gaana, JioSaavn,
+    Wynk Music, Spotify, iTunes/Apple Music, Shazam, Tidal, Amazon,
+    YouTube Music, Deezer, and 150+ more digital music platforms worldwide.
+    Earn more sales and get more fans and more money. We provide a
+    stable tune for you to think of all about money, there your data we
+    never touch your fan base, and own friends. As a 100% safe music
+    person — we know you hear Distribute, license & monetize all in one
+    place.
+  </p>
+
+  <div className="mx-auto xl:mx-0 w-fit">
+    <button className="bg-[#005f73] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 transform hover:scale-105">
+      Join Now
+    </button>
+  </div>
+</div>
+
 
             {/* Right Image Placeholder */}
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
