@@ -20,7 +20,7 @@ module.exports.upload = upload; // Export for use in your routes
 
 module.exports.createBlog = async (req, res) => {
     try {
-        const { title, content, author } = req.body;
+        const { title, content, author,Description,publishDate } = req.body;
         let image = req.body.image;
 
         // If image is uploaded as a file
@@ -33,7 +33,9 @@ module.exports.createBlog = async (req, res) => {
             image,
             title,
             content,
-            author
+            author,
+            Description,
+            publishDate
         });
 
         res.status(201).json({ message: 'Blog created successfully', data: newBlog });

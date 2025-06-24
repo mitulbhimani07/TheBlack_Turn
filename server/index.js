@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to the API');
 });
 // Import routes
-app.use('/api/blogs', require('./routes/blog'));
+app.use('/blogs', require('./routes/blog'));
 app.listen(port, (err) => {
     if (err) {
         console.error('Error starting server:', err);
