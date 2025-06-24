@@ -446,7 +446,7 @@ Global stage, local roots. Share your music video with the world—start distrib
         
       
 
-      <div className="relative ">
+      <div className="relative px-20">
         <Slider ref={sliderRef} {...sliderSettings}>
           {platforms.map((platform, index) => (
             <PlatformItem
