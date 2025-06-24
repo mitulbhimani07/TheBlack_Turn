@@ -1147,7 +1147,7 @@ function Home() {
       <div className="max-w-7xl mx-auto flex justify-center">
         <div className="w-full flex justify-center">
         {/* Desktop Flow - Hidden on mobile and tablet */}
-        <div className="hidden xl:block w-full flex justify-center">
+        <div className="hidden xl:block w-full  justify-center">
           <div className="relative max-w-6xl w-full flex justify-center">
             {/* Connecting Dashed Line */}
             <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
@@ -1203,7 +1203,7 @@ function Home() {
         </div>
 
         {/* Tablet Flow - 2 columns for medium to large tablets */}
-        <div className="hidden md:block xl:hidden w-full flex justify-center">
+        <div className="hidden md:block xl:hidden w-full  justify-center">
           <div className="grid grid-cols-2 gap-6 lg:gap-8 max-w-4xl w-full justify-center items-center">
             {steps.map((step, index) => {
               const Icon = step.icon;
