@@ -74,7 +74,6 @@ function Footer() {
               <li><a href="#" className="hover:text-[#005f73]">FB & Insta Artist Profile Link</a></li>
               <li><a href="#" className="hover:text-[#005f73]">Instagram Stories</a></li>
               <li><a href="#" className="hover:text-[#005f73]">FB - Community</a></li>
-              <li><a href="#" className="hover:text-[#005f73]">Contact Us</a></li>
               <li><a href="#" className="hover:text-[#005f73]">Blog</a></li>
             </ul>
           </div>
@@ -86,7 +85,7 @@ function Footer() {
               <li><Link to='/about' className="hover:text-[#005f73]">About Us</Link></li>
               <li><Link to='/terms&conditions' className="hover:text-[#005f73]">Terms and Conditions Page</Link></li>
               <li><Link to='/Refund' className="hover:text-[#005f73]">Refund Policy</Link></li>
-              <li><a href="#" className="hover:text-[#005f73]">Contact Us</a></li>
+              <li><Link to="/contact" className="hover:text-[#005f73]">Contact Us</Link></li>
               <li><a href="#" className="hover:text-[#005f73]">Privacy Policy</a></li>
             </ul>
           </div>
