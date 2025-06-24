@@ -27,23 +27,87 @@ function Privacy() {
 
         <div className="mt-6">
           <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
-            Section 2 - General Conditions
+            SECTION 2 – CONSENT
           </h2>
           <p className=" text-gray-700">
-            <p className=" text-gray-700">
-            We reserve the right to refuse service to anyone for any reason at any time.
-          </p>
+            How do you get my consent?
           </p>
           <p className="mt-4 text-gray-700">
-            You understand that your content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to the technical requirements of connecting networks or devices. Credit card information is always encrypted during transfer over networks.
+            When you provide us with personal information to complete a transaction, verify your credit card, place an order, arrange for a delivery or return a purchase, we imply that you consent to our collecting it and using it for that specific reason only.
           </p>
           <p className="mt-4 text-gray-700">
-            You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service or any contact on the website through which the service is provided, without express written permission by us.
+            If we ask for your personal information for a secondary reason, like marketing, we will either ask you directly for your expressed consent or provide you with an opportunity to say no.
           </p>
           <p className="mt-4 text-gray-700">
-            The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms.
+            How do I withdraw my consent?
+          </p>
+           <p className="mt-4 text-gray-700">
+            If after you opt-in, you change your mind, you may withdraw your consent for us to contact you, for the continued collection, use, or disclosure of your information, at any time, by contacting us at [contact@theblackturn.com ] or mailing us at: [Ekta Colony, Rohtak, Haryana]
           </p>
         </div>
+
+         <div className="mt-6">
+          <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
+           SECTION 3 – DISCLOSURE
+          </h2>
+          <p className=" text-gray-700">
+            We may disclose your personal information if we are required by law to do so or if you violate our Terms of Service.
+          </p>
+
+        </div>
+
+         <div className="mt-6 ">
+          <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
+            SECTION 4 – PAYMENT
+          </h2>
+          <p className=" text-gray-700">
+            We use Razorpay for processing payments. We/Razorpay do not store your card data on their servers. The data is encrypted through the Payment Card Industry Data Security Standard (PCI-DSS) when processing payment. Your purchase transaction data is only used as long as is necessary to complete your purchase transaction. After that is complete, your purchase transaction information is not saved.
+          </p>
+
+           <p className=" text-gray-700 mt-4">
+            Our payment gateway adheres to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, MasterCard, American Express, and Discover.
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            PCI-DSS requirements help ensure the secure handling of credit card information by our store and its service providers.
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            For more insight, you may also want to read the terms and conditions of Razorpay on https://razorpay.com
+          </p>
+        </div>
+
+
+
+         <div className="mt-6">
+          <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
+            SECTION 5 – THIRD-PARTY SERVICES
+          </h2>
+          <p className=" text-gray-700">
+            However, certain third-party service providers, such as payment gateways and other payment transaction processors, have their own privacy policies in respect to the information we are required to provide to them for your purchase-related transactions.
+          </p>
+
+           <p className=" text-gray-700 mt-4">
+            For these providers, we recommend that you read their privacy policies so you can understand the manner in which your personal information will be handled by these providers.
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            In particular, remember that certain providers may be located in or have facilities that are located a different jurisdiction than either you or us. So if you elect to proceed with a transaction that involves the services of a third-party service provider, then your information may become subject to the laws of the jurisdiction(s) in which that service provider or its facilities are located.
+          </p>
+          <p className=" text-gray-700 mt-4">
+            Once you leave our store’s website or are redirected to a third-party website or application, you are no longer governed by this Privacy Policy or our website’s Terms of Service.
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            Links
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            When you click on links on our store, they may direct you away from our site. We are not responsible for the privacy practices of other sites and encourage you to read their privacy statements.
+          </p>
+
+        </div>
+
       </div>
 
 
