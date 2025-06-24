@@ -86,7 +86,7 @@ function Footer() {
               <li><Link to='/about' className="hover:text-[#005f73]">About Us</Link></li>
               <li><Link to='/terms&conditions' className="hover:text-[#005f73]">Terms and Conditions Page</Link></li>
               <li><Link to='/Refund' className="hover:text-[#005f73]">Refund Policy</Link></li>
-              <li><a href="#" className="hover:text-[#005f73]">Contact Us</a></li>
+              <li><Link to="/contact" className="hover:text-[#005f73]">Contact Us</Link></li>
               <li><a href="#" className="hover:text-[#005f73]">Privacy Policy</a></li>
             </ul>
           </div>

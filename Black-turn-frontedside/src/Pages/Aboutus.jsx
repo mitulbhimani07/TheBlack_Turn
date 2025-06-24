@@ -88,43 +88,48 @@ function Aboutus() {
 
                   {/* our social media platform */}
 
-                 <div className=" bg-white p-15">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-[#004D5F] text-center mb-12">
-          Our Social Media Platforms
-        </h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {platforms.map((platform, index) => (
-            <div
-              key={platform.name}
-              className={`bg-[#EBF4F5] rounded-2xl p-8 shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group`}
-            >
-              <div className="text-center">
-                <div className={`w-20 h-20  rounded-full flex items-center justify-center mx-auto mb-6 text-3xl group-hover:scale-110 transition-transform duration-300`}>
-                  {platform.icon === '📘' && (
-                   <img src={facebook} alt="" srcset="" />
-                  )}
-                  {platform.icon === '📷' && (
-                    <img src={instagram} alt="" srcset="" />
-                  )}
-                  {platform.icon === '🐦' && (
-                    <img src={twitter} alt="" srcset="" className='w-18'/>
-                  )}
-                  {platform.icon === '📺' && (
-                    <img src={youtube} alt="" srcset="" />
-                  )}
-                </div>
-                
-                <h3 className={`text-2xl font-bold ${platform.textColor} mb-4`}>
-                  {platform.name}
-                </h3>
+              <div className="bg-white p-15">
+  <div className="max-w-6xl mx-auto">
+    <h1 className="text-4xl font-bold text-[#004D5F] text-center mb-12">
+      Our Social Media Platforms
+    </h1>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {platforms.map((platform, index) => (
+        <a
+          key={platform.name}
+          href={platform.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="no-underline"
+        >
+          <div className="bg-[#EBF4F5] rounded-2xl p-8 shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group h-full">
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl group-hover:scale-110 transition-transform duration-300">
+                {platform.icon === '📘' && (
+                  <img src={facebook} alt="Facebook" />
+                )}
+                {platform.icon === '📷' && (
+                  <img src={instagram} alt="Instagram" />
+                )}
+                {platform.icon === '🐦' && (
+                  <img src={twitter} alt="Twitter" className="w-18" />
+                )}
+                {platform.icon === '📺' && (
+                  <img src={youtube} alt="YouTube" />
+                )}
               </div>
+
+              <h3 className={`text-2xl font-bold ${platform.textColor} mb-4`}>
+                {platform.name}
+              </h3>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </a>
+      ))}
     </div>
+  </div>
+</div>
     </>
   )
 }
