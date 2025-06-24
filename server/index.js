@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;
 const db = require('./config/db');
 // Connect to the database
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 const cors = require('cors');
 app.use(cors());
 

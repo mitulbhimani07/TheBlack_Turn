@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Calendar, User, FileText, Image, Hash, AlignLeft } from 'lucide-react';
+import { AddBlog } from '../Api/api';
 
 function Blogform() {
 
@@ -10,7 +11,7 @@ function Blogform() {
     content: '',
     author: '',
     publishDate: '',
-    img: '',
+    image: '',
     description: ''
   });
 
@@ -42,81 +43,59 @@ function Blogform() {
     'blockquote', 'code-block'
   ];
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    // Clear error when user starts typing
+ const handleInputChange = (e) => {
+    const { name, value, type, files } = e.target;
+    if (type === 'file') {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, image: reader.result }));
+      };
+      if (file) reader.readAsDataURL(file);
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+
     if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
   // Handle React Quill content change
   const handleContentChange = (content) => {
-    setFormData(prev => ({
-      ...prev,
-      content: content
-    }));
-    // Clear content error when user starts typing
+    setFormData(prev => ({ ...prev, content }));
     if (errors.content) {
-      setErrors(prev => ({
-        ...prev,
-        content: ''
-      }));
+      setErrors(prev => ({ ...prev, content: '' }));
     }
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
     if (!formData.title.trim()) newErrors.title = 'Title is required';
-    
-    // Check if content is empty (React Quill returns <p><br></p> for empty content)
     const contentText = formData.content.replace(/<[^>]*>/g, '').trim();
-    if (!contentText || contentText === '') {
-      newErrors.content = 'Content is required';
-    }
-    
+    if (!contentText || contentText === '') newErrors.content = 'Content is required';
     if (!formData.author.trim()) newErrors.author = 'Author is required';
     if (!formData.publishDate) newErrors.publishDate = 'Publish date is required';
     if (!formData.description.trim()) newErrors.description = 'Description is required';
-    
     return newErrors;
   };
 
   const handleSubmit = async () => {
     const validationErrors = validateForm();
-    
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Blog data:', formData);
+      const result = await AddBlog(formData); // ✅ Call the API
+      console.log('API Response:', result);
       alert('Blog post created successfully!');
-      
-      // Reset form
-      setFormData({
-        title: '',
-        content: '',
-        author: '',
-        publishDate: '',
-        img: '',
-        description: ''
-      });
+      clearForm();
     } catch (error) {
       console.error('Error creating blog:', error);
+      alert('Failed to publish blog. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -128,7 +107,7 @@ function Blogform() {
       content: '',
       author: '',
       publishDate: '',
-      img: '',
+      image: '',
       description: ''
     });
     setErrors({});
@@ -220,8 +199,8 @@ function Blogform() {
                 </label>
                 <input
                   type="file"
-                  name="img"
-                  value={formData.img}
+                  name="image"
+                  // value={formData.image}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border-2 border-black rounded-lg text-black placeholder-gray-500 focus:outline-none transition-all duration-300 hover:shadow-md"
                   style={{ 
@@ -230,10 +209,10 @@ function Blogform() {
                   }}
                   placeholder="https://example.com/image.jpg"
                 />
-                {formData.img && (
+                {formData.image && (
                   <div className="mt-4 rounded-lg overflow-hidden border-2 border-black">
                     <img 
-                      src={formData.img} 
+                      src={formData.image} 
                       alt="Preview" 
                       className="w-full h-48 object-cover"
                       onError={(e) => {
@@ -281,6 +260,7 @@ function Blogform() {
                   <ReactQuill
                     theme="snow"
                     value={formData.content}
+                    name='content'
                     onChange={handleContentChange}
                     modules={quillModules}
                     formats={quillFormats}
