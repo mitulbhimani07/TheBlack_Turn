@@ -19,3 +19,63 @@
   transform: scale(1.25);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
+
+
+/* BlogForm.css */
+.ql-editor {
+  min-height: 200px !important;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: #EBF4F5 !important;
+}
+
+.ql-toolbar {
+  border-bottom: 2px solid #004D5F !important;
+  background-color: #fff !important;
+}
+
+.ql-container {
+  border: none !important;
+  background-color: #EBF4F5 !important;
+}
+
+.ql-editor.ql-blank::before {
+  color: #6b7280 !important;
+  font-style: italic;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: #004D5F;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose p {
+  margin-bottom: 1em;
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.prose blockquote {
+  border-left: 4px solid #004D5F;
+  padding-left: 1em;
+  font-style: italic;
+  margin: 1em 0;
+}
+
+.prose pre {
+  background-color: #f3f4f6;
+  padding: 1em;
+  border-radius: 0.5em;
+  overflow-x: auto;
+}
+
+.prose code {
+  background-color: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  font-size: 0.9em;
+}

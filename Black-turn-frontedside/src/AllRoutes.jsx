@@ -14,6 +14,7 @@ import TermsandConditions from './Pages/TermsandConditions'
 import Refunds from './Pages/Refunds'
 import Blog from './Pages/Blog'
 import Privacy from './Pages/Privacy'
+import Blogform from './Pages/Blogform'
 
 function AllRoutes() {
   return (
@@ -26,6 +27,7 @@ function AllRoutes() {
             <Route path='/Refund' element={<Refunds/>}/>
             <Route path='/privacy' element={<Privacy/>}/>
             <Route path="/blog" element={<Blog/>} />
+            <Route path='/blogform' element={<Blogform/>}/>
             <Route path='/terms&conditions' element={<TermsandConditions/>}/>
             <Route path="/services/music-distribution" element={<MusicDistribution/>} />
             <Route path="/services/music-video-distribution" element={<MusicVideoDistributionInIndia/>} />
