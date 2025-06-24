@@ -137,112 +137,112 @@ function Home() {
       name: "Pop FM",
       logo: figure,
       alt: "Pop FM Logo",
-      link:'https://www.youtube.com/c/Funmoji'
+      link: 'https://www.youtube.com/c/Funmoji'
     },
     {
       id: 2,
       name: "Client Name",
       logo: figure1,
       alt: "Client Logo",
-      link:'https://www.youtube.com/@SonaDeyYt'
+      link: 'https://www.youtube.com/@SonaDeyYt'
     },
     {
       id: 3,
       name: "Sports Club",
       logo: figure2,
       alt: "Sports Club Logo",
-      link:'https://www.youtube.com/user/3verma'
+      link: 'https://www.youtube.com/user/3verma'
     },
     {
       id: 4,
       name: "Gold Records",
       logo: figure3,
       alt: "Gold Records Logo",
-      link:'https://www.youtube.com/c/SriPurushottam'
+      link: 'https://www.youtube.com/c/SriPurushottam'
     },
     {
       id: 5,
       name: "Radio Raabta",
       logo: figure4,
       alt: "Radio Raabta Logo",
-      link:'https://www.facebook.com/radioraabta908/'
+      link: 'https://www.facebook.com/radioraabta908/'
     },
     {
       id: 6,
       name: "Orange Music",
       logo: figure5,
       alt: "Orange Music Logo",
-      link:'https://www.youtube.com/c/RadioSaiGlobalHarmony'
+      link: 'https://www.youtube.com/c/RadioSaiGlobalHarmony'
     },
     {
       id: 7,
       name: "Music Label",
       logo: figure6,
       alt: "Music Label Logo",
-      link:'https://www.youtube.com/@AppyRaja'
+      link: 'https://www.youtube.com/@AppyRaja'
     },
     {
       id: 8,
       name: "PTF Studio",
       logo: figure7,
       alt: "PTF Studio Logo",
-      link:'https://www.youtube.com/c/PTFStudio'
+      link: 'https://www.youtube.com/c/PTFStudio'
     },
     {
       id: 9,
       name: "Gaming Co",
       logo: figure8,
       alt: "Gaming Company Logo",
-      link:'https://www.youtube.com/c/SwaduStaffFilms'
+      link: 'https://www.youtube.com/c/SwaduStaffFilms'
     },
     {
       id: 10,
       name: "Madly Records",
       logo: figure9,
       alt: "Madly Records Logo",
-      link:'https://www.youtube.com/@mashqtalks'
+      link: 'https://www.youtube.com/@mashqtalks'
     },
     {
       id: 11,
       name: "News Channel",
       logo: figure10,
       alt: "News Channel Logo",
-      link:'https://www.youtube.com/@ArambhFilms'
+      link: 'https://www.youtube.com/@ArambhFilms'
     },
     {
       id: 12,
       name: "HK Media",
       logo: figure11,
       alt: "HK Media Logo",
-      link:'https://www.youtube.com/@HKProductionHomdev'
+      link: 'https://www.youtube.com/@HKProductionHomdev'
     },
     {
       id: 13,
       name: "Sunset Co",
       logo: figure12,
       alt: "Sunset Company Logo",
-      link:'https://www.youtube.com/channel/UC2XC5z9YsGy0CQXUolBr4nQ'
+      link: 'https://www.youtube.com/channel/UC2XC5z9YsGy0CQXUolBr4nQ'
     },
     {
       id: 14,
       name: "Tech Solutions",
       logo: figure13,
       alt: "Tech Solutions Logo",
-      link:'https://www.youtube.com/c/MEHFILMUSICS'
+      link: 'https://www.youtube.com/c/MEHFILMUSICS'
     },
     {
       id: 15,
       name: "Creative Hub",
       logo: figure14,
       alt: "Creative Hub Logo",
-      link:'https://www.youtube.com/c/GMCMUSICDevotional'
+      link: 'https://www.youtube.com/c/GMCMUSICDevotional'
     },
     {
       id: 16,
       name: "Magadhi Music",
       logo: figure15,
       alt: "Magadhi Music Logo",
-      link:'https://www.youtube.com/c/MagadhMusic1'
+      link: 'https://www.youtube.com/c/MagadhMusic1'
     }
   ];
 
@@ -695,37 +695,36 @@ function Home() {
         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
           {/* Left Text Content */}
           <div className="text-center xl:text-left">
-  <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px] mx-auto xl:mx-0">
-    Upload Unlimited Songs <br />
-    <span
-      className={`inline-block leading-normal transition-transform duration-500 transform ${
-        flip ? 'rotateX-180' : ''
-      } text-[#00758f]`}
-      style={{
-        display: 'inline-block',
-        transformStyle: 'preserve-3d',
-        perspective: '1000px',
-      }}
-    >
-      {texts[index]}
-    </span>
-  </h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 max-w-[700px] mx-auto xl:mx-0">
+              Upload Unlimited Songs <br />
+              <span
+                className={`inline-block leading-normal transition-transform duration-500 transform ${flip ? 'rotateX-180' : ''
+                  } text-[#00758f]`}
+                style={{
+                  display: 'inline-block',
+                  transformStyle: 'preserve-3d',
+                  perspective: '1000px',
+                }}
+              >
+                {texts[index]}
+              </span>
+            </h1>
 
-  <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0">
-    The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
-    share their creativity across more than 150 streaming platforms, including Spotify, Apple
-    Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
-    reach a wider audience, all while retaining an impressive 95% of your earnings. With our
-    user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
-    72 hours—ensuring your music is always at the forefront.
-  </p>
+            <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0">
+              The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
+              share their creativity across more than 150 streaming platforms, including Spotify, Apple
+              Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
+              reach a wider audience, all while retaining an impressive 95% of your earnings. With our
+              user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
+              72 hours—ensuring your music is always at the forefront.
+            </p>
 
-  <div className="mx-auto xl:mx-0 w-fit">
-    <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
-      Explore the Possibilities
-    </button>
-  </div>
-</div>
+            <div className="mx-auto xl:mx-0 w-fit">
+              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                Explore the Possibilities
+              </button>
+            </div>
+          </div>
 
 
           {/* Right Image Content */}
@@ -750,46 +749,46 @@ function Home() {
 
       {/* distribution your mmusic */}
       <section className="bg-white py-16">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Header */}
-    <div className="text-center mb-12 sm:mb-16">
-      <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold text-black mb-4 leading-tight">
-        DISTRIBUTE YOUR MUSIC WORLDWIDE
-      </h2>
-      <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl font-light mx-auto px-2">
-        Seamlessly Share Your Sound with the World for just{' '}
-        <span className="text-[#00758f] font-semibold">₹799/month</span>
-      </p>
-    </div>
-
-    {/* Cards */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
-      {features.map((item, index) => (
-        <motion.div
-          key={index}
-          custom={index}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-          className="hover-target group bg-white border-2 border-[#005f73] rounded-2xl p-6 sm:p-8 text-center shadow-md hover:border-[#00758f] transform hover:-translate-y-2 transition-all duration-500 ease-in-out"
-        >
-          {/* Icon */}
-          <div className="w-16 h-16 rounded-xl bg-[#ccdfe3] backdrop-blur-md flex items-center justify-center mb-6 mx-auto border border-[#ccdfe3] shadow-sm transition-all duration-300 group-hover:scale-110">
-            {item.icon}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold text-black mb-4 leading-tight">
+              DISTRIBUTE YOUR MUSIC WORLDWIDE
+            </h2>
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl font-light mx-auto px-2">
+              Seamlessly Share Your Sound with the World for just{' '}
+              <span className="text-[#00758f] font-semibold">₹799/month</span>
+            </p>
           </div>
 
-          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-black mb-2 transition-colors duration-300 group-hover:text-[#005f73]">
-            {item.title}
-          </h3>
-          <p className="text-gray-600 text-sm sm:text-base leading-relaxed group-hover:text-[#333] transition-colors duration-300">
-            {item.description}
-          </p>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
+            {features.map((item, index) => (
+              <motion.div
+                key={index}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={containerVariants}
+                className="hover-target group bg-white border-2 border-[#005f73] rounded-2xl p-6 sm:p-8 text-center shadow-md hover:border-[#00758f] transform hover:-translate-y-2 transition-all duration-500 ease-in-out"
+              >
+                {/* Icon */}
+                <div className="w-16 h-16 rounded-xl bg-[#ccdfe3] backdrop-blur-md flex items-center justify-center mb-6 mx-auto border border-[#ccdfe3] shadow-sm transition-all duration-300 group-hover:scale-110">
+                  {item.icon}
+                </div>
+
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-black mb-2 transition-colors duration-300 group-hover:text-[#005f73]">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base leading-relaxed group-hover:text-[#333] transition-colors duration-300">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
 
       {/* Distribute On​ section */}
@@ -844,7 +843,7 @@ function Home() {
                     src={platform.icon}
                     alt={platform.name}
                     className="w-12 h-12 object-contain"
-                   
+
                   />
                 </motion.div>
               ))}
@@ -888,14 +887,14 @@ function Home() {
                   whileHover={{
                     borderColor: "#648f94",
                     boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
-                    
+
                   }}
                 >
                   <motion.img
                     src={platform.icon}
                     alt={platform.name}
                     className="w-16 h-16 object-contain"
-                   
+
                   />
                 </motion.div>
               ))}
@@ -953,32 +952,32 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
             {/* Left Content */}
-           <div className="order-2 lg:order-1 text-center xl:text-left">
-  <h2 className="text-[32px] sm:text-[36px] lg:text-[42px] font-bold text-black mb-6 mx-auto xl:mx-0 max-w-2xl">
-    150+ Stores
-  </h2>
+            <div className="order-2 lg:order-1 text-center xl:text-left">
+              <h2 className="text-[32px] sm:text-[36px] lg:text-[42px] font-bold text-black mb-6 mx-auto xl:mx-0 max-w-2xl">
+                150+ Stores
+              </h2>
 
-  <p className="text-gray-600 text-sm font-bold mb-4 mx-auto xl:mx-0 max-w-xl">
-    Release Song On National And International Platforms.
-  </p>
+              <p className="text-gray-600 text-sm font-bold mb-4 mx-auto xl:mx-0 max-w-xl">
+                Release Song On National And International Platforms.
+              </p>
 
-  <p className="text-gray-700 text-base leading-relaxed mb-8 mx-auto xl:mx-0 max-w-lg">
-    Unlimited music distribution - Get your music on Gaana, JioSaavn,
-    Wynk Music, Spotify, iTunes/Apple Music, Shazam, Tidal, Amazon,
-    YouTube Music, Deezer, and 150+ more digital music platforms worldwide.
-    Earn more sales and get more fans and more money. We provide a
-    stable tune for you to think of all about money, there your data we
-    never touch your fan base, and own friends. As a 100% safe music
-    person — we know you hear Distribute, license & monetize all in one
-    place.
-  </p>
+              <p className="text-gray-700 text-base leading-relaxed mb-8 mx-auto xl:mx-0 max-w-lg">
+                Unlimited music distribution - Get your music on Gaana, JioSaavn,
+                Wynk Music, Spotify, iTunes/Apple Music, Shazam, Tidal, Amazon,
+                YouTube Music, Deezer, and 150+ more digital music platforms worldwide.
+                Earn more sales and get more fans and more money. We provide a
+                stable tune for you to think of all about money, there your data we
+                never touch your fan base, and own friends. As a 100% safe music
+                person — we know you hear Distribute, license & monetize all in one
+                place.
+              </p>
 
-  <div className="mx-auto xl:mx-0 w-fit">
-    <button className="bg-[#005f73] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 transform hover:scale-105">
-      Join Now
-    </button>
-  </div>
-</div>
+              <div className="mx-auto xl:mx-0 w-fit">
+                <button className="bg-[#005f73] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 transform hover:scale-105">
+                  Join Now
+                </button>
+              </div>
+            </div>
 
 
             {/* Right Image Placeholder */}
@@ -1143,167 +1142,163 @@ function Home() {
       </section>
 
       {/* step section */}
-       <section className="bg-white pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto flex justify-center">
-        <div className="w-full flex justify-center">
-        {/* Desktop Flow - Hidden on mobile and tablet */}
-        <div className="hidden xl:block w-full  justify-center">
-          <div className="relative max-w-6xl w-full flex justify-center">
-            {/* Connecting Dashed Line */}
-            <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
+      <section className="bg-white pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto flex justify-center">
+          <div className="w-full flex justify-center">
+            {/* Desktop Flow - Hidden on mobile and tablet */}
+            <div className="hidden xl:block w-full  justify-center">
+              <div className="relative max-w-6xl w-full flex justify-center">
+                {/* Connecting Dashed Line */}
+                <div className="absolute top-1/2 left-0 right-0 border-t border-dashed border-[#00b4d8] transform -translate-y-1/2 z-0"></div>
 
-            {/* Steps */}
-            <div className="relative z-10 grid grid-cols-4 gap-x-12 2xl:gap-x-20 gap-y-8 justify-center items-center w-full">
-              {steps.map((step, index) => {
-                const Icon = step.icon;
-                return (
-                  <div
-                    key={step.id}
-                    className={`group cursor-pointer transition-all duration-500 ${
-                      activeStep === index ? 'scale-105' : 'hover:scale-102'
-                    }`}
-                    onMouseEnter={() => setActiveStep(index)}
-                  >
-                    <div
-                      className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
-                        activeStep === index ? 'shadow-2xl shadow-current/20' : ''
-                      }`}
-                    >
-                      {/* Step Number Badge */}
-                      <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
-                        <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
-                          {step.id}
+                {/* Steps */}
+                <div className="relative z-10 grid grid-cols-4 gap-x-12 2xl:gap-x-20 gap-y-8 justify-center items-center w-full">
+                  {steps.map((step, index) => {
+                    const Icon = step.icon;
+                    return (
+                      <div
+                        key={step.id}
+                        className={`group cursor-pointer transition-all duration-500 ${activeStep === index ? 'scale-105' : 'hover:scale-102'
+                          }`}
+                        onMouseEnter={() => setActiveStep(index)}
+                      >
+                        <div
+                          className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                            }`}
+                        >
+                          {/* Step Number Badge */}
+                          <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
+                            <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
+                              {step.id}
+                            </div>
+                          </div>
+
+                          {/* Icon */}
+                          <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                            <Icon className="w-8 h-8 text-white" />
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="text-xl font-bold text-black text-center">
+                            {step.title}
+                          </h3>
+
+                          {/* Arrow */}
+                          {index < steps.length - 1 && (
+                            <div className="absolute right-[-30px] 2xl:right-[-50px] top-1/2 transform -translate-y-1/2">
+                              <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
+                                <ArrowRight className="w-4 h-4 text-white" />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Tablet Flow - 2 columns for medium to large tablets */}
+            <div className="hidden md:block xl:hidden w-full  justify-center">
+              <div className="grid grid-cols-2 gap-6 lg:gap-8 max-w-4xl w-full justify-center items-center">
+                {steps.map((step, index) => {
+                  const Icon = step.icon;
+                  const isEven = index % 2 === 0;
+                  const isLastRow = index >= steps.length - 2;
+
+                  return (
+                    <div key={step.id} className="relative">
+                      <div
+                        className={`group cursor-pointer transition-all duration-500 ${activeStep === index ? 'scale-105' : 'hover:scale-102'
+                          }`}
+                        onMouseEnter={() => setActiveStep(index)}
+                      >
+                        <div
+                          className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-56 lg:h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${activeStep === index ? 'shadow-2xl shadow-current/20' : ''
+                            }`}
+                        >
+                          {/* Step Number Badge */}
+                          <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
+                            <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
+                              {step.id}
+                            </div>
+                          </div>
+
+                          {/* Icon */}
+                          <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+                            <Icon className="w-7 h-7 lg:w-8 lg:h-8 text-white" />
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="text-lg lg:text-xl font-bold text-black text-center">
+                            {step.title}
+                          </h3>
                         </div>
                       </div>
 
-                      {/* Icon */}
-                      <div className="w-16 h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                        <Icon className="w-8 h-8 text-white" />
+                      {/* Connecting Lines for Tablet */}
+                      {index < steps.length - 1 && (
+                        <>
+                          {/* Horizontal line to next item in same row */}
+                          {!isEven && index < steps.length - 1 && (
+                            <div className="absolute right-[-24px] top-1/2 transform -translate-y-1/2 hidden">
+                              <div className="w-12 h-0.5 bg-[#00b4d8] border-dashed"></div>
+                            </div>
+                          )}
+
+                          {/* Vertical line down to next row */}
+                          {isEven && !isLastRow && (
+                            <div className="absolute bottom-[-24px] left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+                              <div className="w-0.5 h-6 bg-[#00b4d8]"></div>
+                              <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md -mt-1">
+                                <ArrowRight className="w-4 h-4 text-white transform rotate-90" />
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile Flow - Single column for small screens */}
+            <div className="md:hidden space-y-6 w-full flex flex-col items-center justify-center">
+              <div className="w-full max-w-md space-y-6">
+                {steps.map((step) => {
+                  const Icon = step.icon;
+                  return (
+                    <div key={step.id} className="relative w-full flex flex-col items-center">
+                      <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-56 sm:h-64 p-4 sm:p-6 backdrop-blur-sm flex flex-col justify-center w-full max-w-sm">
+                        <div className="flex items-center gap-4 mb-4 justify-center">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
+                            <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
+                            {step.id}
+                          </div>
+                        </div>
+                        <h3 className="text-lg sm:text-xl font-bold text-black mb-3 text-center">
+                          {step.title}
+                        </h3>
                       </div>
 
-                      {/* Title */}
-                      <h3 className="text-xl font-bold text-black text-center">
-                        {step.title}
-                      </h3>
-
-                      {/* Arrow */}
-                      {index < steps.length - 1 && (
-                        <div className="absolute right-[-30px] 2xl:right-[-50px] top-1/2 transform -translate-y-1/2">
-                          <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md">
-                            <ArrowRight className="w-4 h-4 text-white" />
-                          </div>
+                      {/* Vertical Line */}
+                      {step.id < steps.length && (
+                        <div className="flex justify-center py-4">
+                          <div className="w-0.5 h-8 bg-[#005f73]"></div>
                         </div>
                       )}
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Tablet Flow - 2 columns for medium to large tablets */}
-        <div className="hidden md:block xl:hidden w-full  justify-center">
-          <div className="grid grid-cols-2 gap-6 lg:gap-8 max-w-4xl w-full justify-center items-center">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              const isEven = index % 2 === 0;
-              const isLastRow = index >= steps.length - 2;
-              
-              return (
-                <div key={step.id} className="relative">
-                  <div
-                    className={`group cursor-pointer transition-all duration-500 ${
-                      activeStep === index ? 'scale-105' : 'hover:scale-102'
-                    }`}
-                    onMouseEnter={() => setActiveStep(index)}
-                  >
-                    <div
-                      className={`relative bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-56 lg:h-64 p-6 backdrop-blur-sm transition-all duration-500 flex flex-col justify-center items-center ${
-                        activeStep === index ? 'shadow-2xl shadow-current/20' : ''
-                      }`}
-                    >
-                      {/* Step Number Badge */}
-                      <div className="absolute top-[18px] left-1/2 transform -translate-x-1/2 z-20">
-                        <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-lg ring-2 ring-white">
-                          {step.id}
-                        </div>
-                      </div>
-
-                      {/* Icon */}
-                      <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-xl bg-[#004d5f] flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                        <Icon className="w-7 h-7 lg:w-8 lg:h-8 text-white" />
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="text-lg lg:text-xl font-bold text-black text-center">
-                        {step.title}
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Connecting Lines for Tablet */}
-                  {index < steps.length - 1 && (
-                    <>
-                      {/* Horizontal line to next item in same row */}
-                      {!isEven && index < steps.length - 1 && (
-                        <div className="absolute right-[-24px] top-1/2 transform -translate-y-1/2 hidden">
-                          <div className="w-12 h-0.5 bg-[#00b4d8] border-dashed"></div>
-                        </div>
-                      )}
-                      
-                      {/* Vertical line down to next row */}
-                      {isEven && !isLastRow && (
-                        <div className="absolute bottom-[-24px] left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-                          <div className="w-0.5 h-6 bg-[#00b4d8]"></div>
-                          <div className="w-8 h-8 bg-[#005f73] rounded-full flex items-center justify-center border-2 border-[#004d5f] shadow-md -mt-1">
-                            <ArrowRight className="w-4 h-4 text-white transform rotate-90" />
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile Flow - Single column for small screens */}
-        <div className="md:hidden space-y-6 w-full flex flex-col items-center justify-center">
-          <div className="w-full max-w-md space-y-6">
-          {steps.map((step) => {
-            const Icon = step.icon;
-            return (
-              <div key={step.id} className="relative w-full flex flex-col items-center">
-                <div className="bg-[#ebf4f5] border-[#005f73] border-2 hexagon h-56 sm:h-64 p-4 sm:p-6 backdrop-blur-sm flex flex-col justify-center w-full max-w-sm">
-                  <div className="flex items-center gap-4 mb-4 justify-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#005f73] flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-[#005f73] text-white font-bold text-sm flex items-center justify-center shadow-md">
-                      {step.id}
-                    </div>
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-black mb-3 text-center">
-                    {step.title}
-                  </h3>
-                </div>
-
-                {/* Vertical Line */}
-                {step.id < steps.length && (
-                  <div className="flex justify-center py-4">
-                    <div className="w-0.5 h-8 bg-[#005f73]"></div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-        </div>
-      </div>
-    </section>
+      </section>
       <section className="bg-white py-16 px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -1409,8 +1404,8 @@ function Home() {
                   <div className="relative h-[500px] flex items-end">
                     <motion.div
                       className="relative w-72 sm:w-80 lg:w-96 h-[550px] -mt-12"
-                      // whileHover={{ scale: 1.02 }}
-                      // transition={{ type: "spring", stiffness: 200 }}
+                    // whileHover={{ scale: 1.02 }}
+                    // transition={{ type: "spring", stiffness: 200 }}
                     >
                       <img
                         src={businessowner}
@@ -1467,17 +1462,17 @@ function Home() {
                   </button>
 
                   {isActive && (
-                      <div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        // transition={{ duration: 0.3 }}
-                        className="overflow-hidden px-5 pb-5 text-gray-700"
-                      >
-                        <div>{item.description}</div>
-                      </div>
-                    )}
+                    <div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      // transition={{ duration: 0.3 }}
+                      className="overflow-hidden px-5 pb-5 text-gray-700"
+                    >
+                      <div>{item.description}</div>
+                    </div>
+                  )}
 
                   {/* <AnimatePresence initial={false}>
                     
@@ -1491,93 +1486,93 @@ function Home() {
       <section className="pb-16 max-w-7xl mx-auto bg-white">
         {/* Music Distribution Section */}
         <div className=" flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
-         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
-  {/* Left Text Content */}
-  <div className="space-y-6 text-center xl:text-left">
-    <p className="text-gray-700 text-base md:text-[19px] max-w-[650px] mx-auto xl:mx-0">
-      Make money with worldwide music distribution
-    </p>
+          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+            {/* Left Text Content */}
+            <div className="space-y-6 text-center xl:text-left">
+              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px] mx-auto xl:mx-0">
+                Make money with worldwide music distribution
+              </p>
 
-    <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] mx-auto xl:mx-0 leading-tight">
-      Upload Unlimited Songs
-    </h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] mx-auto xl:mx-0 leading-tight">
+                Upload Unlimited Songs
+              </h1>
 
-    <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0 leading-relaxed">
-      The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
-      share their creativity across more than 150 streaming platforms, including Spotify, Apple
-      Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
-      reach a wider audience, all while retaining an impressive 95% of your earnings. With our
-      user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
-      72 hours—ensuring your music is always at the forefront.
-    </p>
+              <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0 leading-relaxed">
+                The Black Turn is your gateway to global music distribution, empowering artists to seamlessly
+                share their creativity across more than 150 streaming platforms, including Spotify, Apple
+                Music, and JioSaavn. By choosing our services, you will unlock the potential for your music to
+                reach a wider audience, all while retaining an impressive 95% of your earnings. With our
+                user-friendly platform, you can upload unlimited tracks and watch them go live in as little as
+                72 hours—ensuring your music is always at the forefront.
+              </p>
 
-    <div className="mx-auto xl:mx-0 w-fit">
-      <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
-        Join Now
-      </button>
-    </div>
-  </div>
+              <div className="mx-auto xl:mx-0 w-fit">
+                <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                  Join Now
+                </button>
+              </div>
+            </div>
 
-  {/* Right Image Content */}
-  <div className="flex items-center justify-center">
-    <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
-      {/* Second border layer (furthest back) */}
-      <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 right-2 sm:right-3 lg:right-4 xl:right-5 z-0"></div>
+            {/* Right Image Content */}
+            <div className="flex items-center justify-center">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+                {/* Second border layer (furthest back) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 right-2 sm:right-3 lg:right-4 xl:right-5 z-0"></div>
 
-      {/* First border layer (middle) */}
-      <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 right-4 sm:right-6 lg:right-8 xl:right-10 z-10"></div>
+                {/* First border layer (middle) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 right-4 sm:right-6 lg:right-8 xl:right-10 z-10"></div>
 
-      {/* Main content box (front) */}
-      <img
-        src={MusicDistribution}
-        alt="Music Distribution Banner"
-        className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
-      />
-    </div>
-  </div>
-</div>
+                {/* Main content box (front) */}
+                <img
+                  src={MusicDistribution}
+                  alt="Music Distribution Banner"
+                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
 
         </div>
 
         {/* Mobile Operator Licensing Section */}
         <div className=" flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
-         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
-  {/* Right Text Content (comes first on sm & lg, second on xl) */}
-  <div className="space-y-6 order-1 lg:order-1 xl:order-2 text-center xl:text-left">
-    <p className="text-gray-700 text-base md:text-[19px] max-w-[650px] mx-auto xl:mx-0">
-      Caller Tune Distribution India
-    </p>
-    <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] mx-auto xl:mx-0 leading-tight">
-      Mobile Operator Licensing
-    </h1>
-    <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0 leading-relaxed">
-      Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
-    </p>
-    <div className="mx-auto xl:mx-0 w-fit">
-      <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
-        Join Now
-      </button>
-    </div>
-  </div>
+          <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center relative z-10">
+            {/* Right Text Content (comes first on sm & lg, second on xl) */}
+            <div className="space-y-6 order-1 lg:order-1 xl:order-2 text-center xl:text-left">
+              <p className="text-gray-700 text-base md:text-[19px] max-w-[650px] mx-auto xl:mx-0">
+                Caller Tune Distribution India
+              </p>
+              <h1 className="text-4xl md:text-5xl font-bold text-black max-w-[700px] mx-auto xl:mx-0 leading-tight">
+                Mobile Operator Licensing
+              </h1>
+              <p className="text-gray-700 text-base md:text-[16px] max-w-[650px] mx-auto xl:mx-0 leading-relaxed">
+                Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
+              </p>
+              <div className="mx-auto xl:mx-0 w-fit">
+                <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                  Join Now
+                </button>
+              </div>
+            </div>
 
-  {/* Left Image Content (comes second on sm & lg, first on xl) */}
-  <div className="flex items-center justify-center order-2 lg:order-2 xl:order-1">
-    <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
-      {/* Second border layer (furthest back) */}
-      <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 left-2 sm:left-3 lg:left-4 xl:left-5 z-0"></div>
+            {/* Left Image Content (comes second on sm & lg, first on xl) */}
+            <div className="flex items-center justify-center order-2 lg:order-2 xl:order-1">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-96 xl:h-96 flex justify-center items-center">
+                {/* Second border layer (furthest back) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-4 sm:top-6 lg:top-8 xl:top-10 left-2 sm:left-3 lg:left-4 xl:left-5 z-0"></div>
 
-      {/* First border layer (middle) */}
-      <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 left-4 sm:left-6 lg:left-8 xl:left-10 z-10"></div>
+                {/* First border layer (middle) */}
+                <div className="absolute w-full h-full border-2 sm:border-3 lg:border-4 border-[#075c7c] rounded-xl top-2 sm:top-3 lg:top-4 xl:top-5 left-4 sm:left-6 lg:left-8 xl:left-10 z-10"></div>
 
-      {/* Main content box (front) */}
-      <img
-        src={MobileOperatorLicensing}
-        alt="Mobile Operator Licensing Banner"
-        className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
-      />
-    </div>
-  </div>
-</div>
+                {/* Main content box (front) */}
+                <img
+                  src={MobileOperatorLicensing}
+                  alt="Mobile Operator Licensing Banner"
+                  className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
 
         </div>
       </section>
@@ -1979,26 +1974,26 @@ function Home() {
 
           {/* Client Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-  {clients.map((client) => (
-    <a
-      key={client.id}
-      href={client.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block"
-    >
-      <div className="bg-white rounded-lg border-2 border-slate-200 p-6 shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer group">
-        <div className="flex items-center justify-center h-20">
-          <img
-            src={client.logo}
-            alt={client.alt}
-            className="max-w-full max-h-full object-contain group-hover:grayscale-0 transition-all duration-300"
-          />
-        </div>
-      </div>
-    </a>
-  ))}
-</div>
+            {clients.map((client) => (
+              <a
+                key={client.id}
+                href={client.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="bg-white rounded-lg border-2 border-slate-200 p-6 shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer group">
+                  <div className="flex items-center justify-center h-20">
+                    <img
+                      src={client.logo}
+                      alt={client.alt}
+                      className="max-w-full max-h-full object-contain group-hover:grayscale-0 transition-all duration-300"
+                    />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
 
 
         </div>
