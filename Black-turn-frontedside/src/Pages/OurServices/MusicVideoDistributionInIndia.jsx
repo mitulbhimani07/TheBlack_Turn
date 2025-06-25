@@ -30,6 +30,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 import { FaUpload } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 
 
@@ -668,9 +669,9 @@ Global stage, local roots. Share your music video with the world—start distrib
             </div>
 
             <div className="mt-8">
-    <button className="bg-[#005F73] text-white flex items-center text-lg font-medium py-3 px-6 rounded-lg transition duration-300">
+    <Link to="/signin" className="bg-[#005F73] text-white flex items-center text-lg font-medium py-3 px-6 rounded-lg transition duration-300 w-[300px]">
       <FaUpload className='me-4'/>Submit Your Video
-    </button>
+    </Link>
   </div>
 
           </div>
