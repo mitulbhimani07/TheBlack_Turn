@@ -12,7 +12,7 @@ function Blogform() {
     author: '',
     publishDate: '',
     image: '',
-    description: ''
+    Description: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -76,7 +76,7 @@ function Blogform() {
     if (!contentText || contentText === '') newErrors.content = 'Content is required';
     if (!formData.author.trim()) newErrors.author = 'Author is required';
     if (!formData.publishDate) newErrors.publishDate = 'Publish date is required';
-    if (!formData.description.trim()) newErrors.description = 'Description is required';
+    if (!formData.Description.trim()) newErrors.Description = 'Description is required';
     return newErrors;
   };
 
@@ -230,19 +230,19 @@ function Blogform() {
                   Description
                 </label>
                 <textarea
-                  name="description"
-                  value={formData.description}
+                  name="Description"
+                  value={formData.Description}
                   onChange={handleInputChange}
                   rows={4}
                   className="w-full px-4 py-3 border-2 rounded-lg text-black placeholder-gray-500 focus:outline-none transition-all duration-300 hover:shadow-md resize-none"
                   style={{ 
                     backgroundColor: '#EBF4F5',
-                    borderColor: errors.description ? '#ef4444' : '#004D5F'
+                    borderColor: errors.Description ? '#ef4444' : '#004D5F'
                   }}
                   placeholder="Write a compelling description for your blog post..."
                 />
-                {errors.description && <p className="text-red-500 text-sm mt-2">{errors.description}</p>}
-                <p className="text-gray-600 text-xs mt-2">{formData.description.length}/100 characters</p>
+                {errors.Description && <p className="text-red-500 text-sm mt-2">{errors.Description}</p>}
+                <p className="text-gray-600 text-xs mt-2">{formData.Description.length}/100 characters</p>
               </div>
 
               {/* Content Field with React Quill */}
