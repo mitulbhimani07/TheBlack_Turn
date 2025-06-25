@@ -788,90 +788,92 @@ const MusicDistribution = () => {
       </div>
     </section>
       {/* Upload Music Section */}
-      <section className="py-20 bg-[] text-[#005f73]">
-        <div className="container mx-auto  max-w-5xl">
-          <div className="flex flex-col lg:flex-row gap-20 items-center">
-            {/* Left Content */}
-            <div className="flex-1">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                You keep 100% of your royalties!
-              </h2>
-              <p className="text-gray-700 mb-6 text-lg">
-                The Black Turn never takes a cut of your deals. Each penny you gain is put right into you’re the Black Turn account. At Black Turn, we know that your money matters and we respect your passion for music.Comprehensive Sales Data
-              </p>
+     <section className="py-12 sm:py-16 md:py-20 bg-[] text-[#005f73]">
+      <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row gap-12 sm:gap-16 lg:gap-20 items-center">
+          {/* Left Content */}
+          <div className="flex-1">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+              You keep 100% of your royalties!
+            </h2>
+            <p className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed">
+              The Black Turn never takes a cut of your deals. Each penny you gain is put right into you're the Black Turn account. At Black Turn, we know that your money matters and we respect your passion for music.Comprehensive Sales Data
+            </p>
 
-              <p className="text-gray-700 mb-8 text-lg">
-                Discover out precisely where fans are downloading and spilling your music so you’ll be able to increment showcasing endeavors and arrange visits around those cities. We make sure that you reach the audience which you are targeting and deliver your music to them.
-              </p>
-            </div>
-            {/* Right Image - Placeholder for music upload illustration */}
-            <div className="flex-1">
-              <div className="bg-gray-700 rounded-xl  aspect-square flex items-center justify-center">
-                <img src={royalite} alt="" />
-              </div>
+            <p className="text-gray-700 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">
+              Discover out precisely where fans are downloading and spilling your music so you'll be able to increment showcasing endeavors and arrange visits around those cities. We make sure that you reach the audience which you are targeting and deliver your music to them.
+            </p>
+          </div>
+          
+          {/* Right Image - Placeholder for music upload illustration */}
+          <div className="flex-1 w-full">
+            <div className="bg-gray-700 rounded-xl aspect-square flex items-center justify-center max-w-md mx-auto lg:max-w-none">
+              <img src={royalite} alt="" className="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
-        {/* IRSC and UPC */}
-        {/* Features Section */}
-        <div className="mt-20 lg:px-12">
-          <div className="grid md:grid-cols-3 gap-8">
-            {feature.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-6 border border-gray-100 shadow-lg transition duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:border-[#005f73]"
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 p-3 bg-gray-50 rounded-lg">
-                    {feature.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[#005f73] mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
+      </div>
+
+      {/* IRSC and UPC */}
+      {/* Features Section */}
+      <div className="mt-12 sm:mt-16 lg:mt-20 px-4 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+          {feature.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl p-4 sm:p-6 border border-gray-100 shadow-lg transition duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:border-[#005f73]"
+            >
+              <div className="flex items-start space-x-3 sm:space-x-4">
+                <div className="flex-shrink-0 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                  {feature.icon}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-[#005f73] mb-2 sm:mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section className="bg-[#005f73] mx-16 rounded-3xl py-16 px-4">
-        <div className="max-w-7xl mx-auto text-center text-black px-4">
-          <h2 className="text-2xl font-medium text-white mb-2 tracking-wider uppercase">What We Do</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-10">
-            {whatWeDoItems.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300"
-              >
-                <img
-                  src={item.icon}
-                  alt={item.title}
-                  className="w-20 h-20 mb-4 object-contain"
-                />
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-700">{item.description}</p>
-              </div>
-            ))}
-          </div>
+     <section className="bg-[#005f73] mx-2 sm:mx-4 md:mx-8 lg:mx-12 xl:mx-16 rounded-2xl sm:rounded-3xl py-8 sm:py-12 md:py-16 px-2 sm:px-4">
+      <div className="max-w-7xl mx-auto text-center text-black px-2 sm:px-4">
+        <h2 className="text-xl sm:text-2xl font-medium text-white mb-2 tracking-wider uppercase">What We Do</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 mt-6 sm:mt-8 md:mt-10">
+          {whatWeDoItems.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center p-4 sm:p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300"
+            >
+              <img
+                src={item.icon}
+                alt={item.title}
+                className="w-16 h-16 sm:w-20 sm:h-20 mb-3 sm:mb-4 object-contain"
+              />
+              <h3 className="text-base sm:text-lg font-semibold mb-2">{item.title}</h3>
+              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">{item.description}</p>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* Bottom Content */}
-        <div className="mt-20 max-w-5xl mx-auto text-center px-4">
-          <h2 className="text-2xl font-bold mb-4">Digital Music Distribution</h2>
-          <p className="text-white leading-relaxed">
-            <strong>Copyright Protection:</strong> Take control of your sound. Make beyond any doubt individuals do not take credit for or monetize your substance without your assent. Choose how you’d like reuploaded substance to be managed on numerous stages. We help to do so for you.
-          </p>
-          <p className="text-white mt-4 leading-relaxed">
-            <strong>Record Label Tools:</strong> Our client entrance has a full suite of devices, permitting total administration of your specialists and resources. Take advantage of full analytics, income detailing, music dispersion, and rights administration.
-          </p>
-        </div>
-      </section>
+      {/* Bottom Content */}
+      <div className="mt-12 sm:mt-16 md:mt-20 max-w-5xl mx-auto text-center px-2 sm:px-4">
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-white">Digital Music Distribution</h2>
+        <p className="text-white leading-relaxed text-sm sm:text-base">
+          <strong>Copyright Protection:</strong> Take control of your sound. Make beyond any doubt individuals do not take credit for or monetize your substance without your assent. Choose how you'd like reuploaded substance to be managed on numerous stages. We help to do so for you.
+        </p>
+        <p className="text-white mt-3 sm:mt-4 leading-relaxed text-sm sm:text-base">
+          <strong>Record Label Tools:</strong> Our client entrance has a full suite of devices, permitting total administration of your specialists and resources. Take advantage of full analytics, income detailing, music dispersion, and rights administration.
+        </p>
+      </div>
+    </section>
       <section className="bg-gray-100 py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#005f73] mb-2">
@@ -904,54 +906,60 @@ const MusicDistribution = () => {
       </section>
       <section>
         {/* Hero Section */}
-        <div className="relative overflow-hidden mx-10 rounded-2xl my-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
-          <div className="relative max-w-7xl mx-auto px-6 py-20">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-full mb-8 shadow-2xl">
-                <span className="text-3xl font-bold text-white">₹</span>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Pay After Work Done
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto leading-relaxed">
-                #1 First time in India pay after work is done. We want to increase our customer trust for us.
+        <div className="relative overflow-hidden mx-2 sm:mx-4 md:mx-6 lg:mx-8 xl:mx-10 rounded-xl sm:rounded-2xl my-6 sm:my-8 md:my-10">
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-full mb-6 sm:mb-8 shadow-2xl">
+            <span className="text-2xl sm:text-3xl font-bold text-white">₹</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
+            Pay After Work Done
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-3 sm:mb-4 max-w-3xl mx-auto leading-relaxed px-2">
+            #1 First time in India pay after work is done. We want to increase our customer trust for us.
+          </p>
+          <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#005f73] mb-8 sm:mb-12">
+            Your trust is our success.
+          </p>
+        </div>
+
+        {/* Main Action Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20">
+          <div className="group bg-gradient-to-br from-[#005f73] to-[#0a9396] p-6 sm:p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
+            <div className="text-center">
+              <Phone className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4 sm:mb-6 text-white" />
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-white">Let's talk!</h3>
+              <p className="text-base sm:text-lg mb-6 sm:mb-8 text-gray-100 leading-relaxed">
+                For More Info Call Now. We Talk in Hindi, English, Punjabi, Haryanvi, Bhojpuri
               </p>
-              <p className="text-2xl md:text-3xl font-semibold text-[#005f73] mb-12">
-                Your trust is our success.
-              </p>
+              <a 
+                href="tel:9274466809" 
+                className="inline-block bg-white text-[#005f73] px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                CALL NOW
+              </a>
             </div>
+          </div>
 
-            {/* Main Action Cards */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20">
-              <div className="group bg-gradient-to-br from-[#005f73] to-[#0a9396] p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
-                <div className="text-center">
-                  <Phone className="w-12 h-12 mx-auto mb-6 text-white" />
-                  <h3 className="text-3xl font-bold mb-4 text-white">Let's talk!</h3>
-                  <p className="text-lg mb-8 text-gray-100 leading-relaxed">
-                    For More Info Call Now. We Talk in Hindi, English, Punjabi, Haryanvi, Bhojpuri
-                  </p>
-                  <a href="tel:9274466809" className="bg-white text-[#005f73] px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    CALL NOW
-                  </a>
-                </div>
-              </div>
-
-              <div className="group bg-gradient-to-br from-gray-900 to-black border-2 border-[#005f73] p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
-                <div className="text-center">
-                  <Shield className="w-12 h-12 mx-auto mb-6 text-[#005f73]" />
-                  <h3 className="text-3xl font-bold mb-4 text-white">Why Think ?</h3>
-                  <p className="text-lg mb-8 text-gray-300 leading-relaxed">
-                    Pay After Work Done.
-                  </p>
-                  <Link to="/pricing" className="bg-[#005f73] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#0a9396] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    GET PRICE
-                  </Link>
-                </div>
-              </div>
+          <div className="group bg-gradient-to-br from-gray-900 to-black border-2 border-[#005f73] p-6 sm:p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
+            <div className="text-center">
+              <Shield className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4 sm:mb-6 text-[#005f73]" />
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-white">Why Think ?</h3>
+              <p className="text-base sm:text-lg mb-6 sm:mb-8 text-gray-300 leading-relaxed">
+                Pay After Work Done.
+              </p>
+              <Link 
+                to="/pricing" 
+                className="inline-block bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-[#0a9396] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                GET PRICE
+              </Link>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
         {/* FAQ Section */}
         <div className="py-20 bg-gradient-to-b from-black to-gray-900">
