@@ -4,10 +4,13 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;
 // const db = require('./config/db');
 // Connect to the database
+require('dotenv').config();
+
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 const cors = require('cors');
 app.use(cors());
+
 // Database connection
 const mongoose = require('mongoose');
     mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res)=>{
