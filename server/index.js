@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 // Import routes
 app.use('/blogs', require('./routes/blog'));
-app.use('/user', require('./routes/user'));
+app.use('/user', require('./routes/userRoutes'));
 
 app.listen(port, (err) => {
     if (err) {
