@@ -47,9 +47,8 @@ module.exports.createBlog = async (req, res) => {
 };
 module.exports.getAllBlogs = async (req, res) => {
     try {
-        const blogs = await BlogModel.find().sort({ publishDate: -1 }); // Sort by publish date descending
-        console.log('Received request to get all blogs', blogs);
-        
+        const blogs = await BlogModel.find();
+        console.log('Received request to get all blogs');
         res.status(200).json({ message: 'Blogs retrieved successfully', data: blogs });
     } catch (error) {
         console.error('Error retrieving blogs:', error);
