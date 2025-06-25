@@ -83,7 +83,7 @@ const Contact = () => {
               >
                 <div className="mb-4 flex justify-center">{item.icon}</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-base uppercase">{item.description}</p>
+                <p className="text-gray-600 text-base lowercase">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -106,7 +106,7 @@ const Contact = () => {
           >
             <iframe
               title="Company Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.7153213181423!2d72.49919907531311!3d22.99749357919135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9b2a41bde76d%3A0xdf3dc198626a6d56!2sTitanium%20Business%20Park!5e0!3m2!1sen!2sin!4v1750412098467!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.235524095017!2d77.05225237549499!3d28.4724528757525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19aa57e3a1b3%3A0xf46d2e913c02a99d!2sTeam%20Co.work%20Spaces%20Gurgaon!5e0!3m2!1sen!2sin!4v1750833334024!5m2!1sen!2sin"
               width="100%"
               height="450"
               style={{ border: 0 }}

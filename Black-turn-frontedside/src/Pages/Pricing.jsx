@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 
 function Pricing() {
@@ -87,9 +88,9 @@ function Pricing() {
                   No Per Year Charges
                 </li>
               </ul>
-              <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Upload Now
-              </button>
+              </Link>
             </motion.div>
 
             {/* Plan 2: Custom Label (Recommended) */}
@@ -169,9 +170,9 @@ function Pricing() {
                 </li>
               </ul>
 
-              <button className="w-full bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
                 Join Now
-              </button>
+              </Link>
             </motion.div>
 
             {/* Plan 3: Previously Released Song */}
@@ -248,9 +249,9 @@ function Pricing() {
                 </li>
               </ul>
 
-              <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Add On Now
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -322,6 +323,7 @@ function Pricing() {
 
             {/* CTA Button */}
             <div className="text-center">
+              <Link to="/signin">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 95, 115, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
@@ -329,6 +331,7 @@ function Pricing() {
               >
                 UPLOAD NOW
               </motion.button>
+              </Link>
             </div>
           </div>
 

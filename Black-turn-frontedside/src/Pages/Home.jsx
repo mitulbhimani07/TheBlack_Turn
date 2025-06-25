@@ -70,6 +70,7 @@ import figure13 from '../assets/images/Figure9.png';
 import figure14 from '../assets/images/Figure10.png';
 import figure15 from '../assets/images/Figure11.png';
 import phone from '../assets/images/phone.png';
+import { Link } from 'react-router-dom';
 
 
 
@@ -720,9 +721,9 @@ function Home() {
             </p>
 
             <div className="mx-auto xl:mx-0 w-fit">
-              <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+              <Link to="/pricing" className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
                 Explore the Possibilities
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -973,9 +974,9 @@ function Home() {
               </p>
 
               <div className="mx-auto xl:mx-0 w-fit">
-                <button className="bg-[#005f73] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 transform hover:scale-105">
+                <Link to="/pricing" className="bg-[#005f73] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 transform hover:scale-105">
                   Join Now
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -1507,9 +1508,9 @@ function Home() {
               </p>
 
               <div className="mx-auto xl:mx-0 w-fit">
-                <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                <Link to="/pricing" className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
                   Join Now
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -1549,9 +1550,9 @@ function Home() {
                 Reach Indian fans and make your music available for Indian fans to caller tune. Set Your Favorite Part Of Your Song As Your Caller Tune From - JIOSAAVN, WYNK & Vi(Vodafone & Idea), BSNL Etc. Get CRBT Codes For Caller Tune. Licensing on VAS such as CRBT, IVR & WAP. Previously released song accepted, a full song on JioSaavn and Wynk mandatory (if not we upload first on Wynk and JioSaavn and distribute for caller tune). We don't charge a yearly fee, the song is available for caller tune as a lifetime
               </p>
               <div className="mx-auto xl:mx-0 w-fit">
-                <button className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
+                <Link to="/pricing" className="hover-target bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium hover:bg-[#005f74] transition-all duration-300 text-sm sm:text-base transform hover:scale-105">
                   Join Now
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -1658,9 +1659,9 @@ function Home() {
                   No Per Year Charges
                 </li>
               </ul>
-              <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Upload Now
-              </button>
+              </Link>
             </motion.div>
 
             {/* Plan 2: Custom Label (Recommended) */}
@@ -1740,9 +1741,9 @@ function Home() {
                 </li>
               </ul>
 
-              <button className="w-full bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
                 Join Now
-              </button>
+              </Link>
             </motion.div>
 
             {/* Plan 3: Previously Released Song */}
@@ -1819,9 +1820,9 @@ function Home() {
                 </li>
               </ul>
 
-              <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Add On Now
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -1893,6 +1894,7 @@ function Home() {
 
             {/* CTA Button */}
             <div className="text-center">
+              <Link to="/signin">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 95, 115, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
@@ -1900,6 +1902,7 @@ function Home() {
               >
                 UPLOAD NOW
               </motion.button>
+              </Link>
             </div>
           </div>
 
@@ -1950,6 +1953,7 @@ function Home() {
           <p className="text-[18px] sm:text-lg lg:text-xl mb-8">
             Distribute Your Music Today! – Pay After Work Done
           </p>
+          <Link to="/pricing">
           <motion.button
             className="bg-white text-[#005f73] px-12 py-3 rounded-md font-semibold shadow-md hover:bg-gray-100 transition transform hover:scale-105"
             whileHover={{ scale: 1.05 }}
@@ -1957,6 +1961,7 @@ function Home() {
           >
             Join Now
           </motion.button>
+          </Link>
         </motion.div>
       </section>
 

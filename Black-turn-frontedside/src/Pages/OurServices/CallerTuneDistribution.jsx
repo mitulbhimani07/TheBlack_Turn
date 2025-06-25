@@ -507,10 +507,10 @@ const CallerTuneDistribution = () => {
 
               {/* Learn More Button */}
               <div className="flex justify-center lg:justify-start">
-                <button className="bg-gradient-to-r from-[#005f73] to-[#0a7084] text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2 w-full sm:w-auto justify-center">
+                <Link to="/services/music-distribution" className="bg-gradient-to-r from-[#005f73] to-[#0a7084] text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2 w-full sm:w-auto justify-center">
                   Learn More
                   <span className="text-lg">→</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -894,9 +894,9 @@ const CallerTuneDistribution = () => {
                   No Per Year Charges
                 </li>
               </ul>
-              <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Upload Now
-              </button>
+              </Link>
             </motion.div>
 
             {/* Plan 2: Custom Label (Recommended) */}
@@ -976,9 +976,9 @@ const CallerTuneDistribution = () => {
                 </li>
               </ul>
 
-              <button className="w-full bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
                 Join Now
-              </button>
+              </Link>
             </motion.div>
 
             {/* Plan 3: Previously Released Song */}
@@ -1055,9 +1055,9 @@ const CallerTuneDistribution = () => {
                 </li>
               </ul>
 
-              <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Add On Now
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>

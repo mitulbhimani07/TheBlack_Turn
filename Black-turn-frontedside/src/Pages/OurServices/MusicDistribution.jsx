@@ -17,6 +17,7 @@ import { MdOutlineStart } from "react-icons/md";
 import { Database, Youtube, BarChart3 } from 'lucide-react';
 import royalite from '../../assets/images/royalti.png'; // Adjust the path as necessary
 import logoApp from '../../assets/images/logo.png'
+import { Link } from 'react-router-dom';
 const MusicDistribution = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const imagePlatforms = [
@@ -208,52 +209,36 @@ const MusicDistribution = () => {
   ];
   return (
     <div className="min-h-screen bg-[#ebf4f5] text-white">
-      <div className=" flex flex-col px-20 lg:flex-row min-h-screen ">
+      <div className="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 lg:flex-row min-h-screen">
         {/* Left Section */}
-        <div className="flex-1 px-6 lg:px-12 py-8 lg:py-16">
+        <div className="flex-1 px-2 sm:px-6 lg:px-12 py-8 lg:py-16">
           <div className="max-w-2xl">
-            <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
               <span className="text-black">MUSIC DISTRIBUTION</span><br />
               <span className="text-[#00758f]"> INDIA</span><br />
             </h1>
 
-            <p className="text-gray-700 mb-6 text-base md:text-[16px] max-w-[650px]">
-              Domestic Full Track Services: Amazon, Gaana, Jio Saavn, Wynk. International Full Track Services: Alibaba, Apple(Itune), Audible Magic, Awa, Boomplay, Deezer, Facebook, Iheart, Imusic Corp, Jaxsta, Kkbox, Kuack Media, Napster, Netease, Pandora, Resso, Snap, Soundcloud, Spotify, Touch Tunes, youtube music. We provide caller tune facility on india’s all cellular networks. Share your music and grow your fan base and view trends, keep 100% safe music royalties and view trends. Distribute, license & monetize at all in one place!
+            <p className="text-gray-700 mb-6 text-sm sm:text-base md:text-[16px] max-w-[650px] leading-relaxed">
+              Domestic Full Track Services: Amazon, Gaana, Jio Saavn, Wynk. International Full Track Services: Alibaba, Apple(Itune), Audible Magic, Awa, Boomplay, Deezer, Facebook, Iheart, Imusic Corp, Jaxsta, Kkbox, Kuack Media, Napster, Netease, Pandora, Resso, Snap, Soundcloud, Spotify, Touch Tunes, youtube music. We provide caller tune facility on india's all cellular networks. Share your music and grow your fan base and view trends, keep 100% safe music royalties and view trends. Distribute, license & monetize at all in one place!
             </p>
-
-            <button className="flex items-center space-x-3 bg-teal-500 hover:bg-teal-600 px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105">
-              <Music size={20} />
-              <span>Check PlatFroms</span>
-            </button>
           </div>
         </div>
-        {/* Half Circle Stroke Elements - Responsive positioning */}
-        <div className="relative">
-          {/* Top-left half circle - only right half visible */}
-          <div className="absolute top-0 -left-220 w-32 h-32 sm:w-40 sm:h-40 lg:w-55 lg:h-55 -translate-x-1/2">
-            <div className="w-full h-full border-20 sm:border-46 lg:border-32 border-[#b8d4db] rounded-full opacity-30"></div>
-          </div>
 
-          {/* Bottom-right half circle - only left half visible */}
-          <div className="absolute -bottom-5 -right-130 w-32 h-32 sm:w-40 sm:h-40 lg:w-55 lg:h-55 translate-x-1/2">
-            <div className="w-full h-full border-20 sm:border-46 lg:border-32 border-[#b8d4db] rounded-full opacity-30"></div>
-          </div>
-        </div>
-        {/* Stats Section */}
+
 
         {/* Right Section - Mobile Responsive */}
-        <div className="flex items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-10 pb-20 order-1 lg:order-2">
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-80 lg:h-80 xl:w-120 xl:h-120 flex justify-center items-center">
-
+        <div className="flex items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-10 pb-8 sm:pb-12 lg:pb-20 order-1 lg:order-2">
+          <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-72 lg:h-72 xl:w-96 xl:h-96 flex justify-center items-center">
             {/* Main content box (front) */}
             <img
               src={musicdistribution}
               alt="Music Distribution Banner"
-              className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg"
+              className="hover-target z-20 w-full h-full object-cover rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
             />
           </div>
         </div>
       </div>
+
       {/* Pay Minimum to Get Maximum */}
       {/* Pay Minimum to Get Maximum */}
       <section className="py-16 bg-white text-black">
@@ -394,9 +379,9 @@ const MusicDistribution = () => {
                   No Per Year Charges
                 </li>
               </ul>
-              <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Upload Now
-              </button>
+              </Link>
             </motion.div>
 
             {/* Plan 2: Custom Label (Recommended) */}
@@ -418,7 +403,7 @@ const MusicDistribution = () => {
                 <span className="text-5xl font-extrabold">₹4,999</span>
                 <span className="opacity-80">per year /-</span>
               </div>
-              <p className="text-gray-900 mb-6">Features</p>
+              <p className="text-white mb-6">Features</p>
               <ul className="space-y-4 opacity-90 mb-8 flex-grow">
                 <li className="flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -476,9 +461,9 @@ const MusicDistribution = () => {
                 </li>
               </ul>
 
-              <button className="w-full bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
                 Join Now
-              </button>
+              </Link>
             </motion.div>
 
             {/* Plan 3: Previously Released Song */}
@@ -555,9 +540,9 @@ const MusicDistribution = () => {
                 </li>
               </ul>
 
-              <button className="w-full bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
+              <Link to="/signin" className="w-full text-center bg-white text-[#005f73] border-2 border-[#005f73] px-6 py-3 rounded-md font-semibold hover:bg-[#005f73] hover:text-white transition-all duration-300 transform hover:scale-105">
                 Add On Now
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -627,13 +612,15 @@ const MusicDistribution = () => {
 
             {/* CTA Button */}
             <div className="text-center">
-              <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 95, 115, 0.3)" }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#005f73] text-white px-10 py-4 rounded-xl font-semibold text-lg shadow-lg"
-              >
-                UPLOAD NOW
-              </motion.button>
+              <Link to="/signin">
+                <motion.button
+                  whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 95, 115, 0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#005f73] text-white px-10 py-4 rounded-xl font-semibold text-lg shadow-lg"
+                >
+                  UPLOAD NOW
+                </motion.button>
+              </Link>
             </div>
           </div>
 
@@ -699,185 +686,194 @@ const MusicDistribution = () => {
           </div>
         </div>
       </section>
-      <section className="py-26 bg-black relative">
-        {/* Grid pattern background */}
-        <div className="absolute inset-0 opacity-10 overflow-hidden flex items-center">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
+      <section className="py-16 sm:py-20 md:py-24 lg:py-26 bg-black relative">
+      {/* Grid pattern background */}
+      <div className="absolute inset-0 opacity-10 overflow-hidden flex items-center">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
             linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
           `,
-            backgroundSize: '50px 50px'
-          }}></div>
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      {/* Geometric shapes */}
+      <div className="absolute inset-0 hidden lg:block">
+        {/* Large diamond shape */}
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-16 xl:translate-x-32">
+          <div className="w-48 h-48 xl:w-76 xl:h-76 bg-[#005d71] transform rotate-45 opacity-80"></div>
         </div>
 
-        {/* Geometric shapes */}
-        <div className="absolute inset-0">
-          {/* Large diamond shape */}
-          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-32">
-            <div className="w-76 h-76 bg-[#005d71] transform rotate-45 opacity-80"></div>
-          </div>
-
-          {/* Secondary diamond */}
-          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-48 translate-y-24">
-            <div className="w-44 h-44 bg-[#005d71] transform rotate-45 opacity-60"></div>
-          </div>
-
-
-          {/* Arrow element */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-8">
-            <svg width="300" height="40" viewBox="0 0 200 40" className="text-[#fff]">
-              <path d="M0 20 L160 20 M140 10 L160 20 L140 30"
-                stroke="currentColor"
-                strokeWidth="5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round" />
-            </svg>
-          </div>
+        {/* Secondary diamond */}
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-32 xl:translate-x-48 translate-y-16 xl:translate-y-24">
+          <div className="w-32 h-32 xl:w-44 xl:h-44 bg-[#005d71] transform rotate-45 opacity-60"></div>
         </div>
 
-        {/* Main content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left content */}
-            <div className="space-y-8">
-              <h1 className="text-5xl lg:text-7xl font-light text-white leading-tight">
-                SELL YOUR MUSIC WORLDWIDE
-                <br />
-              </h1>
-              <p className="text-white">Get your music online and make it go worldwide! Our advanced music dissemination is the ideal arrangement for growing your group of onlookers and salary. Through our organizations with more than 150 best gushing stages, you’ll be able to discharge your music to reach your fans wherever they are.</p>
+        {/* Arrow element */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-4 xl:translate-x-8">
+          <svg width="200" height="40" viewBox="0 0 200 40" className="text-[#fff] xl:w-[300px]">
+            <path d="M0 20 L160 20 M140 10 L160 20 L140 30"
+              stroke="currentColor"
+              strokeWidth="5"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+          {/* Left content */}
+          <div className="space-y-6 sm:space-y-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-tight">
+              SELL YOUR MUSIC WORLDWIDE
               <br />
+            </h1>
+            <p className="text-white text-sm sm:text-base lg:text-lg leading-relaxed">
+              Get your music online and make it go worldwide! Our advanced music dissemination is the ideal arrangement for growing your group of onlookers and salary. Through our organizations with more than 150 best gushing stages, you'll be able to discharge your music to reach your fans wherever they are.
+            </p>
+            <br />
 
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-0.5 bg-white"></div>
-                <p className="text-gray-400 text-lg">Let's start the conversation</p>
-              </div>
-            </div>
-
-            {/* Right content */}
-            <div className="flex flex-col items-end space-y-8">
-              {/* Circular text element */}
-              <div className="relative">
-                <div className="w-48 h-48 border border-gray-600 rounded-full flex items-center justify-center relative">
-                  {/* Circular text path */}
-                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
-                    <defs>
-                      <path id="circle" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" />
-                    </defs>
-                    <text className="text-xs fill-gray-500 uppercase tracking-widest">
-                      <textPath href="#circle">
-                        Smart Digital Video and Media Solutions • Creative Content •
-                      </textPath>
-                    </text>
-                  </svg>
-
-                  {/* Center logo */}
-                  <div className="text-center  ">
-                    <img src={logoApp} className='rounded-full w-50 h-50' alt="" />
-                  </div>
-                </div>
-              </div>
-
-              {/* CTA Button */}
-              <a href='https://api.whatsapp.com/send/?phone=919729786689&text=Hi,%20The%20Black%20Turn%20-%20Query%20For%20Music%20Distribution' target='_blank' rel="noopener noreferrer" className="group relative px-8 py-4 border-3 border-[#005D71] text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center space-x-2">
-                <MdOutlineStart className="w-4 h-4" />
-                <span className="text-sm font-medium tracking-wider uppercase">Start Today</span>
-              </a>
+            <div className="flex items-center space-x-4">
+              <div className="w-8 sm:w-12 h-0.5 bg-white"></div>
+              <p className="text-gray-400 text-base sm:text-lg">Let's start the conversation</p>
             </div>
           </div>
+
+          {/* Right content */}
+          <div className="flex flex-col items-center lg:items-end space-y-6 sm:space-y-8">
+            {/* Circular text element */}
+            <div className="relative">
+              <div className="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 border border-gray-600 rounded-full flex items-center justify-center relative">
+                {/* Circular text path */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
+                  <defs>
+                    <path id="circle" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" />
+                  </defs>
+                  <text className="text-xs fill-gray-500 uppercase tracking-widest">
+                    <textPath href="#circle">
+                      Smart Digital Video and Media Solutions • Creative Content •
+                    </textPath>
+                  </text>
+                </svg>
+
+                {/* Center logo */}
+                <div className="text-center">
+                  <img src={logoApp} className='rounded-full w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover' alt="" />
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <a 
+              href='https://api.whatsapp.com/send/?phone=919729786689&text=Hi,%20The%20Black%20Turn%20-%20Query%20For%20Music%20Distribution' 
+              target='_blank' 
+              rel="noopener noreferrer" 
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 border-2 sm:border-3 border-[#005D71] text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center space-x-2"
+            >
+              <MdOutlineStart className="w-4 h-4" />
+              <span className="text-xs sm:text-sm font-medium tracking-wider uppercase">Start Today</span>
+            </a>
+          </div>
         </div>
-        {/* Corner decorative lines */}
-        <div className="absolute top-8 right-8">
-          <div className="w-16 h-0.5 bg-gray-600 mb-2"></div>
-          <div className="w-8 h-0.5 bg-gray-600"></div>
-        </div>
-      </section>
+      </div>
+
+      {/* Corner decorative lines */}
+      <div className="absolute top-4 sm:top-6 md:top-8 right-4 sm:right-6 md:right-8">
+        <div className="w-12 sm:w-16 h-0.5 bg-gray-600 mb-2"></div>
+        <div className="w-6 sm:w-8 h-0.5 bg-gray-600"></div>
+      </div>
+    </section>
       {/* Upload Music Section */}
-      <section className="py-20 bg-[] text-[#005f73]">
-        <div className="container mx-auto  max-w-5xl">
-          <div className="flex flex-col lg:flex-row gap-20 items-center">
-            {/* Left Content */}
-            <div className="flex-1">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                You keep 100% of your royalties!
-              </h2>
-              <p className="text-gray-700 mb-6 text-lg">
-                The Black Turn never takes a cut of your deals. Each penny you gain is put right into you’re the Black Turn account. At Black Turn, we know that your money matters and we respect your passion for music.Comprehensive Sales Data
-              </p>
+     <section className="py-12 sm:py-16 md:py-20 bg-[] text-[#005f73]">
+      <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row gap-12 sm:gap-16 lg:gap-20 items-center">
+          {/* Left Content */}
+          <div className="flex-1">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+              You keep 100% of your royalties!
+            </h2>
+            <p className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed">
+              The Black Turn never takes a cut of your deals. Each penny you gain is put right into you're the Black Turn account. At Black Turn, we know that your money matters and we respect your passion for music.Comprehensive Sales Data
+            </p>
 
-              <p className="text-gray-700 mb-8 text-lg">
-                Discover out precisely where fans are downloading and spilling your music so you’ll be able to increment showcasing endeavors and arrange visits around those cities. We make sure that you reach the audience which you are targeting and deliver your music to them.
-              </p>
-            </div>
-            {/* Right Image - Placeholder for music upload illustration */}
-            <div className="flex-1">
-              <div className="bg-gray-700 rounded-xl  aspect-square flex items-center justify-center">
-                <img src={royalite} alt="" />
-              </div>
+            <p className="text-gray-700 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">
+              Discover out precisely where fans are downloading and spilling your music so you'll be able to increment showcasing endeavors and arrange visits around those cities. We make sure that you reach the audience which you are targeting and deliver your music to them.
+            </p>
+          </div>
+          
+          {/* Right Image - Placeholder for music upload illustration */}
+          <div className="flex-1 w-full">
+            <div className="bg-gray-700 rounded-xl aspect-square flex items-center justify-center max-w-md mx-auto lg:max-w-none">
+              <img src={royalite} alt="" className="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
-        {/* IRSC and UPC */}
-        {/* Features Section */}
-        <div className="mt-20 lg:px-12">
-          <div className="grid md:grid-cols-3 gap-8">
-            {feature.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-6 border border-gray-100 shadow-lg transition duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:border-[#005f73]"
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 p-3 bg-gray-50 rounded-lg">
-                    {feature.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[#005f73] mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
+      </div>
+
+      {/* IRSC and UPC */}
+      {/* Features Section */}
+      <div className="mt-12 sm:mt-16 lg:mt-20 px-4 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+          {feature.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl p-4 sm:p-6 border border-gray-100 shadow-lg transition duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:border-[#005f73]"
+            >
+              <div className="flex items-start space-x-3 sm:space-x-4">
+                <div className="flex-shrink-0 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                  {feature.icon}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-[#005f73] mb-2 sm:mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section className="bg-[#005f73] mx-16 rounded-3xl py-16 px-4">
-        <div className="max-w-7xl mx-auto text-center text-black px-4">
-          <h2 className="text-2xl font-medium text-white mb-2 tracking-wider uppercase">What We Do</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-10">
-            {whatWeDoItems.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300"
-              >
-                <img
-                  src={item.icon}
-                  alt={item.title}
-                  className="w-20 h-20 mb-4 object-contain"
-                />
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-700">{item.description}</p>
-              </div>
-            ))}
-          </div>
+     <section className="bg-[#005f73] mx-2 sm:mx-4 md:mx-8 lg:mx-12 xl:mx-16 rounded-2xl sm:rounded-3xl py-8 sm:py-12 md:py-16 px-2 sm:px-4">
+      <div className="max-w-7xl mx-auto text-center text-black px-2 sm:px-4">
+        <h2 className="text-xl sm:text-2xl font-medium text-white mb-2 tracking-wider uppercase">What We Do</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 mt-6 sm:mt-8 md:mt-10">
+          {whatWeDoItems.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center p-4 sm:p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300"
+            >
+              <img
+                src={item.icon}
+                alt={item.title}
+                className="w-16 h-16 sm:w-20 sm:h-20 mb-3 sm:mb-4 object-contain"
+              />
+              <h3 className="text-base sm:text-lg font-semibold mb-2">{item.title}</h3>
+              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">{item.description}</p>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* Bottom Content */}
-        <div className="mt-20 max-w-5xl mx-auto text-center px-4">
-          <h2 className="text-2xl font-bold mb-4">Digital Music Distribution</h2>
-          <p className="text-white leading-relaxed">
-            <strong>Copyright Protection:</strong> Take control of your sound. Make beyond any doubt individuals do not take credit for or monetize your substance without your assent. Choose how you’d like reuploaded substance to be managed on numerous stages. We help to do so for you.
-          </p>
-          <p className="text-white mt-4 leading-relaxed">
-            <strong>Record Label Tools:</strong> Our client entrance has a full suite of devices, permitting total administration of your specialists and resources. Take advantage of full analytics, income detailing, music dispersion, and rights administration.
-          </p>
-        </div>
-      </section>
+      {/* Bottom Content */}
+      <div className="mt-12 sm:mt-16 md:mt-20 max-w-5xl mx-auto text-center px-2 sm:px-4">
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-white">Digital Music Distribution</h2>
+        <p className="text-white leading-relaxed text-sm sm:text-base">
+          <strong>Copyright Protection:</strong> Take control of your sound. Make beyond any doubt individuals do not take credit for or monetize your substance without your assent. Choose how you'd like reuploaded substance to be managed on numerous stages. We help to do so for you.
+        </p>
+        <p className="text-white mt-3 sm:mt-4 leading-relaxed text-sm sm:text-base">
+          <strong>Record Label Tools:</strong> Our client entrance has a full suite of devices, permitting total administration of your specialists and resources. Take advantage of full analytics, income detailing, music dispersion, and rights administration.
+        </p>
+      </div>
+    </section>
       <section className="bg-gray-100 py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#005f73] mb-2">
@@ -902,12 +898,7 @@ const MusicDistribution = () => {
                 <p className="text-gray-600 group-hover:text-gray-100 mb-4 transition-colors duration-300">
                   {step.description}
                 </p>
-                <a
-                  href={step.link}
-                  className="text-indigo-600 group-hover:text-white font-medium hover:underline transition-colors duration-300"
-                >
-                  Discover
-                </a>
+
               </div>
             ))}
           </div>
@@ -915,124 +906,130 @@ const MusicDistribution = () => {
       </section>
       <section>
         {/* Hero Section */}
-        <div className="relative overflow-hidden mx-10 rounded-2xl my-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
-          <div className="relative max-w-7xl mx-auto px-6 py-20">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-full mb-8 shadow-2xl">
-                <span className="text-3xl font-bold text-white">₹</span>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Pay After Work Done
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto leading-relaxed">
-                #1 First time in India pay after work is done. We want to increase our customer trust for us.
-              </p>
-              <p className="text-2xl md:text-3xl font-semibold text-[#005f73] mb-12">
-                Your trust is our success.
-              </p>
-            </div>
-
-            {/* Main Action Cards */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20">
-              <div className="group bg-gradient-to-br from-[#005f73] to-[#0a9396] p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
-                <div className="text-center">
-                  <Phone className="w-12 h-12 mx-auto mb-6 text-white" />
-                  <h3 className="text-3xl font-bold mb-4 text-white">Let's talk!</h3>
-                  <p className="text-lg mb-8 text-gray-100 leading-relaxed">
-                    For More Info Call Now. We Talk in Hindi, English, Punjabi, Haryanvi, Bhojpuri
-                  </p>
-                  <a href="tel:9274466809" className="bg-white text-[#005f73] px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    CALL NOW
-                  </a>
-                </div>
-              </div>
-
-              <div className="group bg-gradient-to-br from-gray-900 to-black border-2 border-[#005f73] p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
-                <div className="text-center">
-                  <Shield className="w-12 h-12 mx-auto mb-6 text-[#005f73]" />
-                  <h3 className="text-3xl font-bold mb-4 text-white">Why Think ?</h3>
-                  <p className="text-lg mb-8 text-gray-300 leading-relaxed">
-                    Pay After Work Done.
-                  </p>
-                  <button className="bg-[#005f73] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#0a9396] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    GET PRICE
-                  </button>
-                </div>
-              </div>
-            </div>
+        <div className="relative overflow-hidden mx-2 sm:mx-4 md:mx-6 lg:mx-8 xl:mx-10 rounded-xl sm:rounded-2xl my-6 sm:my-8 md:my-10">
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-full mb-6 sm:mb-8 shadow-2xl">
+            <span className="text-2xl sm:text-3xl font-bold text-white">₹</span>
           </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
+            Pay After Work Done
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-3 sm:mb-4 max-w-3xl mx-auto leading-relaxed px-2">
+            #1 First time in India pay after work is done. We want to increase our customer trust for us.
+          </p>
+          <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#005f73] mb-8 sm:mb-12">
+            Your trust is our success.
+          </p>
         </div>
 
-       {/* FAQ Section */}
-      <div className="py-20 bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              Frequently Asked <span className="text-[#005f73]">Questions</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Get answers to common questions about our pay-after-work service
-            </p>
+        {/* Main Action Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20">
+          <div className="group bg-gradient-to-br from-[#005f73] to-[#0a9396] p-6 sm:p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
+            <div className="text-center">
+              <Phone className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4 sm:mb-6 text-white" />
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-white">Let's talk!</h3>
+              <p className="text-base sm:text-lg mb-6 sm:mb-8 text-gray-100 leading-relaxed">
+                For More Info Call Now. We Talk in Hindi, English, Punjabi, Haryanvi, Bhojpuri
+              </p>
+              <a 
+                href="tel:9274466809" 
+                className="inline-block bg-white text-[#005f73] px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                CALL NOW
+              </a>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
-              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
-                WHAT ABOUT MY WORK RIGHTS?
-              </h3>
-              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
-                Take control of your project. Make beyond any doubt you understand and accept how your work will be managed without your consent. Choose how you'd like your completed work to be managed on numerous platforms and maintained with full quality standards.
+          <div className="group bg-gradient-to-br from-gray-900 to-black border-2 border-[#005f73] p-6 sm:p-8 rounded-2xl shadow-2xl hover:shadow-[#005f73]/20 transition-all duration-300 hover:scale-105">
+            <div className="text-center">
+              <Shield className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4 sm:mb-6 text-[#005f73]" />
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-white">Why Think ?</h3>
+              <p className="text-base sm:text-lg mb-6 sm:mb-8 text-gray-300 leading-relaxed">
+                Pay After Work Done.
               </p>
-            </div>
-
-            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
-              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
-                HOW DOES OUR WORK PROCESS FUNCTION?
-              </h3>
-              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
-                Get your project online and make it reach the right audience! Our comprehensive work management system covers the complete course of action for developing your project success and delivery. Through our network of over 150 quality assurance checkpoints, we ensure your work meets the highest standards before completion.
-              </p>
-            </div>
-
-            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
-              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
-                WHAT IS THE BEST WAY TO START WORK?
-              </h3>
-              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
-                We value every project and put in maximum effort to deliver the best results. Our work advancement team guarantees the most excellent outcomes. We work around the clock utilizing our network of experts, professionals, and specialists to deliver outstanding results. We value your unique requirements and ensure they reach completion successfully.
-              </p>
-            </div>
-
-            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
-              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
-                HOW DO I START A WORK SERVICE?
-              </h3>
-              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
-                We are not a mass service company. We invest our time into our clients! We support our customers to reach their potential. As a matter of fact, we take full responsibility for the work delivered with complete partnership with our clients throughout the entire process.
-              </p>
-            </div>
-
-            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
-              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
-                HOW MUCH DO WE CHARGE FOR SERVICES?
-              </h3>
-              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
-                We never take advance payment from our clients. Every service you receive is delivered first, and payment is made only after your complete satisfaction. We believe that your satisfaction matters, and we respect your investment in our services. Quality work first, payment after - that's our commitment.
-              </p>
-            </div>
-
-            <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
-              <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
-                HOW DO I GET A SERVICE QUOTE?
-              </h3>
-              <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
-                With so many different service providers to select from, it can be challenging but definitely worth it. Contact us using our multiple communication channels, and get personalized quotes that suit your needs. We help you reach out to all types of solutions so that everyone can benefit from our unique services and competitive pricing.
-              </p>
+              <Link 
+                to="/pricing" 
+                className="inline-block bg-[#005f73] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-[#0a9396] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                GET PRICE
+              </Link>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+        {/* FAQ Section */}
+        <div className="py-20 bg-gradient-to-b from-black to-gray-900">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                Frequently Asked <span className="text-[#005f73]">Questions</span>
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Get answers to common questions about our pay-after-work service
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+                <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                  WHAT ABOUT MY WORK RIGHTS?
+                </h3>
+                <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                  Take control of your project. Make beyond any doubt you understand and accept how your work will be managed without your consent. Choose how you'd like your completed work to be managed on numerous platforms and maintained with full quality standards.
+                </p>
+              </div>
+
+              <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+                <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                  HOW DOES OUR WORK PROCESS FUNCTION?
+                </h3>
+                <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                  Get your project online and make it reach the right audience! Our comprehensive work management system covers the complete course of action for developing your project success and delivery. Through our network of over 150 quality assurance checkpoints, we ensure your work meets the highest standards before completion.
+                </p>
+              </div>
+
+              <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+                <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                  WHAT IS THE BEST WAY TO START WORK?
+                </h3>
+                <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                  We value every project and put in maximum effort to deliver the best results. Our work advancement team guarantees the most excellent outcomes. We work around the clock utilizing our network of experts, professionals, and specialists to deliver outstanding results. We value your unique requirements and ensure they reach completion successfully.
+                </p>
+              </div>
+
+              <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+                <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                  HOW DO I START A WORK SERVICE?
+                </h3>
+                <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                  We are not a mass service company. We invest our time into our clients! We support our customers to reach their potential. As a matter of fact, we take full responsibility for the work delivered with complete partnership with our clients throughout the entire process.
+                </p>
+              </div>
+
+              <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+                <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                  HOW MUCH DO WE CHARGE FOR SERVICES?
+                </h3>
+                <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                  We never take advance payment from our clients. Every service you receive is delivered first, and payment is made only after your complete satisfaction. We believe that your satisfaction matters, and we respect your investment in our services. Quality work first, payment after - that's our commitment.
+                </p>
+              </div>
+
+              <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 hover:border-[#005f73] transition-all duration-300 group">
+                <h3 className="text-xl font-bold mb-4 text-[#005f73] bg-[#005f73]/20 px-4 py-2 rounded-lg inline-block">
+                  HOW DO I GET A SERVICE QUOTE?
+                </h3>
+                <p className="text-gray-300 leading-relaxed bg-[#005f73]/10 p-4 rounded-lg">
+                  With so many different service providers to select from, it can be challenging but definitely worth it. Contact us using our multiple communication channels, and get personalized quotes that suit your needs. We help you reach out to all types of solutions so that everyone can benefit from our unique services and competitive pricing.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Language Support Section */}
         <div className="py-20 bg-gradient-to-b  from-gray-900 to-black">
           <div className="max-w-7xl mx-auto px-6">
@@ -1071,11 +1068,11 @@ const MusicDistribution = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
               {/* Call Now Button */}
-                <a href="tel:9274466809" className="group border-2 border-[#005f73] text-[#005f73] px-10 py-5 rounded-full font-semibold text-lg hover:bg-[#005f73] hover:text-white transition-all duration-300 flex items-center gap-3">
-                  <Phone className="w-5 h-5" />
-                  Call Now
-                </a>
-             
+              <a href="tel:9274466809" className="group border-2 border-[#005f73] text-[#005f73] px-10 py-5 rounded-full font-semibold text-lg hover:bg-[#005f73] hover:text-white transition-all duration-300 flex items-center gap-3">
+                <Phone className="w-5 h-5" />
+                Call Now
+              </a>
+
 
             </div>
           </div>
