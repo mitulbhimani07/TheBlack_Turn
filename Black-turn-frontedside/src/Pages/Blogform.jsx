@@ -3,6 +3,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Calendar, User, FileText, Image, Hash, AlignLeft } from 'lucide-react';
 import { AddBlog } from '../Api/api';
+import { useNavigate } from 'react-router-dom';
 
 function Blogform() {
 
@@ -17,7 +18,7 @@ function Blogform() {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const navigate=useNavigate()
   // React Quill configuration
   const quillModules = {
     toolbar: [
@@ -92,6 +93,7 @@ function Blogform() {
       const result = await AddBlog(formData); // ✅ Call the API
       console.log('API Response:', result);
       alert('Blog post created successfully!');
+      navigate('/blog')
       clearForm();
     } catch (error) {
       console.error('Error creating blog:', error);
@@ -178,7 +180,7 @@ function Blogform() {
                   Publish Date
                 </label>
                 <input
-                  type="datetime-local"
+                  type="date"
                   name="publishDate"
                   value={formData.publishDate}
                   onChange={handleInputChange}
