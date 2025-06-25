@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import blogBanner from "../assets/images/blogBanner.webp";
 import { GetAllBlogs } from '../Api/api';
+import { Link } from 'react-router-dom';
 
 function Blog() {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -82,13 +83,15 @@ function Blog() {
                     <p className="text-gray-700 text-base lg:text-lg leading-relaxed mb-6">
                       {post.Description}
                     </p>
-                    <button className="inline-flex items-center px-6 py-3 border-2 border-[#005f73] text-[#005f73] font-medium rounded-lg hover:bg-[#005f73] hover:text-white transition-all duration-300 group">
+                    <Link to='/singleblog'>
+              <button className="inline-flex items-center px-6 py-3 border-2 border-[#005f73] text-[#005f73] font-medium rounded-lg hover:bg-[#005f73] hover:text-white transition-all duration-300 group">
                       <svg className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                       Continue Reading
                     </button>
-                  </div>
+                    </Link>
+          </div>
                 </div>
               </div>
             ))
