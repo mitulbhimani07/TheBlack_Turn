@@ -2,13 +2,21 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;
-const db = require('./config/db');
+// const db = require('./config/db');
 // Connect to the database
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 const cors = require('cors');
 app.use(cors());
-
+// Database connection
+const mongoose = require('mongoose');
+    mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res)=>{
+        console.log('Database connected successfully');  
+    })
+    .catch((err) => {
+        console.log('Error connecting to the database:', err);
+    });
+ 
 app.get('/', (req, res) => {
     res.send('Welcome to the API');
 });
