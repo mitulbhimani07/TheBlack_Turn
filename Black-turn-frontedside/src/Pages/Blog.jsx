@@ -14,6 +14,7 @@ function Blog() {
         setBlogPosts(response?.data || []);
       } catch (error) {
         console.error("Failed to fetch blogs", error);
+        toast.error('Failed to fetch blogs')
       } finally {
         setLoading(false);
       }

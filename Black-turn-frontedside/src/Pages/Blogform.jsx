@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import { Calendar, User, FileText, Image, Hash, AlignLeft } from 'lucide-react';
 import { AddBlog } from '../Api/api';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function Blogform() {
 
@@ -92,12 +93,14 @@ function Blogform() {
     try {
       const result = await AddBlog(formData); // ✅ Call the API
       console.log('API Response:', result);
-      alert('Blog post created successfully!');
+      // alert('Blog post created successfully!');
+      toast.success('Blog post created successfully!')
       navigate('/blog')
       clearForm();
     } catch (error) {
       console.error('Error creating blog:', error);
-      alert('Failed to publish blog. Please try again.');
+      // alert('Failed to publish blog. Please try again.');
+      toast.error('Failed to publish blog. Please try again.')
     } finally {
       setIsSubmitting(false);
     }
