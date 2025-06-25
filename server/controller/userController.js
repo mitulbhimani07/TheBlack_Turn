@@ -132,8 +132,18 @@ module.exports.googleSignin = async (req, res) => {
         delete userResponse.password;
         delete userResponse.conPassword;
 
+        const token = jwt.sign(
+            {
+                userId: data._id,
+                email: data.email,
+            },
+            process.env.JWT_SECRET, // Make sure this is defined in your .env
+            { expiresIn: '8h' }
+        );
+
         return res.status(200).json({
             message: "Signin successful",
+            token,
             data: userResponse
         });
 
