@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
 });
 // Import routes
 app.use('/blogs', require('./routes/blog'));
+app.use('/user', require('./routes/user'));
+
 app.listen(port, (err) => {
     if (err) {
         console.error('Error starting server:', err);
