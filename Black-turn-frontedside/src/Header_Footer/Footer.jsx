@@ -18,7 +18,7 @@ function Footer() {
             </div>
             <div className="flex items-center">
               <Mail size={24} className="mr-2 text-white" />
-              <span>contact@theblackturn.in</span>
+              <span>support@theblackturn.in</span>
             </div>
           </div>
         </div>
