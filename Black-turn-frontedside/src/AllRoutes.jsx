@@ -16,6 +16,9 @@ import Blog from './Pages/Blog'
 import Privacy from './Pages/Privacy'
 import Blogform from './Pages/Blogform'
 import SingleBlog from './Pages/SingleBlog'
+import toast, { ToastBar, Toaster } from 'react-hot-toast'
+import cross from './assets/images/icon-check.svg'
+import check from './assets/images/icon-cross.svg'
 
 function AllRoutes() {
   return (
@@ -39,6 +42,75 @@ function AllRoutes() {
               <Route path='*' element={<h1>404 Not Found</h1>} />
               <Route path='/Signup' element={<Signp/>} />
         </Routes>
+
+
+        <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 1000,
+          error: {
+            className: "alert error",
+            icon: "⚠",
+          },
+          success: {
+            className: "alert success",
+            icon: "✅",
+          },
+        }}
+      >
+        {(t) => (
+          <ToastBar
+            toast={t}
+            style={{
+              ...t.style,
+              animation: t.visible ? "custom-enter 1s ease" : "custom-exit 1s ease",
+            }}
+          >
+            {(props) => {
+              return (
+                <div className="w-full flex flex-col md:flex-row items-center justify-between px-4 py-2 gap-2">
+                  <div className="flex items-center flex-1 gap-3">
+                    {t?.type === "success" ? (
+                      <img
+                        width={50}
+                        height={50}
+                        className=""
+                        src={cross}
+                        alt="Success Icon"
+                      />
+                    ) : (
+                      <img
+                        width={35}
+                        height={35}
+                        className=""
+                        src={check}
+                        alt="Error Icon"
+                      />
+                    )}
+
+                    <div>
+                      <div>
+                        <strong className="text-lg">{t?.type === "success" ? "Success" : "Error"}</strong>
+                      </div>
+                      <span className="text-gray-500">{props.message}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-end">
+                    <span
+                      className="text-gray-500 ml-6 cursor-pointer"
+                      onClick={() => toast.remove(t.id)}
+                    >
+                      <RxCross2 className="text-3xl" />
+                    </span>
+                  </div>
+                </div>
+
+              );
+            }}
+          </ToastBar>
+        )}
+      </Toaster>
     </div>
   )
 }
