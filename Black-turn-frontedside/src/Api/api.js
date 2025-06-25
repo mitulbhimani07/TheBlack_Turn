@@ -28,7 +28,7 @@ export const GetBlogById=async(id)=>{
     try{
         const response=await axios.get(`http://localhost:3001/blogs/all/${id}`)
 
-        console.log("blog by id----",response.data)
+        console.log("blog by id----",response.data.data)
         return response.data
 
     }catch(error){
