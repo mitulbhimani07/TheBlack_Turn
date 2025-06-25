@@ -16,7 +16,7 @@ const mongoose = require('mongoose');
     .catch((err) => {
         console.log('Error connecting to the database:', err);
     });
- 
+// Middleware to parse JSON and URL-encoded data
 app.get('/', (req, res) => {
     res.send('Welcome to the API');
 });
