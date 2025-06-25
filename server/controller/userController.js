@@ -114,6 +114,47 @@ module.exports.googleSignup = async (req, res) => {
     }
 };
 
+module.exports.googleSignin = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({ message: "Email is required" });
+        }
+
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found. Please sign up first." });
+        }
+
+        const userResponse = user.toObject();
+        delete userResponse.password;
+        delete userResponse.conPassword;
+
+        const token = jwt.sign(
+            {
+                userId: data._id,
+                email: data.email,
+            },
+            process.env.JWT_SECRET, // Make sure this is defined in your .env
+            { expiresIn: '8h' }
+        );
+
+        return res.status(200).json({
+            message: "Signin successful",
+            token,
+            data: userResponse
+        });
+
+    } catch (error) {
+        console.error("Google Signin Error:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+
+
 
 
 

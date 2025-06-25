@@ -4,6 +4,8 @@ const userController=require("../controller/userController")
 userRoutes.post("/signup",userController.signup)
 userRoutes.post("/login",userController.Login)
 userRoutes.post("/googleSignup",userController.googleSignup)
+userRoutes.post("/googleSignin",userController.googleSignin)
+
 
 
 module.exports = userRoutes;
