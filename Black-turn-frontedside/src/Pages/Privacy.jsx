@@ -108,6 +108,72 @@ function Privacy() {
 
         </div>
 
+         <div className="mt-6">
+          <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
+           SECTION 6 – SECURITY
+          </h2>
+          <p className=" text-gray-700">
+            To protect your personal information, we take reasonable precautions and follow industry best practices to make sure it is not inappropriately lost, misused, accessed, disclosed, altered, or destroyed.
+          </p>
+
+        </div>
+
+        <div className="mt-6">
+          <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
+           SECTION 7 – COOKIES
+          </h2>
+          <p className=" text-gray-700">
+            We use cookies to maintain the session of your user. It is not used to personally identify you on other websites.
+          </p>
+
+        </div>
+
+        <div className="mt-6">
+          <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
+           SECTION 8 – AGE OF CONSENT
+          </h2>
+          <p className=" text-gray-700">
+            By using this site, you represent that you are at least the age of majority in your state or province of residence, or that you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site.
+          </p>
+
+        </div>
+
+        <div className="mt-6">
+          <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
+          SECTION 9 – CHANGES TO THIS PRIVACY POLICY
+          </h2>
+          <p className=" text-gray-700 mt-4">
+            We reserve the right to modify this privacy policy at any time, so please review it frequently. Changes and clarifications will take effect immediately upon their posting on the website. If we make material changes to this policy, we will notify you here that it has been updated, so that you are aware of what information we collect, how we use it, and under what circumstances, if any, we use and/or disclose it.
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            If our store is acquired or merged with another company, your information may be transferred to the new owners so that we may continue to sell products to you.
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            QUESTIONS AND CONTACT INFORMATION
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            If you would like to: access, correct, amend or delete any personal information we have about you, register a complaint, or simply want more information contact our Privacy Compliance Officer at [contact@theblackturn.com ] or mailing us at: [Ekta Colony, Rohtak – Haryana]
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            [Re: Privacy Compliance Officer]
+          </p>
+
+          <p className=" text-gray-700 mt-4">
+            [Ekta Colony, Rohtak – Haryana]
+          </p>
+
+           <p className=" text-gray-700 mt-8">
+            If you violate our Privacy Policy then your Membership will be held for 1 week for the first warning, in the second warning it will be on hold for 1 month and then if you again violate our policy, your Membership will be canceled.
+          </p>
+
+        </div>
+
+        
+
       </div>
 
 

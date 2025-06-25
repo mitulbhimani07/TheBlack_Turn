@@ -260,13 +260,13 @@ const MusicDistribution = () => {
           </div>
         </div>
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-8">
+          <h2 className="text-4xl lg:text-3xl font-bold my-18">
             Caller Tune Distribution for India's All Cellular Networks
           </h2>
 
 
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 items-center justify-center group">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 items-center justify-center group">
             {[
               {
                 src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGxXe0XvtCWFKaLz8i1zTm3fal0bRupHdC6g&s",
@@ -287,12 +287,12 @@ const MusicDistribution = () => {
             ].map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center p-4 rounded-b-3xl opacity-100 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-700"
+                className="flex flex-col items-center px-4 rounded-b-3xl opacity-100 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-700"
               >
                 <img
                   src={item.src}
                   alt={item.alt}
-                  className="w-16 h-16 mb-2 rounded-full object-contain"
+                  className="w-16 h-16 mb-2"
                 />
               </div>
             ))}

@@ -45,3 +45,28 @@ module.exports.createBlog = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+module.exports.getAllBlogs = async (req, res) => {
+    try {
+        const blogs = await BlogModel.find().sort({ publishDate: -1 }); // Sort by publish date descending
+        console.log('Received request to get all blogs', blogs);
+        
+        res.status(200).json({ message: 'Blogs retrieved successfully', data: blogs });
+    } catch (error) {
+        console.error('Error retrieving blogs:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+module.exports.getBlogById = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+        const blog = await BlogModel.findById(blogId);
+        console.log('Received request to get blog by id:', blogId);
+        if (!blog) {
+            return res.status(404).json({ message: 'Blog not found' });
+        }
+        res.status(200).json({ message: 'Blog retrieved successfully', data: blog });
+    } catch (error) {
+        console.error('Error retrieving blog by id:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
