@@ -208,7 +208,7 @@ export default function SignUp() {
               
               <div className="text-center text-sm sm:text-base">
                 <span>Already have an account? </span>
-                <a href='/Signin' className='text-blue-500 hover:underline'>SignIn</a>
+                <Link to={'/Signin'} className='text-blue-500 hover:underline'>SignIn</Link>
               </div>
             </div>
 
@@ -223,66 +223,10 @@ export default function SignUp() {
         </div>
 
         {/* Right Side - Space Illustration (Same as SignIn) */}
-        <div className="w-full lg:w-1/2 bg-[#0060738e] p-4 sm:p-6 lg:p-8 flex items-center justify-center relative overflow-hidden min-h-[300px] sm:min-h-[400px] lg:min-h-0">
+        <div className="w-full lg:w-1/2 bg-[#fff] flex items-center justify-center relative overflow-hidden   ">
           {/* Space Scene */}
           <div className="relative w-full h-full flex items-center justify-center">
-            {/* Floating UFOs/Spaceships */}
-            <div className="absolute top-8 sm:top-16 left-8 sm:left-16 w-8 h-4 sm:w-12 sm:h-6 bg-gray-600 rounded-full opacity-80 transform rotate-12"></div>
-            <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-6 h-3 sm:w-10 sm:h-5 bg-gray-700 rounded-full opacity-70 transform -rotate-12"></div>
-            <div className="absolute bottom-16 sm:bottom-32 left-6 sm:left-12 w-8 h-4 sm:w-14 sm:h-7 bg-gray-600 rounded-full opacity-60 transform rotate-45"></div>
-            <div className="absolute top-16 sm:top-32 right-16 sm:right-32 w-6 h-3 sm:w-8 sm:h-4 bg-gray-500 rounded-full opacity-90"></div>
-
-            {/* Planet/Rocks floating */}
-            <div className="absolute top-6 sm:top-12 left-16 sm:left-32 w-6 h-6 sm:w-8 sm:h-8 bg-gray-800 rounded-full opacity-70"></div>
-            <div className="absolute top-12 sm:top-24 right-8 sm:right-16 w-4 h-4 sm:w-6 sm:h-6 bg-gray-700 rounded-full opacity-80"></div>
-            <div className="absolute bottom-8 sm:bottom-16 right-12 sm:right-24 w-6 h-6 sm:w-10 sm:h-10 bg-gray-600 rounded-full opacity-60"></div>
-
-            {/* Central Astronaut Figure */}
-            <div className="relative z-10 scale-75 sm:scale-90 lg:scale-100">
-              {/* Platform/Ground */}
-              <div className="relative">
-                <div className="w-60 sm:w-80 h-30 sm:h-40 bg-blue-400 rounded-t-full opacity-90 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-500 to-blue-300"></div>
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 sm:w-32 h-12 sm:h-16 bg-blue-600 rounded-t-full opacity-80"></div>
-                </div>
-                
-                {/* Astronaut */}
-                <div className="absolute bottom-12 sm:bottom-16 left-1/2 transform -translate-x-1/2">
-                  {/* Body */}
-                  <div className="w-12 sm:w-16 h-18 sm:h-24 bg-orange-500 rounded-lg relative">
-                    {/* Chest details */}
-                    <div className="absolute top-3 sm:top-4 left-1/2 transform -translate-x-1/2 w-6 sm:w-8 h-6 sm:h-8 bg-orange-600 rounded"></div>
-                  </div>
-                  
-                  {/* Head/Helmet */}
-                  <div className="absolute -top-6 sm:-top-8 left-1/2 transform -translate-x-1/2 w-9 sm:w-12 h-9 sm:h-12 bg-gradient-to-b from-blue-200 to-blue-400 rounded-full border-3 sm:border-4 border-orange-500">
-                    <div className="absolute inset-1 sm:inset-2 bg-gradient-to-b from-white to-blue-100 rounded-full opacity-80"></div>
-                  </div>
-                  
-                  {/* Arms */}
-                  <div className="absolute top-1 sm:top-2 -left-4 sm:-left-6 w-4 sm:w-5 h-9 sm:h-12 bg-orange-500 rounded-full transform -rotate-12"></div>
-                  <div className="absolute top-1 sm:top-2 -right-4 sm:-right-6 w-4 sm:w-5 h-9 sm:h-12 bg-orange-500 rounded-full transform rotate-12"></div>
-                  
-                  {/* Legs */}
-                  <div className="absolute bottom-0 left-1 sm:left-2 w-3 sm:w-4 h-6 sm:h-8 bg-orange-500 rounded-b-lg"></div>
-                  <div className="absolute bottom-0 right-1 sm:right-2 w-3 sm:w-4 h-6 sm:h-8 bg-orange-500 rounded-b-lg"></div>
-                </div>
-
-                {/* Floating crystals/rocks around platform */}
-                <div className="absolute -top-6 sm:-top-8 -left-6 sm:-left-8 w-12 sm:w-16 h-9 sm:h-12 bg-blue-600 transform rotate-45 opacity-70" style={{clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'}}></div>
-                <div className="absolute -top-9 sm:-top-12 right-6 sm:right-8 w-9 sm:w-12 h-6 sm:h-8 bg-blue-500 transform -rotate-30 opacity-80" style={{clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'}}></div>
-                <div className="absolute top-6 sm:top-8 -right-9 sm:-right-12 w-15 sm:w-20 h-12 sm:h-16 bg-blue-700 transform rotate-12 opacity-60" style={{clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'}}></div>
-                <div className="absolute bottom-3 sm:bottom-4 -left-12 sm:-left-16 w-18 sm:w-24 h-14 sm:h-18 bg-blue-600 transform -rotate-45 opacity-70" style={{clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'}}></div>
-              </div>
-            </div>
-
-            {/* Background elements */}
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/4 left-1/4 w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse"></div>
-              <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-              <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-white rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-              <div className="absolute bottom-1/3 right-1/4 w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
-            </div>
+            <img src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7965.jpg?semt=ais_items_boosted&w=740" alt="" />
           </div>
         </div>
       </div>      

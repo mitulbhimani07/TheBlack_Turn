@@ -1,5 +1,6 @@
 const UserModel = require("../model/userModel");
 const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 const SALT_ROUNDS = 10;
 
 module.exports.signup = async (req, res) => {
@@ -22,7 +23,42 @@ module.exports.signup = async (req, res) => {
 
 module.exports.Login = async (req, res) => {
     try {
-        var data=await UserModel.create(req.body)
+
+         const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" });
+        }
+
+        var data=await UserModel.findOne({email})
+
+                if (!data) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, data.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const userResponse = data.toObject();
+        delete userResponse.password;
+
+        // ✅ Create JWT token
+        const token = jwt.sign(
+            {
+                userId: data._id,
+                email: data.email,
+            },
+            process.env.JWT_SECRET, // Make sure this is defined in your .env
+            { expiresIn: '8h' }
+        );
+
+        res.status(200).json({
+            message: "Login successful",
+            token,
+            data: data
+        });
 
         res.status(200).json({
             status:"Signup Successfully.",
