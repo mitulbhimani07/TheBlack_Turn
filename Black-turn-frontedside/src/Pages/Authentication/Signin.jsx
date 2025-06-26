@@ -41,28 +41,7 @@ export default function Signin() {
 
   return (
     <div className="min-h-screen bg-[#EBF4F5] flex items-center justify-center p-3 sm:p-6 relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-5 sm:top-10 left-5 sm:left-10 w-12 h-12 sm:w-20 sm:h-20 bg-[#005f73] rounded-full opacity-80"></div>
-      <div className="absolute bottom-10 sm:bottom-20 left-10 sm:left-20 w-10 h-10 sm:w-16 sm:h-16 bg-[#005f73] rounded-full opacity-60"></div>
-      <div className="absolute top-10 sm:top-20 right-10 sm:right-20 w-8 h-8 sm:w-12 sm:h-12 bg-[#005f73] rounded-full opacity-70"></div>
-      <div className="absolute bottom-5 sm:bottom-10 right-5 sm:right-10 w-16 h-16 sm:w-24 sm:h-24 bg-[#005f73] rounded-full opacity-50"></div>
       
-      {/* Decorative Sun Rays */}
-      <div className="absolute bottom-16 sm:bottom-32 left-8 sm:left-16">
-        <div className="relative">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-4 sm:h-8 bg-[#005f73] opacity-60"
-              style={{
-                transformOrigin: 'bottom center',
-                transform: `rotate(${i * 45}deg)`,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
       {/* Main Container */}
       <div className="bg-white rounded-xl sm:rounded-3xl shadow-2xl max-w-6xl w-full overflow-hidden flex flex-col lg:flex-row">
         {/* Left Side - Login Form */}
