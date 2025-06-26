@@ -31,6 +31,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 import { FaUpload } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Header from '../../Header_Footer/Header';
+import Footer from '../../Header_Footer/Footer';
 
 
 
@@ -415,6 +417,8 @@ const getYouTubeID = (url) => {
   return (
     <>
       {/* Banner Section */}
+
+      <Header/>
       <div
         className="relative bg-cover bg-center h-[359px] flex items-center justify-center text-center"
         style={{ backgroundImage: `url(${banner})` }}
@@ -760,7 +764,7 @@ Global stage, local roots. Share your music video with the world—start distrib
       
     </div>
 
-
+        <Footer/>
     </>
   );
 }

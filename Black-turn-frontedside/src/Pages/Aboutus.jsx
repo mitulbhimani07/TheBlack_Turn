@@ -5,6 +5,8 @@ import facebook from '../assets/images/Facebook.png'
 import instagram from '../assets/images/instagram.png'
 import youtube from '../assets/images/youtube.png'
 import twitter from '../assets/images/twitter.png'
+import Header from '../Header_Footer/Header';
+import Footer from '../Header_Footer/Footer';
 
 function Aboutus() {
     const platforms = [
@@ -36,7 +38,7 @@ function Aboutus() {
   return (
     <>
         {/* Banner Section */}
-
+          <Header/>
         <div
                 className="relative bg-cover bg-center h-[359px] flex items-center justify-center text-center"
                 style={{ backgroundImage: `url(${banner})` }}
@@ -130,6 +132,8 @@ function Aboutus() {
     </div>
   </div>
 </div>
+
+<Footer/>
     </>
   )
 }

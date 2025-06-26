@@ -2,12 +2,14 @@ import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import Footer from '../Header_Footer/Footer';
+import Header from '../Header_Footer/Header';
 
 
 function Pricing() {
   return (
     <>
-
+      <Header/>
       <section className="bg-[#EBF4F5] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
@@ -365,6 +367,8 @@ function Pricing() {
           </div>
         </div>
       </section>
+
+      <Footer/>
     </>
 
   )

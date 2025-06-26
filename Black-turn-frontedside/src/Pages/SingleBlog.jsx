@@ -3,6 +3,8 @@ import { Heart, MessageCircle, Share2, Bookmark, Clock, Calendar, User, ChevronL
 import { GetBlogById } from '../Api/api';
 import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
+import Header from '../Header_Footer/Header';
+import Footer from '../Header_Footer/Footer';
 
 function SingleBlog() {
 
@@ -41,6 +43,8 @@ function SingleBlog() {
 
   return (
     <>
+
+    <Header/>
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Navigation */}
     
@@ -105,6 +109,8 @@ function SingleBlog() {
         </article>
       </div>
     </div>
+
+    <Footer/>
     
     </>
   )
