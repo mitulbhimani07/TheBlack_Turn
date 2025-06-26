@@ -19,6 +19,7 @@ import SingleBlog from './Pages/SingleBlog'
 import toast, { ToastBar, Toaster } from 'react-hot-toast'
 import cross from './assets/images/icon-check.svg'
 import check from './assets/images/icon-cross.svg'
+import { RxCross2 } from 'react-icons/rx'
 
 function AllRoutes() {
   return (
