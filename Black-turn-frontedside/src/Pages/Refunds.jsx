@@ -1,7 +1,12 @@
 import React from 'react'
+import Header from '../Header_Footer/Header'
+import Footer from '../Header_Footer/Footer'
 
 function Refunds() {
   return (
+
+    <>
+    <Header/>
    <div className="max-w-6xl mx-auto p-8 bg-white shadow-lg mt-8 mb-8">
         <h1 className="text-4xl font-bold text-gray-800 mb-8">
         Refund Policy
@@ -31,6 +36,8 @@ Refunds are also offered if there are defects but there are no refunds on subscr
             </ul>
       </div>
     </div>
+    <Footer/>
+    </>
   )
 }
 

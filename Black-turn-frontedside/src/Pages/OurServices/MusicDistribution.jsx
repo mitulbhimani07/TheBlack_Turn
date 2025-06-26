@@ -18,6 +18,8 @@ import { Database, Youtube, BarChart3 } from 'lucide-react';
 import royalite from '../../assets/images/royalti.png'; // Adjust the path as necessary
 import logoApp from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom';
+import Footer from '../../Header_Footer/Footer';
+import Header from '../../Header_Footer/Header';
 const MusicDistribution = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const imagePlatforms = [
@@ -208,6 +210,10 @@ const MusicDistribution = () => {
     },
   ];
   return (
+
+    <>
+
+    <Header/>
     <div className="min-h-screen bg-[#ebf4f5] text-white">
       <div className="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 lg:flex-row min-h-screen">
         {/* Left Section */}
@@ -701,17 +707,17 @@ const MusicDistribution = () => {
       {/* Geometric shapes */}
       <div className="absolute inset-0 hidden lg:block">
         {/* Large diamond shape */}
-        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-16 xl:translate-x-32">
+        <div className="absolute top-1/3 left-1/2 transform  -translate-y-1/2 translate-x-16 xl:translate-x-32">
           <div className="w-48 h-48 xl:w-76 xl:h-76 bg-[#005d71] transform rotate-45 opacity-80"></div>
         </div>
 
         {/* Secondary diamond */}
-        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-32 xl:translate-x-48 translate-y-16 xl:translate-y-24">
+        <div className="absolute top-1/3 left-1/2 transform  translate-x-32 xl:translate-x-48 translate-y-16 xl:translate-y-24">
           <div className="w-32 h-32 xl:w-44 xl:h-44 bg-[#005d71] transform rotate-45 opacity-60"></div>
         </div>
 
         {/* Arrow element */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-4 xl:translate-x-8">
+        <div className="absolute top-1/2 left-1/2 transform  -translate-y-1/2 translate-x-4 xl:translate-x-8">
           <svg width="200" height="40" viewBox="0 0 200 40" className="text-[#fff] xl:w-[300px]">
             <path d="M0 20 L160 20 M140 10 L160 20 L140 30"
               stroke="currentColor"
@@ -1079,6 +1085,10 @@ const MusicDistribution = () => {
         </div>
       </section>
     </div>
+
+    <Footer/>
+
+    </>
   );
 };
 

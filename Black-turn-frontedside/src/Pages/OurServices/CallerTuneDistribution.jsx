@@ -12,6 +12,8 @@ import tablist2 from "../../assets/images/tablist2.png"
 import tablist3 from "../../assets/images/tablist3.png"
 import tablist4 from "../../assets/images/tablist4.png"
 import { Link } from "react-router-dom";
+import Header from "../../Header_Footer/Header";
+import Footer from "../../Header_Footer/Footer";
 
 
 
@@ -209,6 +211,7 @@ const CallerTuneDistribution = () => {
   return (
     <>
       {/* Hero Section */}
+      <Header/>
       <div className="relative bg-cover bg-center h-[400px] flex items-center justify-center text-center"
         style={{ backgroundImage: `url(${banner})` }}>
 
@@ -1099,6 +1102,7 @@ const CallerTuneDistribution = () => {
 </div>
 
 
+  <Footer/>
 
 
 

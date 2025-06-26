@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import blogBanner from "../assets/images/blogBanner.webp";
 import { GetAllBlogs } from '../Api/api';
 import { Link } from 'react-router-dom';
+import Header from '../Header_Footer/Header';
+import Footer from '../Header_Footer/Footer';
 
 function Blog() {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -26,6 +28,8 @@ function Blog() {
   return (
     <>
       {/* Banner Section */}
+
+      <Header/>
       <div
         className="relative bg-cover bg-center h-[400px] flex items-center justify-center text-center"
         style={{ backgroundImage: `url(${blogBanner})` }}
@@ -109,6 +113,8 @@ function Blog() {
           )}
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 }

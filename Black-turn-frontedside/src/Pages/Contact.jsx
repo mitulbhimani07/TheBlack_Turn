@@ -2,6 +2,8 @@ import React from 'react';
 import banner from "../assets/images/Frame.png";
 import { motion } from "framer-motion";
 import { Home, Mail, Globe } from "lucide-react";
+import Header from '../Header_Footer/Header';
+import Footer from '../Header_Footer/Footer';
 
 const Contact = () => {
   const contactInfo = [
@@ -48,6 +50,7 @@ const Contact = () => {
   return (
     <>
       {/* Banner Section */}
+      <Header/>
       <div className="relative bg-cover bg-center h-[359px] flex items-center justify-center text-center"
         style={{ backgroundImage: `url(${banner})` }}>
         <div className="absolute inset-0 bg-opacity-80"></div>
@@ -117,6 +120,8 @@ const Contact = () => {
           </motion.div>
         </div>
       </section>
+
+      <Footer/>
     </>
   );
 };
