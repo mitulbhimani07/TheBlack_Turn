@@ -59,3 +59,14 @@ export const Googlesignup=async(payload)=>{
         throw error;
     }
 }
+
+export const Googlesignin=async(payload)=>{
+    try{
+        const response=await axios.post('http://localhost:3001/user/googleSignin',payload)
+
+        return response.data
+    }catch(error){
+        console.error("Error in signin API:", error);
+        throw error;
+    }
+}

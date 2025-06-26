@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   LoginSocialGoogle
 } from 'reactjs-social-login';
+import { Googlesignin } from '../../Api/api';
 
 export default function Signin() {
    const [provider, setProvider] = useState('');
@@ -134,32 +135,24 @@ export default function Signin() {
             onResolve={async ({ provider, data }) => {
               setProvider(provider);
               setProfile(data);
-              // try {
-              //   const payload = {
-              //     email: data.email,
-              //     name: data.name,
-              //     country: "IN", // or dynamically detect later
-              //   };
+              try {
+                const payload = {
+                  email: data.email,
+                  name: data.name,
+                  country: "IN", // or dynamically detect later
+                };
 
-              //   const res = await GoogleSignin(payload);
-              //   console.log("Google Signin Response:", res.role);
-              //   // Call your API function
-              //   toast.success(res.message || "Google login success");
+                const res = await Googlesignin(payload);
+                console.log("Google Signin Response:", res.role);
+                // Call your API function
+                toast.success(res.message || "Google login success");
 
-              //   if (res.role === 'client') {
-              //     toast.success("Login successful as Client");
-              //     navigate("/ClientDashboard"); // Or wherever you want to send them
+               
 
-              //   } else if (res.role === 'freelancer') {
-              //     toast.success("Login successful as Freelancer");
-              //     navigate("/FreelancerDashboard"); // Or wherever you want to send them
-
-              //   }
-
-              // } catch (err) {
-              //   console.error("Google signup error:", err);
-              //   toast.error("Failed to save Google login");
-              // }
+              } catch (err) {
+                console.error("Google signup error:", err);
+                toast.error("Failed to save Google login");
+              }
             }}
             onReject={err => {
               console.log(err);
