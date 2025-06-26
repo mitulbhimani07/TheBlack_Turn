@@ -10,9 +10,9 @@ function App() {
 
   return (
     <>
-      <Header/>
+      {/* <Header/> */}
       <AllRoutes/>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   )
 }

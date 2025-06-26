@@ -20,6 +20,7 @@ import toast, { ToastBar, Toaster } from 'react-hot-toast'
 import cross from './assets/images/icon-check.svg'
 import check from './assets/images/icon-cross.svg'
 import { RxCross2 } from 'react-icons/rx'
+import Dashboard from './Dashboard/Pages/Dashboard'
 
 function AllRoutes() {
   return (
@@ -42,6 +43,9 @@ function AllRoutes() {
               <Route path='/Signin' element={<Signin/>} />
               <Route path='*' element={<h1>404 Not Found</h1>} />
               <Route path='/Signup' element={<Signp/>} />
+
+              {/* Dashboard */}
+              <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
 
 
