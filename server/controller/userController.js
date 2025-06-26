@@ -122,7 +122,7 @@ module.exports.googleSignin = async (req, res) => {
             return res.status(400).json({ message: "Email is required" });
         }
 
-        const user = await UserModel.findOne({ email });
+        var user = await UserModel.findOne({ email });
 
         if (!user) {
             return res.status(404).json({ message: "User not found. Please sign up first." });
@@ -134,8 +134,8 @@ module.exports.googleSignin = async (req, res) => {
 
         const token = jwt.sign(
             {
-                userId: data._id,
-                email: data.email,
+                userId: user._id,
+                email: user.email,
             },
             process.env.JWT_SECRET, // Make sure this is defined in your .env
             { expiresIn: '8h' }
