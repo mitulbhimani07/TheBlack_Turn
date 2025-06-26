@@ -36,3 +36,14 @@ export const GetBlogById=async(id)=>{
         throw error;
     }
 }
+
+export const Googlesignup=async(payload)=>{
+    try{
+        const response=await axios.post('http://localhost:3001/user/googleSignup',payload)
+
+        return response.data
+    }catch(error){
+        console.error("Error in signin API:", error);
+        throw error;
+    }
+}
