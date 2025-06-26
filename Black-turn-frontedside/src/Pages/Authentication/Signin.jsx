@@ -3,6 +3,7 @@ import { User, Lock } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginSocialGoogle } from 'reactjs-social-login';
 import { Googlesignin, signin } from '../../Api/api';
+import toast from 'react-hot-toast';
 // import { toast } from 'react-toastify'; // Optional: uncomment if using toast notifications
 
 export default function Signin() {
@@ -35,11 +36,13 @@ export default function Signin() {
     try {
       const response = await signin(formData);
       console.log("Signup success:", response.data);
-      alert("Signup successful!");
+      // alert("Signup successful!");
+      toast.success("SignIn Successfully!!")
       navigate('/');
     } catch (error) {
       console.error("Signup error:", error);
-      alert(error?.response?.data?.message || "Signup failed");
+      toast.error(error?.response?.data?.message)
+      // alert(error?.response?.data?.message || "Signup failed");
     }
   };
 
@@ -55,7 +58,7 @@ export default function Signin() {
             <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">Please sign in to your account with us</p>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <form onSubmit={handleSubmit} method='post' className="space-y-4 sm:space-y-6">
               {/* Username */}
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
