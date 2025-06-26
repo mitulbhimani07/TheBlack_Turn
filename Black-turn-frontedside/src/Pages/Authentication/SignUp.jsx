@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   LoginSocialGoogle
 } from 'reactjs-social-login';
-
+import { Signup } from '../../Api/api';
 export default function SignUp() {
   const [provider, setProvider] = useState('');
     const [profile, setProfile] = useState();
@@ -23,18 +23,54 @@ export default function SignUp() {
     username: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    conPassword: ''
   });
+  const validateSignUp = () =>{
+    if (username === '') {
+      alert("Username is required");
+      return false;
+    }
+    if (email === '') {
+      alert("Email is required");
+      return false;
+    }
+    if (conditions.email && !/\S+@\S+\.\S+/.test(email)) {
+      alert("Email is invalid");
+      return false;
+    }
+    if (password === '') {
+      alert("Password is required");
+      return false;
+    }else if (password.length < 8) {
+      alert("Password must be at least 8 characters long");
+      return false;
+    }
+    if (conPassword === '') {
+      alert("Confirm Password is required");
+      return false;
+    }
+    return true;
+  }
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    
   };
 
   const handleSubmit = () => {
+
+    // const { username, email, password, conPassword } = formData;
+    if (!validateSignUp()) {
+      return;
+    }
     console.log('Sign up attempt:', formData);
+    if (formData.password !== formData.conPassword) {
+      alert("Passwords do not match");
+      return;
+    }
   };
 
   return (
@@ -109,7 +145,7 @@ export default function SignUp() {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  value={formData.password}
+                  value={formData.Password}
                   onChange={handleChange}
                   className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-orange-400 focus:bg-white transition-all duration-200 text-gray-700 placeholder-gray-500 text-sm sm:text-base"
                 />
@@ -122,9 +158,9 @@ export default function SignUp() {
                 </div>
                 <input
                   type="password"
-                  name="confirmPassword"
+                  name="conPassword"
                   placeholder="Confirm Password"
-                  value={formData.confirmPassword}
+                  value={formData.conPassword}
                   onChange={handleChange}
                   className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-orange-400 focus:bg-white transition-all duration-200 text-gray-700 placeholder-gray-500 text-sm sm:text-base"
                 />
