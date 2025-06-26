@@ -48,3 +48,37 @@ export const Signup=async(payload)=>{
         throw error;
     }
 }
+
+export const Googlesignup=async(payload)=>{
+    try{
+        const response=await axios.post('http://localhost:3001/user/googleSignup',payload)
+
+        return response.data
+    }catch(error){
+        console.error("Error in signin API:", error);
+        throw error;
+    }
+}
+
+export const Googlesignin=async(payload)=>{
+    try{
+        const response=await axios.post('http://localhost:3001/user/googleSignin',payload)
+
+        return response.data
+    }catch(error){
+        console.error("Error in signin API:", error);
+        throw error;
+    }
+}
+export const signin=async(payload)=>{
+    try{
+        const response=await axios.post('http://localhost:3001/user/login',payload)
+
+        console.log("signin----",response.data)
+        return response.data
+
+    }catch(error){
+        console.error("Error in signin API:", error);
+        throw error;
+    }
+}

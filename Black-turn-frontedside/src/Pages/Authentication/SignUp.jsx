@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   LoginSocialGoogle
 } from 'reactjs-social-login';
-import { Signup } from '../../Api/api';
+import { Googlesignup, Signup } from '../../Api/api';
+
 export default function SignUp() {
   const [provider, setProvider] = useState('');
     const [profile, setProfile] = useState();
@@ -25,32 +26,39 @@ export default function SignUp() {
     password: '',
     conPassword: ''
   });
-  const validateSignUp = () =>{
-    if (username === '') {
-      alert("Username is required");
-      return false;
-    }
-    if (email === '') {
-      alert("Email is required");
-      return false;
-    }
-    if (conditions.email && !/\S+@\S+\.\S+/.test(email)) {
-      alert("Email is invalid");
-      return false;
-    }
-    if (password === '') {
-      alert("Password is required");
-      return false;
-    }else if (password.length < 8) {
-      alert("Password must be at least 8 characters long");
-      return false;
-    }
-    if (conPassword === '') {
-      alert("Confirm Password is required");
-      return false;
-    }
-    return true;
+  const validateSignUp = () => {
+  const { username, email, password, conPassword } = formData;
+
+  if (username.trim() === '') {
+    alert("Username is required");
+    return false;
   }
+  if (email.trim() === '') {
+    alert("Email is required");
+    return false;
+  }
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    alert("Email is invalid");
+    return false;
+  }
+  if (password === '') {
+    alert("Password is required");
+    return false;
+  } else if (password.length < 8) {
+    alert("Password must be at least 8 characters long");
+    return false;
+  }
+  if (conPassword === '') {
+    alert("Confirm Password is required");
+    return false;
+  }
+  if (password !== conPassword) {
+    alert("Passwords do not match");
+    return false;
+  }
+
+  return true;
+};
 
   const handleChange = (e) => {
     setFormData({
@@ -60,18 +68,23 @@ export default function SignUp() {
     
   };
 
-  const handleSubmit = () => {
+ const handleSubmit = async (e) => {
+  e.preventDefault(); // ✅ prevent form from reloading the page
 
-    // const { username, email, password, conPassword } = formData;
-    if (!validateSignUp()) {
-      return;
-    }
-    console.log('Sign up attempt:', formData);
-    if (formData.password !== formData.conPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-  };
+  if (!validateSignUp()) {
+    return;
+  }
+
+  try {
+    const response = await Signup(formData); // ✅ API call after validation
+    console.log("Signup success:", response.data);
+    alert("Signup successful!");
+    navigate('/Signin'); // ✅ redirect after success
+  } catch (error) {
+    console.error("Signup error:", error);
+    alert(error?.response?.data?.message || "Signup failed");
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#EBF4F5] flex items-center justify-center p-3 sm:p-6 relative overflow-hidden">
@@ -106,8 +119,9 @@ export default function SignUp() {
             <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">Create your account to start exploring with us</p>
             
             <div className="space-y-4 sm:space-y-6">
-              {/* Username Field */}
-              <div className="relative">
+              <form action="" onSubmit={handleSubmit}>
+                {/* Username Field */}
+              <div className="relative mb-3">
                 <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                   <User className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                 </div>
@@ -122,7 +136,7 @@ export default function SignUp() {
               </div>
 
               {/* Email Field */}
-              <div className="relative">
+              <div className="relative mb-3">
                 <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                   <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                 </div>
@@ -137,7 +151,7 @@ export default function SignUp() {
               </div>
 
               {/* Password Field */}
-              <div className="relative">
+              <div className="relative mb-3">
                 <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                   <Lock className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                 </div>
@@ -145,14 +159,14 @@ export default function SignUp() {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  value={formData.Password}
+                  value={formData.password}
                   onChange={handleChange}
                   className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-orange-400 focus:bg-white transition-all duration-200 text-gray-700 placeholder-gray-500 text-sm sm:text-base"
                 />
               </div>
 
               {/* Confirm Password Field */}
-              <div className="relative">
+              <div className="relative mb-3">
                 <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                   <Lock className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                 </div>
@@ -168,11 +182,11 @@ export default function SignUp() {
 
               {/* Sign Up Button */}
               <button
-                onClick={handleSubmit}
                 className="w-full bg-gray-800 text-white py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-700 transition-colors duration-200 text-base sm:text-lg"
               >
                 CREATE ACCOUNT
               </button>
+              </form>
             </div>
 
             {/* Divider */}
@@ -199,32 +213,23 @@ export default function SignUp() {
                           onResolve={async ({ provider, data }) => {
                             setProvider(provider);
                             setProfile(data);
-                            // try {
-                            //   const payload = {
-                            //     email: data.email,
-                            //     name: data.name,
-                            //     country: "IN", // or dynamically detect later
-                            //   };
+                            try {
+                              const payload = {
+                                email: data.email,
+                                name: data.name,
+                                country: "IN", // or dynamically detect later
+                              };
               
-                            //   const res = await GoogleSignin(payload);
-                            //   console.log("Google Signin Response:", res.role);
-                            //   // Call your API function
-                            //   toast.success(res.message || "Google login success");
+                              const res = await Googlesignup(payload);
+                              console.log("Google Signin Response:", res.role);
+                              // Call your API function
+                              toast.success(res.message || "Google login success");
               
-                            //   if (res.role === 'client') {
-                            //     toast.success("Login successful as Client");
-                            //     navigate("/ClientDashboard"); // Or wherever you want to send them
               
-                            //   } else if (res.role === 'freelancer') {
-                            //     toast.success("Login successful as Freelancer");
-                            //     navigate("/FreelancerDashboard"); // Or wherever you want to send them
-              
-                            //   }
-              
-                            // } catch (err) {
-                            //   console.error("Google signup error:", err);
-                            //   toast.error("Failed to save Google login");
-                            // }
+                            } catch (err) {
+                              console.error("Google signup error:", err);
+                              toast.error("Failed to save Google login");
+                            }
                           }}
                           onReject={err => {
                             console.log(err);
