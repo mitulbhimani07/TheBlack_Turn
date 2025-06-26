@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const AddBlog=async(payload)=>{
     try{
-        const response=await axios.post('http://localhost:3001/blogs/create',payload)
+        const response=await axios.post('https://theblack-turn-2.onrender.com/blogs/create',payload)
 
         console.log("blog----",response.data)
         return response.data
@@ -14,7 +14,7 @@ export const AddBlog=async(payload)=>{
 }
 export const GetAllBlogs=async()=>{
     try{
-        const response=await axios.get('http://localhost:3001/blogs/all')
+        const response=await axios.get('https://theblack-turn-2.onrender.com/blogs/all')
 
         console.log("blogs----",response.data)
         return response.data
@@ -26,7 +26,7 @@ export const GetAllBlogs=async()=>{
 }
 export const GetBlogById=async(id)=>{
     try{
-        const response=await axios.get(`http://localhost:3001/blogs/all/${id}`)
+        const response=await axios.get(`https://theblack-turn-2.onrender.com/blogs/all/${id}`)
 
         console.log("blog by id----",response.data.data)
         return response.data
@@ -38,7 +38,7 @@ export const GetBlogById=async(id)=>{
 }
 export const Signup=async(payload)=>{
     try{
-        const response=await axios.post('http://localhost:3001/user/signup',payload)
+        const response=await axios.post('https://theblack-turn-2.onrender.com/user/signup',payload)
 
         console.log("signup----",response.data)
         return response.data
@@ -51,7 +51,7 @@ export const Signup=async(payload)=>{
 
 export const Googlesignup=async(payload)=>{
     try{
-        const response=await axios.post('http://localhost:3001/user/googleSignup',payload)
+        const response=await axios.post('https://theblack-turn-2.onrender.com/user/googleSignup',payload)
 
         return response.data
     }catch(error){
@@ -62,7 +62,7 @@ export const Googlesignup=async(payload)=>{
 
 export const Googlesignin=async(payload)=>{
     try{
-        const response=await axios.post('http://localhost:3001/user/googleSignin',payload)
+        const response=await axios.post('https://theblack-turn-2.onrender.com/user/googleSignin',payload)
 
         return response.data
     }catch(error){
@@ -72,7 +72,7 @@ export const Googlesignin=async(payload)=>{
 }
 export const signin=async(payload)=>{
     try{
-        const response=await axios.post('http://localhost:3001/user/login',payload)
+        const response=await axios.post('https://theblack-turn-2.onrender.com/user/login',payload)
 
         console.log("signin----",response.data)
         return response.data
