@@ -1,200 +1,97 @@
-import React, { useState } from 'react';
-import {
-  Home, Users, BarChart3, Settings, Calendar, FileText,
-  Mail, ShoppingCart, TrendingUp, Activity, CreditCard,
-  Package, Shield, HelpCircle, Star, ChevronRight
-} from 'lucide-react';
-import { useTheme } from '../Context/ThemeContext';
+import React from 'react';
+import { 
+  FiHome, FiMusic, FiUpload, FiDollarSign, 
+  FiSettings, FiUser, FiHelpCircle, FiLogOut, FiChevronRight, 
+  FiBarChart2
+} from 'react-icons/fi';
 
-const Sidebar = ({ isOpen }) => {
-  const { currentTheme } = useTheme();
-  const [activeItem, setActiveItem] = useState('dashboard');
-  const [expandedGroups, setExpandedGroups] = useState({});
-
-  const toggleGroup = (id) => {
-    setExpandedGroups(prev => ({ ...prev, [id]: !prev[id] }));
-  };
-
+const Sidebar = ({ isOpen, activeTab, setActiveTab }) => {
   const menuItems = [
-    {
-      id: 'dashboard',
-      label: 'Dashboard',
-      icon: Home,
-      type: 'single'
-    },
-    {
-      id: 'analytics',
-      label: 'Analytics',
-      icon: BarChart3,
-      type: 'group',
-      children: [
-        { id: 'overview', label: 'Overview', icon: TrendingUp },
-        { id: 'reports', label: 'Reports', icon: FileText },
-        { id: 'insights', label: 'Insights', icon: Activity }
-      ]
-    },
-    {
-      id: 'users',
-      label: 'User Management',
-      icon: Users,
-      type: 'group',
-      children: [
-        { id: 'all-users', label: 'All Users', icon: Users },
-        { id: 'user-roles', label: 'User Roles', icon: Shield },
-        { id: 'permissions', label: 'Permissions', icon: Settings }
-      ]
-    },
-    {
-      id: 'ecommerce',
-      label: 'E-Commerce',
-      icon: ShoppingCart,
-      type: 'group',
-      children: [
-        { id: 'products', label: 'Products', icon: Package },
-        { id: 'orders', label: 'Orders', icon: ShoppingCart },
-        { id: 'payments', label: 'Payments', icon: CreditCard }
-      ]
-    },
-    {
-      id: 'communication',
-      label: 'Communication',
-      icon: Mail,
-      type: 'single'
-    },
-    {
-      id: 'calendar',
-      label: 'Calendar',
-      icon: Calendar,
-      type: 'single'
-    },
-    {
-      id: 'documents',
-      label: 'Documents',
-      icon: FileText,
-      type: 'single'
-    }
+    { id: 'overview', label: 'Dashboard', icon: FiHome },
+    { id: 'music', label: 'My Music', icon: FiMusic },
+    { id: 'upload', label: 'Upload', icon: FiUpload },
+    { id: 'analytics', label: 'Analytics', icon: FiBarChart2 },
+    { id: 'royalties', label: 'Royalties', icon: FiDollarSign },
+    { id: 'profile', label: 'Profile', icon: FiUser },
+    { id: 'settings', label: 'Settings', icon: FiSettings },
+    { id: 'help', label: 'Help & Support', icon: FiHelpCircle },
   ];
 
-  const bottomItems = [
-    { id: 'help', label: 'Help & Support', icon: HelpCircle },
-    { id: 'settings', label: 'Settings', icon: Settings }
-  ];
-
-  const renderMenuItem = (item, isChild = false) => {
-    const Icon = item.icon;
-    const isActive = activeItem === item.id;
-    const isExpanded = expandedGroups[item.id];
-
-    const baseStyle = `w-full flex items-center justify-between px-3 py-2 rounded-lg transition-all duration-200 ${
-      isActive ? 'bg-[#005f73] text-white shadow-md' : `${currentTheme.sidebarText} hover:bg-[#005f73] hover:bg-opacity-10`
-    }`;
-
-    const childStyle = isChild ? 'ml-3 pl-3 border-l border-[#005f73]/30' : '';
-
-    if (item.type === 'group') {
-      return (
-        <div key={item.id}>
-          <button
-            onClick={() => toggleGroup(item.id)}
-            className={`${baseStyle} ${childStyle}`}
-          >
-            <div className="flex items-center gap-2">
-              <Icon size={18} />
-              <span className="text-sm font-medium">{item.label}</span>
+  return (
+    <>
+      {/* Overlay for mobile */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+          onClick={() => setActiveTab('overview')}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <div className={`fixed left-0 top-0 h-full z-40 transition-transform duration-300 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      } md:relative md:translate-x-0 ${isOpen ? 'w-64' : 'w-16'} bg-white border-r border-gray-200 shadow-lg`}>
+        
+        {/* Logo */}
+        <div className="p-4 border-b border-gray-200">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-lg flex items-center justify-center">
+              <FiMusic className="text-white" size={20} />
             </div>
-            <ChevronRight size={16} className={`transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+            {isOpen && (
+              <div>
+                <h2 className="font-bold text-lg text-gray-800">BLACK TURN</h2>
+                <p className="text-xs text-gray-500">Music Distribution</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="mt-6 px-2">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`w-full flex items-center space-x-3 px-3 py-3 mb-1 rounded-lg transition-all duration-200 group ${
+                  isActive 
+                    ? 'bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-lg' 
+                    : 'text-gray-800 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10'
+                }`}
+              >
+                <Icon size={20} className={`${isActive ? 'text-white' : 'text-gray-800'} transition-colors`} />
+                {isOpen && (
+                  <>
+                    <span className="flex-1 text-left font-medium">{item.label}</span>
+                    {isActive && <FiChevronRight size={16} className="text-white" />}
+                  </>
+                )}
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Bottom section */}
+        <div className="absolute bottom-0 w-full p-4 border-t border-gray-200">
+          <button className="w-full flex items-center space-x-3 px-3 py-3 rounded-lg transition-all duration-200 text-gray-800 hover:bg-red-50 hover:text-red-600">
+            <FiLogOut size={20} />
+            {isOpen && <span className="font-medium">Logout</span>}
           </button>
-          {isExpanded && (
-            <div className="mt-1">
-              {item.children.map(child => renderMenuItem(child, true))}
+          
+          {isOpen && (
+            <div className="mt-4 p-3 bg-gradient-to-r from-[#005f73]/10 to-[#0a9396]/10 rounded-lg">
+              <p className="text-xs text-gray-500 mb-1">Need Help?</p>
+              <p className="text-sm font-medium text-gray-800">Contact Support</p>
+              <p className="text-xs text-gray-500">+91 9817889799</p>
             </div>
           )}
         </div>
-      );
-    }
-
-    return (
-      <button
-        key={item.id}
-        onClick={() => setActiveItem(item.id)}
-        className={`${baseStyle} ${childStyle}`}
-      >
-        <div className="flex items-center gap-2">
-          <Icon size={18} />
-          <span className="text-sm font-medium">{item.label}</span>
-        </div>
-      </button>
-    );
-  };
-
-  return (
-    <aside
-      className={`${currentTheme.sidebar} ${isOpen ? 'w-72' : 'w-0'} transition-all duration-300 border-r ${currentTheme.border} h-screen overflow-hidden shadow-md`}
-    >
-      {/* Header */}
-      <div className="p-5 border-b border-[#005f73]/20">
-        <div className="flex items-center gap-3">
-          <div className="bg-[#005f73] p-2 rounded-lg text-white">
-            <BarChart3 size={20} />
-          </div>
-          <div>
-            <h2 className="text-lg font-bold text-[#005f73]">AdminPro</h2>
-            <p className="text-xs text-gray-500">v3.0 Dashboard</p>
-          </div>
-        </div>
       </div>
-
-      {/* User Profile */}
-      <div className="p-4 border-b border-[#005f73]/20">
-        <div className="flex items-center gap-3 bg-[#005f73]/10 p-3 rounded-lg">
-          <div className="bg-[#005f73] w-10 h-10 flex items-center justify-center text-white rounded-full font-bold">
-            JD
-          </div>
-          <div className="flex-1">
-            <p className="font-semibold text-sm">John Doe</p>
-            <p className="text-xs text-gray-500">Administrator</p>
-          </div>
-          <div className="flex items-center gap-1">
-            <Star size={12} className="text-yellow-400 fill-yellow-400" />
-            <span className="text-xs text-gray-500">Pro</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto p-4 space-y-2">
-        {menuItems.map(item => renderMenuItem(item))}
-      </nav>
-
-      {/* Bottom Items + Upgrade + Storage */}
-      <div className="p-4 border-t border-[#005f73]/20 space-y-4">
-        {bottomItems.map(item => renderMenuItem(item))}
-
-        {/* Upgrade Box */}
-        <div className="bg-gradient-to-r from-[#005f73] to-[#004a5a] text-white p-4 rounded-xl">
-          <div className="flex items-center gap-2 mb-2">
-            <Star size={16} className="text-yellow-300" />
-            <span className="font-semibold text-sm">Upgrade to Pro</span>
-          </div>
-          <p className="text-xs text-gray-200">Unlock premium features and insights</p>
-          <button className="mt-3 w-full bg-white text-[#005f73] text-sm font-semibold py-1.5 rounded-lg hover:bg-gray-100">
-            Upgrade Now
-          </button>
-        </div>
-
-        {/* Storage Usage */}
-        <div className="bg-[#ebf4f5] p-3 rounded-lg">
-          <div className="flex justify-between text-sm font-medium">
-            <span>Storage</span>
-            <span className="text-xs text-gray-500">75%</span>
-          </div>
-          <div className="w-full bg-gray-200 h-2 rounded-full mt-2">
-            <div className="bg-[#005f73] h-2 rounded-full" style={{ width: '75%' }} />
-          </div>
-          <p className="text-xs text-gray-500 mt-1">7.5GB of 10GB used</p>
-        </div>
-      </div>
-    </aside>
+    </>
   );
 };
 
