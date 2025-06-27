@@ -38,7 +38,7 @@ export default function Signin() {
       console.log("Signup success:", response.data);
       // alert("Signup successful!");
       toast.success("SignIn Successfully!!")
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       console.error("Signup error:", error);
       toast.error(error?.response?.data?.message)
