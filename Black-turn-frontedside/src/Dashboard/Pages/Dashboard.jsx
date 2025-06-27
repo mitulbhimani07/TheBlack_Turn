@@ -1,205 +1,406 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../Pages/header-sidebar/Header';
 import Sidebar from '../Pages/header-sidebar/Sidebar';
 import {
-  FiMusic, FiUpload, FiDollarSign, FiYoutube, FiUser, FiAlertCircle,
-  FiTrash2, FiLink, FiMessageSquare, FiCheckCircle, FiTrendingUp,
-  FiEye, FiDownload, FiPlay, FiPause, FiEdit, FiShare2
+  FiDollarSign, FiUser, FiEye, FiTrendingUp,
+  FiUpload,
+  FiCheckCircle,
+  FiMusic,
+  FiUploadCloud,
+  FiYoutube,
+  FiShare2,
+  FiBell,
+  FiAlertCircle,
+  FiTrash2,
+  FiClock
 } from 'react-icons/fi';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import gsap from 'gsap';
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [activeTab, setActiveTab] = useState('overview');
-  const [mobileView, setMobileView] = useState(window.innerWidth < 768);
-  const [isPlaying, setIsPlaying] = useState({});
+  const [isMobile, setIsMobile] = useState(false);
 
-  const stats = [
-    { title: "Today's Money", value: "₹53,000", change: "+55%", icon: FiDollarSign, color: "from-[#005f73] to-[#0a9396]" },
-    { title: "New Clients", value: "3,462", change: "-2%", icon: FiUser, color: "from-[#005f73] to-[#0a9396]" },
-    { title: "Today's Users", value: "2,300", change: "+3%", icon: FiEye, color: "from-[#005f73] to-[#0a9396]" },
-    { title: "Sales", value: "₹1,03,430", change: "+5%", icon: FiTrendingUp, color: "from-[#005f73] to-[#0a9396]" },
-  ];
+  const globeWrapperRef = useRef(null);
+  const canvas3DRef = useRef(null);
+  const canvas2DRef = useRef(null);
+  const popupRef = useRef(null);
 
-  const recentSongs = [
-    {
-      isrc: 'US-ABC-12-34567',
-      name: 'Summer Vibes',
-      artist: 'DJ Black',
-      date: '2025-06-20',
-      status: 'Live',
-      payment: 'Pending',
-      platforms: ['Spotify', 'Apple', 'YT Music'],
-      plays: '12.5K',
-      revenue: '₹2,340'
-    },
-    {
-      isrc: 'US-ABC-12-34568',
-      name: 'Midnight Dreams',
-      artist: 'DJ Black ft. Maria',
-      date: '2025-06-15',
-      status: 'Processing',
-      payment: 'Paid',
-      platforms: ['Spotify', 'Apple'],
-      plays: '8.2K',
-      revenue: '₹1,680'
-    },
-    {
-      isrc: 'US-ABC-12-34569',
-      name: 'Urban Life',
-      artist: 'Black Turn Collective',
-      date: '2025-06-10',
-      status: 'Live',
-      payment: 'Paid',
-      platforms: ['All Platforms'],
-      plays: '25.1K',
-      revenue: '₹4,560'
-    }
-  ];
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  const recentUpdates = [
-    {
-      time: '2025-06-26 14:53:36',
-      subject: 'Fill the NOC Form',
-      message: 'Please upload your NOC to proceed with releases.',
-      type: 'warning'
-    },
-    {
-      time: '2025-06-25 11:20:15',
-      subject: 'New Feature Available',
-      message: 'You can now bulk upload up to 7 songs at once.',
-      type: 'info'
-    },
-    {
-      time: '2025-06-24 09:45:30',
-      subject: 'Payment Processed',
-      message: 'Your royalties for May have been processed.',
-      type: 'success'
-    }
-  ];
-
-  const quickActions = [
-    {
-      id: 1,
-      title: 'Upload Album',
-      icon: <FiUpload />,
-      price: '₹1999 / per Album',
-      features: [
-        'Release Upto 7 Songs at Once',
-        'All Stores with CallerTune',
-        'Multiple Artists',
-        'YouTube Content ID'
-      ],
-      action: () => alert('Upload Album clicked!')
-    },
-    {
-      id: 2,
-      title: 'Single Song',
-      icon: <FiMusic />,
-      price: '₹799 / per song',
-      features: [
-        'With CallerTune',
-        'All Stores & Content ID',
-        'Pay Once, Earn Lifetime'
-      ],
-      action: () => alert('Single Song clicked!')
-    },
-    {
-      id: 3,
-      title: 'CallerTune Only',
-      icon: <FiDollarSign />,
-      price: '₹499 / per song',
-      features: [
-        'Previously Released Songs',
-        'All CallerTune Platforms',
-        'Pay Once, Earn Lifetime'
-      ],
-      action: () => alert('CallerTune Only clicked!')
-    }
-  ];
-
-  const serviceCards = [
-    {
-      id: 1, 
-      title: 'YouTube Claim Release', 
-      icon: <FiYoutube />, 
-      description: 'Remove Claim from Your video', 
-      action: 'Submit Link',
-      onClick: () => alert('YouTube Claim Release clicked!')
-    },
-    {
-      id: 2, 
-      title: 'Artist Profile Link', 
-      icon: <FiUser />, 
-      description: 'Link Your Correct Artist Profile', 
-      action: 'Request Now',
-      onClick: () => alert('Artist Profile Link clicked!')
-    },
-    {
-      id: 3, 
-      title: 'FB/Insta Whitelist', 
-      icon: <FiAlertCircle />, 
-      description: 'Remove Claims from Reels', 
-      action: 'Submit Now',
-      onClick: () => alert('FB/Insta Whitelist clicked!')
-    },
-    {
-      id: 4, 
-      title: 'Channel Whitelist', 
-      icon: <FiLink />, 
-      description: 'Whitelist Your Artist Channel', 
-      action: 'Submit Now',
-      onClick: () => alert('Channel Whitelist clicked!')
-    },
-    {
-      id: 5, 
-      title: 'Song Takedown', 
-      icon: <FiTrash2 />, 
-      description: 'Takedown Song from All Stores', 
-      action: 'Submit Request',
-      onClick: () => alert('Song Takedown clicked!')
-    },
-    {
-      id: 6, 
-      title: 'Raise a Complaint', 
-      icon: <FiMessageSquare />, 
-      description: 'Any Issue or Help', 
-      action: 'Submit Now',
-      onClick: () => alert('Raise a Complaint clicked!')
-    }
-  ];
-
-  // Rotating Earth Animation Component
-  const RotatingEarth = () => (
-    <div className="relative w-80 h-80 mx-auto">
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#005f73] via-[#0a9396] to-[#94d3ac] animate-spin-slow shadow-2xl">
-        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-[#005f73] via-[#0a9396] to-[#94d3ac] opacity-80">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-transparent via-white/10 to-transparent"></div>
-          {/* Continents */}
-          <div className="absolute top-8 left-12 w-16 h-8 bg-green-600 rounded-full opacity-70 animate-pulse"></div>
-          <div className="absolute top-20 right-8 w-12 h-12 bg-green-700 rounded-full opacity-60"></div>
-          <div className="absolute bottom-16 left-8 w-20 h-6 bg-green-600 rounded-full opacity-80"></div>
-          <div className="absolute bottom-8 right-12 w-8 h-16 bg-green-700 rounded-full opacity-70"></div>
-          {/* Clouds */}
-          <div className="absolute top-4 left-20 w-8 h-4 bg-white rounded-full opacity-40 animate-float"></div>
-          <div className="absolute top-12 right-16 w-6 h-3 bg-white rounded-full opacity-50 animate-float-delayed"></div>
-          <div className="absolute bottom-20 left-16 w-10 h-5 bg-white rounded-full opacity-30 animate-float"></div>
-        </div>
-      </div>
-      <div className="absolute inset-0 rounded-full shadow-inner"></div>
-    </div>
-  );
+  const markAsRead = (id) => {
+    setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
+    setUnreadCount(prev => prev - 1);
+  };
 
   useEffect(() => {
     const handleResize = () => {
-      const isMobile = window.innerWidth < 768;
-      setMobileView(isMobile);
-      setIsSidebarOpen(!isMobile);
+      const mobile = window.innerWidth < 1024; // Changed to 1024 to cover both sm and md
+      setIsMobile(mobile);
+      setIsSidebarOpen(!mobile);
     };
+
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    // Initialize the globe
+    const containerEl = globeWrapperRef.current;
+    const canvas3D = canvas3DRef.current;
+    const canvas2D = canvas2DRef.current;
+    const popupEl = popupRef.current;
+
+    let renderer, scene, camera, rayCaster, controls, group;
+    let overlayCtx = canvas2D.getContext("2d");
+    let coordinates2D = [0, 0];
+    let pointerPos;
+    let clock, mouse, pointer, globe, globeMesh;
+    let popupVisible;
+    let earthTexture, mapMaterial;
+    let popupOpenTl, popupCloseTl;
+    let dragged = false;
+
+    // Scene initialization
+    renderer = new THREE.WebGLRenderer({
+      canvas: canvas3D,
+      alpha: true,
+      antialias: true
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    scene = new THREE.Scene();
+    camera = new THREE.OrthographicCamera(-1.1, 1.1, 1.1, -1.1, 0, 3);
+    camera.position.z = 1.1;
+
+    rayCaster = new THREE.Raycaster();
+    rayCaster.far = 1.15;
+    mouse = new THREE.Vector2(-1, -1);
+    clock = new THREE.Clock();
+
+    // Orbit controls
+    controls = new OrbitControls(camera, canvas3D);
+    controls.enablePan = false;
+    controls.enableZoom = false;
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1.5;
+    controls.minPolarAngle = Math.PI / 3;
+    controls.maxPolarAngle = Math.PI / 3;
+
+    let timestamp;
+    controls.addEventListener("start", () => {
+      timestamp = Date.now();
+    });
+    controls.addEventListener("end", () => {
+      dragged = (Date.now() - timestamp) > 600;
+    });
+
+    // Load earth texture and create globe
+    new THREE.TextureLoader().load(
+      "https://ksenia-k.com/img/earth-map-colored.png",
+      (mapTex) => {
+        earthTexture = mapTex;
+        earthTexture.repeat.set(1, 1);
+
+        // Create globe
+        const globeGeometry = new THREE.IcosahedronGeometry(1, 22);
+        mapMaterial = new THREE.ShaderMaterial({
+          vertexShader: `
+            uniform sampler2D u_map_tex;
+            uniform float u_dot_size;
+            uniform float u_time_since_click;
+            uniform vec3 u_pointer;
+
+            #define PI 3.14159265359
+
+            varying float vOpacity;
+            varying vec2 vUv;
+
+            void main() {
+              vUv = uv;
+              float visibility = step(.2, texture2D(u_map_tex, uv).r);
+              gl_PointSize = visibility * u_dot_size;
+              vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+              vOpacity = (1. / length(mvPosition.xyz) - .7);
+              vOpacity = clamp(vOpacity, .03, 1.);
+              float t = u_time_since_click - .1;
+              t = max(0., t);
+              float max_amp = .15;
+              float dist = 1. - .5 * length(position - u_pointer);
+              float damping = 1. / (1. + 20. * t);
+              float delta = max_amp * damping * sin(5. * t * (1. + 2. * dist) - PI);
+              delta *= 1. - smoothstep(.8, 1., dist);
+              vec3 pos = position;
+              pos *= (1. + delta);
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+            }
+          `,
+          fragmentShader: `
+            uniform sampler2D u_map_tex;
+            varying float vOpacity;
+            varying vec2 vUv;
+
+            void main() {
+              vec3 color = texture2D(u_map_tex, vUv).rgb;
+              color -= .2 * length(gl_PointCoord.xy - vec2(.5));
+              float dot = 1. - smoothstep(.38, .4, length(gl_PointCoord.xy - vec2(.5)));
+              if (dot < 0.5) discard;
+              gl_FragColor = vec4(color, dot * vOpacity);
+            }
+          `,
+          uniforms: {
+            u_map_tex: { type: "t", value: earthTexture },
+            u_dot_size: { type: "f", value: 0 },
+            u_pointer: { type: "v3", value: new THREE.Vector3(0.0, 0.0, 1.0) },
+            u_time_since_click: { value: 0 },
+          },
+          alphaTest: false,
+          transparent: true
+        });
+
+        globe = new THREE.Points(globeGeometry, mapMaterial);
+        scene.add(globe);
+
+        globeMesh = new THREE.Mesh(globeGeometry, new THREE.MeshBasicMaterial({
+          color: 0x222222,
+          transparent: true,
+          opacity: 0.05
+        }));
+        scene.add(globeMesh);
+
+        // Create pointer (only for desktop)
+        if (!isMobile) {
+          const geometry = new THREE.SphereGeometry(0.04, 16, 16);
+          const material = new THREE.MeshBasicMaterial({
+            color: 0x000000,
+            transparent: true,
+            opacity: 0
+          });
+          pointer = new THREE.Mesh(geometry, material);
+          scene.add(pointer);
+        }
+
+        // Create popup timelines (only for desktop)
+        if (!isMobile) {
+          popupOpenTl = gsap.timeline({ paused: true })
+            .to(pointer.material, { duration: 0.2, opacity: 1 }, 0)
+            .fromTo(canvas2D, { opacity: 0 }, { duration: 0.3, opacity: 1 }, 0.15)
+            .fromTo(popupEl, {
+              opacity: 0,
+              scale: 0.9,
+              transformOrigin: "center bottom"
+            }, {
+              duration: 0.1,
+              opacity: 1,
+              scale: 1
+            }, 0.25);
+
+          popupCloseTl = gsap.timeline({ paused: true })
+            .to(pointer.material, { duration: 0.3, opacity: 0.2 }, 0)
+            .to(canvas2D, { duration: 0.3, opacity: 0 }, 0)
+            .to(popupEl, {
+              duration: 0.3,
+              opacity: 0,
+              scale: 0.9,
+              transformOrigin: "center bottom"
+            }, 0);
+        }
+
+        // Add event listeners (only for desktop)
+        if (!isMobile) {
+          containerEl.addEventListener("mousemove", (e) => {
+            updateMousePosition(e.clientX, e.clientY);
+          });
+
+          containerEl.addEventListener("click", (e) => {
+            if (!dragged) {
+              updateMousePosition(e.clientX, e.clientY);
+              const res = checkIntersects();
+              if (res.length) {
+                pointerPos = res[0].face.normal.clone();
+                pointer.position.set(res[0].face.normal.x, res[0].face.normal.y, res[0].face.normal.z);
+                mapMaterial.uniforms.u_pointer.value = res[0].face.normal;
+                popupEl.innerHTML = cartesianToLatLong();
+                showPopupAnimation(true);
+                clock.start();
+              }
+            }
+          });
+        }
+
+        updateSize();
+        render();
+      }
+    );
+
+    function updateMousePosition(eX, eY) {
+      const rect = containerEl.getBoundingClientRect();
+      mouse.x = ((eX - rect.left) / containerEl.offsetWidth) * 2 - 1;
+      mouse.y = -((eY - rect.top) / containerEl.offsetHeight) * 2 + 1;
+    }
+
+    function checkIntersects() {
+      rayCaster.setFromCamera(mouse, camera);
+      const intersects = rayCaster.intersectObject(globeMesh);
+      if (intersects.length) {
+        containerEl.style.cursor = "pointer";
+      } else {
+        containerEl.style.cursor = "auto";
+      }
+      return intersects;
+    }
+
+    function updateOverlayGraphic() {
+      if (!pointer || isMobile) return;
+
+      const activePointPosition = pointer.position.clone();
+      activePointPosition.applyMatrix4(globe.matrixWorld);
+      const activePointPositionProjected = activePointPosition.clone();
+      activePointPositionProjected.project(camera);
+
+      coordinates2D[0] = (activePointPositionProjected.x + 1) * containerEl.offsetWidth * 0.5;
+      coordinates2D[1] = (1 - activePointPositionProjected.y) * containerEl.offsetHeight * 0.5;
+
+      const matrixWorldInverse = controls.object.matrixWorldInverse;
+      activePointPosition.applyMatrix4(matrixWorldInverse);
+
+      if (activePointPosition.z > -1) {
+        if (popupVisible === false) {
+          popupVisible = true;
+          showPopupAnimation(false);
+        }
+
+        let popupX = coordinates2D[0];
+        popupX -= (activePointPositionProjected.x * containerEl.offsetWidth * 0.3);
+
+        let popupY = coordinates2D[1];
+        const upDown = (activePointPositionProjected.y > 0.6);
+        popupY += (upDown ? 20 : -20);
+
+        gsap.set(popupEl, {
+          x: popupX,
+          y: popupY,
+          xPercent: -35,
+          yPercent: upDown ? 0 : -100
+        });
+
+        popupY += (upDown ? -5 : 5);
+        const curveMidX = popupX + activePointPositionProjected.x * 100;
+        const curveMidY = popupY + (upDown ? -0.5 : 0.1) * coordinates2D[1];
+
+        drawPopupConnector(coordinates2D[0], coordinates2D[1], curveMidX, curveMidY, popupX, popupY);
+      } else {
+        if (popupVisible) {
+          popupOpenTl.pause(0);
+          popupCloseTl.play(0);
+        }
+        popupVisible = false;
+      }
+    }
+
+    function drawPopupConnector(startX, startY, midX, midY, endX, endY) {
+      overlayCtx.strokeStyle = "#000000";
+      overlayCtx.lineWidth = 3;
+      overlayCtx.lineCap = "round";
+      overlayCtx.clearRect(0, 0, containerEl.offsetWidth, containerEl.offsetHeight);
+      overlayCtx.beginPath();
+      overlayCtx.moveTo(startX, startY);
+      overlayCtx.quadraticCurveTo(midX, midY, endX, endY);
+      overlayCtx.stroke();
+    }
+
+    function cartesianToLatLong() {
+      const pos = pointer.position;
+      const lat = 90 - Math.acos(pos.y) * 180 / Math.PI;
+      const lng = (270 + Math.atan2(pos.x, pos.z) * 180 / Math.PI) % 360 - 180;
+      return formatCoordinate(lat, 'N', 'S') + ",&nbsp;" + formatCoordinate(lng, 'E', 'W');
+    }
+
+    function formatCoordinate(coordinate, positiveDirection, negativeDirection) {
+      const direction = coordinate >= 0 ? positiveDirection : negativeDirection;
+      return `${Math.abs(coordinate).toFixed(4)}°&nbsp;${direction}`;
+    }
+
+    function showPopupAnimation(lifted) {
+      if (lifted) {
+        let positionLifted = pointer.position.clone();
+        positionLifted.multiplyScalar(1.3);
+        gsap.from(pointer.position, {
+          duration: 0.25,
+          x: positionLifted.x,
+          y: positionLifted.y,
+          z: positionLifted.z,
+          ease: "power3.out"
+        });
+      }
+      popupCloseTl.pause(0);
+      popupOpenTl.play(0);
+    }
+
+    function updateSize() {
+      if (isMobile) {
+        // Full screen background globe for mobile
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        containerEl.style.width = `${width}px`;
+        containerEl.style.height = `${height}px`;
+        containerEl.style.position = 'fixed';
+        containerEl.style.top = '0';
+        containerEl.style.left = '0';
+        containerEl.style.zIndex = '0';
+        containerEl.style.opacity = '0.2';
+        renderer.setSize(width, height);
+        canvas2D.width = width;
+        canvas2D.height = height;
+        if (mapMaterial) {
+          mapMaterial.uniforms.u_dot_size.value = 0.04 * Math.min(width, height);
+        }
+      } else {
+        // Normal globe for desktop
+        const globeSize = Math.min(containerEl.parentElement.offsetWidth * 0.3, 400);
+        containerEl.style.width = `${globeSize}px`;
+        containerEl.style.height = `${globeSize}px`;
+        containerEl.style.position = 'relative';
+        containerEl.style.opacity = '1';
+        containerEl.style.zIndex = 'auto';
+        renderer.setSize(globeSize, globeSize);
+        canvas2D.width = globeSize;
+        canvas2D.height = globeSize;
+        if (mapMaterial) {
+          mapMaterial.uniforms.u_dot_size.value = 0.04 * globeSize;
+        }
+      }
+    }
+
+    function render() {
+      if (mapMaterial) {
+        mapMaterial.uniforms.u_time_since_click.value = clock.getElapsedTime();
+      }
+      if (!isMobile) {
+        checkIntersects();
+        updateOverlayGraphic();
+      }
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+
+    window.addEventListener("resize", updateSize);
+
+    // Cleanup function
+    return () => {
+      if (controls) controls.dispose();
+      if (renderer) renderer.dispose();
+      window.removeEventListener("resize", updateSize);
+    };
+  }, [isMobile]); // Add isMobile as dependency
 
   useEffect(() => {
     const sampleNotifications = [
@@ -211,43 +412,15 @@ const Dashboard = () => {
     setUnreadCount(sampleNotifications.filter(n => !n.read).length);
   }, []);
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
-  const markAsRead = (id) => {
-    setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
-    setUnreadCount(prev => prev - 1);
-  };
-
-  const togglePlay = (songId) => {
-    setIsPlaying(prev => ({ ...prev, [songId]: !prev[songId] }));
-  };
+  const stats = [
+    { title: "Today's Money", value: "$53,000", change: "+15%", icon: FiDollarSign, color: "from-[#005f73] to-[#0a9396]" },
+    { title: "Today's Users", value: "2,300", change: "+3%", icon: FiUser, color: "from-[#005f73] to-[#0a9396]" },
+    { title: "New Clients", value: "3,462", change: "-2%", icon: FiEye, color: "from-[#005f73] to-[#0a9396]" },
+    { title: "Sales", value: "$103,430", change: "+5%", icon: FiTrendingUp, color: "from-[#005f73] to-[#0a9396]" },
+  ];
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      <style jsx>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        .animate-float-delayed {
-          animation: float-delayed 4s ease-in-out infinite;
-        }
-      `}</style>
-      
+    <div className="min-h-screen flex bg-gray-50 relative">
       <Sidebar
         isOpen={isSidebarOpen}
         activeTab={activeTab}
@@ -263,195 +436,95 @@ const Dashboard = () => {
           markAsRead={markAsRead}
         />
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 text-gray-800">
+        {/* Background Globe for Mobile */}
+        {isMobile && (
+          <div
+            ref={globeWrapperRef}
+            className="fixed inset-0 w-54 h-64 pointer-events-none"
+          >
+            <canvas
+              ref={canvas3DRef}
+              id="globe-3d"
+              className="block absolute"
+            />
+            <canvas
+              ref={canvas2DRef}
+              id="globe-2d-overlay"
+              className="block absolute pointer-events-none"
+            />
+          </div>
+        )}
+
+        <main className={`flex-1 overflow-y-auto p-4 md:p-6 text-gray-800 ${isMobile ? 'relative z-10' : ''}`}>
           {/* Welcome Section */}
-          <div className="p-6 rounded-xl mb-6 bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-lg">
+          <div className={`p-6 rounded-xl mb-6 ${isMobile ? '' : 'bg-gradient-to-r from-[#005f73]/10 to-[#0a9396]/10'} shadow-lg`}>
             <div className="flex flex-col lg:flex-row items-center justify-between">
               <div className="flex-1 mb-6 lg:mb-0">
-                <h1 className="text-2xl md:text-3xl font-bold mb-2">Welcome to The BLACK TURN Family</h1>
-                <p className="mb-4 opacity-90">Team on 9817889799 currently unavailable. For Urgent Inquiries WhatsApp us at 📞 9817889799.</p>
+                <h1 className={`text-2xl md:text-3xl font-bold mb-2 ${isMobile ? 'text-[#005f73]' : 'text-[#005f73]'}`}>
+                  Welcome to The BLACK TURN Family
+                </h1>
+                <p className={`mb-4 ${isMobile ? 'text-[#005f73]' : 'text-[#005f73]'}`}>
+                  Team on 9817889799 currently unavailable. For Urgent Inquiries WhatsApp us at 📞 9817889799.
+                </p>
                 <a
                   href="https://wa.me/919817889799"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-6 py-3 rounded-lg bg-white text-[#005f73] font-semibold hover:bg-gray-100 transition-all duration-200 transform hover:scale-105"
+                  className="inline-block px-6 py-3 rounded-lg bg-white text-[#005f73] font-semibold hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 shadow-md"
                 >
                   Contact on WhatsApp
                 </a>
               </div>
-              <div className="hidden lg:block">
-                <RotatingEarth />
-              </div>
+              {/* Globe Container - Only for Desktop */}
+              {!isMobile && (
+                <div
+                  ref={globeWrapperRef}
+                  className="w-40 h-40 rounded-full overflow-hidden relative"
+                  style={{ pointerEvents: 'auto' }}
+                >
+                  <canvas
+                    ref={canvas3DRef}
+                    id="globe-3d"
+                    className="block absolute rounded-full"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                  <canvas
+                    ref={canvas2DRef}
+                    id="globe-2d-overlay"
+                    className="block absolute pointer-events-none rounded-full"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                  <div
+                    id="globe-popup-overlay"
+                    className="block absolute pointer-events-none rounded-full"
+                    style={{ width: '100%', height: '100%' }}
+                  >
+                    <div
+                      ref={popupRef}
+                      className="globe-popup absolute top-0 left-0 bg-white opacity-0 text-gray-900 font-sans px-2 py-1 text-sm rounded shadow-lg"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Stats Cards */}
+          {/* Rest of your content remains the same */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-gray-500 mb-1">{stat.title}</p>
-                      <p className="text-2xl font-bold">{stat.value}</p>
-                      <p className={`text-sm ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                        {stat.change}
-                      </p>
-                    </div>
-                    <div className={`p-3 rounded-full bg-gradient-to-r ${stat.color} text-white`}>
-                      <Icon size={24} />
-                    </div>
+            {stats.map((stat, index) => (
+              <div key={index} className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">{stat.title}</p>
+                    <p className="text-2xl font-bold">{stat.value}</p>
+                    <p className={`text-sm ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                      {stat.change}
+                    </p>
+                  </div>
+                  <div className={`p-3 rounded-full bg-gradient-to-r ${stat.color} text-white`}>
+                    <stat.icon size={24} />
                   </div>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            {quickActions.map(action => (
-              <div key={action.id} className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 flex flex-col hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                <div className="flex items-center mb-4">
-                  <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white">{action.icon}</div>
-                  <div className="ml-4">
-                    <h3 className="text-xl font-bold">{action.title}</h3>
-                    <p className="font-semibold text-[#005f73]">{action.price}</p>
-                  </div>
-                </div>
-                <ul className="flex-1 space-y-2 mb-4">
-                  {action.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <FiCheckCircle className="mt-1 mr-2 text-green-500" />
-                      <span className="text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button 
-                  onClick={action.action}
-                  className="mt-auto w-full py-3 rounded-lg bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white font-semibold hover:shadow-lg transition-all duration-200 transform hover:scale-105"
-                >
-                  {action.title}
-                </button>
-              </div>
-            ))}
-          </div>
-
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            {/* Recent Songs Table */}
-            <div className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 lg:col-span-2">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold">Recent Songs</h3>
-                <button className="px-4 py-2 rounded-lg border border-gray-200 text-[#005f73] hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10 transition-all duration-200">
-                  View All
-                </button>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="min-w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200">
-                      <th className="py-3 px-4 text-left">Song</th>
-                      <th className="py-3 px-4 text-left">Status</th>
-                      <th className="py-3 px-4 text-left">Plays</th>
-                      <th className="py-3 px-4 text-left">Revenue</th>
-                      <th className="py-3 px-4 text-left">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentSongs.map((song, index) => (
-                      <tr key={index} className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
-                        <td className="py-4 px-4">
-                          <div className="flex items-center space-x-3">
-                            <button
-                              onClick={() => togglePlay(song.isrc)}
-                              className="p-2 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white hover:shadow-lg transition-all duration-200"
-                            >
-                              {isPlaying[song.isrc] ? <FiPause size={16} /> : <FiPlay size={16} />}
-                            </button>
-                            <div>
-                              <p className="font-semibold">{song.name}</p>
-                              <p className="text-sm text-gray-500">{song.artist}</p>
-                              <p className="text-xs text-gray-500 font-mono">{song.isrc}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="py-4 px-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            song.status === 'Live' ? 'bg-green-100 text-green-800' :
-                            song.status === 'Processing' ? 'bg-yellow-100 text-yellow-800' :
-                            'bg-gray-100 text-gray-800'
-                          }`}>
-                            {song.status}
-                          </span>
-                        </td>
-                        <td className="py-4 px-4 font-semibold">{song.plays}</td>
-                        <td className="py-4 px-4 font-semibold text-green-600">{song.revenue}</td>
-                        <td className="py-4 px-4">
-                          <div className="flex space-x-2">
-                            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors" title="Edit">
-                              <FiEdit size={16} />
-                            </button>
-                            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors" title="Share">
-                              <FiShare2 size={16} />
-                            </button>
-                            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors" title="Download">
-                              <FiDownload size={16} />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Recent Updates */}
-            <div className="p-6 rounded-xl shadow-sm bg-white border border-gray-200">
-              <h3 className="text-lg font-semibold mb-4">Recent Updates</h3>
-              <div className="space-y-4">
-                {recentUpdates.map((update, index) => (
-                  <div key={index} className="p-4 rounded-lg border border-gray-200 hover:bg-[#005f73]/5 transition-colors cursor-pointer">
-                    <div className="flex items-start space-x-3">
-                      <div className={`p-2 rounded-full ${
-                        update.type === 'warning' ? 'bg-yellow-100 text-yellow-600' :
-                        update.type === 'success' ? 'bg-green-100 text-green-600' :
-                        'bg-blue-100 text-blue-600'
-                      }`}>
-                        {update.type === 'warning' ? <FiAlertCircle size={16} /> :
-                         update.type === 'success' ? <FiCheckCircle size={16} /> :
-                         <FiUser size={16} />}
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-medium mb-1">{update.subject}</p>
-                        <p className="text-sm text-gray-500 mb-2">{update.message}</p>
-                        <span className="text-xs text-gray-500">
-                          {new Date(update.time).toLocaleString()}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Service Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            {serviceCards.map(service => (
-              <div key={service.id} className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 flex flex-col hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                <div className="flex items-center mb-4">
-                  <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73]/10 to-[#0a9396]/10 text-[#005f73]">{service.icon}</div>
-                  <h3 className="text-lg font-semibold ml-3">{service.title}</h3>
-                </div>
-                <p className="text-sm text-gray-500 mb-4 flex-1">{service.description}</p>
-                <button 
-                  onClick={service.onClick}
-                  className="w-full py-3 rounded-lg border-2 border-[#005f73] text-[#005f73] font-semibold hover:bg-gradient-to-r hover:from-[#005f73] hover:to-[#0a9396] hover:text-white transition-all duration-200 transform hover:scale-105"
-                >
-                  {service.action}
-                </button>
               </div>
             ))}
           </div>
@@ -459,33 +532,354 @@ const Dashboard = () => {
           {/* Sales by Country Section */}
           <div className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 mb-6">
             <h3 className="text-lg font-semibold mb-6">Sales by Country</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { country: 'United States', flag: '🇺🇸', sales: 2500, value: '$230,900', bounce: '29.9%' },
-                { country: 'Germany', flag: '🇩🇪', sales: 3900, value: '$440,000', bounce: '40.22%' },
-                { country: 'Great Britain', flag: '🇬🇧', sales: 1400, value: '$190,700', bounce: '23.44%' },
-                { country: 'Brasil', flag: '🇧🇷', sales: 562, value: '$143,960', bounce: '32.14%' }
-              ].map((country, index) => (
-                <div key={index} className="p-4 rounded-lg border border-gray-200 hover:bg-[#005f73]/5 transition-colors">
-                  <div className="flex items-center mb-2">
-                    <span className="text-2xl mr-3">{country.flag}</span>
-                    <div>
-                      <p className="font-semibold">{country.country}</p>
-                      <p className="text-sm text-gray-500">Sales: {country.sales}</p>
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="flex justify-between">
-                      <span className="text-sm">Value:</span>
-                      <span className="font-semibold text-green-600">{country.value}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm">Bounce:</span>
-                      <span className="font-semibold text-gray-500">{country.bounce}</span>
-                    </div>
-                  </div>
+            <div className="overflow-x-auto">
+              <table className="min-w-full">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="py-3 px-4 text-left">Country</th>
+                    <th className="py-3 px-4 text-left">Sales</th>
+                    <th className="py-3 px-4 text-left">Value</th>
+                    <th className="py-3 px-4 text-left">Bounce</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
+                    <td className="py-4 px-4">
+                      <div className="flex items-center">
+                        <span className="text-xl mr-2">🇺🇸</span>
+                        <span>United States</span>
+                      </div>
+                    </td>
+                    <td className="py-4 px-4 font-semibold">2,500</td>
+                    <td className="py-4 px-4 font-semibold">$220,500</td>
+                    <td className="py-4 px-4">29.9%</td>
+                  </tr>
+                  <tr className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
+                    <td className="py-4 px-4">
+                      <div className="flex items-center">
+                        <span className="text-xl mr-2">🇩🇪</span>
+                        <span>Germany</span>
+                      </div>
+                    </td>
+                    <td className="py-4 px-4 font-semibold">3,900</td>
+                    <td className="py-4 px-4 font-semibold">$140,000</td>
+                    <td className="py-4 px-4">40.23%</td>
+                  </tr>
+                  <tr className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
+                    <td className="py-4 px-4">
+                      <div className="flex items-center">
+                        <span className="text-xl mr-2">🇬🇧</span>
+                        <span>Great Britain</span>
+                      </div>
+                    </td>
+                    <td className="py-4 px-4 font-semibold">1,400</td>
+                    <td className="py-4 px-4 font-semibold">$190,700</td>
+                    <td className="py-4 px-4">22.44%</td>
+                  </tr>
+                  <tr className="hover:bg-[#005f73]/5 transition-colors">
+                    <td className="py-4 px-4">
+                      <div className="flex items-center">
+                        <span className="text-xl mr-2">🇧🇷</span>
+                        <span>Brazil</span>
+                      </div>
+                    </td>
+                    <td className="py-4 px-4 font-semibold">562</td>
+                    <td className="py-4 px-4 font-semibold">$143,500</td>
+                    <td className="py-4 px-4">32.14%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Music Distribution Services Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            {/* Album Upload */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                  <FiUploadCloud size={24} />
                 </div>
-              ))}
+                <h3 className="text-xl font-bold text-[#005f73]">Upload Album</h3>
+              </div>
+              <p className="text-3xl font-bold mb-4">₹1999 <span className="text-sm font-normal">/ per Album</span></p>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>Release Upto 7 Songs at Once</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>All Stores with CallerTune</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>Multiple Artists</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>YouTube Content ID</span>
+                </li>
+              </ul>
+              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+                Upload Album
+              </button>
+            </div>
+
+            {/* Membership */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                  <FiUser size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-[#005f73]">Membership</h3>
+              </div>
+              <p className="text-3xl font-bold mb-4">₹1999 <span className="text-sm font-normal">/ per year</span></p>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>Unlimited Songs</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>Unlimited Artists</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>Bulk Uploads</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>Prioritise Approvals</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>No Per Year Charges</span>
+                </li>
+              </ul>
+              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+                Buy or Renew Membership
+              </button>
+            </div>
+
+            {/* Single Song Options */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                  <FiMusic size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-[#005f73]">Single Songs</h3>
+              </div>
+
+              <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h4 className="font-semibold text-[#005f73] mb-1">With CallerTune</h4>
+                <p className="text-2xl font-bold mb-2">₹799 <span className="text-sm font-normal">/ per song</span></p>
+                <p className="text-sm text-gray-600 mb-1">Release on All Stores with CallerTune & Content ID</p>
+                <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+              </div>
+
+              <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h4 className="font-semibold text-[#005f73] mb-1">Without CallerTune</h4>
+                <p className="text-2xl font-bold mb-2">₹599 <span className="text-sm font-normal">/ per song</span></p>
+                <p className="text-sm text-gray-600 mb-1">Release on All Stores without CallerTune & Content ID</p>
+                <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+              </div>
+
+              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h4 className="font-semibold text-[#005f73] mb-1">CallerTune Only</h4>
+                <p className="text-2xl font-bold mb-2">₹499 <span className="text-sm font-normal">/ per CallerTune</span></p>
+                <p className="text-sm text-gray-600 mb-1">Release on All CallerTune Platforms</p>
+                <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+              </div>
+            </div>
+          </div>
+
+          {/* YouTube Claim & Artist Services Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            {/* YouTube Claim Release */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                  <FiYoutube size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-[#005f73]">YouTube Claim Release</h3>
+              </div>
+              <p className="text-gray-600 mb-6">Remove Claim from Your video</p>
+              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+                Submit Link
+              </button>
+            </div>
+
+            {/* Artist Profile Link */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                  <FiUser size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-[#005f73]">Artist Profile Link</h3>
+              </div>
+              <p className="text-gray-600 mb-6">Link Your Correct Artist Profile</p>
+              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+                Request Now
+              </button>
+            </div>
+
+            {/* FB/Insta Whitelist */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                  <FiShare2 size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-[#005f73]">FB/Insta Whitelist</h3>
+              </div>
+              <p className="text-gray-600 mb-6">Remove Claims from Reels</p>
+              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+                Submit Now
+              </button>
+            </div>
+          </div>
+
+          {/* Recent Songs & Updates Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            {/* Recent Songs */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <h3 className="text-xl font-bold text-[#005f73] mb-6 flex items-center">
+                <FiMusic className="mr-2" /> Recent Songs | Submitted by you
+              </h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full">
+                  <thead>
+                    <tr className="border-b border-gray-200">
+                      <th className="py-3 px-4 text-left">ISRC</th>
+                      <th className="py-3 px-4 text-left">Song Name</th>
+                      <th className="py-3 px-4 text-left">Artist</th>
+                      <th className="py-3 px-4 text-left">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
+                      <td className="py-3 px-4 text-sm">IN1234567890</td>
+                      <td className="py-3 px-4 font-medium">Summer Vibes</td>
+                      <td className="py-3 px-4">DJ Black</td>
+                      <td className="py-3 px-4">
+                        <span className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">Live</span>
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
+                      <td className="py-3 px-4 text-sm">IN1234567891</td>
+                      <td className="py-3 px-4 font-medium">Night Dreams</td>
+                      <td className="py-3 px-4">Singer Blue</td>
+                      <td className="py-3 px-4">
+                        <span className="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-800">Processing</span>
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-[#005f73]/5 transition-colors">
+                      <td className="py-3 px-4 text-sm">IN1234567892</td>
+                      <td className="py-3 px-4 font-medium">Morning Melody</td>
+                      <td className="py-3 px-4">Artist Green</td>
+                      <td className="py-3 px-4">
+                        <span className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">Live</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Recent Updates */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <h3 className="text-xl font-bold text-[#005f73] mb-6 flex items-center">
+                <FiBell className="mr-2" /> Recent Updates
+              </h3>
+              <div className="space-y-4">
+                <div className="border-b border-gray-200 pb-4 last:border-0 last:pb-0">
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="text-sm text-gray-500">2025-06-26 14:53:36</span>
+                    <span className="text-sm font-medium bg-[#005f73]/10 text-[#005f73] px-2 py-1 rounded">
+                      Fill the NOC Form
+                    </span>
+                  </div>
+                  <p className="text-gray-600">Please upload your NOC to proceed with releases.</p>
+                </div>
+                <div className="border-b border-gray-200 pb-4 last:border-0 last:pb-0">
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="text-sm text-gray-500">2025-06-25 11:20:15</span>
+                    <span className="text-sm font-medium bg-[#005f73]/10 text-[#005f73] px-2 py-1 rounded">
+                      Album Approved
+                    </span>
+                  </div>
+                  <p className="text-gray-600">Your album 'Summer Hits' has been approved.</p>
+                </div>
+                <div className="pb-4">
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="text-sm text-gray-500">2025-06-24 09:45:22</span>
+                    <span className="text-sm font-medium bg-[#005f73]/10 text-[#005f73] px-2 py-1 rounded">
+                      Payment Processed
+                    </span>
+                  </div>
+                  <p className="text-gray-600">Your royalty payment has been processed.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Services Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            {/* Raise Complaint */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
+                <FiAlertCircle size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-[#005f73] mb-2">Raise a Complaint</h3>
+              <p className="text-gray-600 mb-4">Any Issue or Help</p>
+              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
+                Submit Now
+              </button>
+            </div>
+
+            {/* YouTube Whitelist */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
+                <FiYoutube size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-[#005f73] mb-2">YouTube Whitelist</h3>
+              <p className="text-gray-600 mb-4">Whitelist Your Artist Channel</p>
+              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
+                Submit Now
+              </button>
+            </div>
+
+            {/* Song Takedown */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
+                <FiTrash2 size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-[#005f73] mb-2">Song Takedown</h3>
+              <p className="text-gray-600 mb-4">Takedown Song from All Stores</p>
+              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
+                Submit Request
+              </button>
+            </div>
+
+            {/* CallerTune Status */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
+                <FiClock size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-[#005f73] mb-2">CallerTune Status</h3>
+              <p className="text-gray-600 mb-4">Check Your CallerTune Activation</p>
+              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
+                Check Status
+              </button>
+            </div>
+          </div>
+
+          {/* Sales Overview Section */}
+          <div className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 mb-6">
+            <h3 className="text-lg font-semibold mb-4">Sales Overview</h3>
+            <p className="text-gray-600">4% more in 2021</p>
+            <div className="h-64 bg-gray-100 rounded-lg mt-4 flex items-center justify-center">
+              <p className="text-gray-500">Sales Chart Placeholder</p>
             </div>
           </div>
 
