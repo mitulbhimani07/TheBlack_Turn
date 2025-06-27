@@ -6,6 +6,7 @@ import {
   FiTrash2, FiLink, FiMessageSquare, FiCheckCircle, FiTrendingUp,
   FiEye, FiDownload, FiPlay, FiPause, FiEdit, FiShare2
 } from 'react-icons/fi';
+import SidebarDemo from '../Pages/header-sidebar/Sidebar';
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

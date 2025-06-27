@@ -1,39 +1,174 @@
-import React from 'react';
-import { 
-  FiHome, FiMusic, FiUpload, FiDollarSign, 
-  FiSettings, FiUser, FiHelpCircle, FiLogOut, FiChevronRight, 
-  FiBarChart2
+import React, { useState } from 'react';
+import { Album } from 'lucide-react';
+import {
+  FiHome, FiMusic, FiUpload, FiUser, FiHelpCircle,
+  FiLogOut, FiChevronRight, FiBarChart2, FiDownload,
+  FiTrendingUp, FiStar, FiGlobe, FiFileText, FiChevronDown,
+  FiChevronUp, FiLink, FiPlus
 } from 'react-icons/fi';
 
-const Sidebar = ({ isOpen, activeTab, setActiveTab }) => {
+const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => {} }) => {
+  const [expandedSections, setExpandedSections] = useState({
+    uploads: false,
+    reports: false,
+    releases: false,
+    claims: false,
+    artist: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
   const menuItems = [
-    { id: 'overview', label: 'Dashboard', icon: FiHome },
-    { id: 'music', label: 'My Music', icon: FiMusic },
-    { id: 'upload', label: 'Upload', icon: FiUpload },
-    { id: 'analytics', label: 'Analytics', icon: FiBarChart2 },
-    { id: 'royalties', label: 'Royalties', icon: FiDollarSign },
-    { id: 'profile', label: 'Profile', icon: FiUser },
-    { id: 'settings', label: 'Settings', icon: FiSettings },
-    { id: 'help', label: 'Help & Support', icon: FiHelpCircle },
+    { id: 'dashboard', label: 'Dashboard', icon: FiHome },
+    {
+      id: 'member',
+      label: 'Become a Member',
+      icon: FiStar,
+      badge: 'NEW',
+      badgeColor: 'bg-red-500'
+    },
+    {
+      id: 'noc-form',
+      label: 'NOC Form',
+      icon: FiFileText,
+      subtitle: '(Payment Details)'
+    },
+    { id: 'releases', label: 'All Releases', icon: FiMusic },
   ];
+
+  const sectionsWithItems = [
+    {
+      id: 'uploads',
+      label: 'UPLOADS',
+      items: [
+        { id: 'new-single', label: 'New Single Release', icon: FiUpload },
+        { id: 'new-album', label: 'Release New Album', icon: Album }
+      ]
+    },
+    {
+      id: 'reports',
+      label: 'REPORTS',
+      items: [
+        { id: 'overview', label: 'Overview', icon: FiBarChart2 },
+        { id: 'download-reports', label: 'Download All Reports', icon: FiDownload },
+        { id: 'earnings-trends', label: 'Earnings Trends', icon: FiTrendingUp },
+        { id: 'streaming-trends', label: 'Streaming Trends', icon: FiTrendingUp }
+      ]
+    },
+    {
+      id: 'claims',
+      label: 'CLAIM RELEASE & WHITELIST',
+      items: [
+        { id: 'youtube-claim', label: 'YouTube Claim Release', icon: FiGlobe },
+        { id: 'facebook-whitelist', label: 'Facebook Page Whitelist', icon: FiGlobe }
+      ]
+    },
+    {
+      id: 'artist',
+      label: 'ARTIST PROFILES',
+      items: [
+        { id: 'create-profile', label: 'Create a New Artist Profile', icon: FiPlus },
+        { id: 'profile-link', label: 'Artist Profile Link Generation', icon: FiLink },
+        { id: 'manage-profile', label: 'Manage Your Profile', icon: FiUser }
+      ]
+    }
+  ];
+
+  const bottomItems = [
+    { id: 'help', label: 'Help & Support', icon: FiHelpCircle },
+    { id: 'complaints', label: 'Complaints', icon: FiFileText },
+    { id: 'takedown', label: 'Takedown Request', icon: FiFileText }
+  ];
+
+  const renderMenuItem = (item, isSubItem = false) => {
+    const Icon = item.icon;
+    const isActive = activeTab === item.id;
+
+    return (
+      <button
+        key={item.id}
+        onClick={() => setActiveTab(item.id)}
+        className={`w-full flex items-center space-x-3 px-3 py-2.5 mb-1 rounded-lg transition-all duration-200 group
+          ${isSubItem ? 'ml-2' : ''}
+          ${isActive
+            ? 'bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-md'
+            : 'text-gray-700 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10 hover:text-[#0a9396]'}
+        `}
+      >
+        <Icon
+          size={18}
+          className={`transition-colors ${
+            isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'
+          }`}
+        />
+        {isOpen && (
+          <div className="flex-1 text-left">
+            <span className={`font-medium text-sm ${
+              isActive ? 'text-white' : 'text-gray-700 group-hover:text-[#0a9396]'
+            }`}>
+              {item.label}
+            </span>
+            {item.subtitle && (
+              <div className={`text-xs ${
+                isActive ? 'text-white/80' : 'text-gray-500 group-hover:text-[#0a9396]/80'
+              }`}>
+                {item.subtitle}
+              </div>
+            )}
+          </div>
+        )}
+        {item.badge && isOpen && (
+          <span className={`px-2 py-1 text-xs font-bold text-white rounded ${item.badgeColor}`}>
+            {item.badge}
+          </span>
+        )}
+        {isActive && isOpen && <FiChevronRight size={14} className="text-white" />}
+      </button>
+    );
+  };
+
+  const renderSection = (section) => {
+    const isExpanded = expandedSections[section.id];
+
+    return (
+      <div key={section.id} className="mb-2">
+        {isOpen && (
+          <button
+            onClick={() => toggleSection(section.id)}
+            className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider hover:text-gray-700 transition-colors"
+          >
+            <span>{section.label}</span>
+            {isExpanded ? <FiChevronUp size={14} /> : <FiChevronDown size={14} />}
+          </button>
+        )}
+        {(isExpanded || !isOpen) && (
+          <div className="space-y-1">
+            {section.items.map(item => renderMenuItem(item, true))}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <>
-      {/* Overlay for mobile */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
-          onClick={() => setActiveTab('overview')}
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={() => setActiveTab('dashboard')}
         />
       )}
-      
-      {/* Sidebar */}
-      <div className={`fixed left-0 top-0 h-full z-40 transition-transform duration-300 ${
+
+      <div className={`sticky top-0 left-0 h-screen z-40 transition-all duration-300 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
-      } md:relative md:translate-x-0 ${isOpen ? 'w-64' : 'w-16'} bg-white border-r border-gray-200 shadow-lg`}>
-        
-        {/* Logo */}
-        <div className="p-4 border-b border-gray-200">
+      } lg:translate-x-0 ${isOpen ? 'w-64' : 'w-16'} bg-white border-r border-gray-200 shadow-lg flex flex-col`}>
+
+        <div className="flex-shrink-0 p-4 border-b border-gray-200">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-lg flex items-center justify-center">
               <FiMusic className="text-white" size={20} />
@@ -47,50 +182,71 @@ const Sidebar = ({ isOpen, activeTab, setActiveTab }) => {
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="mt-6 px-2">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center space-x-3 px-3 py-3 mb-1 rounded-lg transition-all duration-200 group ${
-                  isActive 
-                    ? 'bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-lg' 
-                    : 'text-gray-800 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10'
-                }`}
-              >
-                <Icon size={20} className={`${isActive ? 'text-white' : 'text-gray-800'} transition-colors`} />
-                {isOpen && (
-                  <>
-                    <span className="flex-1 text-left font-medium">{item.label}</span>
-                    {isActive && <FiChevronRight size={16} className="text-white" />}
-                  </>
-                )}
-              </button>
-            );
-          })}
-        </nav>
+        {/* Scrollable area with custom scrollbar */}
+        <nav className="flex-1 overflow-y-auto overflow-x-hidden px-2 py-4 custom-scrollbar">
+          <div className="space-y-1 mb-6">
+            {menuItems.map(item => renderMenuItem(item))}
+          </div>
 
-        {/* Bottom section */}
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-200">
-          <button className="w-full flex items-center space-x-3 px-3 py-3 rounded-lg transition-all duration-200 text-gray-800 hover:bg-red-50 hover:text-red-600">
+          {sectionsWithItems.map(section => renderSection(section))}
+
+          <div className="space-y-1 mb-4">
+            {bottomItems.map(item => renderMenuItem(item))}
+          </div>
+          
+          <button className="w-full flex items-center space-x-3 px-3 py-3 rounded-lg transition-all duration-200 text-gray-700 hover:bg-red-50 hover:text-red-600">
             <FiLogOut size={20} />
             {isOpen && <span className="font-medium">Logout</span>}
           </button>
-          
-          {isOpen && (
-            <div className="mt-4 p-3 bg-gradient-to-r from-[#005f73]/10 to-[#0a9396]/10 rounded-lg">
-              <p className="text-xs text-gray-500 mb-1">Need Help?</p>
-              <p className="text-sm font-medium text-gray-800">Contact Support</p>
-              <p className="text-xs text-gray-500">+91 9817889799</p>
-            </div>
-          )}
-        </div>
+        </nav>
       </div>
+
+      {/* Custom scrollbar styles */}
+      <style jsx global>{`
+        /* Custom scrollbar that appears only on hover */
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: transparent transparent;
+          overflow-y: overlay !important;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+          border-radius: 4px;
+          margin: 8px 0;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background-color: transparent;
+          border-radius: 4px;
+          background-clip: padding-box;
+          border: 2px solid transparent;
+          min-height: 40px;
+          transition: background-color 0.3s;
+        }
+        
+        .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+          background-color: rgba(148, 163, 184, 0.4);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background-color: rgba(148, 163, 184, 0.7) !important;
+        }
+        
+        /* Firefox scrollbar */
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: transparent transparent;
+        }
+        
+        .custom-scrollbar:hover {
+          scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+        }
+      `}</style>
     </>
   );
 };
