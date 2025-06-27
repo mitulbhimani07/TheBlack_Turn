@@ -5,6 +5,7 @@ import {
   LoginSocialGoogle
 } from 'reactjs-social-login';
 import { Googlesignup, Signup } from '../../Api/api';
+import toast from 'react-hot-toast';
 
 export default function SignUp() {
   const [provider, setProvider] = useState('');
@@ -78,11 +79,12 @@ export default function SignUp() {
   try {
     const response = await Signup(formData); // ✅ API call after validation
     console.log("Signup success:", response.data);
-    alert("Signup successful!");
+    // alert("Signup successful!");
+    toast.success("Signup SuccessfullY!!!")
     navigate('/Signin'); // ✅ redirect after success
   } catch (error) {
     console.error("Signup error:", error);
-    alert(error?.response?.data?.message || "Signup failed");
+    toast.error(error?.response?.data?.message)
   }
 };
 
@@ -98,7 +100,7 @@ export default function SignUp() {
             <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">Create your account to start exploring with us</p>
             
             <div className="space-y-4 sm:space-y-6">
-              <form action="" onSubmit={handleSubmit}>
+              <form action="" method='post' onSubmit={handleSubmit}>
                 {/* Username Field */}
               <div className="relative mb-3">
                 <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
