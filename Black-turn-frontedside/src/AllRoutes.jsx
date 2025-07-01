@@ -23,7 +23,7 @@ import { RxCross2 } from 'react-icons/rx'
 import Dashboard from './Dashboard/Pages/Dashboard'
 import Pagenotfound from './Pages/404'
 import NOCform from './Dashboard/Pages/NOCform'
-import BecomeAPartner from './Dashboard/Pages/BecomeAPartner'
+import BecomeAMembar from './Dashboard/Pages/BecomeAMembar'
 
 function AllRoutes() {
   return (
@@ -50,7 +50,7 @@ function AllRoutes() {
               {/* Dashboard */}
               <Route path="/dashboard" element={<Dashboard/>}/>
               <Route path="/nocForm" element={<NOCform/>}/>
-              <Route path="/becomeAPartner" element={<BecomeAPartner/>}/>
+              <Route path="/BecomeAMembar" element={<BecomeAMembar/>}/>
         </Routes>
 
 
