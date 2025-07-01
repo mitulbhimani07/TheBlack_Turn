@@ -21,6 +21,7 @@ import cross from './assets/images/icon-check.svg'
 import check from './assets/images/icon-cross.svg'
 import { RxCross2 } from 'react-icons/rx'
 import Dashboard from './Dashboard/Pages/Dashboard'
+import Pagenotfound from './Pages/404'
 
 function AllRoutes() {
   return (
@@ -41,7 +42,7 @@ function AllRoutes() {
             <Route path="/services/caller-tune-distribution" element={<CallerTuneDistribution/>} />
             {/* signin  */}
               <Route path='/Signin' element={<Signin/>} />
-              <Route path='*' element={<h1>404 Not Found</h1>} />
+              <Route path='*' element={<Pagenotfound/>} />
               <Route path='/Signup' element={<Signp/>} />
 
               {/* Dashboard */}
