@@ -24,6 +24,9 @@ import Dashboard from './Dashboard/Pages/Dashboard'
 import Pagenotfound from './Pages/404'
 import NOCform from './Dashboard/Pages/NOCform'
 import BecomeAPartner from './Dashboard/Pages/BecomeAPartner'
+import SingleSongWithCT from './Dashboard/Pages/SingleSongWithCT'
+import SingleSongWithoutCT from './Dashboard/Pages/SingleSongWithoutCT'
+import OnlyCallerTune from './Dashboard/Pages/OnlyCallerTune'
 
 function AllRoutes() {
   return (
@@ -51,6 +54,9 @@ function AllRoutes() {
               <Route path="/dashboard" element={<Dashboard/>}/>
               <Route path="/nocForm" element={<NOCform/>}/>
               <Route path="/becomeAPartner" element={<BecomeAPartner/>}/>
+              <Route path="/singleSongWithCT" element={<SingleSongWithCT/>}/>
+              <Route path="/singleSongwithoutCT" element={<SingleSongWithoutCT/>}/>
+              <Route path="/onlyCallerTune" element={<OnlyCallerTune/>}/>
         </Routes>
 
 
