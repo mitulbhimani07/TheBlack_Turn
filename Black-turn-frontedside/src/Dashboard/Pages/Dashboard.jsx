@@ -510,193 +510,142 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Rest of your content remains the same */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">{stat.title}</p>
-                    <p className="text-2xl font-bold">{stat.value}</p>
-                    <p className={`text-sm ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                      {stat.change}
-                    </p>
-                  </div>
-                  <div className={`p-3 rounded-full bg-gradient-to-r ${stat.color} text-white`}>
-                    <stat.icon size={24} />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Sales by Country Section */}
-          <div className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 mb-6">
-            <h3 className="text-lg font-semibold mb-6">Sales by Country</h3>
-            <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="py-3 px-4 text-left">Country</th>
-                    <th className="py-3 px-4 text-left">Sales</th>
-                    <th className="py-3 px-4 text-left">Value</th>
-                    <th className="py-3 px-4 text-left">Bounce</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
-                    <td className="py-4 px-4">
-                      <div className="flex items-center">
-                        <span className="text-xl mr-2">🇺🇸</span>
-                        <span>United States</span>
-                      </div>
-                    </td>
-                    <td className="py-4 px-4 font-semibold">2,500</td>
-                    <td className="py-4 px-4 font-semibold">$220,500</td>
-                    <td className="py-4 px-4">29.9%</td>
-                  </tr>
-                  <tr className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
-                    <td className="py-4 px-4">
-                      <div className="flex items-center">
-                        <span className="text-xl mr-2">🇩🇪</span>
-                        <span>Germany</span>
-                      </div>
-                    </td>
-                    <td className="py-4 px-4 font-semibold">3,900</td>
-                    <td className="py-4 px-4 font-semibold">$140,000</td>
-                    <td className="py-4 px-4">40.23%</td>
-                  </tr>
-                  <tr className="border-b border-gray-200 hover:bg-[#005f73]/5 transition-colors">
-                    <td className="py-4 px-4">
-                      <div className="flex items-center">
-                        <span className="text-xl mr-2">🇬🇧</span>
-                        <span>Great Britain</span>
-                      </div>
-                    </td>
-                    <td className="py-4 px-4 font-semibold">1,400</td>
-                    <td className="py-4 px-4 font-semibold">$190,700</td>
-                    <td className="py-4 px-4">22.44%</td>
-                  </tr>
-                  <tr className="hover:bg-[#005f73]/5 transition-colors">
-                    <td className="py-4 px-4">
-                      <div className="flex items-center">
-                        <span className="text-xl mr-2">🇧🇷</span>
-                        <span>Brazil</span>
-                      </div>
-                    </td>
-                    <td className="py-4 px-4 font-semibold">562</td>
-                    <td className="py-4 px-4 font-semibold">$143,500</td>
-                    <td className="py-4 px-4">32.14%</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
           {/* Music Distribution Services Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-            {/* Album Upload */}
-            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-              <div className="flex items-center mb-4">
-                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
-                  <FiUploadCloud size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-[#005f73]">Upload Album</h3>
-              </div>
-              <p className="text-3xl font-bold mb-4">₹1999 <span className="text-sm font-normal">/ per Album</span></p>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>Release Upto 7 Songs at Once</span>
-                </li>
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>All Stores with CallerTune</span>
-                </li>
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>Multiple Artists</span>
-                </li>
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>YouTube Content ID</span>
-                </li>
-              </ul>
-              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-                Upload Album
-              </button>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-6">
+  {/* Upload Album */}
+  <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+    <div className="flex items-center mb-4">
+      <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+        <FiUploadCloud size={24} />
+      </div>
+      <h3 className="text-xl font-bold text-[#005f73]">Upload Album</h3>
+    </div>
+    <p className="text-3xl font-bold mb-4">₹1999 <span className="text-sm font-normal">/ per Album</span></p>
+    <ul className="space-y-3 mb-6">
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>Release Upto 7 Songs at Once</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>All Stores with CallerTune</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>Multiple Artists</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>YouTube Content ID</span>
+      </li>
+    </ul>
+    <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+      Upload Album
+    </button>
+  </div>
 
-            {/* Membership */}
-            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-              <div className="flex items-center mb-4">
-                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
-                  <FiUser size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-[#005f73]">Membership</h3>
-              </div>
-              <p className="text-3xl font-bold mb-4">₹1999 <span className="text-sm font-normal">/ per year</span></p>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>Unlimited Songs</span>
-                </li>
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>Unlimited Artists</span>
-                </li>
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>Bulk Uploads</span>
-                </li>
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>Prioritise Approvals</span>
-                </li>
-                <li className="flex items-start">
-                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                  <span>No Per Year Charges</span>
-                </li>
-              </ul>
-              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-                Buy or Renew Membership
-              </button>
-            </div>
+  {/* Premium Membership */}
+  <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+  <div className="flex items-center mb-4">
+    <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+      <FiUser size={24} />
+    </div>
+    <h3 className="text-xl font-bold text-[#005f73]">Become a Premium Member</h3>
+  </div>
 
-            {/* Single Song Options */}
-            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-              <div className="flex items-center mb-4">
-                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
-                  <FiMusic size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-[#005f73]">Single Songs</h3>
-              </div>
+  <p className="text-3xl font-bold mb-6">₹4999 <span className="text-sm font-normal">/ per year</span></p>
 
-              <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-[#005f73] mb-1">With CallerTune</h4>
-                <p className="text-2xl font-bold mb-2">₹799 <span className="text-sm font-normal">/ per song</span></p>
-                <p className="text-sm text-gray-600 mb-1">Release on All Stores with CallerTune & Content ID</p>
-                <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
-              </div>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 mb-6">
+    <ul className="space-y-3">
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>Unlimited Songs</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>Unlimited Artists</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>Bulk Uploads</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>Prioritise Approvals</span>
+      </li>
+    </ul>
 
-              <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-[#005f73] mb-1">Without CallerTune</h4>
-                <p className="text-2xl font-bold mb-2">₹599 <span className="text-sm font-normal">/ per song</span></p>
-                <p className="text-sm text-gray-600 mb-1">Release on All Stores without CallerTune & Content ID</p>
-                <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
-              </div>
+    <ul className="space-y-3 mt-6 md:mt-0">
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>No Per Year Charges</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>All Stores with CallerTune</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>YouTube Content ID</span>
+      </li>
+      <li className="flex items-start">
+        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+        <span>Lyrics Distribution</span>
+      </li>
+    </ul>
+  </div>
 
-              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-[#005f73] mb-1">CallerTune Only</h4>
-                <p className="text-2xl font-bold mb-2">₹499 <span className="text-sm font-normal">/ per CallerTune</span></p>
-                <p className="text-sm text-gray-600 mb-1">Release on All CallerTune Platforms</p>
-                <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
-              </div>
-            </div>
-          </div>
+  <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+    Buy or Renew Membership (One Year Plan)
+  </button>
+</div>
+
+
+  {/* Single Songs — no changes mentioned in screenshot, keeping original content */}
+  
+</div>
+
+
+<div className="p-6 rounded-xl bg-white border border-gray-200 mb-6 hover:shadow-lg transition-all duration-200">
+    <div className="flex items-center justify-center mb-4">
+      <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+        <FiMusic size={24} />
+      </div>
+      <h3 className="text-xl font-bold text-[#005f73]">Single Songs</h3>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+
+    <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+      <h4 className="font-semibold text-[#005f73] mb-1">With CallerTune</h4>
+      <p className="text-2xl font-bold mb-2">₹799 <span className="text-sm font-normal">/ per song</span></p>
+      <p className="text-sm text-gray-600 mb-1">Release on All Stores with CallerTune & Content ID</p>
+      <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+    </div>
+
+    <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+      <h4 className="font-semibold text-[#005f73] mb-1">Without CallerTune</h4>
+      <p className="text-2xl font-bold mb-2">₹599 <span className="text-sm font-normal">/ per song</span></p>
+      <p className="text-sm text-gray-600 mb-1">Release on All Stores without CallerTune & Content ID</p>
+      <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+    </div>
+
+    <div className="p-4 mb-4 bg-gray-50 rounded-lg border border-gray-200">
+      <h4 className="font-semibold text-[#005f73] mb-1">CallerTune Only</h4>
+      <p className="text-2xl font-bold mb-2">₹499 <span className="text-sm font-normal">/ per CallerTune</span></p>
+      <p className="text-sm text-gray-600 mb-1">Release on All CallerTune Platforms</p>
+      <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+    </div>
+    </div>
+  </div>
+
+
+
 
           {/* YouTube Claim & Artist Services Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+
+            
             {/* YouTube Claim Release */}
             <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
               <div className="flex items-center mb-4">
@@ -738,6 +687,48 @@ const Dashboard = () => {
                 Submit Now
               </button>
             </div>
+          </div>
+
+
+          {/* Additional Services Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            {/* Raise Complaint */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
+                <FiAlertCircle size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-[#005f73] mb-2">Raise a Complaint</h3>
+              <p className="text-gray-600 mb-4">Any Issue or Help</p>
+              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
+                Submit Now
+              </button>
+            </div>
+
+            {/* YouTube Whitelist */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
+                <FiYoutube size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-[#005f73] mb-2">YouTube Whitelist</h3>
+              <p className="text-gray-600 mb-4">Whitelist Your Artist Channel</p>
+              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
+                Submit Now
+              </button>
+            </div>
+
+            {/* Song Takedown */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
+                <FiTrash2 size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-[#005f73] mb-2">Song Takedown</h3>
+              <p className="text-gray-600 mb-4">Takedown Song from All Stores</p>
+              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
+                Submit Request
+              </button>
+            </div>
+
+            
           </div>
 
           {/* Recent Songs & Updates Section */}
@@ -824,56 +815,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Additional Services Section */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-            {/* Raise Complaint */}
-            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
-              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
-                <FiAlertCircle size={24} />
-              </div>
-              <h3 className="text-lg font-bold text-[#005f73] mb-2">Raise a Complaint</h3>
-              <p className="text-gray-600 mb-4">Any Issue or Help</p>
-              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
-                Submit Now
-              </button>
-            </div>
-
-            {/* YouTube Whitelist */}
-            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
-              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
-                <FiYoutube size={24} />
-              </div>
-              <h3 className="text-lg font-bold text-[#005f73] mb-2">YouTube Whitelist</h3>
-              <p className="text-gray-600 mb-4">Whitelist Your Artist Channel</p>
-              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
-                Submit Now
-              </button>
-            </div>
-
-            {/* Song Takedown */}
-            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
-              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
-                <FiTrash2 size={24} />
-              </div>
-              <h3 className="text-lg font-bold text-[#005f73] mb-2">Song Takedown</h3>
-              <p className="text-gray-600 mb-4">Takedown Song from All Stores</p>
-              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
-                Submit Request
-              </button>
-            </div>
-
-            {/* CallerTune Status */}
-            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200 text-center">
-              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white inline-block mb-4">
-                <FiClock size={24} />
-              </div>
-              <h3 className="text-lg font-bold text-[#005f73] mb-2">CallerTune Status</h3>
-              <p className="text-gray-600 mb-4">Check Your CallerTune Activation</p>
-              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
-                Check Status
-              </button>
-            </div>
-          </div>
+          
 
           {/* Sales Overview Section */}
             
