@@ -115,89 +115,65 @@ const Navbar = ({
   };
 
   return (
-    <nav className={`sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm backdrop-blur-sm bg-opacity-90`}>
-      <div className="flex items-center justify-between px-4 py-3">
-        {/* Left side - Logo and Menu */}
-        <div className="flex items-center space-x-4">
+    <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm backdrop-blur-sm bg-opacity-90">
+      <div className="flex flex-wrap items-center justify-between px-4 py-3">
+        
+        {/* Left - Logo + Toggle */}
+        <div className="flex items-center space-x-3">
           <button
             onClick={toggleSidebar}
-            className="p-2 rounded-lg hover:bg-[#005f73]/10 transition-all duration-200 text-gray-800"
+            className="p-2 rounded-lg hover:bg-[#005f73]/10 transition duration-200 text-gray-800"
             aria-label="Toggle sidebar"
           >
             {sidebarOpen ? <FiX size={20} /> : <FiMenu size={20} />}
           </button>
-          
-          <div className="hidden md:block">
-            <h1 className="text-xl font-bold text-gray-800">BLACK TURN</h1>
-            <p className="text-xs text-gray-500">Music Distribution</p>
-          </div>
+         
         </div>
 
-        {/* Search bar - Desktop */}
-        <div className={`hidden md:flex flex-1 max-w-md mx-4 transition-all duration-300 ${showMobileSearch ? 'hidden' : ''}`}>
+        {/* Desktop Search */}
+        <div className={`hidden md:flex flex-1 max-w-md mx-4 ${showMobileSearch ? 'hidden' : ''}`}>
           <div className="relative w-full">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search songs, artists, or ISRC..."
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#005f73] transition-all duration-200"
+              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#005f73] transition"
             />
             <FiSearch className="absolute left-3 top-3 text-gray-400" size={18} />
           </div>
         </div>
 
-        {/* Mobile search toggle */}
-        <button 
-          className="md:hidden p-2 rounded-lg hover:bg-[#005f73]/10 transition-all duration-200 text-gray-800"
-          onClick={() => setShowMobileSearch(!showMobileSearch)}
-          aria-label="Search"
-        >
-          <FiSearch size={20} />
-        </button>
+        {/* Mobile search icon */}
+        <div className="flex items-center space-x-2 md:hidden">
+          <button
+            className="p-2 rounded-lg hover:bg-[#005f73]/10 text-gray-800 transition"
+            onClick={() => setShowMobileSearch(!showMobileSearch)}
+            aria-label="Search"
+          >
+            <FiSearch size={20} />
+          </button>
+        </div>
 
-        {/* Mobile search bar */}
-        {showMobileSearch && (
-          <div className="absolute top-16 left-0 right-0 px-4 py-2 bg-white shadow-md md:hidden z-50">
-            <div className="relative w-full">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search..."
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#005f73] transition-all duration-200"
-                autoFocus
-              />
-              <FiSearch className="absolute left-3 top-3 text-gray-400" size={18} />
-              <button 
-                className="absolute right-3 top-3 text-gray-500"
-                onClick={() => setShowMobileSearch(false)}
-              >
-                <FiX size={18} />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Right side - Actions */}
-        <div className="flex items-center space-x-2">
-          {/* Fullscreen toggle */}
+        {/* Right side */}
+        <div className="flex items-center space-x-2 ml-auto">
+          {/* Fullscreen */}
           <button
             onClick={toggleFullscreen}
-            className="p-2 rounded-lg hover:bg-[#005f73]/10 transition-all duration-200 text-gray-800"
+            className="p-2 rounded-lg hover:bg-[#005f73]/10 text-gray-800 transition"
             aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
           >
             {isFullscreen ? <FiMinimize size={20} /> : <FiMaximize size={20} />}
           </button>
 
           {/* Notifications */}
-          <div className="relative notifications-container">
+          <div className="relative">
             <button
               onClick={() => {
                 setShowNotifications(!showNotifications);
                 setShowProfile(false);
               }}
-              className="p-2 rounded-lg hover:bg-[#005f73]/10 transition-all duration-200 text-gray-800 relative"
+              className="p-2 rounded-lg hover:bg-[#005f73]/10 text-gray-800 transition relative"
               aria-label="Notifications"
             >
               <FiBell size={20} />
@@ -217,11 +193,13 @@ const Navbar = ({
                   variants={dropdownVariants}
                   className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden"
                 >
-                  <div className="p-4 border-b border-gray-200 flex justify-between items-center bg-[#005f73] text-white">
+                  <div className="p-4 border-b border-gray-200 bg-[#005f73] text-white flex justify-between items-center">
                     <h3 className="font-semibold">Notifications</h3>
                     {unreadCount > 0 && (
-                      <button 
-                        onClick={() => notifications.forEach(n => !n.read && markAsRead(n.id))}
+                      <button
+                        onClick={() =>
+                          notifications.forEach(n => !n.read && markAsRead(n.id))
+                        }
                         className="text-sm hover:underline"
                       >
                         Mark all as read
@@ -246,9 +224,7 @@ const Navbar = ({
                         </motion.div>
                       ))
                     ) : (
-                      <div className="p-4 text-center text-gray-500">
-                        No notifications
-                      </div>
+                      <div className="p-4 text-center text-gray-500">No notifications</div>
                     )}
                   </div>
                 </motion.div>
@@ -256,14 +232,14 @@ const Navbar = ({
             </AnimatePresence>
           </div>
 
-          {/* Profile */}
-          <div className="relative profile-container">
+          {/* Profile dropdown */}
+          <div className="relative">
             <button
               onClick={() => {
                 setShowProfile(!showProfile);
                 setShowNotifications(false);
               }}
-              className="flex items-center space-x-1 p-2 rounded-lg hover:bg-[#005f73]/10 transition-all duration-200 text-gray-800"
+              className="flex items-center space-x-1 p-2 rounded-lg hover:bg-[#005f73]/10 text-gray-800 transition"
               aria-label="User profile"
             >
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] flex items-center justify-center text-white">
@@ -272,9 +248,9 @@ const Navbar = ({
               {!isMobile && (
                 <>
                   <span className="text-sm font-medium">DJ Black</span>
-                  <FiChevronDown 
-                    size={16} 
-                    className={`transition-transform duration-200 ${showProfile ? 'rotate-180' : ''}`} 
+                  <FiChevronDown
+                    size={16}
+                    className={`transition-transform duration-200 ${showProfile ? 'rotate-180' : ''}`}
                   />
                 </>
               )}
@@ -289,28 +265,28 @@ const Navbar = ({
                   variants={dropdownVariants}
                   className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden"
                 >
-                  <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white">
+                  <div className="p-4 border-b bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white">
                     <p className="font-semibold">DJ Black</p>
                     <p className="text-xs">Artist</p>
                   </div>
                   <div className="py-2">
-                    <motion.button 
+                    <motion.button
                       whileHover={{ x: 2 }}
-                      className="w-full text-left px-4 py-2 hover:bg-[#005f73]/10 transition-colors text-gray-800 flex items-center space-x-3"
+                      className="w-full text-left px-4 py-2 hover:bg-[#005f73]/10 text-gray-800 flex items-center space-x-3"
                     >
                       <FiUser size={16} className="text-[#005f73]" />
                       <span>Profile</span>
                     </motion.button>
-                    <motion.button 
+                    <motion.button
                       whileHover={{ x: 2 }}
-                      className="w-full text-left px-4 py-2 hover:bg-[#005f73]/10 transition-colors text-gray-800 flex items-center space-x-3"
+                      className="w-full text-left px-4 py-2 hover:bg-[#005f73]/10 text-gray-800 flex items-center space-x-3"
                     >
                       <FiSettings size={16} className="text-[#005f73]" />
                       <span>Settings</span>
                     </motion.button>
-                    <motion.button 
+                    <motion.button
                       whileHover={{ x: 2 }}
-                      className="w-full text-left px-4 py-2 hover:bg-red-50 transition-colors text-red-600 flex items-center space-x-3"
+                      className="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 flex items-center space-x-3"
                     >
                       <FiLogOut size={16} />
                       <span>Logout</span>
@@ -322,6 +298,29 @@ const Navbar = ({
           </div>
         </div>
       </div>
+
+      {/* Mobile Search Expanded */}
+      {showMobileSearch && (
+        <div className="px-4 py-2 bg-white shadow-md md:hidden z-50 w-full">
+          <div className="relative w-full">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search..."
+              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#005f73] transition"
+              autoFocus
+            />
+            <FiSearch className="absolute left-3 top-3 text-gray-400" size={18} />
+            <button
+              className="absolute right-3 top-3 text-gray-500"
+              onClick={() => setShowMobileSearch(false)}
+            >
+              <FiX size={18} />
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

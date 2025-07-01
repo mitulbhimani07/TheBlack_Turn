@@ -160,14 +160,15 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          className="fixed inset-0 bg-opacity-50 z-30 lg:hidden"
           onClick={() => setActiveTab('dashboard')}
         />
       )}
 
-      <div className={`sticky top-0 left-0 h-screen z-40 transition-all duration-300 ${
+      {/* MODIFIED: Changed from sticky to fixed on mobile/tablet */}
+      <div className={`fixed lg:sticky top-0 left-0 h-screen z-40 transition-all duration-300 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:translate-x-0 ${isOpen ? 'w-64' : 'w-16'} bg-white border-r border-gray-200 shadow-lg flex flex-col`}>
+      } lg:translate-x-0 ${isOpen ? 'w-64' : 'w-16'} bg-white border-r border-gray-200 shadow-lg flex flex-col mt-18 lg:mt-0`} >
 
         <div className="flex-shrink-0 p-4 border-b border-gray-200">
           <div className="flex items-center space-x-3">
