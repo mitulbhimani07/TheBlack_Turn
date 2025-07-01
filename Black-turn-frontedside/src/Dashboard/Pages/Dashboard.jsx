@@ -876,13 +876,7 @@ const Dashboard = () => {
           </div>
 
           {/* Sales Overview Section */}
-          <div className="p-6 rounded-xl shadow-sm bg-white border border-gray-200 mb-6">
-            <h3 className="text-lg font-semibold mb-4">Sales Overview</h3>
-            <p className="text-gray-600">4% more in 2021</p>
-            <div className="h-64 bg-gray-100 rounded-lg mt-4 flex items-center justify-center">
-              <p className="text-gray-500">Sales Chart Placeholder</p>
-            </div>
-          </div>
+            
 
           {/* Footer Info */}
           <div className="p-6 rounded-xl bg-white border border-gray-200 text-center">
