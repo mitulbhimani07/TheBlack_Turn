@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Navbar from './header-sidebar/Header';
 import Sidebar from './header-sidebar/Sidebar';
 import visa from '../../assets/images/payment-platform/Visa.png'
-import visa from '../../assets/images/payment-platform/Visa.png'
 import MasterCard from '../../assets/images/payment-platform/mastercard.png'
 import maestro from '../../assets/images/payment-platform/maestro.png'
 import rupay from '../../assets/images/payment-platform/Rupay.png'
