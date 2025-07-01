@@ -1,8 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Upload, X, Edit3, FileText, User, CreditCard, Building, Smartphone, Mail, Hash } from 'lucide-react';
 import Navbar from '../Pages/header-sidebar/Header';
 import Sidebar from '../Pages/header-sidebar/Sidebar';
-
 
 const NOCForm = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -22,6 +21,74 @@ const NOCForm = () => {
         ifscCode: '',
         bankAccountNumber: ''
     });
+    // Add these to your existing state and functions
+const [isDrawing, setIsDrawing] = useState(false);
+const canvasRef = useRef(null);
+const ctxRef = useRef(null);
+
+// Initialize canvas context on component mount
+useEffect(() => {
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext('2d');
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#005f73';
+  ctx.lineWidth = 2;
+  ctxRef.current = ctx;
+}, []);
+
+const startDrawing = (e) => {
+  setIsDrawing(true);
+  const { offsetX, offsetY } = getCoordinates(e);
+  ctxRef.current.beginPath();
+  ctxRef.current.moveTo(offsetX, offsetY);
+};
+
+const draw = (e) => {
+  if (!isDrawing) return;
+  const { offsetX, offsetY } = getCoordinates(e);
+  ctxRef.current.lineTo(offsetX, offsetY);
+  ctxRef.current.stroke();
+};
+
+const stopDrawing = () => {
+  ctxRef.current.closePath();
+  setIsDrawing(false);
+};
+
+const clearSignature = () => {
+  const canvas = canvasRef.current;
+  const ctx = ctxRef.current;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+};
+
+// Helper function to get coordinates for both mouse and touch events
+const getCoordinates = (e) => {
+  const canvas = canvasRef.current;
+  const rect = canvas.getBoundingClientRect();
+  
+  if (e.touches) {
+    return {
+      offsetX: e.touches[0].clientX - rect.left,
+      offsetY: e.touches[0].clientY - rect.top
+    };
+  } else {
+    return {
+      offsetX: e.nativeEvent.offsetX || e.clientX - rect.left,
+      offsetY: e.nativeEvent.offsetY || e.clientY - rect.top
+    };
+  }
+};
+
+// Touch event handlers
+const handleTouchStart = (e) => {
+  e.preventDefault();
+  startDrawing(e);
+};
+
+const handleTouchMove = (e) => {
+  e.preventDefault();
+  draw(e);
+};
 
     const [files, setFiles] = useState({
         panCard: null,
@@ -31,8 +98,6 @@ const NOCForm = () => {
         signature: null
     });
 
-    const [isDrawing, setIsDrawing] = useState(false);
-    const canvasRef = useRef(null);
     const [lastPos, setLastPos] = useState({ x: 0, y: 0 });
 
     const handleInputChange = (e) => {
@@ -53,46 +118,8 @@ const NOCForm = () => {
         }
     };
 
-    const startDrawing = (e) => {
-        setIsDrawing(true);
-        const canvas = canvasRef.current;
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        setLastPos({ x, y });
-    };
-
-    const draw = (e) => {
-        if (!isDrawing) return;
-
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        ctx.strokeStyle = '#005f73';
-        ctx.lineWidth = 2;
-        ctx.lineCap = 'round';
-
-        ctx.beginPath();
-        ctx.moveTo(lastPos.x, lastPos.y);
-        ctx.lineTo(x, y);
-        ctx.stroke();
-
-        setLastPos({ x, y });
-    };
-
-    const stopDrawing = () => {
-        setIsDrawing(false);
-    };
-
-    const clearSignature = () => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    };
-
+    
+    
     const handleSubmit = () => {
         alert('NOC Form submitted successfully!');
     };
@@ -124,7 +151,7 @@ const NOCForm = () => {
                         <div className="max-w-4xl mx-auto">
                             {/* Header */}
                             <div className="text-center mb-8">
-                                <div className="inline-flex items-center gap-3 bg-white px-6 py-2 rounded-full shadow-lg border-2 border-[#005f73]">
+                                <div className="inline-flex items-center gap-3 bg-white px-6 py-2 rounded-xl shadow-lg  border-t-4 border-[#005f73]">
                                     <FileText className="w-8 h-8 text-[#005f73]" />
                                     <h1 className="text-xl font-bold text-[#005f73]">NOC Form</h1>
                                 </div>
@@ -146,7 +173,7 @@ const NOCForm = () => {
 
                             <div onSubmit={handleSubmit} className="space-y-8">
                                 {/* Personal Information */}
-                                <div className="bg-white rounded-2xl shadow-xl p-8 border border-[#005f73]/10">
+                                <div className="bg-white rounded-xl shadow-xl p-8 border-t-4 border-[#005f73] relative overflow-hidden">
                                     <div className="flex items-center gap-3 mb-6">
                                         <User className="w-6 h-6 text-[#005f73]" />
                                         <h2 className="text-xl font-semibold text-[#005f73]">Personal Information</h2>
@@ -210,7 +237,7 @@ const NOCForm = () => {
                                 </div>
 
                                 {/* Banking Information */}
-                                <div className="bg-white rounded-2xl shadow-xl p-8 border border-[#005f73]/10">
+                                <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#005f73] relative overflow-hidden">
                                     <div className="flex items-center gap-3 mb-6">
                                         <Building className="w-6 h-6 text-[#005f73]" />
                                         <h2 className="text-xl font-semibold text-[#005f73]">Banking Information</h2>
@@ -271,7 +298,7 @@ const NOCForm = () => {
                                 </div>
 
                                 {/* Document Information */}
-                                <div className="bg-white rounded-2xl shadow-xl p-8 border border-[#005f73]/10">
+                                <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#005f73] relative overflow-hidden">
                                     <div className="flex items-center gap-3 mb-6">
                                         <CreditCard className="w-6 h-6 text-[#005f73]" />
                                         <h2 className="text-xl font-semibold text-[#005f73]">Document Information</h2>
@@ -305,7 +332,7 @@ const NOCForm = () => {
                                 </div>
 
                                 {/* File Uploads */}
-                                <div className="bg-white rounded-2xl shadow-xl p-8 border border-[#005f73]/10">
+                                <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#005f73] relative overflow-hidden">
                                     <div className="flex items-center gap-3 mb-6">
                                         <Upload className="w-6 h-6 text-[#005f73]" />
                                         <h2 className="text-xl font-semibold text-[#005f73]">Document Uploads</h2>
@@ -346,37 +373,40 @@ const NOCForm = () => {
                                 </div>
 
                                 {/* Signature */}
-                                <div className="bg-white rounded-2xl shadow-xl p-8 border border-[#005f73]/10">
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <Edit3 className="w-6 h-6 text-[#005f73]" />
-                                        <h2 className="text-xl font-semibold text-[#005f73]">Digital Signature</h2>
-                                    </div>
+                                <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#005f73] relative overflow-hidden">
+  <div className="flex items-center gap-3 mb-6">
+    <Edit3 className="w-6 h-6 text-[#005f73]" />
+    <h2 className="text-xl font-semibold text-[#005f73]">Digital Signature</h2>
+  </div>
 
-                                    <div className="space-y-4">
-                                        <label className="block text-sm font-medium text-gray-700">
-                                            Signature (Tap or Hold Cursor to Sign)
-                                        </label>
-                                        <div className="border-2 border-[#005f73]/30 rounded-lg p-4 bg-gray-50">
-                                            <canvas
-                                                ref={canvasRef}
-                                                width={600}
-                                                height={200}
-                                                className="w-full h-48 border-2 border-dashed border-[#005f73]/20 rounded bg-white cursor-crosshair"
-                                                onMouseDown={startDrawing}
-                                                onMouseMove={draw}
-                                                onMouseUp={stopDrawing}
-                                                onMouseLeave={stopDrawing}
-                                            />
-                                            <button
-                                                type="button"
-                                                onClick={clearSignature}
-                                                className="mt-3 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
-                                            >
-                                                Clear Signature
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+  <div className="space-y-4">
+    <label className="block text-sm font-medium text-gray-700">
+      Signature (Tap or Hold Cursor to Sign)
+    </label>
+    <div className="border-2 border-[#005f73]/30 rounded-lg p-4 bg-gray-50">
+      <canvas
+        ref={canvasRef}
+        width={600}
+        height={200}
+        className="w-full h-48 border-2 border-dashed border-[#005f73]/20 rounded bg-white cursor-crosshair touch-none"
+        onMouseDown={startDrawing}
+        onMouseMove={draw}
+        onMouseUp={stopDrawing}
+        onMouseLeave={stopDrawing}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={stopDrawing}
+      />
+      <button
+        type="button"
+        onClick={clearSignature}
+        className="mt-3 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
+      >
+        Clear Signature
+      </button>
+    </div>
+  </div>
+</div>
 
                                 {/* Submit Button */}
                                 <div className="text-center">
@@ -391,14 +421,9 @@ const NOCForm = () => {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
-
         </>
-
     );
 };
 
