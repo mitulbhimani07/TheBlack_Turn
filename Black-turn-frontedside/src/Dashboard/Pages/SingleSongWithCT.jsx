@@ -82,6 +82,19 @@ function SingleSongWithCT() {
         // Handle form submission
     };
 
+    const paymentplatform = [
+        { img: visa },
+        { img: MasterCard },
+        { img: maestro },
+        { img: rupay },
+        { img: netbanking },
+        { img: emi },
+        { img: upi },
+        { img: gpay },
+        { img: phonepe }
+
+    ]
+
 
 
 
@@ -211,8 +224,8 @@ function SingleSongWithCT() {
                                                 onDragLeave={(e) => handleDragLeave(e, 'artwork')}
                                                 onDrop={(e) => handleDrop(e, 'artwork')}
                                                 className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${dragActive.artwork
-                                                        ? 'border-[#005f73] bg-blue-50'
-                                                        : 'border-gray-300 hover:border-[#005f73] hover:bg-gray-50'
+                                                    ? 'border-[#005f73] bg-blue-50'
+                                                    : 'border-gray-300 hover:border-[#005f73] hover:bg-gray-50'
                                                     }`}
                                             >
                                                 <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -247,8 +260,8 @@ function SingleSongWithCT() {
                                                 onDragLeave={(e) => handleDragLeave(e, 'audio')}
                                                 onDrop={(e) => handleDrop(e, 'audio')}
                                                 className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${dragActive.audio
-                                                        ? 'border-[#005f73] bg-blue-50'
-                                                        : 'border-gray-300 hover:border-[#005f73] hover:bg-gray-50'
+                                                    ? 'border-[#005f73] bg-blue-50'
+                                                    : 'border-gray-300 hover:border-[#005f73] hover:bg-gray-50'
                                                     }`}
                                             >
                                                 <Music className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -620,46 +633,16 @@ function SingleSongWithCT() {
                                     <div className="mt-6">
                                         <p className="text-sm text-gray-600 mb-4">We Accept:</p>
                                         <div className="grid grid-cols-4 md:grid-cols-8 gap-4 mb-6">
-                                            <div className="bg-white p-2 rounded border shadow-sm">
-                                                <div className="h-8  rounded flex items-center justify-center">
-                                                    <img src={visa} alt="" />                  
+                                            {
+                                                paymentplatform.map((platform, index) => (
+                                                    <div key={index}
+                                                        className="group w-20 h-20 flex items-center justify-center rounded-xl bg-white shadow-md border border-gray-200">
+                                                        <img src={platform.img}
+                                                            alt={platform.name}
+                                                            className="w-12 h-12 object-contain" />
                                                     </div>
-                                            </div>
-                                            <div className="bg-white p-2 rounded border shadow-sm">
-                                                <div className="h-8  rounded flex items-center justify-center">
-                                                    <img src={MasterCard} alt="" />                  
-                                                </div>
-                                            </div>
-                                            <div className="bg-white p-2 rounded border shadow-sm">
-                                                <div className="h-8  rounded flex items-center justify-center">
-                                                    <img src={maestro} alt="" />                  
-                                                </div>
-                                            </div>
-                                            <div className="bg-white p-2 rounded border shadow-sm">
-                                                <div className="h-8  rounded flex items-center justify-center">
-                                                    <img src={gpay} alt="" />                  
-                                                </div>
-                                            </div>
-                                            <div className="bg-white p-2 rounded border shadow-sm">
-                                                <div className="h-8  rounded flex items-center justify-center">
-                                                    <img src={rupay} alt="" />                  
-                                                </div>
-                                            </div>
-                                            <div className="bg-white p-2 rounded border shadow-sm">
-                                                <div className="h-8  rounded flex items-center justify-center">
-                                                    <img src={netbanking} alt="" />                  
-                                                </div>
-                                            </div>
-                                            <div className="bg-white p-2 rounded border shadow-sm">
-                                                <div className="h-8  rounded flex items-center justify-center">
-                                                    <img src={emi} alt="" />                  
-                                                </div>
-                                            </div>
-                                            <div className="bg-white p-2 rounded border shadow-sm">
-                                                <div className="h-8  rounded flex items-center justify-center">
-                                                    <img src={upi} alt="" />                  
-                                                </div>
-                                            </div>
+                                                ))
+                                            }
                                         </div>
                                     </div>
 
@@ -668,8 +651,8 @@ function SingleSongWithCT() {
                                         type="submit"
                                         disabled={!formData.originalWork || !formData.agreeTerms}
                                         className={`w-full py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-[1.02] ${formData.originalWork && formData.agreeTerms
-                                                ? 'bg-gradient-to-r from-[#005f73] to-[#0a7c91] text-white hover:shadow-lg'
-                                                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                            ? 'bg-gradient-to-r from-[#005f73] to-[#0a7c91] text-white hover:shadow-lg'
+                                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                             }`}
                                     >
                                         Submit Song

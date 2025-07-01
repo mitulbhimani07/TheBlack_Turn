@@ -27,6 +27,7 @@ import BecomeAMembar from './Dashboard/Pages/BecomeAMembar'
 import SingleSongWithCT from './Dashboard/Pages/SingleSongWithCT'
 import SingleSongWithoutCT from './Dashboard/Pages/SingleSongWithoutCT'
 import OnlyCallerTune from './Dashboard/Pages/OnlyCallerTune'
+import Overview from './Dashboard/Pages/Overview'
 
 function AllRoutes() {
   return (
@@ -57,6 +58,7 @@ function AllRoutes() {
               <Route path="/singleSongWithCT" element={<SingleSongWithCT/>}/>
               <Route path="/singleSongwithoutCT" element={<SingleSongWithoutCT/>}/>
               <Route path="/onlyCallerTune" element={<OnlyCallerTune/>}/>
+              <Route path="/overview" element={<Overview/>}/>
         </Routes>
 
 
