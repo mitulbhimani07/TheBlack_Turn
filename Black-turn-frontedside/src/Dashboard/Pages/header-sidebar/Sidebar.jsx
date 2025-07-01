@@ -6,6 +6,7 @@ import {
   FiTrendingUp, FiStar, FiGlobe, FiFileText, FiChevronDown,
   FiChevronUp, FiLink, FiPlus
 } from 'react-icons/fi';
+import logo from '../../../assets/images/logo1.png'
 
 const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => {} }) => {
   const [expandedSections, setExpandedSections] = useState({
@@ -170,15 +171,7 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
 
         <div className="flex-shrink-0 p-4 border-b border-gray-200">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-lg flex items-center justify-center">
-              <FiMusic className="text-white" size={20} />
-            </div>
-            {isOpen && (
-              <div>
-                <h2 className="font-bold text-lg text-gray-800">BLACK TURN</h2>
-                <p className="text-xs text-gray-500">Music Distribution</p>
-              </div>
-            )}
+            <img src={logo} alt="" />
           </div>
         </div>
 

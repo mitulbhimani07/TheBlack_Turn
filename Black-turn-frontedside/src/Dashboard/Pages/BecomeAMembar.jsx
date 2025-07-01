@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Navbar from './header-sidebar/Header';
 import Sidebar from './header-sidebar/Sidebar';
 import visa from '../../assets/images/payment-platform/Visa.png'
-import visa from '../../assets/images/payment-platform/Visa.png'
 import MasterCard from '../../assets/images/payment-platform/mastercard.png'
 import maestro from '../../assets/images/payment-platform/maestro.png'
 import rupay from '../../assets/images/payment-platform/Rupay.png'
@@ -13,6 +12,7 @@ import gpay from '../../assets/images/payment-platform/gpay.png'
 import phonepe from '../../assets/images/payment-platform/phonepe.png'
 
 
+
 function BecomeAMembar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [notifications, setNotifications] = useState([]);
@@ -21,6 +21,19 @@ function BecomeAMembar() {
     const [couponCode, setCouponCode] = useState('');
   const [appliedCoupon, setAppliedCoupon] = useState(false);
   const [price, setPrice] = useState(4999.00);
+
+  const paymentplatform=[
+    {img:visa},
+    {img:MasterCard},
+    {img:maestro},
+    {img:rupay},
+    {img:netbanking},
+    {img:emi},
+    {img:upi},
+    {img:gpay},
+    {img:phonepe}
+
+  ]
 
    const handleApplyCoupon = () => {
     if (couponCode.trim()) {
@@ -138,42 +151,21 @@ const markAsRead = (id) => {
               <p className="text-sm font-medium text-gray-700 mb-4 text-center">WE ACCEPT</p>
               
               {/* Payment Icons Grid */}
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-blue-600 font-bold text-sm">VISA</span>
-                </div>
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-red-600 font-bold text-sm">MasterCard</span>
-                </div>
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-blue-500 font-bold text-sm">Maestro</span>
-                </div>
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-purple-600 font-bold text-sm">RuPay</span>
-                </div>
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-gray-700 font-bold text-xs">NET BANKING</span>
-                </div>
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-black font-bold text-sm">EMI</span>
-                </div>
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                {
+                    paymentplatform.map((platform, index)=>(
+                        <div key={index}
+                  className="group w-20 h-20 flex items-center justify-center rounded-xl bg-white shadow-md border border-gray-200">
+                                <img src={platform.img}
+                    alt={platform.name}
+                    className="w-12 h-12 object-contain" />
+                        </div>
+                    ))
+                }
+            
               </div>
               
-              {/* Digital Wallets */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-orange-600 font-bold text-sm">UPI</span>
-                </div>
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-gray-700 font-bold text-sm">Google Pay</span>
-                </div>
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-purple-600 font-bold text-sm">PhonePe</span>
-                </div>
-                <div className="flex items-center justify-center p-3 border border-gray-200 rounded-lg">
-                  <span className="text-gray-700 font-bold text-sm">Wallet</span>
-                </div>
-              </div>
+            
             </div>
 
             {/* Security Note */}
