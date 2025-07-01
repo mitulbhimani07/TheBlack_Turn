@@ -182,7 +182,7 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
           </div>
         </div>
 
-        {/* Scrollable area with custom scrollbar */}
+        {/* Scrollable Navigation */}
         <nav className="flex-1 overflow-y-auto overflow-x-hidden px-2 py-4 custom-scrollbar">
           <div className="space-y-1 mb-6">
             {menuItems.map(item => renderMenuItem(item))}
@@ -203,48 +203,44 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
 
       {/* Custom scrollbar styles */}
       <style jsx global>{`
-        /* Custom scrollbar that appears only on hover */
+        /* Custom scrollbar - Minimalist style */
         .custom-scrollbar {
           scrollbar-width: thin;
-          scrollbar-color: transparent transparent;
+          scrollbar-color: #cbd5e1 transparent;
           overflow-y: overlay !important;
         }
         
         .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
+          width: 6px;
         }
         
         .custom-scrollbar::-webkit-scrollbar-track {
           background: transparent;
-          border-radius: 4px;
-          margin: 8px 0;
+          border-radius: 3px;
+          margin: 4px 0;
         }
         
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background-color: transparent;
-          border-radius: 4px;
+          background-color: #cbd5e1;
+          border-radius: 3px;
           background-clip: padding-box;
-          border: 2px solid transparent;
+          border: 1px solid transparent;
           min-height: 40px;
           transition: background-color 0.3s;
         }
         
         .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-          background-color: rgba(148, 163, 184, 0.4);
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background-color: rgba(148, 163, 184, 0.7) !important;
+          background-color: #94a3b8;
         }
         
         /* Firefox scrollbar */
         .custom-scrollbar {
           scrollbar-width: thin;
-          scrollbar-color: transparent transparent;
+          scrollbar-color: #cbd5e1 transparent;
         }
         
         .custom-scrollbar:hover {
-          scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+          scrollbar-color: #94a3b8 transparent;
         }
       `}</style>
     </>

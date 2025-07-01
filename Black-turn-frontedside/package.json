@@ -28,6 +28,8 @@
     "react-router-dom": "^7.6.2",
     "react-slick": "^0.30.3",
     "reactjs-social-login": "^2.6.3",
+    "simplebar": "^6.3.1",
+    "simplebar-react": "^3.3.1",
     "slick-carousel": "^1.8.1",
     "three": "^0.177.0"
   },
