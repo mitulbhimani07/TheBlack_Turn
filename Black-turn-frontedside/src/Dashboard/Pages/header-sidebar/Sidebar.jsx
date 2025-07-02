@@ -90,7 +90,7 @@ const Sidebar = ({ isOpen = true }) => {
       label: 'REPORTS',
       items: [
         { id: 'overview', label: 'Overview', icon: FiBarChart2, route: '/overview' },
-        { id: 'download-reports', label: 'Download All Reports', icon: FiDownload },
+        { id: 'download-reports', label: 'Download All Reports', icon: FiDownload,route:'/downloadreports' },
         { id: 'earnings-trends', label: 'Earnings Trends', icon: FiTrendingUp },
         { id: 'streaming-trends', label: 'Streaming Trends', icon: FiTrendingUp }
       ]
