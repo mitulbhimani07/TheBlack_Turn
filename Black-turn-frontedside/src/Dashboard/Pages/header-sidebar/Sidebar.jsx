@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Album } from 'lucide-react';
 import {
   FiHome, FiMusic, FiUpload, FiUser, FiHelpCircle,
@@ -9,14 +10,33 @@ import {
 import logo from '../../../assets/images/logo1.png';
 import logo1 from '../../../assets/images/logo.png';
 
-const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => {} }) => {
+const Sidebar = ({ isOpen = true }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get current active tab from URL
+  const getCurrentActiveTab = () => {
+    const path = location.pathname;
+    if (path === '/dashboard') return 'dashboard';
+    if (path === '/BecomeAMembar') return 'member';
+    if (path === '/nocForm') return 'noc-form';
+    if (path === '/allreleases') return 'releases';
+    if (path === '/singleSongWithCT') return 'singleSongWithCT';
+    if (path === '/singleSongwithoutCT') return 'singleSongwithoutCT';
+    if (path === '/onlyCallerTune') return 'onlyCallerTune';
+    if (path === '/upload_album') return 'new-album';
+    if (path === '/overview') return 'overview';
+    return 'dashboard';
+  };
+
+  const activeTab = getCurrentActiveTab();
   const [expandedSections, setExpandedSections] = useState({
-    uploads: false,
+    uploads: true, // Make uploads section open by default
     reports: false,
     releases: false,
     claims: false,
     artist: false,
-    newSingleRelease: false // Add new dropdown state
+    newSingleRelease: false
   });
 
   const toggleSection = (section) => {
@@ -62,7 +82,7 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
               { id: 'onlyCallerTune', label: 'Only Caller Tune', icon: FiHeadphones, route: '/onlyCallerTune' }
             ]
           },
-        { id: 'new-album', label: 'Release New Album', icon: Album }
+        { id: 'new-album', label: 'Release New Album', icon: Album, route: '/upload_album' }
       ]
     },
     {
@@ -101,9 +121,9 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
   ];
 
   const handleNavigation = (item) => {
-    setActiveTab(item.id);
-    // You can add navigation logic here if using React Router
-    // For example: navigate(item.route);
+    if (item.route) {
+      navigate(item.route);
+    }
   };
 
   const renderMenuItem = (item, isSubItem = false, isDropdownItem = false) => {
