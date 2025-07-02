@@ -4,7 +4,7 @@ import {
   FiHome, FiMusic, FiUpload, FiUser, FiHelpCircle,
   FiLogOut, FiChevronRight, FiBarChart2, FiDownload,
   FiTrendingUp, FiStar, FiGlobe, FiFileText, FiChevronDown,
-  FiChevronUp, FiLink, FiPlus
+  FiChevronUp, FiLink, FiPlus, FiHeadphones
 } from 'react-icons/fi';
 import logo from '../../../assets/images/logo1.png'
 
@@ -14,7 +14,8 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
     reports: false,
     releases: false,
     claims: false,
-    artist: false
+    artist: false,
+    newSingleRelease: false // Add new dropdown state
   });
 
   const toggleSection = (section) => {
@@ -25,21 +26,23 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
   };
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: FiHome },
+    { id: 'dashboard', label: 'Dashboard', icon: FiHome, route: '/dashboard' },
     {
       id: 'member',
       label: 'Become a Member',
       icon: FiStar,
       badge: 'NEW',
-      badgeColor: 'bg-red-500'
+      badgeColor: 'bg-red-500',
+      route: '/BecomeAMembar'
     },
     {
       id: 'noc-form',
       label: 'NOC Form',
       icon: FiFileText,
-      subtitle: '(Payment Details)'
+      subtitle: '(Payment Details)',
+      route: '/nocForm'
     },
-    { id: 'releases', label: 'All Releases', icon: FiMusic },
+    { id: 'releases', label: 'All Releases', icon: FiMusic, route: '/allreleases' },
   ];
 
     const sectionsWithItems = [
@@ -47,7 +50,17 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
         id: 'uploads',
         label: 'UPLOADS',
         items: [
-          { id: 'new-single', label: 'New Single Release', icon: FiUpload },
+          { 
+            id: 'new-single', 
+            label: 'New Single Release', 
+            icon: FiUpload,
+            hasDropdown: true,
+            dropdownItems: [
+              { id: 'singleSongWithCT', label: 'Single Song With CT', icon: FiMusic, route: '/singleSongWithCT' },
+              { id: 'singleSongwithoutCT', label: 'Single Song Without CT', icon: FiMusic, route: '/singleSongwithoutCT' },
+              { id: 'onlyCallerTune', label: 'Only Caller Tune', icon: FiHeadphones, route: '/onlyCallerTune' }
+            ]
+          },
           { id: 'new-album', label: 'Release New Album', icon: Album }
         ]
       },
@@ -55,7 +68,7 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
         id: 'reports',
         label: 'REPORTS',
         items: [
-          { id: 'overview', label: 'Overview', icon: FiBarChart2 },
+          { id: 'overview', label: 'Overview', icon: FiBarChart2, route: '/overview' },
           { id: 'download-reports', label: 'Download All Reports', icon: FiDownload },
           { id: 'earnings-trends', label: 'Earnings Trends', icon: FiTrendingUp },
           { id: 'streaming-trends', label: 'Streaming Trends', icon: FiTrendingUp }
@@ -86,16 +99,23 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
     { id: 'takedown', label: 'Takedown Request', icon: FiFileText }
   ];
 
-  const renderMenuItem = (item, isSubItem = false) => {
+  const handleNavigation = (item) => {
+    setActiveTab(item.id);
+    // You can add navigation logic here if using React Router
+    // For example: navigate(item.route);
+  };
+
+  const renderMenuItem = (item, isSubItem = false, isDropdownItem = false) => {
     const Icon = item.icon;
     const isActive = activeTab === item.id;
 
     return (
       <button
         key={item.id}
-        onClick={() => setActiveTab(item.id)}
+        onClick={() => handleNavigation(item)}
         className={`w-full flex items-center space-x-3 px-3 py-2.5 mb-1 rounded-lg transition-all duration-200 group
-          ${isSubItem ? 'ml-2' : ''}
+          ${isSubItem && !isDropdownItem ? 'ml-2' : ''}
+          ${isDropdownItem ? 'ml-2' : ''}
           ${isActive
             ? 'bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-md'
             : 'text-gray-700 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10 hover:text-[#0a9396]'}
@@ -133,6 +153,53 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
     );
   };
 
+  const renderMenuItemWithDropdown = (item, isSubItem = false) => {
+    const Icon = item.icon;
+    const isActive = activeTab === item.id;
+    const isExpanded = expandedSections.newSingleRelease;
+
+    return (
+      <div key={item.id}>
+        <button
+          onClick={() => toggleSection('newSingleRelease')}
+          className={`w-full flex items-center space-x-3 px-3 py-2.5 mb-1 rounded-lg transition-all duration-200 group
+            ${isSubItem ? 'ml-2' : ''}
+            ${isActive
+              ? 'bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-md'
+              : 'text-gray-700 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10 hover:text-[#0a9396]'}
+          `}
+        >
+          <Icon
+            size={18}
+            className={`transition-colors ${
+              isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'
+            }`}
+          />
+          {isOpen && (
+            <div className="flex-1 text-left">
+              <span className={`font-medium text-sm ${
+                isActive ? 'text-white' : 'text-gray-700 group-hover:text-[#0a9396]'
+              }`}>
+                {item.label}
+              </span>
+            </div>
+          )}
+          {isOpen && (
+            isExpanded ? 
+            <FiChevronUp size={14} className={isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'} /> : 
+            <FiChevronDown size={14} className={isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'} />
+          )}
+        </button>
+        
+        {isExpanded && isOpen && item.dropdownItems && (
+          <div className="space-y-1 mb-2">
+            {item.dropdownItems.map(dropdownItem => renderMenuItem(dropdownItem, false, true))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const renderSection = (section) => {
     const isExpanded = expandedSections[section.id];
 
@@ -149,7 +216,11 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
         )}
         {(isExpanded || !isOpen) && (
           <div className="space-y-1">
-            {section.items.map(item => renderMenuItem(item, true))}
+            {section.items.map(item => 
+              item.hasDropdown ? 
+                renderMenuItemWithDropdown(item, true) : 
+                renderMenuItem(item, true)
+            )}
           </div>
         )}
       </div>
