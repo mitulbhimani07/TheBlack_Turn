@@ -1,21 +1,42 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Album } from 'lucide-react';
 import {
   FiHome, FiMusic, FiUpload, FiUser, FiHelpCircle,
   FiLogOut, FiChevronRight, FiBarChart2, FiDownload,
   FiTrendingUp, FiStar, FiGlobe, FiFileText, FiChevronDown,
-  FiChevronUp, FiLink, FiPlus
+  FiChevronUp, FiLink, FiPlus, FiHeadphones
 } from 'react-icons/fi';
 import logo from '../../../assets/images/logo1.png';
 import logo1 from '../../../assets/images/logo.png';
 
-const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => {} }) => {
+const Sidebar = ({ isOpen = true }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get current active tab from URL
+  const getCurrentActiveTab = () => {
+    const path = location.pathname;
+    if (path === '/dashboard') return 'dashboard';
+    if (path === '/BecomeAMembar') return 'member';
+    if (path === '/nocForm') return 'noc-form';
+    if (path === '/allreleases') return 'releases';
+    if (path === '/singleSongWithCT') return 'singleSongWithCT';
+    if (path === '/singleSongwithoutCT') return 'singleSongwithoutCT';
+    if (path === '/onlyCallerTune') return 'onlyCallerTune';
+    if (path === '/upload_album') return 'new-album';
+    if (path === '/overview') return 'overview';
+    return 'dashboard';
+  };
+
+  const activeTab = getCurrentActiveTab();
   const [expandedSections, setExpandedSections] = useState({
-    uploads: false,
+    uploads: true, // Make uploads section open by default
     reports: false,
     releases: false,
     claims: false,
-    artist: false
+    artist: false,
+    newSingleRelease: false
   });
 
   const toggleSection = (section) => {
@@ -26,21 +47,23 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
   };
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: FiHome },
+    { id: 'dashboard', label: 'Dashboard', icon: FiHome, route: '/dashboard' },
     {
       id: 'member',
       label: 'Become a Member',
       icon: FiStar,
       badge: 'NEW',
-      badgeColor: 'bg-red-500'
+      badgeColor: 'bg-red-500',
+      route: '/BecomeAMembar'
     },
     {
       id: 'noc-form',
       label: 'NOC Form',
       icon: FiFileText,
-      subtitle: '(Payment Details)'
+      subtitle: '(Payment Details)',
+      route: '/nocForm'
     },
-    { id: 'releases', label: 'All Releases', icon: FiMusic },
+    { id: 'releases', label: 'All Releases', icon: FiMusic, route: '/allreleases' },
   ];
 
   const sectionsWithItems = [
@@ -48,15 +71,25 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
       id: 'uploads',
       label: 'UPLOADS',
       items: [
-        { id: 'new-single', label: 'New Single Release', icon: FiUpload },
-        { id: 'new-album', label: 'Release New Album', icon: Album }
+        { 
+            id: 'new-single', 
+            label: 'New Single Release', 
+            icon: FiUpload,
+            hasDropdown: true,
+            dropdownItems: [
+              { id: 'singleSongWithCT', label: 'Single Song With CT', icon: FiMusic, route: '/singleSongWithCT' },
+              { id: 'singleSongwithoutCT', label: 'Single Song Without CT', icon: FiMusic, route: '/singleSongwithoutCT' },
+              { id: 'onlyCallerTune', label: 'Only Caller Tune', icon: FiHeadphones, route: '/onlyCallerTune' }
+            ]
+          },
+        { id: 'new-album', label: 'Release New Album', icon: Album, route: '/upload_album' }
       ]
     },
     {
       id: 'reports',
       label: 'REPORTS',
       items: [
-        { id: 'overview', label: 'Overview', icon: FiBarChart2 },
+        { id: 'overview', label: 'Overview', icon: FiBarChart2, route: '/overview' },
         { id: 'download-reports', label: 'Download All Reports', icon: FiDownload },
         { id: 'earnings-trends', label: 'Earnings Trends', icon: FiTrendingUp },
         { id: 'streaming-trends', label: 'Streaming Trends', icon: FiTrendingUp }
@@ -87,16 +120,23 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
     { id: 'takedown', label: 'Takedown Request', icon: FiFileText }
   ];
 
-  const renderMenuItem = (item, isSubItem = false) => {
+  const handleNavigation = (item) => {
+    if (item.route) {
+      navigate(item.route);
+    }
+  };
+
+  const renderMenuItem = (item, isSubItem = false, isDropdownItem = false) => {
     const Icon = item.icon;
     const isActive = activeTab === item.id;
 
     return (
       <button
         key={item.id}
-        onClick={() => setActiveTab(item.id)}
+        onClick={() => handleNavigation(item)}
         className={`w-full flex items-center space-x-3 px-3 py-2.5 mb-1 rounded-lg transition-all duration-200 group
-          ${isSubItem ? 'ml-2' : ''}
+          ${isSubItem && !isDropdownItem ? 'ml-2' : ''}
+          ${isDropdownItem ? 'ml-2' : ''}
           ${isActive
             ? 'bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-md'
             : 'text-gray-700 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10 hover:text-[#0a9396]'}`}
@@ -127,6 +167,53 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
     );
   };
 
+  const renderMenuItemWithDropdown = (item, isSubItem = false) => {
+    const Icon = item.icon;
+    const isActive = activeTab === item.id;
+    const isExpanded = expandedSections.newSingleRelease;
+
+    return (
+      <div key={item.id}>
+        <button
+          onClick={() => toggleSection('newSingleRelease')}
+          className={`w-full flex items-center space-x-3 px-3 py-2.5 mb-1 rounded-lg transition-all duration-200 group
+            ${isSubItem ? 'ml-2' : ''}
+            ${isActive
+              ? 'bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-md'
+              : 'text-gray-700 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10 hover:text-[#0a9396]'}
+          `}
+        >
+          <Icon
+            size={18}
+            className={`transition-colors ${
+              isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'
+            }`}
+          />
+          {isOpen && (
+            <div className="flex-1 text-left">
+              <span className={`font-medium text-sm ${
+                isActive ? 'text-white' : 'text-gray-700 group-hover:text-[#0a9396]'
+              }`}>
+                {item.label}
+              </span>
+            </div>
+          )}
+          {isOpen && (
+            isExpanded ? 
+            <FiChevronUp size={14} className={isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'} /> : 
+            <FiChevronDown size={14} className={isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'} />
+          )}
+        </button>
+        
+        {isExpanded && isOpen && item.dropdownItems && (
+          <div className="space-y-1 mb-2">
+            {item.dropdownItems.map(dropdownItem => renderMenuItem(dropdownItem, false, true))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const renderSection = (section) => {
     const isExpanded = expandedSections[section.id];
 
@@ -143,7 +230,11 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
         )}
         {(isExpanded || !isOpen) && (
           <div className="space-y-1">
-            {section.items.map(item => renderMenuItem(item, true))}
+            {section.items.map(item => 
+              item.hasDropdown ? 
+                renderMenuItemWithDropdown(item, true) : 
+                renderMenuItem(item, true)
+            )}
           </div>
         )}
       </div>
