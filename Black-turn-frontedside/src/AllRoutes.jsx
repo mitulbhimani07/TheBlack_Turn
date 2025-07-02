@@ -31,7 +31,12 @@ import Overview from './Dashboard/Pages/Overview'
 import Allreleases from './Dashboard/Pages/Allreleases'
 import ReleaseNewAlbum from './Dashboard/Pages/ReleaseNewAlbum'
 import YoutubeClaim from './Dashboard/Pages/YoutubeClaim'
+import HelpAndSupport from './Dashboard/Pages/HelpAndSupport'
 import DownloadRecipets from './Dashboard/Pages/DownloadRecipets'
+import EarningsTrends from './Dashboard/Pages/EarningsTrends'
+import StreamingTrends from './Dashboard/Pages/StreamingTrends'
+import FBInstaPageWhitelist from './Dashboard/Pages/FBInstaPageWhitelist'
+import TakedownRequest from './Dashboard/Pages/TakedownRequest'
 import Complaint from './Dashboard/Pages/Complaint'
 
 function AllRoutes() {
@@ -67,7 +72,12 @@ function AllRoutes() {
               <Route path="/overview" element={<Overview/>}/>
               <Route path="/upload_album" element={<ReleaseNewAlbum/>}/>
               <Route path="/youtubeClaim" element={<YoutubeClaim/>}/>
+              <Route path="/helpAndSupport" element={<HelpAndSupport/>}/>
               <Route path='/downloadreports' element={<DownloadRecipets/>}/>
+              <Route path="/yearlyearnings" element={<EarningsTrends/>}/>
+              <Route path="/yearlyplays" element={<StreamingTrends/>}/>
+              <Route path="/pagewhitelist" element={<FBInstaPageWhitelist/>}/>
+              <Route path="/takedownrequest" element={<TakedownRequest/>}/>
               <Route path='/complaint' element={<Complaint/>}/>
         </Routes>
 
