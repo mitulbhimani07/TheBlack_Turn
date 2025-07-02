@@ -30,6 +30,8 @@ import OnlyCallerTune from './Dashboard/Pages/OnlyCallerTune'
 import Overview from './Dashboard/Pages/Overview'
 import Allreleases from './Dashboard/Pages/Allreleases'
 import ReleaseNewAlbum from './Dashboard/Pages/ReleaseNewAlbum'
+import YoutubeClaim from './Dashboard/Pages/YoutubeClaim'
+import DownloadRecipets from './Dashboard/DownloadRecipets'
 import EarningsTrends from './Dashboard/Pages/EarningsTrends'
 import StreamingTrends from './Dashboard/Pages/StreamingTrends'
 import FBInstaPageWhitelist from './Dashboard/Pages/FBInstaPageWhitelist'
@@ -67,6 +69,8 @@ function AllRoutes() {
               <Route path="/onlyCallerTune" element={<OnlyCallerTune/>}/>
               <Route path="/overview" element={<Overview/>}/>
               <Route path="/upload_album" element={<ReleaseNewAlbum/>}/>
+              <Route path="/youtubeClaim" element={<YoutubeClaim/>}/>
+              <Route path='/downloadreports' element={<DownloadRecipets/>}/>
               <Route path="/yearlyearnings" element={<EarningsTrends/>}/>
               <Route path="/yearlyplays" element={<StreamingTrends/>}/>
               <Route path="/pagewhitelist" element={<FBInstaPageWhitelist/>}/>

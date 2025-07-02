@@ -4,8 +4,8 @@ import Sidebar from './header-sidebar/Sidebar';
 import Navbar from './header-sidebar/Header';
 
 // Simple CountUp implementation since we can't import external libraries
-const CountUp = ({ end, duration = 2000, prefix = '', suffix = '' }) => {
-  const [count, setCount] = useState(0);
+const CountUp = ({ start = 0, end, duration = 2000, prefix = '', suffix = '' }) => {
+  const [count, setCount] = useState(start);
 
   useEffect(() => {
     let startTime;
@@ -15,7 +15,8 @@ const CountUp = ({ end, duration = 2000, prefix = '', suffix = '' }) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       
-      setCount(Math.floor(progress * end));
+      const currentValue = start + (end - start) * progress;
+      setCount(Math.floor(currentValue));
       
       if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
@@ -24,7 +25,7 @@ const CountUp = ({ end, duration = 2000, prefix = '', suffix = '' }) => {
 
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [end, duration]);
+  }, [start, end, duration]);
 
   return <span>{prefix}{count}{suffix}</span>;
 };
@@ -74,7 +75,7 @@ function Overview() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-4xl font-bold mb-2">
-                    <CountUp end={286} />
+                    <CountUp start={268} end={0} />
                   </div>
                   <div className="text-blue-100 text-lg">Total Views</div>
                 </div>
@@ -90,7 +91,7 @@ function Overview() {
                 <div>
                   <div className="text-4xl font-bold mb-2 flex items-center">
                     <span className="text-2xl mr-1">₹</span>
-                    <CountUp end={1} />
+                    <CountUp start={10} end={0} />
                   </div>
                   <div className="text-green-100 text-lg">Total Earnings</div>
                 </div>
