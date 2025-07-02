@@ -46,7 +46,7 @@ function BecomeAMember() {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   
-  const closeSidebar = () => setIsSidebarOpen(false);
+//   const closeSidebar = () => setIsSidebarOpen(false);
 
   const markAsRead = (id) => {
     setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
