@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './header-sidebar/Sidebar';
 import Navbar from './header-sidebar/Header';
-import { ChevronDown, ChevronUp, User } from 'lucide-react';
+import { ChevronDown, ChevronUp, User, Wallet } from 'lucide-react';
+import visa from '../../assets/images/payment-platform/Visa.png';
+import mastercard from '../../assets/images/payment-platform/mastercard.png';
+import maestro from '../../assets/images/payment-platform/maestro.png';
+import rupay from '../../assets/images/payment-platform/rupay.png';
+import emi from '../../assets/images/payment-platform/emi.png';
+import upi from '../../assets/images/payment-platform/upi.png';
+import netbanking from '../../assets/images/payment-platform/netbanking.png';
+import phonepe from '../../assets/images/payment-platform/phonepe.png';
+import googlepay from '../../assets/images/payment-platform/gpay.png';
 
 export default function ReleaseNewAlbum() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -294,11 +303,11 @@ export default function ReleaseNewAlbum() {
                                             <span>Final IDs will appear here after you select from the list or add new.</span>
                                         </div>
                                     </div>
-                                        {/* 🍏 Apple Artist Section */}
-                                        <div className="flex items-center gap-3">
+                                    {/* 🍏 Apple Artist Section */}
+                                    <div className="flex items-center gap-3">
                                         <User className="w-6 h-6 text-[#005f73]" />
                                         <h2 className="text-xl font-semibold text-[#005f73]">Apple Artist Search (Exact Name Match + IDs)</h2>
-                                    </div> 
+                                    </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shadow-md rounded-lg p-6 my-4">
                                         <div>
                                             <label className="font-medium">Search Apple Artist by name or paste Apple Music link</label>
@@ -319,11 +328,7 @@ export default function ReleaseNewAlbum() {
                                             <span>Final IDs will be stored here after you select from the list or add new.</span>
                                         </div>
                                     </div>
-                                        {/* 👥 Song Credits */}
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <User className="w-6 h-6 text-[#005f73]" />
-                                        <h2 className="text-xl font-semibold text-[#005f73]">Spotify Artist Search (Search by name or paste Spotify link)</h2>
-                                    </div> 
+                                    {/* 👥 Song Credits */}
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 shadow-md rounded-lg p-6 my-4">
 
                                         <div>
@@ -341,7 +346,7 @@ export default function ReleaseNewAlbum() {
                                             <input type="text" placeholder="Enter Editors Name" className="w-full border rounded px-4 py-2 mt-1" />
                                             <span>Enter Editors Name for Your Track. Use Comma for Multiple</span>
                                         </div>
-                                    
+
                                         <div>
                                             <label className="font-medium">Composer's Apple ID</label>
                                             <input type="text" placeholder="Enter Composer's Apple ID" className="w-full border rounded px-4 py-2 mt-1" />
@@ -383,27 +388,79 @@ export default function ReleaseNewAlbum() {
                                             <input type="text" placeholder="Enter Harmonica Player Name(s)" className="w-full border rounded px-4 py-2 mt-1" />
                                             <span>Use commas to separate multiple names.</span>
                                         </div>
-
-                                        <div>
-                                            <label className="font-medium">Primary Artist's Facebook ID</label>
-                                            <input type="text" placeholder="Enter Primary Artist's Facebook ID" className="w-full border rounded px-4 py-2 mt-1" />
-                                            <span>Use Comma For Multiple. Find Existing Profile or Use NEW for a new artist profile.</span>
-                                        </div>
-                                        <div>
-                                            <label className="font-medium">Composer's Facebook ID</label>
-                                            <input type="text" placeholder="Enter Composer's Facebook ID" className="w-full border rounded px-4 py-2 mt-1" />
-                                             <span>Use Comma For Multiple. Find Existing Profile or Use NEW for a new artist profile.</span>
-                                        </div>
-                                        <div>
-                                            <label className="font-medium">Lyricist's Facebook ID</label>
-                                            <input type="text" placeholder="Enter Lyricist's Facebook ID" className="w-full border rounded px-4 py-2 mt-1" />
-                                             <span>Use Comma For Multiple. Find Existing Profile or Use NEW for a new artist profile.</span>
-                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <User className="w-6 h-6 text-[#005f73]" />
+                                        <h2 className="text-xl font-semibold text-[#005f73]">Facebook Artist ID's</h2>
+                                    </div>
+                                    <div>
+                                        <label className="font-medium">Primary Artist's Facebook ID</label>
+                                        <input type="text" placeholder="Enter Primary Artist's Facebook ID" className="w-full border rounded px-4 py-2 mt-1" />
+                                        <span>Use Comma For Multiple. Find Existing Profile or Use NEW for a new artist profile.</span>
+                                    </div>
+                                    <div>
+                                        <label className="font-medium">Composer's Facebook ID</label>
+                                        <input type="text" placeholder="Enter Composer's Facebook ID" className="w-full border rounded px-4 py-2 mt-1" />
+                                        <span>Use Comma For Multiple. Find Existing Profile or Use NEW for a new artist profile.</span>
+                                    </div>
+                                    <div>
+                                        <label className="font-medium">Lyricist's Facebook ID</label>
+                                        <input type="text" placeholder="Enter Lyricist's Facebook ID" className="w-full border rounded px-4 py-2 mt-1" />
+                                        <span>Use Comma For Multiple. Find Existing Profile or Use NEW for a new artist profile.</span>
                                     </div>
                                 </div>
-                           </div>
-
+                            </div>
                         </div>
+                        {/* 🎵 Add/Remove Song Controls */}
+                        <div className="flex flex-col md:flex-row gap-4 mt-10">
+                            <button
+                                type="button"
+                                className="w-full md:w-1/2 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded"
+                            >
+                                Remove Song
+                            </button>
+                            <button
+                                type="button"
+                                className="w-full md:w-1/2 bg-[#005f73] hover:bg-[#2c313a] text-white font-semibold py-3 rounded"
+                            >
+                                + Add New Song
+                            </button>
+                        </div>
+
+                        {/* 💳 Payment Summary */}
+                        <div className="mt-8 border-t pt-6">
+                            <h2 className="text-lg font-semibold mb-4">Your Order</h2>
+                            <div className="flex flex-col md:flex-row items-center justify-between bg-gray-100 p-4 rounded-md mb-4">
+                                <span className="font-medium">Complete Album (All Stores + CallerTune)</span>
+                                <span className="font-bold text-lg">₹1999</span>
+                            </div>
+
+                            <div className="flex items-center justify-between border-t pt-4">
+                                <span className="font-semibold text-gray-800 text-lg">Total Amount Payable</span>
+                                <span className="font-bold text-xl text-green-600">₹1999</span>
+                            </div>
+
+                            {/* Payment Method Icons */}
+                            <div className="mt-4 flex flex-wrap items-center justify-start gap-3">
+                                <img src={visa} alt="Visa" className="h-10" />
+                                <img src={mastercard} alt="MasterCard" className="h-10" />
+                                <img src={maestro} alt="Maestro" className="h-10" />
+                                <img src={rupay} alt="RuPay" className="h-10" />
+                                <img src={netbanking} alt="Net Banking" className="h-10" />
+                                <img src={emi} alt="EMI" className="h-10" />
+                                <img src={upi} alt="UPI" className="h-10" />
+                                <img src={googlepay} alt="GPay" className="h-10" />
+                                <img src={phonepe} alt="PhonePe" className="h-10" />
+                            </div>
+                        </div>
+
+                        {/* 🚀 Submit Button */}
+                        <button
+                            type="submit"
+                            className="w-full bg-[#005f73] hover:bg-[#2c313a] text-white font-semibold py-4 mt-6 rounded"
+                        >
+                            Submit Album
+                        </button>
                     </form>
                 </main>
             </div>
