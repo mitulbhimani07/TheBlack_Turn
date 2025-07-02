@@ -30,6 +30,7 @@ import OnlyCallerTune from './Dashboard/Pages/OnlyCallerTune'
 import Overview from './Dashboard/Pages/Overview'
 import Allreleases from './Dashboard/Pages/Allreleases'
 import ReleaseNewAlbum from './Dashboard/Pages/ReleaseNewAlbum'
+import DownloadRecipets from './Dashboard/DownloadRecipets'
 
 function AllRoutes() {
   return (
@@ -63,6 +64,7 @@ function AllRoutes() {
               <Route path="/onlyCallerTune" element={<OnlyCallerTune/>}/>
               <Route path="/overview" element={<Overview/>}/>
               <Route path="/upload_album" element={<ReleaseNewAlbum/>}/>
+              <Route path='/downloadreports' element={<DownloadRecipets/>}/>
         </Routes>
 
 
