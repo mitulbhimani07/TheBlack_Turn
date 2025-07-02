@@ -12,7 +12,7 @@ import gpay from '../../assets/images/payment-platform/gpay.png'
 import phonepe from '../../assets/images/payment-platform/phonepe.png'
 
 function BecomeAMember() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Changed to false for mobile-first
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Changed to false for mobile-first
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [activeTab, setActiveTab] = useState('member'); // Set to member tab since we're on this page
