@@ -158,7 +158,8 @@ function BecomeAMember() {
                   <p className="text-xs sm:text-sm font-medium text-gray-700 mb-4 text-center">WE ACCEPT</p>
                   
                   {/* Payment Icons Grid */}
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
+                  <div className="grid grid-cols-3 md:grid-cols-5 xl:grid-cols-3 gap-2 sm:gap-3 mb-4">
+
                     {paymentplatform.map((platform, index) => (
                       <div 
                         key={index}

@@ -115,7 +115,8 @@ const Navbar = ({
   };
 
   return (
-    <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm backdrop-blur-sm bg-opacity-90">
+    // MODIFIED: Reduced z-index from z-40 to z-30
+    <nav className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm backdrop-blur-sm bg-opacity-90">
       <div className="flex flex-wrap items-center justify-between px-4 py-3">
         
         {/* Left - Logo + Toggle */}

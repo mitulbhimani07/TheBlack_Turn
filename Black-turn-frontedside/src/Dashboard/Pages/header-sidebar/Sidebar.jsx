@@ -6,7 +6,8 @@ import {
   FiTrendingUp, FiStar, FiGlobe, FiFileText, FiChevronDown,
   FiChevronUp, FiLink, FiPlus
 } from 'react-icons/fi';
-import logo from '../../../assets/images/logo1.png'
+import logo from '../../../assets/images/logo1.png';
+import logo1 from '../../../assets/images/logo.png';
 
 const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => {} }) => {
   const [expandedSections, setExpandedSections] = useState({
@@ -42,43 +43,43 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
     { id: 'releases', label: 'All Releases', icon: FiMusic },
   ];
 
-    const sectionsWithItems = [
-      {
-        id: 'uploads',
-        label: 'UPLOADS',
-        items: [
-          { id: 'new-single', label: 'New Single Release', icon: FiUpload },
-          { id: 'new-album', label: 'Release New Album', icon: Album }
-        ]
-      },
-      {
-        id: 'reports',
-        label: 'REPORTS',
-        items: [
-          { id: 'overview', label: 'Overview', icon: FiBarChart2 },
-          { id: 'download-reports', label: 'Download All Reports', icon: FiDownload },
-          { id: 'earnings-trends', label: 'Earnings Trends', icon: FiTrendingUp },
-          { id: 'streaming-trends', label: 'Streaming Trends', icon: FiTrendingUp }
-        ]
-      },
-      {
-        id: 'claims',
-        label: 'CLAIM RELEASE & WHITELIST',
-        items: [
-          { id: 'youtube-claim', label: 'YouTube Claim Release', icon: FiGlobe },
-          { id: 'facebook-whitelist', label: 'Facebook Page Whitelist', icon: FiGlobe }
-        ]
-      },
-      {
-        id: 'artist',
-        label: 'ARTIST PROFILES',
-        items: [
-          { id: 'create-profile', label: 'Create a New Artist Profile', icon: FiPlus },
-          { id: 'profile-link', label: 'Artist Profile Link Generation', icon: FiLink },
-          { id: 'manage-profile', label: 'Manage Your Profile', icon: FiUser }
-        ]
-      }
-    ];
+  const sectionsWithItems = [
+    {
+      id: 'uploads',
+      label: 'UPLOADS',
+      items: [
+        { id: 'new-single', label: 'New Single Release', icon: FiUpload },
+        { id: 'new-album', label: 'Release New Album', icon: Album }
+      ]
+    },
+    {
+      id: 'reports',
+      label: 'REPORTS',
+      items: [
+        { id: 'overview', label: 'Overview', icon: FiBarChart2 },
+        { id: 'download-reports', label: 'Download All Reports', icon: FiDownload },
+        { id: 'earnings-trends', label: 'Earnings Trends', icon: FiTrendingUp },
+        { id: 'streaming-trends', label: 'Streaming Trends', icon: FiTrendingUp }
+      ]
+    },
+    {
+      id: 'claims',
+      label: 'CLAIM RELEASE & WHITELIST',
+      items: [
+        { id: 'youtube-claim', label: 'YouTube Claim Release', icon: FiGlobe },
+        { id: 'facebook-whitelist', label: 'Facebook Page Whitelist', icon: FiGlobe }
+      ]
+    },
+    {
+      id: 'artist',
+      label: 'ARTIST PROFILES',
+      items: [
+        { id: 'create-profile', label: 'Create a New Artist Profile', icon: FiPlus },
+        { id: 'profile-link', label: 'Artist Profile Link Generation', icon: FiLink },
+        { id: 'manage-profile', label: 'Manage Your Profile', icon: FiUser }
+      ]
+    }
+  ];
 
   const bottomItems = [
     { id: 'help', label: 'Help & Support', icon: FiHelpCircle },
@@ -98,26 +99,19 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
           ${isSubItem ? 'ml-2' : ''}
           ${isActive
             ? 'bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white shadow-md'
-            : 'text-gray-700 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10 hover:text-[#0a9396]'}
-        `}
+            : 'text-gray-700 hover:bg-gradient-to-r hover:from-[#005f73]/10 hover:to-[#0a9396]/10 hover:text-[#0a9396]'}`}
       >
         <Icon
           size={18}
-          className={`transition-colors ${
-            isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'
-          }`}
+          className={`transition-colors ${isActive ? 'text-white' : 'text-gray-600 group-hover:text-[#0a9396]'}`}
         />
         {isOpen && (
           <div className="flex-1 text-left">
-            <span className={`font-medium text-sm ${
-              isActive ? 'text-white' : 'text-gray-700 group-hover:text-[#0a9396]'
-            }`}>
+            <span className={`font-medium text-sm ${isActive ? 'text-white' : 'text-gray-700 group-hover:text-[#0a9396]'}`}>
               {item.label}
             </span>
             {item.subtitle && (
-              <div className={`text-xs ${
-                isActive ? 'text-white/80' : 'text-gray-500 group-hover:text-[#0a9396]/80'
-              }`}>
+              <div className={`text-xs ${isActive ? 'text-white/80' : 'text-gray-500 group-hover:text-[#0a9396]/80'}`}>
                 {item.subtitle}
               </div>
             )}
@@ -165,18 +159,14 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
         />
       )}
 
-      {/* MODIFIED: Changed from sticky to fixed on mobile/tablet */}
-      <div className={`fixed lg:sticky top-0 left-0 h-screen z-40 transition-all duration-300 ${
-        isOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:translate-x-0 ${isOpen ? 'w-64' : 'w-16'} bg-white border-r border-gray-200 shadow-lg flex flex-col mt-18 lg:mt-0`} >
-
+      <div className={`fixed lg:sticky top-0 left-0 h-screen z-40 transition-all duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 ${isOpen ? 'w-64' : 'w-16'} bg-white border-r border-gray-200 shadow-lg flex flex-col mt-18 lg:mt-0`}>
+        
         <div className="flex-shrink-0 p-4 border-b border-gray-200">
-          <div className="flex items-center space-x-3">
-            <img src={logo} alt="" />
+          <div className="flex items-center justify-center">
+            <img src={isOpen ? logo : logo1} alt="Logo" className="h-12 object-contain" />
           </div>
         </div>
 
-        {/* Scrollable Navigation */}
         <nav className="flex-1 overflow-y-auto overflow-x-hidden px-2 py-4 custom-scrollbar">
           <div className="space-y-1 mb-6">
             {menuItems.map(item => renderMenuItem(item))}
@@ -195,25 +185,23 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
         </nav>
       </div>
 
-      {/* Custom scrollbar styles */}
       <style jsx global>{`
-        /* Custom scrollbar - Minimalist style */
         .custom-scrollbar {
           scrollbar-width: thin;
           scrollbar-color: #cbd5e1 transparent;
           overflow-y: overlay !important;
         }
-        
+
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
         }
-        
+
         .custom-scrollbar::-webkit-scrollbar-track {
           background: transparent;
           border-radius: 3px;
           margin: 4px 0;
         }
-        
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
           background-color: #cbd5e1;
           border-radius: 3px;
@@ -222,17 +210,16 @@ const Sidebar = ({ isOpen = true, activeTab = 'dashboard', setActiveTab = () => 
           min-height: 40px;
           transition: background-color 0.3s;
         }
-        
+
         .custom-scrollbar:hover::-webkit-scrollbar-thumb {
           background-color: #94a3b8;
         }
-        
-        /* Firefox scrollbar */
+
         .custom-scrollbar {
           scrollbar-width: thin;
           scrollbar-color: #cbd5e1 transparent;
         }
-        
+
         .custom-scrollbar:hover {
           scrollbar-color: #94a3b8 transparent;
         }
