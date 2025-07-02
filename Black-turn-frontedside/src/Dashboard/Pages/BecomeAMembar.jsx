@@ -60,7 +60,7 @@ function BecomeAMember() {
         isOpen={isSidebarOpen}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        onCloseSidebar={closeSidebar}
+        // onCloseSidebar={closeSideba.r}
       />
 
       {/* Main Content Area */}
