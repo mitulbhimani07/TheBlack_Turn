@@ -28,6 +28,7 @@ import SingleSongWithCT from './Dashboard/Pages/SingleSongWithCT'
 import SingleSongWithoutCT from './Dashboard/Pages/SingleSongWithoutCT'
 import OnlyCallerTune from './Dashboard/Pages/OnlyCallerTune'
 import Allreleases from './Dashboard/Pages/Allreleases'
+import ReleaseNewAlbum from './Dashboard/Pages/ReleaseNewAlbum'
 
 function AllRoutes() {
   return (
@@ -59,6 +60,7 @@ function AllRoutes() {
               <Route path="/singleSongWithCT" element={<SingleSongWithCT/>}/>
               <Route path="/singleSongwithoutCT" element={<SingleSongWithoutCT/>}/>
               <Route path="/onlyCallerTune" element={<OnlyCallerTune/>}/>
+              <Route path="/upload_album" element={<ReleaseNewAlbum/>}/>
         </Routes>
 
 
