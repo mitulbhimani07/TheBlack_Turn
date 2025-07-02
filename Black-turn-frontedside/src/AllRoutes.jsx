@@ -31,7 +31,8 @@ import Overview from './Dashboard/Pages/Overview'
 import Allreleases from './Dashboard/Pages/Allreleases'
 import ReleaseNewAlbum from './Dashboard/Pages/ReleaseNewAlbum'
 import YoutubeClaim from './Dashboard/Pages/YoutubeClaim'
-import DownloadRecipets from './Dashboard/DownloadRecipets'
+import DownloadRecipets from './Dashboard/Pages/DownloadRecipets'
+import Complaint from './Dashboard/Pages/Complaint'
 
 function AllRoutes() {
   return (
@@ -67,6 +68,7 @@ function AllRoutes() {
               <Route path="/upload_album" element={<ReleaseNewAlbum/>}/>
               <Route path="/youtubeClaim" element={<YoutubeClaim/>}/>
               <Route path='/downloadreports' element={<DownloadRecipets/>}/>
+              <Route path='/complaint' element={<Complaint/>}/>
         </Routes>
 
 

@@ -116,7 +116,7 @@ const Sidebar = ({ isOpen = true }) => {
 
   const bottomItems = [
     { id: 'help', label: 'Help & Support', icon: FiHelpCircle },
-    { id: 'complaints', label: 'Complaints', icon: FiFileText },
+    { id: 'complaints', label: 'Complaints', icon: FiFileText,route:'/complaint' },
     { id: 'takedown', label: 'Takedown Request', icon: FiFileText }
   ];
 
