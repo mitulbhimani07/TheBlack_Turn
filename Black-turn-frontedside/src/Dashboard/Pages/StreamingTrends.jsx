@@ -44,7 +44,7 @@ const months = [
 ];
 const years = ['2024', '2023', '2022', '2021', '2020'];
 
-export default function EarningsTrends() {
+export default function StreamingTrends() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
@@ -401,6 +401,7 @@ export default function EarningsTrends() {
                                 <option>2023</option>
                                 <option>2022</option>
                             </select>
+                            <button className='bg-[#004d66] p-2 rounded-xl mx-3 text-white hover:bg-[#000006]'>Click to View</button>  
                         </div>
 
                         <div className="overflow-auto rounded-lg border border-gray-200">
