@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Download, Search, Calendar, FileText, Filter, ChevronDown, ChevronUp } from 'lucide-react';
-import Sidebar from './Pages/header-sidebar/Sidebar';
-import Navbar from './Pages/header-sidebar/Header';
-import platform from '../assets/images/airtel.png';
-import platform1 from '../assets/images/amazon music.png';
-import platform2 from '../assets/images/Vector.png';
-import platform3 from '../assets/images/Facebook.png';
-import platform4 from '../assets/images/ganna.png';
-import platform5 from '../assets/images/jiosavan.png';
-import platform6 from '../assets/images/resso.png';
-import platform7 from '../assets/images/spofity.png';
-import platform8 from '../assets/images/vi.png';
-import platform9 from '../assets/images/wynk.png';
-import platform10 from '../assets/images/youtubemusic.png';
-import platform11 from '../assets/images/snapchat.png';
+import platform from '../../assets/images/airtel.png';
+import platform1 from '../../assets/images/amazon music.png';
+import platform2 from '../../assets/images/Vector.png';
+import platform3 from '../../assets/images/Facebook.png';
+import platform4 from '../../assets/images/ganna.png';
+import platform5 from '../../assets/images/jiosavan.png';
+import platform6 from '../../assets/images/resso.png';
+import platform7 from '../../assets/images/spofity.png';
+import platform8 from '../../assets/images/vi.png';
+import platform9 from '../../assets/images/wynk.png';
+import platform10 from '../../assets/images/youtubemusic.png';
+import platform11 from '../../assets/images/snapchat.png';
+import Sidebar from './header-sidebar/Sidebar';
+import Navbar from './header-sidebar/Header';
 
 function DownloadRecipets() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
