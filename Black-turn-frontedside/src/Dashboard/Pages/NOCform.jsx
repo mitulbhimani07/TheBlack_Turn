@@ -139,14 +139,16 @@ const handleTouchMove = (e) => {
                     setActiveTab={setActiveTab}
                 />
 
-                <div className="flex-1 flex flex-col overflow-hidden">
-                    <Navbar
-                        toggleSidebar={toggleSidebar}
-                        sidebarOpen={isSidebarOpen}
-                        notifications={notifications}
-                        unreadCount={unreadCount}
-                        markAsRead={markAsRead}
-                    />
+                <div className="flex-1 flex flex-col min-h-screen">
+                    <div className="sticky top-0 z-50">
+          <Navbar
+            toggleSidebar={toggleSidebar}
+            sidebarOpen={isSidebarOpen}
+            notifications={notifications}
+            unreadCount={unreadCount}
+            markAsRead={markAsRead}
+          />
+        </div>
                     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4">
                         <div className="max-w-4xl mx-auto">
                             {/* Header */}

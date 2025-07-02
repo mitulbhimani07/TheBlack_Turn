@@ -12,7 +12,7 @@ import gpay from '../../assets/images/payment-platform/gpay.png'
 import phonepe from '../../assets/images/payment-platform/phonepe.png'
 
 function BecomeAMember() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Changed to false for mobile-first
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Changed to false for mobile-first
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [activeTab, setActiveTab] = useState('member'); // Set to member tab since we're on this page
@@ -46,7 +46,7 @@ function BecomeAMember() {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   
-  const closeSidebar = () => setIsSidebarOpen(false);
+//   const closeSidebar = () => setIsSidebarOpen(false);
 
   const markAsRead = (id) => {
     setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
@@ -60,7 +60,7 @@ function BecomeAMember() {
         isOpen={isSidebarOpen}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        onCloseSidebar={closeSidebar}
+        // onCloseSidebar={closeSideba.r}
       />
 
       {/* Main Content Area */}

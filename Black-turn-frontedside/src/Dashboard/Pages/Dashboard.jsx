@@ -428,14 +428,16 @@ const Dashboard = () => {
         setActiveTab={setActiveTab}
       />
 
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Navbar
-          toggleSidebar={toggleSidebar}
-          sidebarOpen={isSidebarOpen}
-          notifications={notifications}
-          unreadCount={unreadCount}
-          markAsRead={markAsRead}
-        />
+      <div className="flex-1 flex flex-col min-h-screen">
+         <div className="sticky top-0 z-50">
+          <Navbar
+            toggleSidebar={toggleSidebar}
+            sidebarOpen={isSidebarOpen}
+            notifications={notifications}
+            unreadCount={unreadCount}
+            markAsRead={markAsRead}
+          />
+        </div>
 
         {/* Background Globe for Mobile */}
         {isMobile && (
