@@ -56,7 +56,7 @@ export default function ArtistProfileLinkGeneration() {
     <div className="min-h-screen flex bg-[#f5f8fa]">
       {/* Sidebar */}
       {isSidebarOpen && (
-        <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
+        <aside className="fixed inset-y-0 z-40 left-0 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
           <Sidebar isOpen={isSidebarOpen} />
         </aside>
       )}
