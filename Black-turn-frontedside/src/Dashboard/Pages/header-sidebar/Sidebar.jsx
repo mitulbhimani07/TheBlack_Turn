@@ -5,7 +5,8 @@ import {
   FiHome, FiMusic, FiUpload, FiUser, FiHelpCircle,
   FiLogOut, FiChevronRight, FiBarChart2, FiDownload,
   FiTrendingUp, FiStar, FiGlobe, FiFileText, FiChevronDown,
-  FiChevronUp, FiLink, FiPlus, FiHeadphones
+  FiChevronUp, FiLink, FiPlus, FiHeadphones, FiShield,
+  FiAlertTriangle
 } from 'react-icons/fi';
 import logo from '../../../assets/images/logo1.png';
 import logo1 from '../../../assets/images/logo.png';
@@ -26,6 +27,17 @@ const Sidebar = ({ isOpen = true }) => {
     if (path === '/onlyCallerTune') return 'onlyCallerTune';
     if (path === '/upload_album') return 'new-album';
     if (path === '/overview') return 'overview';
+    if (path === '/downloadreports') return 'download-reports';
+    if (path === '/yearlyearnings') return 'earnings-trends';
+    if (path === '/yearlyplays') return 'streaming-trends';
+    if (path === '/youtubeClaim') return 'youtube-claim';
+    if (path === '/pagewhitelist') return 'facebook-whitelist';
+    if (path === '/helpAndSupport') return 'help';
+    if (path === '/complaint') return 'complaints';
+    if (path === '/takedownrequest') return 'takedown';
+    if (path === '/profile') return 'manage-profile';
+    if (path === '/artistprofile') return 'create-profile';
+    if (path === '/artistprofilelink') return 'profile-link';
     return 'dashboard';
   };
 
@@ -90,34 +102,34 @@ const Sidebar = ({ isOpen = true }) => {
       label: 'REPORTS',
       items: [
         { id: 'overview', label: 'Overview', icon: FiBarChart2, route: '/overview' },
-        { id: 'download-reports', label: 'Download All Reports', icon: FiDownload,route:'/downloadreports' },
-        { id: 'earnings-trends', label: 'Earnings Trends', icon: FiTrendingUp },
-        { id: 'streaming-trends', label: 'Streaming Trends', icon: FiTrendingUp }
+        { id: 'download-reports', label: 'Download All Reports', icon: FiDownload, route: '/downloadreports' },
+        { id: 'earnings-trends', label: 'Earnings Trends', icon: FiTrendingUp, route: '/yearlyearnings' },
+        { id: 'streaming-trends', label: 'Streaming Trends', icon: FiTrendingUp, route: '/yearlyplays' }
       ]
     },
     {
       id: 'claims',
       label: 'CLAIM RELEASE & WHITELIST',
       items: [
-        { id: 'youtube-claim', label: 'YouTube Claim Release', icon: FiGlobe },
-        { id: 'facebook-whitelist', label: 'Facebook Page Whitelist', icon: FiGlobe }
+        { id: 'youtube-claim', label: 'YouTube Claim Release', icon: FiGlobe, route: '/youtubeClaim' },
+        { id: 'facebook-whitelist', label: 'Facebook Page Whitelist', icon: FiGlobe, route: '/pagewhitelist' }
       ]
     },
     {
       id: 'artist',
-      label: 'ARTIST PROFILES',
+      label: 'MANAGE ARTIST PROFILES',
       items: [
-        { id: 'create-profile', label: 'Create a New Artist Profile', icon: FiPlus },
-        { id: 'profile-link', label: 'Artist Profile Link Generation', icon: FiLink },
-        { id: 'manage-profile', label: 'Manage Your Profile', icon: FiUser }
+        { id: 'create-profile', label: 'Create a New Artist Profile', icon: FiPlus, route: '/artistprofile' },
+        { id: 'profile-link', label: 'Artist Profile Link Generation', icon: FiLink, route: '/artistprofilelink' }
       ]
     }
   ];
 
   const bottomItems = [
-    { id: 'help', label: 'Help & Support', icon: FiHelpCircle },
-    { id: 'complaints', label: 'Complaints', icon: FiFileText,route:'/complaint' },
-    { id: 'takedown', label: 'Takedown Request', icon: FiFileText }
+    { id: 'help', label: 'Help & Support', icon: FiHelpCircle, route: '/helpAndSupport' },
+    { id: 'manage-profile', label: 'Manage Your Profile', icon: FiUser, route: '/profile' },
+    { id: 'complaints', label: 'Complaints', icon: FiFileText, route: '/complaint' },
+    { id: 'takedown', label: 'Takedown Request', icon: FiAlertTriangle, route: '/takedownrequest' }
   ];
 
   const handleNavigation = (item) => {
