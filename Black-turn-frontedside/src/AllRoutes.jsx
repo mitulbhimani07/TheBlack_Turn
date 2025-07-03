@@ -39,6 +39,8 @@ import FBInstaPageWhitelist from './Dashboard/Pages/FBInstaPageWhitelist'
 import TakedownRequest from './Dashboard/Pages/TakedownRequest'
 import Complaint from './Dashboard/Pages/Complaint'
 import ManageYourProfile from './Dashboard/Pages/ManageYourProfile'
+import CreateANewArtistProfile from './Dashboard/Pages/ARTISTPROFILES/CreateANewArtistProfile'
+import ArtistProfileLinkGeneration from './Dashboard/Pages/ARTISTPROFILES/ArtistProfileLinkGeneration'
 
 function AllRoutes() {
   return (
@@ -81,6 +83,8 @@ function AllRoutes() {
               <Route path="/takedownrequest" element={<TakedownRequest/>}/>
               <Route path='/complaint' element={<Complaint/>}/>
               <Route path='/profile' element={<ManageYourProfile/>}/>
+              <Route path='/artistprofile' element={<CreateANewArtistProfile/>}/>
+              <Route path='/artistprofilelink' element={<ArtistProfileLinkGeneration/>}/>
         </Routes>
 
 
