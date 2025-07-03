@@ -35,6 +35,9 @@ const Sidebar = ({ isOpen = true }) => {
     if (path === '/helpAndSupport') return 'help';
     if (path === '/complaint') return 'complaints';
     if (path === '/takedownrequest') return 'takedown';
+    if (path === '/profile') return 'manage-profile';
+    if (path === '/artistprofile') return 'create-profile';
+    if (path === '/artistprofilelink') return 'profile-link';
     return 'dashboard';
   };
 
@@ -116,15 +119,15 @@ const Sidebar = ({ isOpen = true }) => {
       id: 'artist',
       label: 'MANAGE ARTIST PROFILES',
       items: [
-        { id: 'create-profile', label: 'Create a New Artist Profile', icon: FiPlus },
-        { id: 'profile-link', label: 'Artist Profile Link Generation', icon: FiLink }
+        { id: 'create-profile', label: 'Create a New Artist Profile', icon: FiPlus, route: '/artistprofile' },
+        { id: 'profile-link', label: 'Artist Profile Link Generation', icon: FiLink, route: '/artistprofilelink' }
       ]
     }
   ];
 
   const bottomItems = [
     { id: 'help', label: 'Help & Support', icon: FiHelpCircle, route: '/helpAndSupport' },
-    { id: 'manage-profile', label: 'Manage Your Profile', icon: FiUser },
+    { id: 'manage-profile', label: 'Manage Your Profile', icon: FiUser, route: '/profile' },
     { id: 'complaints', label: 'Complaints', icon: FiFileText, route: '/complaint' },
     { id: 'takedown', label: 'Takedown Request', icon: FiAlertTriangle, route: '/takedownrequest' }
   ];
