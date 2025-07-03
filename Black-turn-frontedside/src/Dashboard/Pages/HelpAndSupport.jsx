@@ -73,9 +73,9 @@ function HelpAndSupport() {
                 <span className="font-medium">Help & Support</span>
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-6 mb-8">
+              <div className="flex flex-col lg:flex-row gap-6 mb-8 ">
                 <div className="flex-1 space-y-6">
-                  <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#005f73]">
                     <div className="flex items-center mb-3">
                       <Mail className="text-[#005f73] mr-3" size={20} />
                       <h3 className="font-medium text-[16px]">Email Us</h3>
@@ -83,7 +83,7 @@ function HelpAndSupport() {
                     <p className="text-gray-700 text-sm">contact@theblackturn.com</p>
                   </div>
 
-                  <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#005f73]">
                     <div className="flex items-center mb-3">
                       <Clock className="text-[#005f73] mr-3" size={20} />
                       <h3 className="font-medium text-[16px]">Open Hours</h3>
@@ -93,7 +93,7 @@ function HelpAndSupport() {
                 </div>
 
                 <div className="flex-1">
-                  <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 h-full">
+                  <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#005f73] h-full">
                     <h3 className="font-medium text-[16px] mb-4 text-[#005f73]">
                       Submit Feedback or Report Desired Improvements
                     </h3>
@@ -118,7 +118,7 @@ function HelpAndSupport() {
               </div>
 
               {/* Static Basic Questions */}
-              <div className="mb-8 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <div className="mb-8 bg-white p-6 rounded-lg shadow-sm  border-t-4 border-[#005f73]">
                 <h3 className="font-medium text-xl mb-4 text-[#005f73]">Basic Questions</h3>
                 <div className="space-y-4">
                   {faqs.map((faq, index) => (
@@ -131,7 +131,7 @@ function HelpAndSupport() {
               </div>
 
               {/* Accordion for Upload FAQs */}
-              <div className="mb-8 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <div className="mb-8 bg-white p-6 rounded-lg shadow-sm  border-t-4 border-[#005f73]">
                 <h3 className="font-medium text-xl mb-4 text-[#005f73]">FAQs for Uploading Your Release</h3>
                 <div className="space-y-2">
                   {uploadFaqs.map((item, index) => (

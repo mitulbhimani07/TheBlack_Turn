@@ -114,7 +114,7 @@ const Sidebar = ({ isOpen = true }) => {
     },
     {
       id: 'artist',
-      label: 'ARTIST PROFILES',
+      label: 'MANAGE ARTIST PROFILES',
       items: [
         { id: 'create-profile', label: 'Create a New Artist Profile', icon: FiPlus },
         { id: 'profile-link', label: 'Artist Profile Link Generation', icon: FiLink }
