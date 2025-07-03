@@ -38,6 +38,7 @@ import StreamingTrends from './Dashboard/Pages/StreamingTrends'
 import FBInstaPageWhitelist from './Dashboard/Pages/FBInstaPageWhitelist'
 import TakedownRequest from './Dashboard/Pages/TakedownRequest'
 import Complaint from './Dashboard/Pages/Complaint'
+import ManageYourProfile from './Dashboard/Pages/ManageYourProfile'
 
 function AllRoutes() {
   return (
@@ -79,6 +80,7 @@ function AllRoutes() {
               <Route path="/pagewhitelist" element={<FBInstaPageWhitelist/>}/>
               <Route path="/takedownrequest" element={<TakedownRequest/>}/>
               <Route path='/complaint' element={<Complaint/>}/>
+              <Route path='/profile' element={<ManageYourProfile/>}/>
         </Routes>
 
 
