@@ -18,7 +18,7 @@ function SingleSongWithCT() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
-    const [activeTab, setActiveTab] = useState('overview');
+    const [activeTab, setActiveTab] = useState('singleSongWithCT');
 
     const [formData, setFormData] = useState({
         songName: '',

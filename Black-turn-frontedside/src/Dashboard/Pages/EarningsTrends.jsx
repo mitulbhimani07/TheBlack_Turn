@@ -48,7 +48,7 @@ export default function EarningsTrends() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
-    const [activeTab, setActiveTab] = useState('overview');
+    const [activeTab, setActiveTab] = useState('earnings-trends');
     const [isMobile, setIsMobile] = useState(false);
     const [selectedYear, setSelectedYear] = useState('2024');
 

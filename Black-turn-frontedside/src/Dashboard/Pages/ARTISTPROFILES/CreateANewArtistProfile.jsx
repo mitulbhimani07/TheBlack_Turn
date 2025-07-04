@@ -17,7 +17,7 @@ export default function CreateANewArtistProfile() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('create-profile');
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const markAsRead = (id) => {

@@ -48,7 +48,7 @@ export default function StreamingTrends() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
-    const [activeTab, setActiveTab] = useState('overview');
+    const [activeTab, setActiveTab] = useState('streaming-trends');
     const [isMobile, setIsMobile] = useState(false);
     const [selectedYear, setSelectedYear] = useState('2024');
 
