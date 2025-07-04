@@ -74,9 +74,9 @@ export default function ManageYourProfile() {
     <div className="min-h-screen flex bg-[#f5f8fa] relative">
       {/* Sidebar */}
       {isSidebarOpen && (
-        <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
+        // <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
           <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
-        </aside>
+        // </aside>
       )}
 
       {/* Main Content */}

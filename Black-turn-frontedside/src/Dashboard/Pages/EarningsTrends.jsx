@@ -60,10 +60,14 @@ export default function EarningsTrends() {
     };
 
     useEffect(() => {
-        const handleResize = () => {
+       const handleResize = () => {
             const mobile = window.innerWidth < 1024;
             setIsMobile(mobile);
-            setIsSidebarOpen(!mobile);
+            if (mobile) {
+                setIsSidebarOpen(false);
+            } else {
+                setIsSidebarOpen(true);
+            }
         };
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -365,9 +369,9 @@ export default function EarningsTrends() {
     return (
         <div className="min-h-screen flex bg-gray-50 relative">
             {isSidebarOpen && (
-                <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
+                // <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
                     <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
-                </aside>
+                // </aside>
             )}
 
             <div className="flex flex-col flex-1 transition-all duration-300">
@@ -379,125 +383,130 @@ export default function EarningsTrends() {
                     markAsRead={markAsRead}
                 />
 
-                <main className="p-6">
-                    <h1 className="text-3xl font-extrabold text-[#004d66] mb-6 tracking-tight">
+               <main className="p-4 sm:p-6">
+                    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#004d66] mb-4 sm:mb-6 tracking-tight">
                         Earning Trends & Analytics
                     </h1>
 
                     {/* Royalty Table */}
-                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                        <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
-                            Song Earning (Royalty) Reports
-                        </h2>
-
-                        <div className="mb-6">
-                            <label className="font-medium text-gray-700 mr-2 text-base">Year:</label>
-                            <select
-                                value={selectedYear}
-                                onChange={(e) => setSelectedYear(e.target.value)}
-                                className="border border-gray-300 rounded-lg px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004d66]"
-                            >
-                                <option>2024</option>
-                                <option>2023</option>
-                                <option>2022</option>
-                            </select>
+                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mb-6">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6">
+                            <h2 className="text-lg sm:text-xl font-semibold text-[#BB3E00] mb-2 sm:mb-0">
+                                Song Earning (Royalty) Reports
+                            </h2>
+                            <div className="w-full sm:w-auto">
+                                <label className="font-medium text-gray-700 mr-2 text-sm sm:text-base">Year:</label>
+                                <select
+                                    value={selectedYear}
+                                    onChange={(e) => setSelectedYear(e.target.value)}
+                                    className="border border-gray-300 rounded-lg px-3 py-1 sm:px-4 sm:py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004d66] w-full sm:w-auto"
+                                >
+                                    {years.map(year => (
+                                        <option key={year} value={year}>{year}</option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
 
-                        <div className="overflow-auto rounded-lg border border-gray-200">
-                            <table className="min-w-full text-center text-sm text-gray-700">
-                                <thead className="bg-[#f5f8fa] text-[#004d66] font-semibold border-b">
-                                    <tr>
-                                        <th className="border px-4 py-3 bg-[#004d66] text-white">Month</th>
-                                        {platforms.map((p, i) => (
-                                            <th key={i} className="border px-4 py-3 bg-[#004d66] text-white whitespace-nowrap">
-                                                {p}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {months.map((month, idx) => (
-                                        <tr key={idx} className="hover:bg-[#f9f9f9] transition duration-200">
-                                            <td className="border px-4 py-2 font-medium text-gray-800">{month}</td>
-                                            {platforms.map((_, i) => (
-                                                <td key={i} className="border px-4 py-2 text-gray-700">0</td>
+                        <div className="overflow-x-auto rounded-lg border border-gray-200">
+                            <div className="min-w-[800px] sm:min-w-full">
+                                <table className="w-full text-center text-xs sm:text-sm text-gray-700">
+                                    <thead className="bg-[#f5f8fa] text-[#004d66] font-semibold border-b">
+                                        <tr>
+                                            <th className="border px-2 py-2 sm:px-4 sm:py-3 bg-[#004d66] text-white sticky left-0">Month</th>
+                                            {platforms.map((p, i) => (
+                                                <th key={i} className="border px-2 py-2 sm:px-4 sm:py-3 bg-[#004d66] text-white whitespace-nowrap">
+                                                    {p}
+                                                </th>
                                             ))}
                                         </tr>
-                                    ))}
-                                    <tr className="bg-[#f5f8fa] font-bold">
-                                        <td className="border px-4 py-3 text-[#004d66]">Total</td>
-                                        {platforms.map((_, i) => (
-                                            <td key={i} className="border px-4 py-3 text-[#004d66]">0.00</td>
+                                    </thead>
+                                    <tbody>
+                                        {months.map((month, idx) => (
+                                            <tr key={idx} className="hover:bg-[#f9f9f9] transition duration-200">
+                                                <td className="border px-2 py-1 sm:px-4 sm:py-2 font-medium text-gray-800 sticky left-0 bg-white">{month}</td>
+                                                {platforms.map((_, i) => (
+                                                    <td key={i} className="border px-2 py-1 sm:px-4 sm:py-2 text-gray-700">0</td>
+                                                ))}
+                                            </tr>
                                         ))}
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        <tr className="bg-[#f5f8fa] font-bold">
+                                            <td className="border px-2 py-2 sm:px-4 sm:py-3 text-[#004d66] sticky left-0">Total</td>
+                                            {platforms.map((_, i) => (
+                                                <td key={i} className="border px-2 py-2 sm:px-4 sm:py-3 text-[#004d66]">0.00</td>
+                                            ))}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Charts */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
+                    {/* Charts Grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                         {/* Line Chart */}
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                            <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
+                            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                                 2024 : Top 5 Months with Highest Royalty
                             </h2>
-                            <div className="w-full">
+                            <div className="w-full h-64 sm:h-80">
                                 <Line data={lineChartData} options={lineChartOptions} />
                             </div>
                         </div>
 
                         {/* Bar Chart */}
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                            <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
+                            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                                 2024 : Top 5 Platforms with Highest Royalty
                             </h2>
-                            <div className="w-full">
+                            <div className="w-full h-64 sm:h-80">
                                 <Bar data={topPlatformChartData} options={topPlatformChartOptions} />
                             </div>
                         </div>
                     </div>
-                    {/* 🆕 New Chart Card: Monthly Earnings Comparison */}
-                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                        <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+
+                    {/* Monthly Earnings Comparison */}
+                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mt-4 sm:mt-6">
+                        <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                             2024 : Monthly Earnings Comparison (₹)
                         </h2>
-                        <div className="w-full">
+                        <div className="w-full h-64 sm:h-96">
                             <Bar data={monthlyEarningsData} options={monthlyEarningsOptions} />
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
+                    {/* Second Row of Charts */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-6">
                         {/* Doughnut Chart */}
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                            <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
+                            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                                 Yearly Royality (Earnings) Overview
                             </h2>
-                            <div className="w-full">
+                            <div className="w-full h-64 sm:h-80">
                                 <Doughnut data={doughnutChartData} options={doughnutChartOptions} />
                             </div>
                         </div>
 
                         {/* Polar Area Chart */}
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                            <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
+                            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                                 (All Years) Top 5 Months with Highest Earnings
                             </h2>
-                            <div className="w-full">
+                            <div className="w-full h-64 sm:h-80">
                                 <Bar data={top5MonthsChartData} options={top5MonthsChartOptions} />
                             </div>
                         </div>
                     </div>
-                    {/* (All Years) Platform-Wise Total Earnings */}
-                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mt-8">
-                        <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+
+                    {/* Platform-Wise Total Earnings */}
+                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mt-4 sm:mt-6">
+                        <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                             (All Years) Platform-Wise Total Earnings
                         </h2>
-                        <div className="w-full">
+                        <div className="w-full h-64 sm:h-80">
                             <Bar data={platformWiseTotalEarningsData} options={platformWiseTotalEarningsOptions} />
                         </div>
                     </div>
-
                 </main>
             </div>
         </div>

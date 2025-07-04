@@ -337,13 +337,13 @@ const statusCards = [
   return (
     <div className="min-h-screen flex bg-gray-50 relative">
       {isSidebarOpen && (
-        <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
+        // <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
           <Sidebar
             isOpen={isSidebarOpen}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
           />
-        </aside>
+        // </aside>
       )}
 
       <div className="flex flex-col flex-1 transition-all duration-300">

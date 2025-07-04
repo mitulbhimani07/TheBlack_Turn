@@ -53,19 +53,18 @@ export default function ArtistProfileLinkGeneration() {
   );
 
   return (
-    <div className="min-h-screen flex bg-[#f5f8fa]">
+    <div className="min-h-screen flex bg-[#f5f8fa] relative">
       {/* Sidebar */}
       {isSidebarOpen && (
-        <aside className="fixed inset-y-0 z-40 left-0 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
           <Sidebar isOpen={isSidebarOpen} />
-        </aside>
+        
       )}
 
       {/* Main Content */}
       <div className="flex flex-col flex-1">
         <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} sidebarOpen={isSidebarOpen} />
 
-        <div className="p-4 md:p-8 w-full max-w-[1200px] mx-auto">
+        <div className="p-4 md:p-6 w-full mx-auto">
           {/* Link Submission Card */}
           <div className="bg-white rounded-lg shadow p-6 md:p-8 mb-8">
             <h2 className="text-lg md:text-xl font-bold mb-2 text-[#004d66]">Artist Profile Link Submission</h2>
