@@ -15,7 +15,17 @@ export default function CreateANewArtistProfile() {
     file: null,
   });
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [notifications, setNotifications] = useState([]);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [activeTab, setActiveTab] = useState('overview');
+    
+
+      const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+const markAsRead = (id) => {
+    setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
+    setUnreadCount(prev => prev - 1);
+  };
 
   // Static data for table
   const recentArtists = [
@@ -53,17 +63,25 @@ export default function CreateANewArtistProfile() {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#f5f8fa]">
-      {/* Sidebar */}
-      {isSidebarOpen && (
-        <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
-          <Sidebar isOpen={isSidebarOpen} />
-        </aside>
-      )}
+    <div className="min-h-screen flex bg-gray-50 relative">
+                <Sidebar
+                    isOpen={isSidebarOpen}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                />
 
-      {/* Main Content */}
-      <div className="flex flex-col flex-1">
-        <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} sidebarOpen={isSidebarOpen} />
+                      <div className="flex-1 flex flex-col min-h-screen">
+        {/* Sticky Header */}
+        <div className="sticky top-0 z-50">
+          <Navbar
+            toggleSidebar={toggleSidebar}
+            sidebarOpen={isSidebarOpen}
+            notifications={notifications}
+            unreadCount={unreadCount}
+            markAsRead={markAsRead}
+          />
+        </div>
+
 
         {/* Content Wrapper */}
         <div className="p-6 w-full mx-auto">

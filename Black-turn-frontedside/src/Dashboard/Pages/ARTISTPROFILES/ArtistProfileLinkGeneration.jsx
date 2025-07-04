@@ -3,10 +3,21 @@ import Sidebar from '../header-sidebar/Sidebar';
 import Navbar from '../header-sidebar/Header';
 
 export default function ArtistProfileLinkGeneration() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [form, setForm] = useState({ song: '', artistProfile: '' });
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [search, setSearch] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [activeTab, setActiveTab] = useState('overview');
+
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const markAsRead = (id) => {
+    setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
+    setUnreadCount(prev => prev - 1);
+  };
+
 
   // Static data for the table
   const recentLinks = [
@@ -53,17 +64,25 @@ export default function ArtistProfileLinkGeneration() {
   );
 
   return (
-    <div className="min-h-screen flex bg-[#f5f8fa]">
-      {/* Sidebar */}
-      {isSidebarOpen && (
-        <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
-          <Sidebar isOpen={isSidebarOpen} />
-        </aside>
-      )}
+    <div className="min-h-screen flex bg-gray-50 relative">
+                <Sidebar
+                    isOpen={isSidebarOpen}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                />
 
-      {/* Main Content */}
-      <div className="flex flex-col flex-1">
-        <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} sidebarOpen={isSidebarOpen} />
+                      <div className="flex-1 flex flex-col min-h-screen">
+        {/* Sticky Header */}
+        <div className="sticky top-0 z-50">
+          <Navbar
+            toggleSidebar={toggleSidebar}
+            sidebarOpen={isSidebarOpen}
+            notifications={notifications}
+            unreadCount={unreadCount}
+            markAsRead={markAsRead}
+          />
+        </div>
+
 
         <div className="p-4 md:p-8 w-full max-w-[1200px] mx-auto">
           {/* Link Submission Card */}
@@ -161,8 +180,8 @@ export default function ArtistProfileLinkGeneration() {
                             link.status === 'Approved'
                               ? 'text-green-600 font-semibold'
                               : link.status === 'Pending'
-                              ? 'text-yellow-600 font-semibold'
-                              : 'text-red-600 font-semibold'
+                                ? 'text-yellow-600 font-semibold'
+                                : 'text-red-600 font-semibold'
                           }>
                             {link.status}
                           </span>
