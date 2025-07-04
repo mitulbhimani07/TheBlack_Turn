@@ -15,7 +15,17 @@ export default function CreateANewArtistProfile() {
     file: null,
   });
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [notifications, setNotifications] = useState([]);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [activeTab, setActiveTab] = useState('overview');
+    
+
+      const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+const markAsRead = (id) => {
+    setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
+    setUnreadCount(prev => prev - 1);
+  };
 
   // Static data for table
   const recentArtists = [

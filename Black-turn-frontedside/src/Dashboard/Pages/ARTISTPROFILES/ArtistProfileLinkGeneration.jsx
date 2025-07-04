@@ -3,10 +3,21 @@ import Sidebar from '../header-sidebar/Sidebar';
 import Navbar from '../header-sidebar/Header';
 
 export default function ArtistProfileLinkGeneration() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [form, setForm] = useState({ song: '', artistProfile: '' });
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [search, setSearch] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [activeTab, setActiveTab] = useState('overview');
+
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const markAsRead = (id) => {
+    setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
+    setUnreadCount(prev => prev - 1);
+  };
+
 
   // Static data for the table
   const recentLinks = [
@@ -160,8 +171,8 @@ export default function ArtistProfileLinkGeneration() {
                             link.status === 'Approved'
                               ? 'text-green-600 font-semibold'
                               : link.status === 'Pending'
-                              ? 'text-yellow-600 font-semibold'
-                              : 'text-red-600 font-semibold'
+                                ? 'text-yellow-600 font-semibold'
+                                : 'text-red-600 font-semibold'
                           }>
                             {link.status}
                           </span>
