@@ -554,7 +554,7 @@ function SingleSongWithoutCT() {
                                     {/* Payment Options */}
                                     <div className="mt-6">
                                         <p className="text-sm text-gray-600 mb-4">We Accept:</p>
-                                        <div className="grid grid-cols-4 md:grid-cols-8 gap-4 mb-6">
+                                        <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-4 mb-6">
                                             {paymentplatform.map((platform, index) => (
                                                 <div key={index}
                                                     className="group w-20 h-20 flex items-center justify-center rounded-xl bg-white shadow-md border border-gray-200">

@@ -3,7 +3,6 @@ import Sidebar from '../header-sidebar/Sidebar';
 import Navbar from '../header-sidebar/Header';
 
 export default function CreateANewArtistProfile() {
-  // Example state for form fields
   const [form, setForm] = useState({
     songs: '',
     artist: '',
@@ -15,19 +14,17 @@ export default function CreateANewArtistProfile() {
     file: null,
   });
 
-const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [notifications, setNotifications] = useState([]);
-    const [unreadCount, setUnreadCount] = useState(0);
-    const [activeTab, setActiveTab] = useState('overview');
-    
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [activeTab, setActiveTab] = useState('overview');
 
-      const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-const markAsRead = (id) => {
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const markAsRead = (id) => {
     setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
     setUnreadCount(prev => prev - 1);
   };
 
-  // Static data for table
   const recentArtists = [
     {
       date: '2025-07-01',
@@ -59,48 +56,59 @@ const markAsRead = (id) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Submit logic
+    // Submit logic here
   };
 
   return (
-    <div className="min-h-screen flex bg-[#f5f8fa]">
-      {/* Sidebar */}
-      {isSidebarOpen && (
-        // <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
-          <Sidebar isOpen={isSidebarOpen} />
-        // </aside>
-      )}
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
+      <Sidebar
+        isOpen={isSidebarOpen}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
-      {/* Main Content */}
-      <div className="flex flex-col flex-1">
-        <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} sidebarOpen={isSidebarOpen} />
+      <div className="flex-1 flex flex-col min-h-screen">
+        {/* Sticky Header */}
+        <div className="sticky top-0 z-50">
+          <Navbar
+            toggleSidebar={toggleSidebar}
+            sidebarOpen={isSidebarOpen}
+            notifications={notifications}
+            unreadCount={unreadCount}
+            markAsRead={markAsRead}
+          />
+        </div>
 
-        {/* Content Wrapper */}
-        <div className="p-6 w-full mx-auto">
-          {/* Card */}
-          <div className="bg-white rounded-lg shadow p-6 md:p-8 mb-6">
-            <h2 className="text-xl md:text-2xl font-bold mb-4 text-[#004d66]">Create a New Artist Page</h2>
-            <div className="bg-green-100 border border-green-100 text-[#004d66] px-4 py-4 rounded mb-6 text-sm">
-              <b>Artist Profile Image Guide.</b> 1500x1500px (need front facing &amp; clear image of Artist with Name). Artist should not wear sunglasses or specs; eyes and face must be clearly visible.
+        {/* Page Content */}
+        <div className="p-4 sm:p-6 lg:p-8 w-full max-w-7xl mx-auto">
+          {/* Form Card */}
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 mb-6">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-[#004d66]">
+              Create a New Artist Page
+            </h2>
+            <div className="bg-green-100 border border-green-100 text-[#004d66] px-3 py-3 rounded mb-6 text-sm">
+              <b>Artist Profile Image Guide.</b> 1500x1500px front-facing clear image of artist with name.
+              No sunglasses/specs; eyes and face must be visible.
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Select Songs */}
+              {/* Songs Field */}
               <div>
                 <label className="block font-medium mb-1 text-[#004d66]">Select Songs:</label>
                 <input
                   type="text"
                   name="songs"
-                  placeholder="Select Songs"
+                  placeholder="Enter song names"
                   value={form.songs}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#004d66]"
                 />
               </div>
+
               {/* Row: File, Artist, Bio */}
-              <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex flex-col lg:flex-row gap-4">
                 <div className="flex-1">
                   <label className="block font-medium mb-1 text-[#004d66]">
-                    Upload Your <span className="font-normal text-gray-500">(Artist Profile)</span> Picture
+                    Upload Artist <span className="font-normal text-gray-500">(Profile Picture)</span>
                   </label>
                   <input
                     type="file"
@@ -110,7 +118,7 @@ const markAsRead = (id) => {
                     className="block w-full border border-gray-300 rounded px-3 py-2"
                   />
                   <div className="text-xs text-gray-500 mt-1">
-                    Size must be 1500x1500px. Choose (.jpg, .png, .jpeg) Only
+                    1500x1500px. Format: .jpg, .jpeg, .png
                   </div>
                 </div>
                 <div className="flex-1">
@@ -123,7 +131,6 @@ const markAsRead = (id) => {
                   >
                     <option value="">Select Artist</option>
                     <option value="Gfh">Gfh</option>
-                    {/* Add more options here */}
                   </select>
                 </div>
                 <div className="flex-1">
@@ -131,15 +138,16 @@ const markAsRead = (id) => {
                   <input
                     type="text"
                     name="bio"
-                    placeholder="Artist Bio"
+                    placeholder="Enter bio"
                     value={form.bio}
                     onChange={handleChange}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                   />
                 </div>
               </div>
+
               {/* Row: Era, Language, Genre, Origin */}
-              <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex flex-col lg:flex-row gap-4">
                 <div className="flex-1">
                   <label className="block font-medium mb-1 text-[#004d66]">Era</label>
                   <input
@@ -162,7 +170,6 @@ const markAsRead = (id) => {
                     <option value="">Select Language</option>
                     <option value="English">English</option>
                     <option value="Hindi">Hindi</option>
-                    {/* Add more options */}
                   </select>
                 </div>
                 <div className="flex-1">
@@ -176,7 +183,6 @@ const markAsRead = (id) => {
                     <option value="">Select Genre</option>
                     <option value="Pop">Pop</option>
                     <option value="Rock">Rock</option>
-                    {/* Add more options */}
                   </select>
                 </div>
                 <div className="flex-1">
@@ -191,30 +197,31 @@ const markAsRead = (id) => {
                   />
                 </div>
               </div>
+
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-[#004d66] text-white py-2 rounded font-semibold hover:bg-[#000] transition"
+                className="w-full bg-[#004d66] text-white py-2 rounded font-semibold hover:bg-black transition"
               >
                 Create a New Artist Page
               </button>
             </form>
           </div>
 
-          {/* Recent Artist Pages Table */}
-          <div className="bg-white rounded-lg shadow p-6 md:p-8">
-            <div className="flex items-center justify-between mb-4">
+          {/* Recent Artists Table */}
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
               <h3 className="text-lg font-semibold text-[#004d66]">
-                Recent Artist Pages <span className="font-normal text-gray-500">| Created by you</span>
+                Recent Artist Pages <span className="text-gray-500 font-normal">| Created by you</span>
               </h3>
               <input
                 type="text"
                 placeholder="Search..."
-                className="border border-gray-300 rounded px-3 py-2 w-48"
+                className="border border-gray-300 rounded px-3 py-2 w-full sm:w-48"
               />
             </div>
-            <div className="flex items-center mb-2">
-              <select className="border border-gray-300 rounded px-2 py-1 text-sm mr-2">
+            <div className="flex items-center mb-2 gap-2">
+              <select className="border border-gray-300 rounded px-2 py-1 text-sm">
                 <option>10</option>
                 <option>20</option>
                 <option>50</option>
@@ -224,17 +231,17 @@ const markAsRead = (id) => {
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="bg-[#004d66] text-[#fff]">
-                    <th className="py-2 px-4 font-semibold text-left">Date of Submission</th>
-                    <th className="py-2 px-4 font-semibold text-left">Artist Name</th>
-                    <th className="py-2 px-4 font-semibold text-left">Selected Songs</th>
-                    <th className="py-2 px-4 font-semibold text-left">Status</th>
+                  <tr className="bg-[#004d66] text-white">
+                    <th className="py-2 px-4 text-left font-semibold">Date of Submission</th>
+                    <th className="py-2 px-4 text-left font-semibold">Artist Name</th>
+                    <th className="py-2 px-4 text-left font-semibold">Selected Songs</th>
+                    <th className="py-2 px-4 text-left font-semibold">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {recentArtists.length === 0 ? (
                     <tr>
-                      <td className="py-2 px-4 text-gray-500" colSpan={4}>No entries found</td>
+                      <td colSpan={4} className="text-center py-4 text-gray-500">No entries found</td>
                     </tr>
                   ) : (
                     recentArtists.map((artist, idx) => (
@@ -247,8 +254,8 @@ const markAsRead = (id) => {
                             artist.status === 'Approved'
                               ? 'text-green-600 font-semibold'
                               : artist.status === 'Pending'
-                              ? 'text-yellow-600 font-semibold'
-                              : 'text-red-600 font-semibold'
+                                ? 'text-yellow-600 font-semibold'
+                                : 'text-red-600 font-semibold'
                           }>
                             {artist.status}
                           </span>
