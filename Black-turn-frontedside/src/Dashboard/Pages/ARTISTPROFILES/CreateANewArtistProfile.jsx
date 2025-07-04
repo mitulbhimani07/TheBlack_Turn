@@ -15,14 +15,15 @@ export default function CreateANewArtistProfile() {
     file: null,
   });
 
-const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [notifications, setNotifications] = useState([]);
-    const [unreadCount, setUnreadCount] = useState(0);
-    const [activeTab, setActiveTab] = useState('overview');
-    
+ const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [activeTab, setActiveTab] = useState('overview');
 
-      const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-const markAsRead = (id) => {
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+  const markAsRead = (id) => {
     setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
     setUnreadCount(prev => prev - 1);
   };
@@ -67,16 +68,20 @@ const markAsRead = (id) => {
       {/* Sidebar */}
       {isSidebarOpen && (
         // <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
-          <Sidebar isOpen={isSidebarOpen} />
+        <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
         // </aside>
       )}
 
       {/* Main Content */}
       <div className="flex flex-col flex-1">
-        <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} sidebarOpen={isSidebarOpen} />
+        <Navbar toggleSidebar={toggleSidebar}
+          sidebarOpen={isSidebarOpen}
+          notifications={notifications}
+          unreadCount={unreadCount}
+          markAsRead={markAsRead} />
 
         {/* Content Wrapper */}
-        <div className="p-6 w-full mx-auto">
+        <div className="p-6 w-full mx-auto ">
           {/* Card */}
           <div className="bg-white rounded-lg shadow p-6 md:p-8 mb-6">
             <h2 className="text-xl md:text-2xl font-bold mb-4 text-[#004d66]">Create a New Artist Page</h2>
@@ -247,8 +252,8 @@ const markAsRead = (id) => {
                             artist.status === 'Approved'
                               ? 'text-green-600 font-semibold'
                               : artist.status === 'Pending'
-                              ? 'text-yellow-600 font-semibold'
-                              : 'text-red-600 font-semibold'
+                                ? 'text-yellow-600 font-semibold'
+                                : 'text-red-600 font-semibold'
                           }>
                             {artist.status}
                           </span>
