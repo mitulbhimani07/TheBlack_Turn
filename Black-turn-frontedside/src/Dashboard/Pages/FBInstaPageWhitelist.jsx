@@ -30,6 +30,7 @@ export default function FBInstaPageWhitelist() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
     const [submittedRequests, setSubmittedRequests] = useState([
         {
             id: 1,
@@ -76,9 +77,7 @@ export default function FBInstaPageWhitelist() {
     return (
         <div className="min-h-screen flex bg-gray-50 relative">
             {isSidebarOpen && (
-                // <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
-                    <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
-                // </aside>
+                <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
             )}
 
             <div className="flex flex-col flex-1 transition-all duration-300">
@@ -90,15 +89,15 @@ export default function FBInstaPageWhitelist() {
                     markAsRead={markAsRead}
                 />
 
-                <main className="p-6">
-                    <h1 className="text-2xl font-semibold text-[#004d66] mb-4">
+                <main className="p-3 sm:p-4 lg:p-6">
+                    <h1 className="text-xl sm:text-2xl font-semibold text-[#004d66] mb-4 sm:mb-6">
                         Submit Facebook & Instagram Whitelist Request
                     </h1>
 
                     {/* Info Box */}
-                    <div className="bg-cyan-100 border border-cyan-300 rounded-xl p-4 mb-6 text-sm leading-relaxed">
+                    <div className="bg-cyan-100 border border-cyan-300 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-sm leading-relaxed">
                         <p className="font-semibold text-[#BB3E00] mb-1">📢 What is Facebook & Instagram Whitelist?</p>
-                        <p className="text-gray-700">
+                        <p className="text-gray-700 text-xs sm:text-sm">
                             Whitelisting means that <strong>claims will not be applied</strong> to your selected Facebook Page & Instagram Profile.
                             <br />
                             ✅ Once approved, <strong>your page/profile will not receive Content ID claims</strong>, but other pages and profiles will still get claims.
@@ -108,49 +107,53 @@ export default function FBInstaPageWhitelist() {
                     </div>
 
                     {/* Form Section */}
-                    <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-8">
-                        <div className="mb-4">
-                            <label className="block font-medium text-gray-800 mb-1">Facebook Page URL</label>
-                            <input
-                                type="text"
-                                value={fbPageUrl}
-                                onChange={(e) => setFbPageUrl(e.target.value)}
-                                placeholder="Enter your Facebook *Page* link only (No Video Links)"
-                                className="w-full px-4 py-2 border border-[#004d66] rounded-lg shadow-sm text-sm"
-                            />
-                        </div>
+                    <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 sm:p-6 mb-6 sm:mb-8">
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block font-medium text-gray-800 mb-1 text-sm sm:text-base">Facebook Page URL</label>
+                                <input
+                                    type="text"
+                                    value={fbPageUrl}
+                                    onChange={(e) => setFbPageUrl(e.target.value)}
+                                    placeholder="Enter your Facebook *Page* link only (No Video Links)"
+                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-[#004d66] rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-[#004d66] focus:border-transparent"
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <label className="block font-medium text-gray-800 mb-1">Instagram Profile URL</label>
-                            <input
-                                type="text"
-                                value={instaProfileUrl}
-                                onChange={(e) => setInstaProfileUrl(e.target.value)}
-                                placeholder="Enter your Instagram *Profile* link only (No Reel/Video Links)"
-                                className="w-full px-4 py-2 border border-[#004d66] rounded-lg shadow-sm text-sm"
-                            />
-                        </div>
+                            <div>
+                                <label className="block font-medium text-gray-800 mb-1 text-sm sm:text-base">Instagram Profile URL</label>
+                                <input
+                                    type="text"
+                                    value={instaProfileUrl}
+                                    onChange={(e) => setInstaProfileUrl(e.target.value)}
+                                    placeholder="Enter your Instagram *Profile* link only (No Reel/Video Links)"
+                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-[#004d66] rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-[#004d66] focus:border-transparent"
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <label className="block font-medium text-gray-800 mb-1">Additional Message (Optional)</label>
-                            <textarea
-                                value={additionalMessage}
-                                onChange={(e) => setAdditionalMessage(e.target.value)}
-                                placeholder="If you have any additional details, mention here."
-                                rows={3}
-                                className="w-full px-4 py-2 border border-[#004d66] rounded-lg shadow-sm text-sm"
-                            />
-                        </div>
+                            <div>
+                                <label className="block font-medium text-gray-800 mb-1 text-sm sm:text-base">Additional Message (Optional)</label>
+                                <textarea
+                                    value={additionalMessage}
+                                    onChange={(e) => setAdditionalMessage(e.target.value)}
+                                    placeholder="If you have any additional details, mention here."
+                                    rows={3}
+                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-[#004d66] rounded-lg shadow-sm text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#004d66] focus:border-transparent"
+                                />
+                            </div>
 
-                        <button className="w-full bg-[#004d66] text-white font-medium py-2 rounded-lg hover:bg-[#1a282d] transition">
-                            Submit Whitelist Request
-                        </button>
+                            <button className="w-full bg-[#004d66] text-white font-medium py-2 sm:py-3 rounded-lg hover:bg-[#1a282d] transition text-sm sm:text-base">
+                                Submit Whitelist Request
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Submitted Requests Table */}
-                    <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-                        <h2 className="text-lg font-semibold text-[#004d66] mb-4">Recent Submitted Requests</h2>
-                        <div className="overflow-auto">
+                    {/* Submitted Requests Section */}
+                    <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 sm:p-6">
+                        <h2 className="text-lg sm:text-xl font-semibold text-[#004d66] mb-4 sm:mb-6">Recent Submitted Requests</h2>
+                        
+                        {/* Desktop Table View */}
+                        <div className="hidden lg:block overflow-x-auto">
                             <table className="min-w-full border text-sm text-center">
                                 <thead className="bg-[#004d66] text-white font-semibold">
                                     <tr>
@@ -173,14 +176,17 @@ export default function FBInstaPageWhitelist() {
                                         submittedRequests.map((request) => (
                                             <tr key={request.id}>
                                                 <td className="border-2 border-[#004d66] px-4 py-2">{request.id}</td>
-                                                <td className="border-2 border-[#004d66] px-4 py-2 break-all">{request.fbPageUrl}</td>
-                                                <td className="border-2 border-[#004d66] px-4 py-2 break-all">{request.instaProfileUrl}</td>
-                                                <td className="border-2 border-[#004d66] px-4 py-2">{request.additionalMessage}</td>
+                                                <td className="border-2 border-[#004d66] px-4 py-2 break-all max-w-xs">{request.fbPageUrl}</td>
+                                                <td className="border-2 border-[#004d66] px-4 py-2 break-all max-w-xs">{request.instaProfileUrl}</td>
+                                                <td className="border-2 border-[#004d66] px-4 py-2 max-w-xs">{request.additionalMessage || '-'}</td>
                                                 <td className="border-2 border-[#004d66] px-4 py-2">
-                                                    <span className={`px-2 py-1 text-xs rounded-full ${request.status === "Approved"
-                                                        ? "bg-green-100 text-green-700"
-                                                        : "bg-yellow-100 text-yellow-700"
-                                                        }`}>
+                                                    <span className={`px-2 py-1 text-xs rounded-full ${
+                                                        request.status === "Approved"
+                                                            ? "bg-green-100 text-green-700"
+                                                            : request.status === "Rejected"
+                                                            ? "bg-red-100 text-red-700"
+                                                            : "bg-yellow-100 text-yellow-700"
+                                                    }`}>
                                                         {request.status}
                                                     </span>
                                                 </td>
@@ -189,8 +195,57 @@ export default function FBInstaPageWhitelist() {
                                         ))
                                     )}
                                 </tbody>
-
                             </table>
+                        </div>
+
+                        {/* Mobile Card View */}
+                        <div className="lg:hidden space-y-4">
+                            {submittedRequests.length === 0 ? (
+                                <div className="text-center py-8 text-gray-500">
+                                    No requests submitted yet.
+                                </div>
+                            ) : (
+                                submittedRequests.map((request) => (
+                                    <div key={request.id} className="border border-gray-200 rounded-lg p-4 space-y-3">
+                                        <div className="flex justify-between items-start">
+                                            <span className="text-sm font-medium text-gray-600">Request #{request.id}</span>
+                                            <span className={`px-2 py-1 text-xs rounded-full ${
+                                                request.status === "Approved"
+                                                    ? "bg-green-100 text-green-700"
+                                                    : request.status === "Rejected"
+                                                    ? "bg-red-100 text-red-700"
+                                                    : "bg-yellow-100 text-yellow-700"
+                                            }`}>
+                                                {request.status}
+                                            </span>
+                                        </div>
+                                        
+                                        <div className="space-y-2">
+                                            <div>
+                                                <span className="text-xs font-medium text-gray-600">Facebook Page:</span>
+                                                <p className="text-sm text-gray-800 break-all">{request.fbPageUrl}</p>
+                                            </div>
+                                            
+                                            <div>
+                                                <span className="text-xs font-medium text-gray-600">Instagram Profile:</span>
+                                                <p className="text-sm text-gray-800 break-all">{request.instaProfileUrl}</p>
+                                            </div>
+                                            
+                                            {request.additionalMessage && (
+                                                <div>
+                                                    <span className="text-xs font-medium text-gray-600">Additional Message:</span>
+                                                    <p className="text-sm text-gray-800">{request.additionalMessage}</p>
+                                                </div>
+                                            )}
+                                            
+                                            <div>
+                                                <span className="text-xs font-medium text-gray-600">Submitted On:</span>
+                                                <p className="text-sm text-gray-800">{request.submittedOn}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
                         </div>
                     </div>
                 </main>
