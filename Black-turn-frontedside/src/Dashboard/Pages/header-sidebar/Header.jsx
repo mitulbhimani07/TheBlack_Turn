@@ -13,6 +13,97 @@ import {
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Custom Arrow Toggle Icon Component with Enhanced Animations
+const ArrowToggleIcon = ({ size = 20, className = "", isOpen = false }) => (
+  <div className={`relative group ${className}`}>
+    {/* Animated background circle */}
+    <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
+      isOpen 
+        ? 'bg-gradient-to-r from-[#005f73]/20 to-[#0a9396]/20 scale-110' 
+        : 'bg-transparent scale-100 group-hover:bg-[#005f73]/10 group-hover:scale-105'
+    }`} />
+    
+    {/* Main SVG */}
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      className="relative z-10"
+    >
+      {/* Animated gradient definition */}
+      <defs>
+        <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#005f73" />
+          <stop offset="100%" stopColor="#0a9396" />
+        </linearGradient>
+      </defs>
+      
+      {/* Main arrow with enhanced styling */}
+      <path
+        d="M9 18l6-6-6-6"
+        stroke="url(#arrowGradient)"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={`transition-all duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+        style={{ transformOrigin: '50% 50%' }}
+      />
+      
+      {/* Animated side lines with staggered animation */}
+      <line
+        x1="4" y1="6" x2="6" y2="6"
+        stroke="url(#arrowGradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        className={`transition-all duration-200 ${
+          isOpen ? 'opacity-100 translate-x-0' : 'opacity-70 translate-x-[-1px]'
+        }`}
+        style={{ transitionDelay: '0ms' }}
+      />
+      <line
+        x1="4" y1="12" x2="6" y2="12"
+        stroke="url(#arrowGradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        className={`transition-all duration-200 ${
+          isOpen ? 'opacity-100 translate-x-0' : 'opacity-70 translate-x-[-1px]'
+        }`}
+        style={{ transitionDelay: '50ms' }}
+      />
+      <line
+        x1="4" y1="18" x2="6" y2="18"
+        stroke="url(#arrowGradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        className={`transition-all duration-200 ${
+          isOpen ? 'opacity-100 translate-x-0' : 'opacity-70 translate-x-[-1px]'
+        }`}
+        style={{ transitionDelay: '100ms' }}
+      />
+      
+      {/* Pulse effect when active */}
+      {isOpen && (
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+          fill="none"
+          stroke="url(#arrowGradient)"
+          strokeWidth="0.5"
+          opacity="0.3"
+          className="animate-ping"
+        />
+      )}
+    </svg>
+    
+    {/* Hover glow effect */}
+    <div className={`absolute inset-0 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 ${
+      isOpen ? 'shadow-lg shadow-[#005f73]/30' : 'shadow-md shadow-[#005f73]/20'
+    }`} />
+  </div>
+);
+
 const Navbar = ({ 
   toggleSidebar, 
   sidebarOpen, 
@@ -121,13 +212,15 @@ const Navbar = ({
         
         {/* Left - Logo + Toggle */}
         <div className="flex items-center space-x-3">
-          <button
+          <motion.button
             onClick={toggleSidebar}
-            className="p-2 rounded-lg hover:bg-[#005f73]/10 transition duration-200 text-gray-800"
+            className="relative p-2 rounded-lg hover:bg-[#005f73]/10 transition-all duration-300 text-gray-800 group"
             aria-label="Toggle sidebar"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {sidebarOpen ? <FiX size={20} /> : <FiMenu size={20} />}
-          </button>
+            <ArrowToggleIcon size={22} isOpen={sidebarOpen} />
+          </motion.button>
          
         </div>
 
