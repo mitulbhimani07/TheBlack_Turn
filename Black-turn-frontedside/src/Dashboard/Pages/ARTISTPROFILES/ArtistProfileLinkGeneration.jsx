@@ -11,15 +11,12 @@ export default function ArtistProfileLinkGeneration() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [activeTab, setActiveTab] = useState('overview');
 
-
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const markAsRead = (id) => {
     setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
     setUnreadCount(prev => prev - 1);
   };
 
-
-  // Static data for the table
   const recentLinks = [
     {
       date: '2025-07-02',
@@ -54,25 +51,23 @@ export default function ArtistProfileLinkGeneration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Submit logic here
+    // Add your submit logic here
   };
 
-  // Filtered data for search (optional)
   const filteredLinks = recentLinks.filter(link =>
     link.artistName.toLowerCase().includes(search.toLowerCase()) ||
     link.songs.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen flex bg-gray-50 relative">
-                <Sidebar
-                    isOpen={isSidebarOpen}
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
-                />
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
+      <Sidebar
+        isOpen={isSidebarOpen}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
-                      <div className="flex-1 flex flex-col min-h-screen">
-        {/* Sticky Header */}
+      <div className="flex-1 flex flex-col min-h-screen">
         <div className="sticky top-0 z-50">
           <Navbar
             toggleSidebar={toggleSidebar}
@@ -83,22 +78,22 @@ export default function ArtistProfileLinkGeneration() {
           />
         </div>
 
-
-        <div className="p-4 md:p-8 w-full max-w-[1200px] mx-auto">
-          {/* Link Submission Card */}
-          <div className="bg-white rounded-lg shadow p-6 md:p-8 mb-8">
-            <h2 className="text-lg md:text-xl font-bold mb-2 text-[#004d66]">Artist Profile Link Submission</h2>
-            <p className="mb-4 text-gray-700">
+        <div className="p-4 sm:p-6 lg:p-8 w-full max-w-7xl mx-auto">
+          {/* Form Section */}
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 mb-8">
+            <h2 className="text-lg sm:text-xl font-bold mb-2 text-[#004d66]">Artist Profile Link Submission</h2>
+            <p className="mb-4 text-gray-700 text-sm sm:text-base">
               If your song is not linked to the correct artist profile, follow these simple steps:
             </p>
-            <div className="mb-3 space-y-2">
+            <div className="mb-4 space-y-2 text-sm">
               <div className="bg-[#c8f4fd] px-4 py-2 rounded font-medium">
                 <span className="font-bold">Step 1:</span> Select your song.
               </div>
               <div className="bg-[#c8f4fd] px-4 py-2 rounded font-medium">
-                <span className="font-bold">Step 2:</span> Enter the correct artist profile where you want the song to be linked.
+                <span className="font-bold">Step 2:</span> Enter the correct artist profile.
               </div>
             </div>
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block font-medium mb-1 text-[#004d66]">Search or Select Songs:</label>
@@ -120,32 +115,35 @@ export default function ArtistProfileLinkGeneration() {
             </form>
           </div>
 
-          {/* Recent Artist Profile Link Table */}
-          <div className="bg-white rounded-lg shadow p-6 md:p-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-              <h3 className="text-lg font-semibold text-[#004d66] mb-2 md:mb-0">
-                Recent Artist Profile Link <span className="font-normal text-gray-500">| Submitted by you</span>
+          {/* Table Section */}
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-4 gap-4">
+              <h3 className="text-lg font-semibold text-[#004d66]">
+                Recent Artist Profile Link <span className="text-gray-500 font-normal">| Submitted by you</span>
               </h3>
-              <div className="flex items-center gap-2">
-                <select
-                  className="border border-gray-300 rounded px-2 py-1 text-sm"
-                  value={entriesPerPage}
-                  onChange={e => setEntriesPerPage(Number(e.target.value))}
-                >
-                  <option>10</option>
-                  <option>20</option>
-                  <option>50</option>
-                </select>
-                <span className="text-sm text-gray-500">entries per page</span>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                <div className="flex items-center gap-2">
+                  <select
+                    className="border border-gray-300 rounded px-2 py-1 text-sm"
+                    value={entriesPerPage}
+                    onChange={e => setEntriesPerPage(Number(e.target.value))}
+                  >
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                  </select>
+                  <span className="text-sm text-gray-500">entries per page</span>
+                </div>
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="border border-gray-300 rounded px-3 py-2 ml-4"
+                  className="border border-gray-300 rounded px-3 py-2 w-full sm:w-60"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                 />
               </div>
             </div>
+
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead>
@@ -161,7 +159,7 @@ export default function ArtistProfileLinkGeneration() {
                 <tbody>
                   {filteredLinks.length === 0 ? (
                     <tr>
-                      <td className="py-2 px-4 text-gray-500" colSpan={6}>No entries found</td>
+                      <td colSpan={6} className="text-center py-4 text-gray-500">No entries found</td>
                     </tr>
                   ) : (
                     filteredLinks.map((link, idx) => (
