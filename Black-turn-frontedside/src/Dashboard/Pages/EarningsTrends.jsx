@@ -9,7 +9,7 @@ import {
     LinearScale,
     PointElement,
     LineElement,
-    BarElement, // ✅ Needed for Bar Chart
+    BarElement,
     Title,
     Tooltip,
     Legend,
@@ -21,7 +21,7 @@ import { ArcElement, RadialLinearScale } from 'chart.js';
 
 ChartJS.register(ArcElement, RadialLinearScale);
 
-// ✅ Register all chart elements
+// Register all chart elements
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -60,13 +60,11 @@ export default function EarningsTrends() {
     };
 
     useEffect(() => {
-       const handleResize = () => {
+        const handleResize = () => {
             const mobile = window.innerWidth < 1024;
             setIsMobile(mobile);
             if (mobile) {
                 setIsSidebarOpen(false);
-            } else {
-                setIsSidebarOpen(true);
             }
         };
         handleResize();
@@ -74,7 +72,7 @@ export default function EarningsTrends() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // 🎵 Line Chart: Top 5 Months
+    // Line Chart: Top 5 Months
     const lineChartData = {
         labels: months,
         datasets: [
@@ -87,13 +85,13 @@ export default function EarningsTrends() {
                 tension: 0.3,
                 pointRadius: 5,
                 pointBackgroundColor: '#BB3E00',
-
             },
         ],
     };
 
     const lineChartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top',
@@ -109,6 +107,8 @@ export default function EarningsTrends() {
             x: {
                 ticks: {
                     color: '#333',
+                    maxRotation: 45,
+                    minRotation: 0,
                 },
             },
             y: {
@@ -119,13 +119,13 @@ export default function EarningsTrends() {
         },
     };
 
-    // 🎵 Bar Chart: Top Platforms
+    // Bar Chart: Top Platforms
     const topPlatformChartData = {
         labels: platforms,
         datasets: [
             {
                 label: 'Royalty Earnings (₹)',
-                data: [1200, 1100, 950, 880, 800, 900 ,736 ,56 ,673 ,94, 500, 450, 400],
+                data: [1200, 1100, 950, 880, 800, 900, 736, 56, 673, 94, 500, 450, 400],
                 backgroundColor: '#005d71',
                 borderRadius: 4,
                 barThickness: 10,
@@ -135,6 +135,7 @@ export default function EarningsTrends() {
 
     const topPlatformChartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 display: true,
@@ -146,7 +147,11 @@ export default function EarningsTrends() {
         },
         scales: {
             x: {
-                ticks: { color: '#333' },
+                ticks: { 
+                    color: '#333',
+                    maxRotation: 45,
+                    minRotation: 0,
+                },
                 grid: { display: false },
             },
             y: {
@@ -155,6 +160,7 @@ export default function EarningsTrends() {
             },
         },
     };
+
     const doughnutChartData = {
         labels: years,
         datasets: [
@@ -170,12 +176,14 @@ export default function EarningsTrends() {
 
     const doughnutChartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'bottom',
             },
         },
     };
+
     const top5MonthsChartData = {
         labels: ['March', 'July', 'May', 'August', 'January'],
         datasets: [
@@ -189,6 +197,7 @@ export default function EarningsTrends() {
             },
         ],
     };
+
     const monthlyEarningsLabels = months;
 
     const monthlyEarningsData = {
@@ -259,11 +268,14 @@ export default function EarningsTrends() {
 
     const monthlyEarningsOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top',
                 labels: {
                     color: '#333',
+                    usePointStyle: true,
+                    boxWidth: 12,
                 },
             },
         },
@@ -271,6 +283,8 @@ export default function EarningsTrends() {
             x: {
                 ticks: {
                     color: '#333',
+                    maxRotation: 45,
+                    minRotation: 0,
                 },
                 grid: {
                     display: false,
@@ -289,6 +303,7 @@ export default function EarningsTrends() {
 
     const top5MonthsChartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 display: true,
@@ -316,6 +331,7 @@ export default function EarningsTrends() {
             },
         },
     };
+
     const platformWiseTotalEarningsData = {
         labels: [
             'Airtel (₹)',
@@ -338,7 +354,7 @@ export default function EarningsTrends() {
                 backgroundColor: 'rgba(255, 99, 132, 0.4)',
                 borderColor: '#004d66',
                 borderWidth: 2,
-                type: 'line', // To get line style
+                type: 'line',
                 fill: true,
                 pointBackgroundColor: '#BB3E00',
                 pointRadius: 10,
@@ -348,6 +364,7 @@ export default function EarningsTrends() {
 
     const platformWiseTotalEarningsOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top',
@@ -356,7 +373,11 @@ export default function EarningsTrends() {
         },
         scales: {
             x: {
-                ticks: { color: '#333' },
+                ticks: { 
+                    color: '#333',
+                    maxRotation: 45,
+                    minRotation: 0,
+                },
             },
             y: {
                 ticks: { color: '#333' },
@@ -365,87 +386,86 @@ export default function EarningsTrends() {
         },
     };
 
-
     return (
         <div className="min-h-screen flex bg-gray-50 relative">
-            {isSidebarOpen && (
-                // <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
-                    <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
-                // </aside>
-            )}
+            <Sidebar
+                isOpen={isSidebarOpen}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+            />
 
-            <div className="flex flex-col flex-1 transition-all duration-300">
-                <Navbar
-                    toggleSidebar={toggleSidebar}
-                    sidebarOpen={isSidebarOpen}
-                    notifications={notifications}
-                    unreadCount={unreadCount}
-                    markAsRead={markAsRead}
-                />
+            <div className="flex-1 flex flex-col min-h-screen">
+                {/* Sticky Header */}
+                <div className="sticky top-0 z-50">
+                    <Navbar
+                        toggleSidebar={toggleSidebar}
+                        sidebarOpen={isSidebarOpen}
+                        notifications={notifications}
+                        unreadCount={unreadCount}
+                        markAsRead={markAsRead}
+                    />
+                </div>
 
-               <main className="p-4 sm:p-6">
-                    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#004d66] mb-4 sm:mb-6 tracking-tight">
+                <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
+                    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#004d66] mb-6 tracking-tight">
                         Earning Trends & Analytics
                     </h1>
 
                     {/* Royalty Table */}
-                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mb-6">
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6">
-                            <h2 className="text-lg sm:text-xl font-semibold text-[#BB3E00] mb-2 sm:mb-0">
-                                Song Earning (Royalty) Reports
-                            </h2>
-                            <div className="w-full sm:w-auto">
-                                <label className="font-medium text-gray-700 mr-2 text-sm sm:text-base">Year:</label>
-                                <select
-                                    value={selectedYear}
-                                    onChange={(e) => setSelectedYear(e.target.value)}
-                                    className="border border-gray-300 rounded-lg px-3 py-1 sm:px-4 sm:py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004d66] w-full sm:w-auto"
-                                >
-                                    {years.map(year => (
-                                        <option key={year} value={year}>{year}</option>
-                                    ))}
-                                </select>
-                            </div>
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mb-6">
+                        <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
+                            Song Earning (Royalty) Reports
+                        </h2>
+
+                        <div className="mb-4 sm:mb-6">
+                            <label className="font-medium text-gray-700 mr-2 text-sm sm:text-base">Year:</label>
+                            <select
+                                value={selectedYear}
+                                onChange={(e) => setSelectedYear(e.target.value)}
+                                className="border border-gray-300 rounded-lg px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004d66]"
+                            >
+                                <option>2024</option>
+                                <option>2023</option>
+                                <option>2022</option>
+                            </select>
                         </div>
 
-                        <div className="overflow-x-auto rounded-lg border border-gray-200">
-                            <div className="min-w-[800px] sm:min-w-full">
-                                <table className="w-full text-center text-xs sm:text-sm text-gray-700">
-                                    <thead className="bg-[#f5f8fa] text-[#004d66] font-semibold border-b">
-                                        <tr>
-                                            <th className="border px-2 py-2 sm:px-4 sm:py-3 bg-[#004d66] text-white sticky left-0">Month</th>
-                                            {platforms.map((p, i) => (
-                                                <th key={i} className="border px-2 py-2 sm:px-4 sm:py-3 bg-[#004d66] text-white whitespace-nowrap">
-                                                    {p}
-                                                </th>
-                                            ))}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {months.map((month, idx) => (
-                                            <tr key={idx} className="hover:bg-[#f9f9f9] transition duration-200">
-                                                <td className="border px-2 py-1 sm:px-4 sm:py-2 font-medium text-gray-800 sticky left-0 bg-white">{month}</td>
-                                                {platforms.map((_, i) => (
-                                                    <td key={i} className="border px-2 py-1 sm:px-4 sm:py-2 text-gray-700">0</td>
-                                                ))}
-                                            </tr>
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full text-center text-xs sm:text-sm text-gray-700">
+                                <thead className="bg-[#f5f8fa] text-[#004d66] font-semibold border-b">
+                                    <tr>
+                                        <th className="border px-2 sm:px-4 py-2 sm:py-3 bg-[#004d66] text-white sticky left-0 z-10 min-w-[80px]">Month</th>
+                                        {platforms.map((p, i) => (
+                                            <th key={i} className="border px-2 sm:px-4 py-2 sm:py-3 bg-[#004d66] text-white whitespace-nowrap min-w-[70px]">
+                                                {p}
+                                            </th>
                                         ))}
-                                        <tr className="bg-[#f5f8fa] font-bold">
-                                            <td className="border px-2 py-2 sm:px-4 sm:py-3 text-[#004d66] sticky left-0">Total</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {months.map((month, idx) => (
+                                        <tr key={idx} className="hover:bg-[#f9f9f9] transition duration-200">
+                                            <td className="border px-2 sm:px-4 py-2 font-medium text-gray-800 sticky left-0 bg-white z-10">{month}</td>
                                             {platforms.map((_, i) => (
-                                                <td key={i} className="border px-2 py-2 sm:px-4 sm:py-3 text-[#004d66]">0.00</td>
+                                                <td key={i} className="border px-2 sm:px-4 py-2 text-gray-700">0</td>
                                             ))}
                                         </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    ))}
+                                    <tr className="bg-[#f5f8fa] font-bold">
+                                        <td className="border px-2 sm:px-4 py-2 sm:py-3 text-[#004d66] sticky left-0 bg-[#f5f8fa] z-10">Total</td>
+                                        {platforms.map((_, i) => (
+                                            <td key={i} className="border px-2 sm:px-4 py-2 sm:py-3 text-[#004d66]">0.00</td>
+                                        ))}
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
                     {/* Charts Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                         {/* Line Chart */}
-                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
+                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
                             <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                                 2024 : Top 5 Months with Highest Royalty
                             </h2>
@@ -455,7 +475,7 @@ export default function EarningsTrends() {
                         </div>
 
                         {/* Bar Chart */}
-                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
+                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
                             <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                                 2024 : Top 5 Platforms with Highest Royalty
                             </h2>
@@ -466,19 +486,18 @@ export default function EarningsTrends() {
                     </div>
 
                     {/* Monthly Earnings Comparison */}
-                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mt-4 sm:mt-6">
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mb-6">
                         <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                             2024 : Monthly Earnings Comparison (₹)
                         </h2>
-                        <div className="w-full h-64 sm:h-96">
+                        <div className="w-full h-64 sm:h-80">
                             <Bar data={monthlyEarningsData} options={monthlyEarningsOptions} />
                         </div>
                     </div>
 
-                    {/* Second Row of Charts */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                         {/* Doughnut Chart */}
-                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
+                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
                             <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                                 Yearly Royality (Earnings) Overview
                             </h2>
@@ -487,8 +506,8 @@ export default function EarningsTrends() {
                             </div>
                         </div>
 
-                        {/* Polar Area Chart */}
-                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
+                        {/* Top 5 Months Bar Chart */}
+                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
                             <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                                 (All Years) Top 5 Months with Highest Earnings
                             </h2>
@@ -499,7 +518,7 @@ export default function EarningsTrends() {
                     </div>
 
                     {/* Platform-Wise Total Earnings */}
-                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mt-4 sm:mt-6">
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
                         <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-[#BB3E00]">
                             (All Years) Platform-Wise Total Earnings
                         </h2>
