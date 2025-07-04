@@ -100,19 +100,21 @@ export default function TakedownRequest() {
     ];
 
     return (
-         <div className="min-h-screen flex bg-gray-50 relative">
+         <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
       {isSidebarOpen && (
         <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
       )}
 
-      <div className="flex flex-col flex-1 transition-all duration-300 overflow-x-hidden">
-        <Navbar
-          toggleSidebar={toggleSidebar}
-          sidebarOpen={isSidebarOpen}
-          notifications={notifications}
-          unreadCount={unreadCount}
-          markAsRead={markAsRead}
-        />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <div className="sticky top-0 z-50">
+          <Navbar
+            toggleSidebar={toggleSidebar}
+            sidebarOpen={isSidebarOpen}
+            notifications={notifications}
+            unreadCount={unreadCount}
+            markAsRead={markAsRead}
+          />
+        </div>
 
         <main className="p-4 sm:p-6 lg:p-8 space-y-6">
           <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-gray-200">
