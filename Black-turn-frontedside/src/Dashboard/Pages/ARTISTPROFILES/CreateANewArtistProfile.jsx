@@ -254,8 +254,8 @@ export default function CreateANewArtistProfile() {
                             artist.status === 'Approved'
                               ? 'text-green-600 font-semibold'
                               : artist.status === 'Pending'
-                              ? 'text-yellow-600 font-semibold'
-                              : 'text-red-600 font-semibold'
+                                ? 'text-yellow-600 font-semibold'
+                                : 'text-red-600 font-semibold'
                           }>
                             {artist.status}
                           </span>
