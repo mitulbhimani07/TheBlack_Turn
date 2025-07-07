@@ -611,307 +611,273 @@ function YoutubeClaim() {
     return (
 
 
-        < div className="min-h-screen flex bg-gray-50 relative" >
-            <Sidebar
-                isOpen={isSidebarOpen}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-            />
+       <div className="min-h-screen flex flex-col md:flex-row bg-gray-50 relative">
+  {/* Sidebar */}
+  <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
 
-            <div className={`flex-1 flex flex-col min-h-screen`}>
-                <div className="sticky top-0 z-50">
-                    <Navbar
-                        toggleSidebar={toggleSidebar}
-                        sidebarOpen={isSidebarOpen}
-                        notifications={notifications}
-                        unreadCount={unreadCount}
-                        markAsRead={markAsRead}
-                    />
-                </div>
+  {/* Main Content Area */}
+  <div className="flex-1 flex flex-col min-h-screen">
+    {/* Navbar */}
+    <div className="sticky top-0 z-50">
+      <Navbar
+        toggleSidebar={toggleSidebar}
+        sidebarOpen={isSidebarOpen}
+        notifications={notifications}
+        unreadCount={unreadCount}
+        markAsRead={markAsRead}
+      />
+    </div>
 
-                {/* Main Content */}
-                <div className="flex-1 p-6 space-y-6">
-                    {/* Stats Cards */}
-
-                    {/* No Songs Delivered Section */}
-                    {showBanner && (
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 w-full max-w-4xl mx-auto">
-                            {/* Header Section */}
-                            <div className="p-4 sm:p-6 border-b border-gray-200">
-                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                    <div className="flex-1">
-                                        <h2 className="text-lg sm:text-xl font-semibold text-gray-900">No Songs Delivered</h2>
-                                        <p className="text-sm text-gray-600 mt-1">by You</p>
-                                    </div>
-                                    <button
-                                        onClick={() => console.log('Navigate to upload')}
-                                        className="bg-[#005f73] text-white px-4 py-2 rounded-lg hover:bg-[#007a8c] transition-colors flex items-center justify-center space-x-2 w-full sm:w-auto text-sm sm:text-base"
-                                    >
-                                        <Upload className="w-4 h-4" />
-                                        <span>Upload New Song</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* Content Section */}
-                            <div className="p-4 sm:p-6">
-                                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 mb-4">
-                                    <div className="flex flex-col sm:flex-row sm:items-start space-y-3 sm:space-y-0 sm:space-x-3">
-                                        <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 sm:mt-0.5" />
-                                        <div className="flex-1 min-w-0">
-                                            <p className="text-blue-800 font-medium text-sm sm:text-base">
-                                                None of your song has been Delivered yet.
-                                            </p>
-                                            <div className="text-blue-700 text-xs sm:text-sm mt-2 space-y-1">
-                                                <p>
-                                                    In case, you have uploaded the song. Click{' '}
-                                                    <button
-                                                        onClick={() => openModal('songStatus')}
-                                                        className="text-[#005f73] hover:underline font-medium break-words"
-                                                    >
-                                                        Check Song Status
-                                                    </button>
-                                                    .
-                                                </p>
-                                                <p>
-                                                    If the Song Status is Complete. Then please{' '}
-                                                    <button
-                                                        onClick={() => openModal('complaint')}
-                                                        className="text-[#005f73] hover:underline font-medium break-words"
-                                                    >
-                                                        Raise a Complaint
-                                                    </button>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <button
-                                            onClick={() => setShowBanner(false)}
-                                            className="text-blue-600 hover:text-blue-800 flex-shrink-0 self-start sm:self-auto"
-                                        >
-                                            <X className="w-5 h-5" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* YouTube Claim Requests Section */}
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-                        <div className="p-6 border-b border-gray-200">
-                            <div className="flex items-center justify-between mb-4">
-                                <div>
-                                    <h2 className="text-lg font-semibold text-gray-900">Recent YT Claim Release Requests</h2>
-                                    <p className="text-sm text-gray-600 mt-1">Submitted by you</p>
-                                </div>
-                                <div className="flex items-center space-x-3">
-                                    <div className="relative">
-                                        <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-                                        <input
-                                            type="text"
-                                            placeholder="Search claims..."
-                                            value={searchTerm}
-                                            onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-transparent"
-                                        />
-                                    </div>
-                                    <select
-                                        value={selectedFilter}
-                                        onChange={(e) => setSelectedFilter(e.target.value)}
-                                        className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-transparent"
-                                    >
-                                        <option value="all">All Status</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="approved">Approved</option>
-                                        <option value="rejected">Rejected</option>
-                                    </select>
-                                    <button
-                                        onClick={handleRefresh}
-                                        disabled={isRefreshing}
-                                        className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
-                                    >
-                                        <RefreshCw className={`w-4 h-4 text-gray-600 ${isRefreshing ? 'animate-spin' : ''}`} />
-                                    </button>
-                                    <button
-                                        onClick={handleExport}
-                                        className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-                                        title="Export to CSV"
-                                    >
-                                        <Download className="w-4 h-4 text-gray-600" />
-                                    </button>
-                                    <button
-                                        onClick={() => openModal('newClaim')}
-                                        className="bg-[#005f73] text-white px-4 py-2 rounded-lg hover:bg-[#007a8c] transition-colors flex items-center space-x-2"
-                                    >
-                                        <Plus className="w-4 h-4" />
-                                        <span>New Claim</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <thead className="bg-gray-50 border-b border-gray-200">
-                                    <tr>
-                                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-700">Date of Submission</th>
-                                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-700">URL</th>
-                                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-700">Selected Songs</th>
-                                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-700">Status</th>
-                                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-700">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200">
-                                    {paginatedRequests.length > 0 ? (
-                                        paginatedRequests.map((request) => (
-                                            <tr key={request.id} className="hover:bg-gray-50">
-                                                <td className="py-4 px-6 text-sm text-gray-900">{request.date}</td>
-                                                <td className="py-4 px-6 text-sm">
-                                                    <a href={request.url} target="_blank" rel="noopener noreferrer" className="text-[#005f73] hover:underline truncate block max-w-xs">
-                                                        {request.url}
-                                                    </a>
-                                                </td>
-                                                <td className="py-4 px-6 text-sm text-gray-900">
-                                                    <div className="space-y-1">
-                                                        {request.selectedSongs.map((song, index) => (
-                                                            <div key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
-                                                                {song}
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </td>
-                                                <td className="py-4 px-6 text-sm">
-                                                    {getStatusBadge(request.status)}
-                                                </td>
-                                                <td className="py-4 px-6 text-sm">
-                                                    <div className="flex items-center space-x-2">
-                                                        <button
-                                                            onClick={() => openModal('viewClaim', request)}
-                                                            className="text-[#005f73] hover:text-[#007a8c] text-sm font-medium flex items-center space-x-1"
-                                                        >
-                                                            <Eye className="w-4 h-4" />
-                                                            <span>View</span>
-                                                        </button>
-                                                        {request.status === 'pending' && (
-                                                            <button
-                                                                onClick={() => openModal('editClaim', request)}
-                                                                className="text-gray-500 hover:text-gray-700 text-sm font-medium flex items-center space-x-1"
-                                                            >
-                                                                <Edit className="w-4 h-4" />
-                                                                <span>Edit</span>
-                                                            </button>
-                                                        )}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    ) : (
-                                        <tr>
-                                            <td colSpan="5" className="py-12 text-center">
-                                                <div className="flex flex-col items-center space-y-3">
-                                                    <Clock className="w-12 h-12 text-gray-400" />
-                                                    <p className="text-gray-500 font-medium">
-                                                        {searchTerm || selectedFilter !== 'all'
-                                                            ? 'No matching claims found'
-                                                            : 'No YT Claim Release Requests found'
-                                                        }
-                                                    </p>
-                                                    <p className="text-gray-400 text-sm">
-                                                        {searchTerm || selectedFilter !== 'all'
-                                                            ? 'Try adjusting your search or filter criteria'
-                                                            : 'Submit your first claim request to get started'
-                                                        }
-                                                    </p>
-                                                    {!searchTerm && selectedFilter === 'all' && (
-                                                        <button
-                                                            onClick={() => openModal('newClaim')}
-                                                            className="bg-[#005f73] text-white px-6 py-2 rounded-lg hover:bg-[#007a8c] transition-colors mt-4"
-                                                        >
-                                                            Submit New Claim
-                                                        </button>
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {/* Pagination */}
-                        {filteredRequests.length > 0 && (
-                            <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
-                                <div className="flex items-center justify-between">
-                                    <p className="text-sm text-gray-700">
-                                        Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredRequests.length)} of {filteredRequests.length} requests
-                                    </p>
-                                    <div className="flex items-center space-x-2">
-                                        <button
-                                            onClick={() => handlePageChange(currentPage - 1)}
-                                            disabled={currentPage === 1}
-                                            className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                                        >
-                                            Previous
-                                        </button>
-                                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                                            <button
-                                                key={page}
-                                                onClick={() => handlePageChange(page)}
-                                                className={`px-3 py-1 rounded text-sm ${currentPage === page
-                                                    ? 'bg-[#005f73] text-white'
-                                                    : 'border border-gray-300 hover:bg-gray-100'
-                                                    }`}
-                                            >
-                                                {page}
-                                            </button>
-                                        ))}
-                                        <button
-                                            onClick={() => handlePageChange(currentPage + 1)}
-                                            disabled={currentPage === totalPages}
-                                            className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                                        >
-                                            Next
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
+    {/* Page Content */}
+    <div className="flex-1 p-4 sm:p-6 space-y-6">
+      {/* No Songs Delivered Banner */}
+      {showBanner && (
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 w-full ">
+          <div className="p-4 sm:p-6 border-b border-gray-200">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex-1">
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">No Songs Delivered</h2>
+                <p className="text-sm text-gray-600 mt-1">by You</p>
+              </div>
+              <button
+                onClick={() => console.log('Navigate to upload')}
+                className="bg-[#005f73] text-white px-4 py-2 rounded-lg hover:bg-[#007a8c] transition-colors flex items-center justify-center space-x-2 text-sm sm:text-base w-full sm:w-auto"
+              >
+                <Upload className="w-4 h-4" />
+                <span>Upload New Song</span>
+              </button>
             </div>
+          </div>
 
-            {/* All Modals */}
+          <div className="p-4 sm:p-6">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                <div className="flex-1">
+                  <p className="text-blue-800 font-medium text-sm sm:text-base">
+                    None of your song has been Delivered yet.
+                  </p>
+                  <div className="text-blue-700 text-xs sm:text-sm mt-2 space-y-1">
+                    <p>
+                      In case, you have uploaded the song. Click{' '}
+                      <button onClick={() => openModal('songStatus')} className="text-[#005f73] hover:underline font-medium">
+                        Check Song Status
+                      </button>.
+                    </p>
+                    <p>
+                      If the Song Status is Complete, then{' '}
+                      <button onClick={() => openModal('complaint')} className="text-[#005f73] hover:underline font-medium">
+                        Raise a Complaint
+                      </button>.
+                    </p>
+                  </div>
+                </div>
+                <button onClick={() => setShowBanner(false)} className="text-blue-600 hover:text-blue-800">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
-            <NewClaimModal
-                isOpen={modals.newClaim}
-                onClose={() => closeModal('newClaim')}
-                onSubmit={handleNewClaim}
-            />
+      {/* Claim Requests Table Section */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        {/* Header */}
+        <div className="p-4 sm:p-6 border-b border-gray-200">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">Recent YT Claim Release Requests</h2>
+              <p className="text-sm text-gray-600 mt-1">Submitted by you</p>
+            </div>
+            <div className="flex flex-wrap gap-2 items-center">
+              {/* Search */}
+              <div className="relative w-full sm:w-auto">
+                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Search claims..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full sm:w-auto focus:ring-2 focus:ring-[#005f73] focus:border-transparent"
+                />
+              </div>
 
-            <ViewClaimModal
-                isOpen={modals.viewClaim}
-                onClose={() => closeModal('viewClaim')}
-                claim={selectedClaim}
-            />
+              {/* Filter */}
+              <select
+                value={selectedFilter}
+                onChange={(e) => setSelectedFilter(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-transparent"
+              >
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
 
-            <EditClaimModal
-                isOpen={modals.editClaim}
-                onClose={() => closeModal('editClaim')}
-                claim={selectedClaim}
-                onUpdate={handleUpdateClaim}
-            />
+              {/* Buttons */}
+              <button
+                onClick={handleRefresh}
+                disabled={isRefreshing}
+                className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
+              >
+                <RefreshCw className={`w-4 h-4 text-gray-600 ${isRefreshing ? 'animate-spin' : ''}`} />
+              </button>
+              <button onClick={handleExport} className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                <Download className="w-4 h-4 text-gray-600" />
+              </button>
+              <button
+                onClick={() => openModal('newClaim')}
+                className="bg-[#005f73] text-white px-4 py-2 rounded-lg hover:bg-[#007a8c] flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>New Claim</span>
+              </button>
+            </div>
+          </div>
+        </div>
 
-            <SongStatusModal
-                isOpen={modals.songStatus}
-                onClose={() => closeModal('songStatus')}
-            />
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="text-left py-3 px-6 text-gray-700">Date of Submission</th>
+                <th className="text-left py-3 px-6 text-gray-700">URL</th>
+                <th className="text-left py-3 px-6 text-gray-700">Selected Songs</th>
+                <th className="text-left py-3 px-6 text-gray-700">Status</th>
+                <th className="text-left py-3 px-6 text-gray-700">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {paginatedRequests.length > 0 ? (
+                paginatedRequests.map((request) => (
+                  <tr key={request.id} className="hover:bg-gray-50">
+                    <td className="py-4 px-6 text-gray-900">{request.date}</td>
+                    <td className="py-4 px-6">
+                      <a
+                        href={request.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#005f73] hover:underline block max-w-xs truncate"
+                      >
+                        {request.url}
+                      </a>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="space-y-1">
+                        {request.selectedSongs.map((song, index) => (
+                          <div key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
+                            {song}
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">{getStatusBadge(request.status)}</td>
+                    <td className="py-4 px-6">
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          onClick={() => openModal('viewClaim', request)}
+                          className="text-[#005f73] hover:text-[#007a8c] flex items-center space-x-1"
+                        >
+                          <Eye className="w-4 h-4" />
+                          <span>View</span>
+                        </button>
+                        {request.status === 'pending' && (
+                          <button
+                            onClick={() => openModal('editClaim', request)}
+                            className="text-gray-500 hover:text-gray-700 flex items-center space-x-1"
+                          >
+                            <Edit className="w-4 h-4" />
+                            <span>Edit</span>
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="py-12 text-center">
+                    <div className="flex flex-col items-center space-y-3">
+                      <Clock className="w-12 h-12 text-gray-400" />
+                      <p className="text-gray-500 font-medium">
+                        {searchTerm || selectedFilter !== 'all'
+                          ? 'No matching claims found'
+                          : 'No YT Claim Release Requests found'}
+                      </p>
+                      <p className="text-gray-400 text-sm">
+                        {searchTerm || selectedFilter !== 'all'
+                          ? 'Try adjusting your search or filter criteria'
+                          : 'Submit your first claim request to get started'}
+                      </p>
+                      {!searchTerm && selectedFilter === 'all' && (
+                        <button
+                          onClick={() => openModal('newClaim')}
+                          className="bg-[#005f73] text-white px-6 py-2 rounded-lg hover:bg-[#007a8c] mt-4"
+                        >
+                          Submit New Claim
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
 
-            <ComplaintModal
-                isOpen={modals.complaint}
-                onClose={() => closeModal('complaint')}
-                onSubmit={handleComplaint}
-            />
-        </div >
+        {/* Pagination */}
+        {filteredRequests.length > 0 && (
+          <div className="px-4 py-4 border-t border-gray-200 bg-gray-50">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-sm text-gray-700 text-center sm:text-left">
+                Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredRequests.length)} of {filteredRequests.length} requests
+              </p>
+              <div className="flex flex-wrap gap-2 justify-center sm:justify-end">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`px-3 py-1 rounded ${
+                      currentPage === page
+                        ? 'bg-[#005f73] text-white'
+                        : 'border border-gray-300 hover:bg-gray-100'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    {/* All Modals */}
+    <NewClaimModal isOpen={modals.newClaim} onClose={() => closeModal('newClaim')} onSubmit={handleNewClaim} />
+    <ViewClaimModal isOpen={modals.viewClaim} onClose={() => closeModal('viewClaim')} claim={selectedClaim} />
+    <EditClaimModal isOpen={modals.editClaim} onClose={() => closeModal('editClaim')} claim={selectedClaim} onUpdate={handleUpdateClaim} />
+    <SongStatusModal isOpen={modals.songStatus} onClose={() => closeModal('songStatus')} />
+    <ComplaintModal isOpen={modals.complaint} onClose={() => closeModal('complaint')} onSubmit={handleComplaint} />
+  </div>
+</div>
+
     );
 }
 
