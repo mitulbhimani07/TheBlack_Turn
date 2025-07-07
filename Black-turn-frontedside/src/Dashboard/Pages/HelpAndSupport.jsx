@@ -7,7 +7,7 @@ function HelpAndSupport() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('help');
   const [openUploadFaqIndex, setOpenUploadFaqIndex] = useState(null);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);

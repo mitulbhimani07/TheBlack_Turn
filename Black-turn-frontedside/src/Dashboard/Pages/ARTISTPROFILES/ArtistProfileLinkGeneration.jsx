@@ -9,7 +9,7 @@ export default function ArtistProfileLinkGeneration() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('profile-link');
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const markAsRead = (id) => {
