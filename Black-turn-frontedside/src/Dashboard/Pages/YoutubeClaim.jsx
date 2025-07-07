@@ -635,49 +635,58 @@ function YoutubeClaim() {
 
                     {/* No Songs Delivered Section */}
                     {showBanner && (
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-                            <div className="p-6 border-b border-gray-200">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <h2 className="text-lg font-semibold text-gray-900">No Songs Delivered</h2>
+                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 w-full max-w-4xl mx-auto">
+                            {/* Header Section */}
+                            <div className="p-4 sm:p-6 border-b border-gray-200">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                    <div className="flex-1">
+                                        <h2 className="text-lg sm:text-xl font-semibold text-gray-900">No Songs Delivered</h2>
                                         <p className="text-sm text-gray-600 mt-1">by You</p>
                                     </div>
-                                    <Link to="/singleSongWithCT"
-
-                                        className="bg-[#005f73] text-white px-4 py-2 rounded-lg hover:bg-[#007a8c] transition-colors flex items-center space-x-2"
+                                    <button
+                                        onClick={() => console.log('Navigate to upload')}
+                                        className="bg-[#005f73] text-white px-4 py-2 rounded-lg hover:bg-[#007a8c] transition-colors flex items-center justify-center space-x-2 w-full sm:w-auto text-sm sm:text-base"
                                     >
                                         <Upload className="w-4 h-4" />
                                         <span>Upload New Song</span>
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
 
-                            <div className="p-6">
-                                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                                    <div className="flex items-start space-x-3">
-                                        <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
-                                        <div className="flex-1">
-                                            <p className="text-blue-800 font-medium">None of your song has been Delivered yet.</p>
-                                            <p className="text-blue-700 text-sm mt-1">
-                                                In case, you have uploaded the song. Click{' '}
-                                                <button
-                                                    onClick={() => openModal('songStatus')}
-                                                    className="text-[#005f73] hover:underline font-medium"
-                                                >
-                                                    Check Song Status
-                                                </button>
-                                                . If the Song Status is Complete. Then please{' '}
-                                                <button
-                                                    onClick={() => openModal('complaint')}
-                                                    className="text-[#005f73] hover:underline font-medium"
-                                                >
-                                                    Raise a Complaint
-                                                </button>
+                            {/* Content Section */}
+                            <div className="p-4 sm:p-6">
+                                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 mb-4">
+                                    <div className="flex flex-col sm:flex-row sm:items-start space-y-3 sm:space-y-0 sm:space-x-3">
+                                        <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 sm:mt-0.5" />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-blue-800 font-medium text-sm sm:text-base">
+                                                None of your song has been Delivered yet.
                                             </p>
+                                            <div className="text-blue-700 text-xs sm:text-sm mt-2 space-y-1">
+                                                <p>
+                                                    In case, you have uploaded the song. Click{' '}
+                                                    <button
+                                                        onClick={() => openModal('songStatus')}
+                                                        className="text-[#005f73] hover:underline font-medium break-words"
+                                                    >
+                                                        Check Song Status
+                                                    </button>
+                                                    .
+                                                </p>
+                                                <p>
+                                                    If the Song Status is Complete. Then please{' '}
+                                                    <button
+                                                        onClick={() => openModal('complaint')}
+                                                        className="text-[#005f73] hover:underline font-medium break-words"
+                                                    >
+                                                        Raise a Complaint
+                                                    </button>
+                                                </p>
+                                            </div>
                                         </div>
                                         <button
                                             onClick={() => setShowBanner(false)}
-                                            className="text-blue-600 hover:text-blue-800"
+                                            className="text-blue-600 hover:text-blue-800 flex-shrink-0 self-start sm:self-auto"
                                         >
                                             <X className="w-5 h-5" />
                                         </button>
@@ -849,8 +858,8 @@ function YoutubeClaim() {
                                                 key={page}
                                                 onClick={() => handlePageChange(page)}
                                                 className={`px-3 py-1 rounded text-sm ${currentPage === page
-                                                        ? 'bg-[#005f73] text-white'
-                                                        : 'border border-gray-300 hover:bg-gray-100'
+                                                    ? 'bg-[#005f73] text-white'
+                                                    : 'border border-gray-300 hover:bg-gray-100'
                                                     }`}
                                             >
                                                 {page}
