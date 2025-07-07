@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
 // Import routes
 app.use('/blogs', require('./routes/blog'));
 app.use('/user', require('./routes/userRoutes'));
-
+// ReleseNewAlbum
+app.use('/ReleseNewAlbum', require('./routes/ReleseNewAlbumRoute'))
 app.listen(port, (err) => {
     if (err) {
         console.error('Error starting server:', err);

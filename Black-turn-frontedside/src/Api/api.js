@@ -82,3 +82,13 @@ export const signin=async(payload)=>{
         throw error;
     }
 }
+export const CreateAlbum = async (payload) => {
+    try {
+        const response = await axios.post('http://localhost:3001/ReleseNewAlbum/create', payload);
+        console.log("album create----", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error in album create API:", error);
+        throw error;
+    }
+};
