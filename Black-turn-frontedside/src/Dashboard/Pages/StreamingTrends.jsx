@@ -2,26 +2,22 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './header-sidebar/Sidebar';
 import Navbar from './header-sidebar/Header';
 
-// Chart.js imports FIRST
+// Chart.js imports
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
-    BarElement, // ✅ Needed for Bar Chart
+    BarElement,
     Title,
     Tooltip,
     Legend,
+    ArcElement,
+    RadialLinearScale,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { Bar } from 'react-chartjs-2';
-import { Doughnut, PolarArea } from 'react-chartjs-2';
-import { ArcElement, RadialLinearScale } from 'chart.js';
+import { Line, Bar, Doughnut } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, RadialLinearScale);
-
-// ✅ Register all chart elements
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -30,7 +26,9 @@ ChartJS.register(
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    ArcElement,
+    RadialLinearScale
 );
 
 const platforms = [
@@ -44,7 +42,7 @@ const months = [
 ];
 const years = ['2024', '2023', '2022', '2021', '2020'];
 
-export default function StreamingTrends() {
+export default function EarningsTrends() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
@@ -63,14 +61,14 @@ export default function StreamingTrends() {
         const handleResize = () => {
             const mobile = window.innerWidth < 1024;
             setIsMobile(mobile);
-            setIsSidebarOpen(!mobile);
+            if (mobile) setIsSidebarOpen(false);
         };
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // 🎵 Line Chart: Top 5 Months
+    // Chart Data & Options (unchanged from your code)
     const lineChartData = {
         labels: months,
         datasets: [
@@ -83,72 +81,47 @@ export default function StreamingTrends() {
                 tension: 0.3,
                 pointRadius: 5,
                 pointBackgroundColor: '#BB3E00',
-
             },
         ],
     };
-
     const lineChartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top',
-                labels: {
-                    color: '#333',
-                },
-            },
-            title: {
-                display: false,
+                labels: { color: '#333' },
             },
         },
         scales: {
-            x: {
-                ticks: {
-                    color: '#333',
-                },
-            },
-            y: {
-                ticks: {
-                    color: '#333',
-                },
-            },
+            x: { ticks: { color: '#333', maxRotation: 45, minRotation: 0 } },
+            y: { ticks: { color: '#333' } },
         },
     };
-
-    // 🎵 Bar Chart: Top Platforms
     const topPlatformChartData = {
         labels: platforms,
         datasets: [
             {
                 label: 'Royalty Earnings (₹)',
-                data: [1200, 1100, 950, 880, 800, 900 ,736 ,56 ,673 ,94, 500, 450, 400],
+                data: [1200, 1100, 950, 880, 800, 900, 736, 56, 673, 94, 500, 450, 400],
                 backgroundColor: '#005d71',
                 borderRadius: 4,
                 barThickness: 10,
             },
         ],
     };
-
     const topPlatformChartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 display: true,
-                labels: {
-                    color: '#333',
-                    font: { size: 12 },
-                },
+                labels: { color: '#333', font: { size: 12 } },
             },
         },
         scales: {
-            x: {
-                ticks: { color: '#333' },
-                grid: { display: false },
-            },
-            y: {
-                ticks: { color: '#333' },
-                grid: { borderDash: [4] },
-            },
+            x: { ticks: { color: '#333', maxRotation: 45, minRotation: 0 }, grid: { display: false } },
+            y: { ticks: { color: '#333' }, grid: { borderDash: [4] } },
         },
     };
     const doughnutChartData = {
@@ -163,14 +136,10 @@ export default function StreamingTrends() {
             },
         ],
     };
-
     const doughnutChartOptions = {
         responsive: true,
-        plugins: {
-            legend: {
-                position: 'bottom',
-            },
-        },
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } },
     };
     const top5MonthsChartData = {
         labels: ['March', 'July', 'May', 'August', 'January'],
@@ -181,12 +150,11 @@ export default function StreamingTrends() {
                 backgroundColor: '#004d66',
                 hoverBackgroundColor: 'rgba(255, 99, 132, 9.2)',
                 borderRadius: 0,
-                barThickness: 80,
+                barThickness: 40,
             },
         ],
     };
     const monthlyEarningsLabels = months;
-
     const monthlyEarningsData = {
         labels: monthlyEarningsLabels,
         datasets: [
@@ -252,64 +220,32 @@ export default function StreamingTrends() {
             },
         ],
     };
-
     const monthlyEarningsOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top',
-                labels: {
-                    color: '#333',
-                },
+                labels: { color: '#333', usePointStyle: true, boxWidth: 12 },
             },
         },
         scales: {
-            x: {
-                ticks: {
-                    color: '#333',
-                },
-                grid: {
-                    display: false,
-                },
-            },
-            y: {
-                ticks: {
-                    color: '#333',
-                },
-                grid: {
-                    borderDash: [4],
-                },
-            },
+            x: { ticks: { color: '#333', maxRotation: 45, minRotation: 0 }, grid: { display: false } },
+            y: { ticks: { color: '#333' }, grid: { borderDash: [4] } },
         },
     };
-
     const top5MonthsChartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 display: true,
-                labels: {
-                    color: '#333',
-                },
+                labels: { color: '#333' },
             },
         },
         scales: {
-            x: {
-                ticks: {
-                    color: '#333',
-                },
-                grid: {
-                    display: false,
-                },
-            },
-            y: {
-                ticks: {
-                    color: '#333',
-                },
-                grid: {
-                    borderDash: [4],
-                },
-            },
+            x: { ticks: { color: '#333' }, grid: { display: false } },
+            y: { ticks: { color: '#333' }, grid: { borderDash: [4] } },
         },
     };
     const platformWiseTotalEarningsData = {
@@ -334,16 +270,16 @@ export default function StreamingTrends() {
                 backgroundColor: 'rgba(255, 99, 132, 0.4)',
                 borderColor: '#004d66',
                 borderWidth: 2,
-                type: 'line', // To get line style
+                type: 'line',
                 fill: true,
                 pointBackgroundColor: '#BB3E00',
                 pointRadius: 10,
             },
         ],
     };
-
     const platformWiseTotalEarningsOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top',
@@ -351,66 +287,78 @@ export default function StreamingTrends() {
             },
         },
         scales: {
-            x: {
-                ticks: { color: '#333' },
-            },
-            y: {
-                ticks: { color: '#333' },
-                beginAtZero: true,
-            },
+            x: { ticks: { color: '#333', maxRotation: 45, minRotation: 0 } },
+            y: { ticks: { color: '#333' }, beginAtZero: true },
         },
     };
 
-
     return (
-        <div className="min-h-screen flex bg-gray-50 relative">
-            {isSidebarOpen && (
-                // <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg lg:static lg:translate-x-0 transition-transform">
-                    <Sidebar isOpen={isSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
-                // </aside>
-            )}
-
-            <div className="flex flex-col flex-1 transition-all duration-300">
-                <Navbar
-                    toggleSidebar={toggleSidebar}
-                    sidebarOpen={isSidebarOpen}
-                    notifications={notifications}
-                    unreadCount={unreadCount}
-                    markAsRead={markAsRead}
+        <div className="min-h-screen flex flex-col lg:flex-row bg-gray-50 relative">
+            {/* Sidebar: hidden on mobile/tablet, visible on large screens */}
+            <div className=''>
+                <Sidebar
+                    isOpen={isSidebarOpen}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
                 />
+            </div>
 
-                <main className="p-6">
-                    <h1 className="text-3xl font-extrabold text-[#004d66] mb-6 tracking-tight">
+            <div className="flex-1 flex flex-col min-h-screen">
+                {/* Sticky Header */}
+                <div className="sticky top-0 z-50">
+                    <Navbar
+                        toggleSidebar={toggleSidebar}
+                        sidebarOpen={isSidebarOpen}
+                        notifications={notifications}
+                        unreadCount={unreadCount}
+                        markAsRead={markAsRead}
+                    />
+                </div>
+
+                <main className="flex-1 p-2 sm:p-4 md:p-6 overflow-y-auto">
+                    <h1 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-[#004d66] mb-4 sm:mb-6 tracking-tight">
                         Earning Trends & Analytics
                     </h1>
 
                     {/* Royalty Table */}
-                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                        <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-2 sm:p-4 md:p-6 mb-4 sm:mb-6">
+                        <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-4 md:mb-6 text-[#BB3E00]">
                             Song Earning (Royalty) Reports
                         </h2>
 
-                        <div className="mb-6">
-                            <label className="font-medium text-gray-700 mr-2 text-base">Year:</label>
-                            <select
-                                value={selectedYear}
-                                onChange={(e) => setSelectedYear(e.target.value)}
-                                className="border border-gray-300 rounded-lg px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004d66]"
-                            >
-                                <option>2024</option>
-                                <option>2023</option>
-                                <option>2022</option>
-                            </select>
-                            <button className='bg-[#004d66] p-2 rounded-xl mx-3 text-white hover:bg-[#000006]'>Click to View</button>  
-                        </div>
+                        <div className="mb-2 sm:mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+  <label className="font-medium text-gray-700 text-xs sm:text-sm md:text-base">
+    Year:
+  </label>
 
-                        <div className="overflow-auto rounded-lg border border-gray-200">
-                            <table className="min-w-full text-center text-sm text-gray-700">
+  <select
+    value={selectedYear}
+    onChange={(e) => setSelectedYear(e.target.value)}
+    className="border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004d66] w-full sm:w-auto"
+  >
+    {years.map((year) => (
+      <option key={year}>{year}</option>
+    ))}
+  </select>
+
+  <button className="bg-[#004d66] px-4 py-2 rounded-xl text-white hover:bg-[#000006] w-full sm:w-auto">
+    Click to View
+  </button>
+</div>
+
+
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full text-center text-[10px] sm:text-xs md:text-sm text-gray-700">
                                 <thead className="bg-[#f5f8fa] text-[#004d66] font-semibold border-b">
                                     <tr>
-                                        <th className="border px-4 py-3 bg-[#004d66] text-white">Month</th>
+                                        <th className="border px-1 sm:px-2 md:px-4 py-1 sm:py-2 md:py-3 bg-[#004d66] text-white sticky left-0 z-10 min-w-[60px] sm:min-w-[80px]">
+                                            Month
+                                        </th>
                                         {platforms.map((p, i) => (
-                                            <th key={i} className="border px-4 py-3 bg-[#004d66] text-white whitespace-nowrap">
+                                            <th
+                                                key={i}
+                                                className="border px-1 sm:px-2 md:px-4 py-1 sm:py-2 md:py-3 bg-[#004d66] text-white whitespace-nowrap min-w-[50px] sm:min-w-[70px]"
+                                            >
                                                 {p}
                                             </th>
                                         ))}
@@ -419,16 +367,27 @@ export default function StreamingTrends() {
                                 <tbody>
                                     {months.map((month, idx) => (
                                         <tr key={idx} className="hover:bg-[#f9f9f9] transition duration-200">
-                                            <td className="border px-4 py-2 font-medium text-gray-800">{month}</td>
+                                            <td className="border px-1 sm:px-2 md:px-4 py-1 font-medium text-gray-800 sticky left-0 bg-white z-10">
+                                                {month}
+                                            </td>
                                             {platforms.map((_, i) => (
-                                                <td key={i} className="border px-4 py-2 text-gray-700">0</td>
+                                                <td key={i} className="border px-1 sm:px-2 md:px-4 py-1 text-gray-700">
+                                                    0
+                                                </td>
                                             ))}
                                         </tr>
                                     ))}
                                     <tr className="bg-[#f5f8fa] font-bold">
-                                        <td className="border px-4 py-3 text-[#004d66]">Total</td>
+                                        <td className="border px-1 sm:px-2 md:px-4 py-1 sm:py-2 md:py-3 text-[#004d66] sticky left-0 bg-[#f5f8fa] z-10">
+                                            Total
+                                        </td>
                                         {platforms.map((_, i) => (
-                                            <td key={i} className="border px-4 py-3 text-[#004d66]">0.00</td>
+                                            <td
+                                                key={i}
+                                                className="border px-1 sm:px-2 md:px-4 py-1 sm:py-2 md:py-3 text-[#004d66]"
+                                            >
+                                                0.00
+                                            </td>
                                         ))}
                                     </tr>
                                 </tbody>
@@ -436,69 +395,70 @@ export default function StreamingTrends() {
                         </div>
                     </div>
 
-                    {/* Charts */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
+                    {/* Charts Grid */}
+                    <div className="grid grid-cols-1 gap-4 sm:gap-6 mb-4 sm:mb-6 lg:grid-cols-2">
                         {/* Line Chart */}
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                            <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-2 sm:p-4 md:p-6">
+                            <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-4 md:mb-6 text-[#BB3E00]">
                                 2024 : Top 5 Months with Highest Royalty
                             </h2>
-                            <div className="w-full">
+                            <div className="w-full h-48 sm:h-64 md:h-80">
                                 <Line data={lineChartData} options={lineChartOptions} />
                             </div>
                         </div>
 
                         {/* Bar Chart */}
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                            <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-2 sm:p-4 md:p-6">
+                            <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-4 md:mb-6 text-[#BB3E00]">
                                 2024 : Top 5 Platforms with Highest Royalty
                             </h2>
-                            <div className="w-full">
+                            <div className="w-full h-48 sm:h-64 md:h-80">
                                 <Bar data={topPlatformChartData} options={topPlatformChartOptions} />
                             </div>
                         </div>
                     </div>
-                    {/* 🆕 New Chart Card: Monthly Earnings Comparison */}
-                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                        <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+
+                    {/* Monthly Earnings Comparison */}
+                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-2 sm:p-4 md:p-6 mb-4 sm:mb-6">
+                        <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-4 md:mb-6 text-[#BB3E00]">
                             2024 : Monthly Earnings Comparison (₹)
                         </h2>
-                        <div className="w-full">
+                        <div className="w-full h-48 sm:h-64 md:h-80">
                             <Bar data={monthlyEarningsData} options={monthlyEarningsOptions} />
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
+                    <div className="grid grid-cols-1 gap-4 sm:gap-6 mb-4 sm:mb-6 lg:grid-cols-2">
                         {/* Doughnut Chart */}
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                            <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-2 sm:p-4 md:p-6">
+                            <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-4 md:mb-6 text-[#BB3E00]">
                                 Yearly Royality (Earnings) Overview
                             </h2>
-                            <div className="w-full">
+                            <div className="w-full h-48 sm:h-64 md:h-80">
                                 <Doughnut data={doughnutChartData} options={doughnutChartOptions} />
                             </div>
                         </div>
 
-                        {/* Polar Area Chart */}
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                            <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+                        {/* Top 5 Months Bar Chart */}
+                        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-2 sm:p-4 md:p-6">
+                            <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-4 md:mb-6 text-[#BB3E00]">
                                 (All Years) Top 5 Months with Highest Earnings
                             </h2>
-                            <div className="w-full">
+                            <div className="w-full h-48 sm:h-64 md:h-80">
                                 <Bar data={top5MonthsChartData} options={top5MonthsChartOptions} />
                             </div>
                         </div>
                     </div>
-                    {/* (All Years) Platform-Wise Total Earnings */}
-                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mt-8">
-                        <h2 className="text-xl font-semibold mb-6 text-[#BB3E00]">
+
+                    {/* Platform-Wise Total Earnings */}
+                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-2 sm:p-4 md:p-6">
+                        <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-4 md:mb-6 text-[#BB3E00]">
                             (All Years) Platform-Wise Total Earnings
                         </h2>
-                        <div className="w-full">
+                        <div className="w-full h-48 sm:h-64 md:h-80">
                             <Bar data={platformWiseTotalEarningsData} options={platformWiseTotalEarningsOptions} />
                         </div>
                     </div>
-
                 </main>
             </div>
         </div>
