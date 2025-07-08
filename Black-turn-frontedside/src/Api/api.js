@@ -92,3 +92,18 @@ export const CreateAlbum = async (payload) => {
         throw error;
     }
 };
+
+export const CreateNOC=async(payload)=>{
+    try{
+        const response=await axios.post('http://localhost:3001/NOC/create',payload,{
+            headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        console.log("NOC from",response.data)
+        return response.data;
+    }catch(error){
+         console.error("Error in Noc create API:", error);
+        throw error;
+    }
+}

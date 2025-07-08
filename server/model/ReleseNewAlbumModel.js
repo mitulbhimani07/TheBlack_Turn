@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 const SongSchema = new mongoose.Schema({
-  songName: { type: String, required: true },
-  releaseDate: { type: Date, required: true },
-  audioFile: { type: String, required: true }, // file path or URL
-  singers: { type: String, required: true },
-  composers: { type: String, required: true },
-  lyricists: { type: String, required: true },
-  language: { type: String, required: true },
-  genre: { type: String, required: true },
-  subgenre: { type: String, required: true },
-  explicitContent: { type: String, required: true },
-  contentId: { type: String, required: true },
+  songName: { type: String },
+  releaseDate: { type: Date},
+  audioFile: { type: String }, // file path or URL
+  singers: { type: String },
+  composers: { type: String},
+  lyricists: { type: String },
+  language: { type: String },
+  genre: { type: String },
+  subgenre: { type: String },
+  explicitContent: { type: String },
+  contentId: { type: String },
   callerTuneStart: { type: String },
   spotifyArtistIds: { type: String },
   appleArtistIds: { type: String },
@@ -28,17 +28,15 @@ const SongSchema = new mongoose.Schema({
   harmonicaPlayer: { type: String },
   facebookArtistId: { type: String },
   composerFacebookId: { type: String },
-  lyricistFacebookId: { type: String }
-});
-
-const AlbumSchema = new mongoose.Schema({
-  albumName: { type: String, required: true },
-  albumArtwork: { type: String, required: true }, // file path or URL
+  lyricistFacebookId: { type: String },
+  albumName: { type: String },
+  albumArtwork: { type: String }, // file path or URL
   couponCode: { type: String },
-  songs: [SongSchema],
-  price: { type: Number, default: 1999 },
+   price: { type: Number, default: 1999 },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('ReleaseNewAlbum', AlbumSchema);
+
+
+module.exports = mongoose.model('ReleaseNewAlbum', SongSchema);
