@@ -3,7 +3,7 @@ const Album = require('../model/ReleseNewAlbumModel');
 // Create a new album
 module.exports.createAlbum = async (req, res) => {
   try {
-    const album = new Album(req.body);
+    const album = await Album.create(req.body);
     console.log(req.body);
     await album.save();
     res.status(201).json({ message: 'Album created successfully', data: album });
