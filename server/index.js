@@ -10,6 +10,8 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 const cors = require('cors');
 app.use(cors());
+app.use("/upload", express.static("upload"));
+
 
 // Database connection
 const mongoose = require('mongoose');
@@ -30,7 +32,7 @@ app.use('/user', require('./routes/userRoutes'));
 app.use('/ReleseNewAlbum', require('./routes/ReleseNewAlbumRoute'));
 app.use('/NOC', require('./routes/Noc'));
 // singlesongwithct
-app.use("/singlesongCT",)
+app.use("/singlesongCT",require("./routes/singleSongCTRoutes"))
 app.listen(port, (err) => {
     if (err) {
         console.error('Error starting server:', err);
