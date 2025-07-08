@@ -13,9 +13,9 @@ app.use(cors());
 
 // Database connection
 const mongoose = require('mongoose');
-    mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res)=>{
-        console.log('Database connected successfully');  
-    })
+mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res) => {
+    console.log('Database connected successfully');
+})
     .catch((err) => {
         console.log('Error connecting to the database:', err);
     });
@@ -28,6 +28,8 @@ app.use('/blogs', require('./routes/blog'));
 app.use('/user', require('./routes/userRoutes'));
 // ReleseNewAlbum
 app.use('/ReleseNewAlbum', require('./routes/ReleseNewAlbumRoute'))
+// singlesongwithct
+app.use("/singlesongCT",)
 app.listen(port, (err) => {
     if (err) {
         console.error('Error starting server:', err);
