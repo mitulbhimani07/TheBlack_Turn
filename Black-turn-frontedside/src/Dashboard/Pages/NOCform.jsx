@@ -23,73 +23,72 @@ const NOCForm = () => {
     });
     // Add these to your existing state and functions
 const [isDrawing, setIsDrawing] = useState(false);
-const canvasRef = useRef(null);
-const ctxRef = useRef(null);
+  const canvasRef = useRef(null);
+  const ctxRef = useRef(null);
 
-// Initialize canvas context on component mount
-useEffect(() => {
-  const canvas = canvasRef.current;
-  const ctx = canvas.getContext('2d');
-  ctx.lineCap = 'round';
-  ctx.strokeStyle = '#005f73';
-  ctx.lineWidth = 2;
-  ctxRef.current = ctx;
-}, []);
+  // Resize & Scale Canvas on Mount
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
 
-const startDrawing = (e) => {
-  setIsDrawing(true);
-  const { offsetX, offsetY } = getCoordinates(e);
-  ctxRef.current.beginPath();
-  ctxRef.current.moveTo(offsetX, offsetY);
-};
+    // Set display size
+    const width = canvas.offsetWidth;
+    const height = canvas.offsetHeight;
 
-const draw = (e) => {
-  if (!isDrawing) return;
-  const { offsetX, offsetY } = getCoordinates(e);
-  ctxRef.current.lineTo(offsetX, offsetY);
-  ctxRef.current.stroke();
-};
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
 
-const stopDrawing = () => {
-  ctxRef.current.closePath();
-  setIsDrawing(false);
-};
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#005f73';
+    ctx.lineWidth = 2;
 
-const clearSignature = () => {
-  const canvas = canvasRef.current;
-  const ctx = ctxRef.current;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-};
+    ctxRef.current = ctx;
+  }, []);
 
-// Helper function to get coordinates for both mouse and touch events
-const getCoordinates = (e) => {
-  const canvas = canvasRef.current;
-  const rect = canvas.getBoundingClientRect();
-  
-  if (e.touches) {
-    return {
-      offsetX: e.touches[0].clientX - rect.left,
-      offsetY: e.touches[0].clientY - rect.top
-    };
-  } else {
-    return {
-      offsetX: e.nativeEvent.offsetX || e.clientX - rect.left,
-      offsetY: e.nativeEvent.offsetY || e.clientY - rect.top
-    };
-  }
-};
+  const getCoordinates = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
 
-// Touch event handlers
-const handleTouchStart = (e) => {
-  e.preventDefault();
-  startDrawing(e);
-};
+    if (e.touches) {
+      return {
+        offsetX: e.touches[0].clientX - rect.left,
+        offsetY: e.touches[0].clientY - rect.top,
+      };
+    } else {
+      return {
+        offsetX: e.clientX - rect.left,
+        offsetY: e.clientY - rect.top,
+      };
+    }
+  };
 
-const handleTouchMove = (e) => {
-  e.preventDefault();
-  draw(e);
-};
+  const startDrawing = (e) => {
+    e.preventDefault();
+    const { offsetX, offsetY } = getCoordinates(e);
+    ctxRef.current.beginPath();
+    ctxRef.current.moveTo(offsetX, offsetY);
+    setIsDrawing(true);
+  };
 
+  const draw = (e) => {
+    if (!isDrawing) return;
+    const { offsetX, offsetY } = getCoordinates(e);
+    ctxRef.current.lineTo(offsetX, offsetY);
+    ctxRef.current.stroke();
+  };
+
+  const stopDrawing = () => {
+    ctxRef.current.closePath();
+    setIsDrawing(false);
+  };
+
+  const clearSignature = () => {
+    const canvas = canvasRef.current;
+    const ctx = ctxRef.current;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
     const [files, setFiles] = useState({
         panCard: null,
         aadhaarFront: null,
@@ -375,40 +374,40 @@ const handleTouchMove = (e) => {
                                 </div>
 
                                 {/* Signature */}
-                                <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#005f73] relative overflow-hidden">
-  <div className="flex items-center gap-3 mb-6">
-    <Edit3 className="w-6 h-6 text-[#005f73]" />
-    <h2 className="text-xl font-semibold text-[#005f73]">Digital Signature</h2>
-  </div>
+                        <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#005f73] relative overflow-hidden">
+      <div className="flex items-center gap-3 mb-6">
+        <Edit3 className="w-6 h-6 text-[#005f73]" />
+        <h2 className="text-xl font-semibold text-[#005f73]">Digital Signature</h2>
+      </div>
 
-  <div className="space-y-4">
-    <label className="block text-sm font-medium text-gray-700">
-      Signature (Tap or Hold Cursor to Sign)
-    </label>
-    <div className="border-2 border-[#005f73]/30 rounded-lg p-4 bg-gray-50">
-      <canvas
-        ref={canvasRef}
-        width={600}
-        height={200}
-        className="w-full h-48 border-2 border-dashed border-[#005f73]/20 rounded bg-white cursor-crosshair touch-none"
-        onMouseDown={startDrawing}
-        onMouseMove={draw}
-        onMouseUp={stopDrawing}
-        onMouseLeave={stopDrawing}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={stopDrawing}
-      />
-      <button
-        type="button"
-        onClick={clearSignature}
-        className="mt-3 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
-      >
-        Clear Signature
-      </button>
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-gray-700">
+          Signature (Tap or Hold Cursor to Sign)
+        </label>
+        <div className="border-2 border-[#005f73]/30 rounded-lg p-4 bg-gray-50">
+          <div className="relative w-full h-48">
+            <canvas
+              ref={canvasRef}
+              className="w-full h-full border-2 border-dashed border-[#005f73]/20 rounded bg-white cursor-crosshair touch-none"
+              onMouseDown={startDrawing}
+              onMouseMove={draw}
+              onMouseUp={stopDrawing}
+              onMouseLeave={stopDrawing}
+              onTouchStart={startDrawing}
+              onTouchMove={draw}
+              onTouchEnd={stopDrawing}
+            />
+          </div>
+          <button
+            type="button"
+            onClick={clearSignature}
+            className="mt-3 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
+          >
+            Clear Signature
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
                                 {/* Submit Button */}
                                 <div className="text-center">
