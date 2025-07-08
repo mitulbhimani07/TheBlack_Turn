@@ -29,13 +29,15 @@ module.exports.createNoc = async (req, res) => {
         const AadharCardFront = normalizePath(files['AadharCardFront']?.[0]);
         const AadharCardBack = normalizePath(files['AadharCardBack']?.[0]);
         const cancelledPassbook = normalizePath(files['cancelledPassbook']?.[0]);
+        const Signature = normalizePath(files['Signature']?.[0]);
 
         const nocData = {
             ...body,
             PANCardphoto,
             AadharCardFront,
             AadharCardBack,
-            cancelledPassbook
+            cancelledPassbook,
+            Signature
         };
 
         const data = await NOCModel.create(nocData);

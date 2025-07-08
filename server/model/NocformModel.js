@@ -25,6 +25,12 @@ const NOCForm=new mongoose.Schema({
     IFSCcode:{
         type:String
     },
+    PANCardNo:{
+        type:String
+    },
+    AadhaarCardNo:{
+        type:String
+    },
     PANCardphoto:{
         type:String
     },
