@@ -109,42 +109,48 @@ export default function ReleaseNewAlbum() {
     };
 
     // Form Submit Handler
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true); setError(''); setSuccess('');
-        try {
-            const formData = new FormData();
-            formData.append('albumName', albumName);
-            formData.append('albumArtwork', albumArtwork);
-            formData.append('couponCode', couponCode);
-            formData.append('price', price);
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess('');
 
-            // Songs: files and metadata
-            const songsMeta = songs.map((song, idx) => {
-                if (song.audioFile) {
-                    formData.append(`songs[${idx}][audioFile]`, song.audioFile);
+    try {
+        const formData = new FormData();
+        formData.append('albumName', albumName);
+        formData.append('albumArtwork', albumArtwork);
+        formData.append('couponCode', couponCode);
+        formData.append('price', price);
+
+        // Add all song data directly
+        songs.forEach((song, idx) => {
+            Object.entries(song).forEach(([key, value]) => {
+                if (key === 'audioFile' && value) {
+                    formData.append(`songs[${idx}][${key}]`, value);
+                } else {
+                    formData.append(`songs[${idx}][${key}]`, value || '');
                 }
-                // Return all other fields except audioFile
-                const { audioFile, ...rest } = song;
-                return rest;
             });
-            formData.append('songs', JSON.stringify(songsMeta));
+        });
 
-            // API call
-            const response = await CreateAlbum(formData);
-            if (response && (response.success || response.message?.toLowerCase().includes('success'))) {
-                setSuccess('Album created successfully!');
-                setAlbumName(''); setAlbumArtwork(null); setCouponCode('');
-                setSongs([getEmptySong()]);
-            } else {
-                setError(response?.message || 'Album creation failed.');
-            }
-        } catch (err) {
-            setError('Error creating album.');
-        } finally {
-            setLoading(false);
+        // API call
+        const response = await CreateAlbum(formData);
+        if (response && (response.success || response.message?.toLowerCase().includes('success'))) {
+            setSuccess('Album created successfully!');
+            setAlbumName('');
+            setAlbumArtwork(null);
+            setCouponCode('');
+            setSongs([getEmptySong()]);
+        } else {
+            setError(response?.message || 'Album creation failed.');
         }
-    };
+    } catch (err) {
+        setError('Error creating album.');
+    } finally {
+        setLoading(false);
+    }
+};
+
 
     return (
         <div className="min-h-screen flex bg-gray-50 relative">
@@ -161,7 +167,7 @@ export default function ReleaseNewAlbum() {
                 />
                 <main className="p-6">
                     <form
-                        className="space-y-4 bg-white shadow-md rounded-lg p-6 rounded-xl shadow-xl p-8 border-t-4 border-[#005f73]"
+                        className="space-y-4 bg-white rounded-xl shadow-xl p-8 border-t-4 border-[#005f73]"
                         onSubmit={handleSubmit}
                         encType="multipart/form-data"
                     >
@@ -236,6 +242,7 @@ export default function ReleaseNewAlbum() {
                                         className="block w-full text-sm border border-gray-300 rounded  px-4 py-2"
                                         onChange={handleAlbumArtwork}
                                         required
+                                        name='albumArtwork'
                                     />
                                     <p className="text-xs text-gray-500 mt-1">Size must be 3000x3000px (.jpg or .png only)</p>
                                 </div>
@@ -276,7 +283,7 @@ export default function ReleaseNewAlbum() {
                                             accept=".mp3,.wav"
                                             className="block w-full text-sm border px-4 py-2 border-gray-300 rounded"
                                             onChange={e => handleSongFileChange(idx, e.target.files[0])}
-                                            required
+                                            
                                         />
                                         <p className="text-xs text-gray-500 mt-1">Max size 2GB (.mp3, .wav only)</p>
                                     </div>

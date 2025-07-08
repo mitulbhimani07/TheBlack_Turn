@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Upload, X, Edit3, FileText, User, CreditCard, Building, Smartphone, Mail, Hash } from 'lucide-react';
 import Navbar from '../Pages/header-sidebar/Header';
 import Sidebar from '../Pages/header-sidebar/Sidebar';
+import axios from 'axios';
+import { CreateNOC } from '../../Api/api';
+import toast from 'react-hot-toast';
 
 const NOCForm = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -10,16 +13,16 @@ const NOCForm = () => {
     const [activeTab, setActiveTab] = useState('noc-form');
     const [isMobile, setIsMobile] = useState(false);
     const [formData, setFormData] = useState({
-        fullName: '',
+        fullname: '',
+        labelname:'',
         email: '',
-        mobile: '',
-        labelName: '',
-        bankAccountHolderName: '',
-        panCardNumber: '',
-        aadhaarNumber: '',
+        phoneno: '',
+        accountholdername: '',
         bankName: '',
-        ifscCode: '',
-        bankAccountNumber: ''
+        accountNo: '',
+        IFSCcode: '',
+        PANCardNo: '',
+        AadhaarCardNo: ''
     });
     // Add these to your existing state and functions
 const [isDrawing, setIsDrawing] = useState(false);
@@ -90,11 +93,11 @@ const [isDrawing, setIsDrawing] = useState(false);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
     const [files, setFiles] = useState({
-        panCard: null,
-        aadhaarFront: null,
-        aadhaarBack: null,
-        cancelledCheque: null,
-        signature: null
+        PANCardphoto: null,
+        AadharCardFront: null,
+        AadharCardBack: null,
+        cancelledPassbook: null,
+        Signature: null
     });
 
     const [lastPos, setLastPos] = useState({ x: 0, y: 0 });
@@ -119,9 +122,50 @@ const [isDrawing, setIsDrawing] = useState(false);
 
     
     
-    const handleSubmit = () => {
-        alert('NOC Form submitted successfully!');
-    };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const form = new FormData();
+
+    // Text Fields
+    Object.entries(formData).forEach(([key, value]) => {
+      form.append(key, value);
+    });
+
+    // File uploads
+    if (files.PANCardphoto) form.append('PANCardphoto', files.PANCardphoto);
+    if (files.AadharCardFront) form.append('AadharCardFront', files.AadharCardFront);
+    if (files.AadharCardBack) form.append('AadharCardBack', files.AadharCardBack);
+    if (files.cancelledPassbook) form.append('cancelledPassbook', files.cancelledPassbook);
+
+    // Convert signature canvas to Blob
+    const canvas = canvasRef.current;
+    canvas.toBlob(async (blob) => {
+      if (blob) {
+        form.append('Signature', blob, 'signature.png');
+
+        // 🔗 Call external API function
+        try {
+          const res = await CreateNOC(form);
+        //   alert('NOC submitted successfully!');
+          toast.success('NOC submitted successfully')
+          console.log(res);
+        } catch (apiErr) {
+        //   alert('Failed to submit NOC form.');
+        toast.error('Failed to submit NOC form.')
+        }
+      } else {
+        // alert('Signature is missing or invalid.');
+        toast.error('Signature is missing or invalid.')
+      }
+    }, 'image/png');
+  } catch (err) {
+    console.error('Error preparing form:', err);
+    // alert('Error while preparing form');
+    toast.error('Error while preparing form.')
+  }
+};
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const markAsRead = (id) => {
@@ -171,8 +215,9 @@ const [isDrawing, setIsDrawing] = useState(false);
                                     </div>
                                 </div>
                             </div>
+                            <form action="" onSubmit={handleSubmit}>
 
-                            <div onSubmit={handleSubmit} className="space-y-8">
+                            <div  className="space-y-8">
                                 {/* Personal Information */}
                                 <div className="bg-white rounded-xl shadow-xl p-8 border-t-4 border-[#005f73] relative overflow-hidden">
                                     <div className="flex items-center gap-3 mb-6">
@@ -185,8 +230,8 @@ const [isDrawing, setIsDrawing] = useState(false);
                                             <label className="block text-sm font-medium text-gray-700">Full Name</label>
                                             <input
                                                 type="text"
-                                                name="fullName"
-                                                value={formData.fullName}
+                                                name="fullname"
+                                                value={formData.fullname}
                                                 onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#005f73] focus:outline-none transition-colors bg-gray-50 focus:bg-white"
                                                 placeholder="Enter your full name"
@@ -197,8 +242,8 @@ const [isDrawing, setIsDrawing] = useState(false);
                                             <label className="block text-sm font-medium text-gray-700">Label Name</label>
                                             <input
                                                 type="text"
-                                                name="labelName"
-                                                value={formData.labelName}
+                                                name="labelname"
+                                                value={formData.labelname}
                                                 onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#005f73] focus:outline-none transition-colors bg-gray-50 focus:bg-white"
                                                 placeholder="Enter label name"
@@ -227,8 +272,8 @@ const [isDrawing, setIsDrawing] = useState(false);
                                             </label>
                                             <input
                                                 type="tel"
-                                                name="mobile"
-                                                value={formData.mobile}
+                                                name="phoneno"
+                                                value={formData.phoneno}
                                                 onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#005f73] focus:outline-none transition-colors bg-gray-50 focus:bg-white"
                                                 placeholder="Enter mobile number"
@@ -249,8 +294,8 @@ const [isDrawing, setIsDrawing] = useState(false);
                                             <label className="block text-sm font-medium text-gray-700">Bank Account Holder Name</label>
                                             <input
                                                 type="text"
-                                                name="bankAccountHolderName"
-                                                value={formData.bankAccountHolderName}
+                                                name="accountholdername"
+                                                value={formData.accountholdername}
                                                 onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#005f73] focus:outline-none transition-colors bg-gray-50 focus:bg-white"
                                                 placeholder="Account holder name"
@@ -276,8 +321,8 @@ const [isDrawing, setIsDrawing] = useState(false);
                                             </label>
                                             <input
                                                 type="text"
-                                                name="bankAccountNumber"
-                                                value={formData.bankAccountNumber}
+                                                name="accountNo"
+                                                value={formData.accountNo}
                                                 onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#005f73] focus:outline-none transition-colors bg-gray-50 focus:bg-white"
                                                 placeholder="Enter account number"
@@ -288,8 +333,8 @@ const [isDrawing, setIsDrawing] = useState(false);
                                             <label className="block text-sm font-medium text-gray-700">IFSC Code</label>
                                             <input
                                                 type="text"
-                                                name="ifscCode"
-                                                value={formData.ifscCode}
+                                                name="IFSCcode"
+                                                value={formData.IFSCcode}
                                                 onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#005f73] focus:outline-none transition-colors bg-gray-50 focus:bg-white"
                                                 placeholder="Enter IFSC code"
@@ -310,8 +355,8 @@ const [isDrawing, setIsDrawing] = useState(false);
                                             <label className="block text-sm font-medium text-gray-700">PAN Card Number</label>
                                             <input
                                                 type="text"
-                                                name="panCardNumber"
-                                                value={formData.panCardNumber}
+                                                name="PANCardNo"
+                                                value={formData.PANCardNo}
                                                 onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#005f73] focus:outline-none transition-colors bg-gray-50 focus:bg-white"
                                                 placeholder="Enter PAN number"
@@ -322,8 +367,8 @@ const [isDrawing, setIsDrawing] = useState(false);
                                             <label className="block text-sm font-medium text-gray-700">Aadhaar Card / Driving License Number</label>
                                             <input
                                                 type="text"
-                                                name="aadhaarNumber"
-                                                value={formData.aadhaarNumber}
+                                                name="AadhaarCardNo"
+                                                value={formData.AadhaarCardNo}
                                                 onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#005f73] focus:outline-none transition-colors bg-gray-50 focus:bg-white"
                                                 placeholder="Enter Aadhaar/DL number"
@@ -341,11 +386,11 @@ const [isDrawing, setIsDrawing] = useState(false);
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {[
-                                            { key: 'panCard', label: 'Upload PAN Card Photo' },
-                                            { key: 'aadhaarFront', label: 'Upload Aadhaar Card / Driving License Front' },
-                                            { key: 'aadhaarBack', label: 'Upload Aadhaar Card / Driving License Back' },
-                                            { key: 'cancelledCheque', label: 'Upload Cancelled Cheque / Passbook' }
-                                        ].map(({ key, label }) => (
+                                            { key: 'PANCardphoto', label: 'Upload PAN Card Photo',name:'PANCardphoto' },
+                                            { key: 'AadharCardFront', label: 'Upload Aadhaar Card / Driving License Front', name:'AadharCardFront' },
+                                            { key: 'AadharCardBack', label: 'Upload Aadhaar Card / Driving License Back',name:'AadharCardBack' },
+                                            { key: 'cancelledPassbook', label: 'Upload Cancelled Cheque / Passbook',name:'cancelledPassbook' }
+                                        ].map(({ key, label,name }) => (
                                             <div key={key} className="space-y-2">
                                                 <label className="block text-sm font-medium text-gray-700">{label}</label>
                                                 <div className="relative">
@@ -355,6 +400,7 @@ const [isDrawing, setIsDrawing] = useState(false);
                                                         className="hidden"
                                                         id={key}
                                                         accept="image/*,.pdf"
+                                                        name={name}
                                                     />
                                                     <label
                                                         htmlFor={key}
@@ -412,7 +458,7 @@ const [isDrawing, setIsDrawing] = useState(false);
                                 {/* Submit Button */}
                                 <div className="text-center">
                                     <button
-                                        onClick={handleSubmit}
+                                      
                                         className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 text-lg"
                                     >
                                         <FileText className="w-5 h-5" />
@@ -420,6 +466,7 @@ const [isDrawing, setIsDrawing] = useState(false);
                                     </button>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
