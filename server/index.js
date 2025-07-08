@@ -27,7 +27,8 @@ app.get('/', (req, res) => {
 app.use('/blogs', require('./routes/blog'));
 app.use('/user', require('./routes/userRoutes'));
 // ReleseNewAlbum
-app.use('/ReleseNewAlbum', require('./routes/ReleseNewAlbumRoute'))
+app.use('/ReleseNewAlbum', require('./routes/ReleseNewAlbumRoute'));
+app.use('/NOC', require('./routes/Noc'));
 // singlesongwithct
 app.use("/singlesongCT",)
 app.listen(port, (err) => {
