@@ -499,71 +499,81 @@ export default function ReleaseNewAlbum() {
                                             <div>
                                                 <label className="font-medium">Featured Artist</label>
                                                 <input type="text" placeholder="Enter Featured Artist" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.featuredArtist}
-                                                    onChange={e => handleSongChange(idx, 'featuredArtist', e.target.value)}
+                                                    value={albumNames.featuredArtist}
+                                                    name='featuredArtist'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Editors</label>
                                                 <input type="text" placeholder="Enter Editors Name" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.editors}
-                                                    onChange={e => handleSongChange(idx, 'editors', e.target.value)}
+                                                    value={albumNames.editors}
+                                                    name='editors'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Composer's Apple ID</label>
                                                 <input type="text" placeholder="Enter Composer's Apple ID" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.composerAppleId}
-                                                    onChange={e => handleSongChange(idx, 'composerAppleId', e.target.value)}
+                                                    value={albumNames.composerAppleId}
+                                                    name='composerAppleId'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Composer's Spotify ID</label>
                                                 <input type="text" placeholder="Enter Composer's Spotify ID" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.composerSpotifyId}
-                                                    onChange={e => handleSongChange(idx, 'composerSpotifyId', e.target.value)}
+                                                    value={albumNames.composerSpotifyId}
+                                                    name='composerSpotifyId'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Lyricist's Apple ID</label>
                                                 <input type="text" placeholder="Enter Lyricist's Apple ID" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.lyricistAppleId}
-                                                    onChange={e => handleSongChange(idx, 'lyricistAppleId', e.target.value)}
+                                                    value={albumNames.lyricistAppleId}
+                                                    name='lyricistAppleId'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Lyricist's Spotify ID</label>
                                                 <input type="text" placeholder="Enter Lyricist's Spotify ID" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.lyricistSpotifyId}
-                                                    onChange={e => handleSongChange(idx, 'lyricistSpotifyId', e.target.value)}
+                                                    value={albumNames.lyricistSpotifyId}
+                                                    name='lyricistSpotifyId'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Guitarist(s)</label>
                                                 <input type="text" placeholder="Enter Guitarist Name(s)" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.guitarist}
-                                                    onChange={e => handleSongChange(idx, 'guitarist', e.target.value)}
+                                                    value={albumNames.guitarist}
+                                                    name='guitarist'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Bass Player(s)</label>
                                                 <input type="text" placeholder="Enter Bass Player Name(s)" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.bassPlayer}
-                                                    onChange={e => handleSongChange(idx, 'bassPlayer', e.target.value)}
+                                                    value={albumNames.bassPlayer}
+                                                    name='bassPlayer'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Drummer(s)</label>
                                                 <input type="text" placeholder="Enter Drummer Name(s)" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.drummer}
-                                                    onChange={e => handleSongChange(idx, 'drummer', e.target.value)}
+                                                    value={albumNames.drummer}
+                                                    name='drummer'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Harmonica Player(s)</label>
                                                 <input type="text" placeholder="Enter Harmonica Player Name(s)" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.harmonicaPlayer}
-                                                    onChange={e => handleSongChange(idx, 'harmonicaPlayer', e.target.value)}
+                                                    value={albumNames.harmonicaPlayer}
+                                                    name='harmonicaPlayer'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                         </div>
@@ -575,22 +585,25 @@ export default function ReleaseNewAlbum() {
                                         <div>
                                             <label className="font-medium">Primary Artist's Facebook ID</label>
                                             <input type="text" placeholder="Enter Primary Artist's Facebook ID" className="w-full border rounded px-4 py-2 mt-1"
-                                                value={song.facebookArtistId}
-                                                onChange={e => handleSongChange(idx, 'facebookArtistId', e.target.value)}
+                                                value={albumNames.facebookArtistId}
+                                                name='facebookArtistId'
+                                                onChange={handleSongChange}
                                             />
                                         </div>
                                         <div>
                                             <label className="font-medium">Composer's Facebook ID</label>
                                             <input type="text" placeholder="Enter Composer's Facebook ID" className="w-full border rounded px-4 py-2 mt-1"
-                                                value={song.composerFacebookId}
-                                                onChange={e => handleSongChange(idx, 'composerFacebookId', e.target.value)}
+                                                value={albumNames.composerFacebookId}
+                                                name='composerFacebookId'
+                                                onChange={handleSongChange}
                                             />
                                         </div>
                                         <div>
                                             <label className="font-medium">Lyricist's Facebook ID</label>
                                             <input type="text" placeholder="Enter Lyricist's Facebook ID" className="w-full border rounded px-4 py-2 mt-1"
-                                                value={song.lyricistFacebookId}
-                                                onChange={e => handleSongChange(idx, 'lyricistFacebookId', e.target.value)}
+                                                value={albumNames.lyricistFacebookId}
+                                                name='lyricistFacebookId'
+                                                onChange={handleSongChange}
                                             />
                                         </div>
                                     </div>
