@@ -22,19 +22,9 @@ export default function ReleaseNewAlbum() {
     const [openAccordion, setOpenAccordion] = useState(null);
 
     // Album state
-    const [albumName, setAlbumName] = useState('');
-    const [albumArtwork, setAlbumArtwork] = useState(null);
-    const [couponCode, setCouponCode] = useState('');
-    const [price, setPrice] = useState(1999);
-
-    // Songs state (array of objects)
-    const [songs, setSongs] = useState([getEmptySong()]);
-    const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState('');
-    const [error, setError] = useState('');
-
-    function getEmptySong() {
-        return {
+    const [albumNames, setAlbumNames] = useState({
+            albumName:'',
+            albumArtwork:'',
             songName: '',
             releaseDate: '',
             audioFile: null,
@@ -48,8 +38,10 @@ export default function ReleaseNewAlbum() {
             contentId: 'No',
             callerTuneStart: '',
             spotifyArtistIds: '',
+            newspotifyartist:'',
             appleArtistIds: '',
-            producer: '',
+            newappleartist:'',
+            producername: '',
             featuredArtist: '',
             editors: '',
             composerAppleId: '',
@@ -62,9 +54,51 @@ export default function ReleaseNewAlbum() {
             harmonicaPlayer: '',
             facebookArtistId: '',
             composerFacebookId: '',
-            lyricistFacebookId: ''
-        };
-    }
+            lyricistFacebookId: '',
+            couponCode:'',
+            price:''
+    });
+    // const [couponCode, setCouponCode] = useState('');
+    // const [price, setPrice] = useState(1999);
+
+    // Songs state (array of objects)
+    // const [songs, setSongs] = useState([getEmptySong()]);
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState('');
+    const [error, setError] = useState('');
+
+    // function getEmptySong() {
+    //     return {
+    //         songName: '',
+    //         releaseDate: '',
+    //         audioFile: null,
+    //         singers: '',
+    //         composers: '',
+    //         lyricists: '',
+    //         language: '',
+    //         genre: '',
+    //         subgenre: '',
+    //         explicitContent: 'No',
+    //         contentId: 'No',
+    //         callerTuneStart: '',
+    //         spotifyArtistIds: '',
+    //         appleArtistIds: '',
+    //         producer: '',
+    //         featuredArtist: '',
+    //         editors: '',
+    //         composerAppleId: '',
+    //         composerSpotifyId: '',
+    //         lyricistAppleId: '',
+    //         lyricistSpotifyId: '',
+    //         guitarist: '',
+    //         bassPlayer: '',
+    //         drummer: '',
+    //         harmonicaPlayer: '',
+    //         facebookArtistId: '',
+    //         composerFacebookId: '',
+    //         lyricistFacebookId: ''
+    //     };
+    // }
 
     // Sidebar and accordion logic (same as your code)
     const markAsRead = (id) => {
@@ -87,20 +121,16 @@ export default function ReleaseNewAlbum() {
     };
 
     // Album artwork
-    const handleAlbumArtwork = (e) => setAlbumArtwork(e.target.files[0]);
+
     // Coupon
-    const handleCouponChange = (e) => setCouponCode(e.target.value);
+    // const handleCouponChange = (e) => setCouponCode(e.target.value);
 
     // Song Handlers
     const handleSongChange = (idx, field, value) => {
-        const updated = [...songs];
-        updated[idx][field] = value;
-        setSongs(updated);
+        
     };
     const handleSongFileChange = (idx, file) => {
-        const updated = [...songs];
-        updated[idx].audioFile = file;
-        setSongs(updated);
+       ;
     };
     const addSong = () => setSongs([...songs, getEmptySong()]);
     const removeSong = (idx) => {
@@ -115,40 +145,7 @@ export default function ReleaseNewAlbum() {
     setError('');
     setSuccess('');
 
-    try {
-        const formData = new FormData();
-        formData.append('albumName', albumName);
-        formData.append('albumArtwork', albumArtwork);
-        formData.append('couponCode', couponCode);
-        formData.append('price', price);
-
-        // Add all song data directly
-        songs.forEach((song, idx) => {
-            Object.entries(song).forEach(([key, value]) => {
-                if (key === 'audioFile' && value) {
-                    formData.append(`songs[${idx}][${key}]`, value);
-                } else {
-                    formData.append(`songs[${idx}][${key}]`, value || '');
-                }
-            });
-        });
-
-        // API call
-        const response = await CreateAlbum(formData);
-        if (response && (response.success || response.message?.toLowerCase().includes('success'))) {
-            setSuccess('Album created successfully!');
-            setAlbumName('');
-            setAlbumArtwork(null);
-            setCouponCode('');
-            setSongs([getEmptySong()]);
-        } else {
-            setError(response?.message || 'Album creation failed.');
-        }
-    } catch (err) {
-        setError('Error creating album.');
-    } finally {
-        setLoading(false);
-    }
+   
 };
 
 
@@ -228,9 +225,10 @@ export default function ReleaseNewAlbum() {
                                     <label className="block font-medium mb-1">Album Name:</label>
                                     <input
                                         type="text"
+                                        name='albumName'
                                         className="w-full border border-gray-300 rounded px-4 py-2"
-                                        value={albumName}
-                                        onChange={e => setAlbumName(e.target.value)}
+                                        value={albumNames.albumName}
+                                        onChange={handleSongChange}
                                         required
                                     />
                                 </div>
@@ -240,7 +238,7 @@ export default function ReleaseNewAlbum() {
                                         type="file"
                                         accept=".jpg,.png"
                                         className="block w-full text-sm border border-gray-300 rounded  px-4 py-2"
-                                        onChange={handleAlbumArtwork}
+                                        onChange={handleSongChange}
                                         required
                                         name='albumArtwork'
                                     />
@@ -259,9 +257,10 @@ export default function ReleaseNewAlbum() {
                                         <input
                                             type="text"
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.songName}
-                                            onChange={e => handleSongChange(idx, 'songName', e.target.value)}
+                                            value={albumNames.songName}
+                                            onChange={handleSongChange}
                                             required
+                                            name='songName'
                                         />
                                         <p className="text-xs text-gray-500 mt-1">Don't use special characters (max 10 words)</p>
                                     </div>
@@ -270,9 +269,10 @@ export default function ReleaseNewAlbum() {
                                         <input
                                             type="date"
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.releaseDate}
-                                            onChange={e => handleSongChange(idx, 'releaseDate', e.target.value)}
+                                            value={albumNames.releaseDate}
+                                            onChange={handleSongChange}
                                             required
+                                            name='releaseDate'
                                         />
                                         <p className="text-xs text-gray-500 mt-1">Present or future date</p>
                                     </div>
@@ -281,6 +281,7 @@ export default function ReleaseNewAlbum() {
                                         <input
                                             type="file"
                                             accept=".mp3,.wav"
+                                            name='audioFile'
                                             className="block w-full text-sm border px-4 py-2 border-gray-300 rounded"
                                             onChange={e => handleSongFileChange(idx, e.target.files[0])}
                                             
@@ -294,9 +295,10 @@ export default function ReleaseNewAlbum() {
                                         <input
                                             type="text"
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.singers}
-                                            onChange={e => handleSongChange(idx, 'singers', e.target.value)}
+                                            value={albumNames.singers}
+                                            onChange={handleSongChange}
                                             required
+                                            name='singers'
                                         />
                                         <p className="text-xs text-gray-500 mt-1">Use comma for multiple</p>
                                     </div>
@@ -305,9 +307,10 @@ export default function ReleaseNewAlbum() {
                                         <input
                                             type="text"
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.composers}
-                                            onChange={e => handleSongChange(idx, 'composers', e.target.value)}
+                                            value={albumNames.composers}
+                                            onChange={handleSongChange}
                                             required
+                                            name='composers'
                                         />
                                         <p className="text-xs text-gray-500 mt-1">Use comma for multiple</p>
                                     </div>
@@ -316,9 +319,10 @@ export default function ReleaseNewAlbum() {
                                         <input
                                             type="text"
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.lyricists}
-                                            onChange={e => handleSongChange(idx, 'lyricists', e.target.value)}
+                                            value={albumNames.lyricists}
+                                            onChange={handleSongChange}
                                             required
+                                            name='lyricists'
                                         />
                                         <p className="text-xs text-gray-500 mt-1">Use comma for multiple</p>
                                     </div>
@@ -329,9 +333,10 @@ export default function ReleaseNewAlbum() {
                                         <label className="block font-medium mb-1">Language<span className="text-red-500">*</span></label>
                                         <select
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.language}
-                                            onChange={e => handleSongChange(idx, 'language', e.target.value)}
+                                            value={albumNames.language}
+                                            onChange={handleSongChange}
                                             required
+                                            name='language'
                                         >
                                             <option value="">Select Language</option>
                                             <option>English</option>
@@ -357,7 +362,7 @@ export default function ReleaseNewAlbum() {
                                         <label className="block font-medium mb-1">Genre<span className="text-red-500">*</span></label>
                                         <select
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.genre}
+                                            value={albumNames.genre}
                                             onChange={e => handleSongChange(idx, 'genre', e.target.value)}
                                             required
                                         >
