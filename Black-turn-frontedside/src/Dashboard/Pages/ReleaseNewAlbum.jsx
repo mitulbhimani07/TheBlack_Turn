@@ -184,8 +184,9 @@ export default function ReleaseNewAlbum() {
                                         type="text"
                                         placeholder="Enter Your Coupon Code Here"
                                         className="w-full border border-gray-300 rounded px-4 py-2"
-                                        value={couponCode}
-                                        onChange={handleCouponChange}
+                                        value={albumNames.couponCode}
+                                        onChange={handleSongChange}
+                                        name='couponCode'
                                     />
                                     <button type="button" className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800">
                                         Apply Coupon
@@ -363,8 +364,9 @@ export default function ReleaseNewAlbum() {
                                         <select
                                             className="w-full border border-gray-300 rounded px-4 py-2"
                                             value={albumNames.genre}
-                                            onChange={e => handleSongChange(idx, 'genre', e.target.value)}
+                                            onChange={handleSongChange}
                                             required
+                                            name='genre'
                                         >
                                             <option value="">Select Genre</option>
                                             <option>Pop</option>
@@ -379,9 +381,10 @@ export default function ReleaseNewAlbum() {
                                         <label className="block font-medium mb-1">Subgenre<span className="text-red-500">*</span></label>
                                         <select
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.subgenre}
-                                            onChange={e => handleSongChange(idx, 'subgenre', e.target.value)}
+                                            value={albumNames.subgenre}
+                                            onChange={handleSongChange}
                                             required
+                                            name='subgenre'
                                         >
                                             <option value="">Select Subgenre</option>
                                             <option>House</option>
@@ -396,9 +399,10 @@ export default function ReleaseNewAlbum() {
                                         <label className="block font-medium mb-1">Explicit Content<span className="text-red-500">*</span></label>
                                         <select
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.explicitContent}
-                                            onChange={e => handleSongChange(idx, 'explicitContent', e.target.value)}
+                                            value={albumNames.explicitContent}
+                                            onChange={handleSongChange}
                                             required
+                                            name='explicitContent'
                                         >
                                             <option>Yes</option>
                                             <option>No</option>
@@ -411,9 +415,10 @@ export default function ReleaseNewAlbum() {
                                         <label className="block font-medium mb-1">Content ID<span className="text-red-500">*</span></label>
                                         <select
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.contentId}
-                                            onChange={e => handleSongChange(idx, 'contentId', e.target.value)}
+                                            value={albumNames.contentId}
+                                            onChange={handleSongChange}
                                             required
+                                            name='contentId'
                                         >
                                             <option>Yes</option>
                                             <option>No</option>
@@ -428,9 +433,10 @@ export default function ReleaseNewAlbum() {
                                             type="text"
                                             placeholder="hh:mm:ss"
                                             className="w-full border border-gray-300 rounded px-4 py-2"
-                                            value={song.callerTuneStart}
-                                            onChange={e => handleSongChange(idx, 'callerTuneStart', e.target.value)}
+                                            value={albumNames.callerTuneStart}
+                                            onChange={handleSongChange}
                                             required
+                                            name='callerTuneStart'
                                         />
                                         <p className="text-xs text-gray-500 mt-1">
                                             Caller tune start timing in (hh:min:sec) <span className="font-medium">Maximum 45 sec.</span><br />
@@ -460,13 +466,18 @@ export default function ReleaseNewAlbum() {
                                             <div>
                                                 <label className="font-medium">Primary Artist Spotify IDs</label>
                                                 <input type="text" placeholder="Artist IDs (comma separated)" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.spotifyArtistIds}
-                                                    onChange={e => handleSongChange(idx, 'spotifyArtistIds', e.target.value)}
+                                                    value={albumNames.spotifyArtistIds}
+                                                    onChange={handleSongChange}
+                                                    name='spotifyArtistIds'
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Add a New Spotify Artist (Manually)</label>
-                                                <input type="text" placeholder="Enter new Spotify artist name..." className="w-full border rounded px-4 py-2 mt-1" />
+                                                <input type="text" placeholder="Enter new Spotify artist name..." className="w-full border rounded px-4 py-2 mt-1" 
+                                                value={albumNames.newspotifyartist}
+                                                name='newspotifyartist'
+                                                onChange={handleSongChange}
+                                                />
                                             </div>
                                         </div>
                                         {/* Apple */}
@@ -478,13 +489,17 @@ export default function ReleaseNewAlbum() {
                                             <div>
                                                 <label className="font-medium">Primary Artist Apple IDs</label>
                                                 <input type="text" placeholder="Artist IDs (comma separated)" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.appleArtistIds}
-                                                    onChange={e => handleSongChange(idx, 'appleArtistIds', e.target.value)}
+                                                    value={albumNames.appleArtistIds}
+                                                   onChange={handleSongChange}
+                                                   name='appleArtistIds'
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Add a New Apple Artist (Manually)</label>
-                                                <input type="text" placeholder="Enter new Apple artist name..." className="w-full border rounded px-4 py-2 mt-1" />
+                                                <input type="text" placeholder="Enter new Apple artist name..." className="w-full border rounded px-4 py-2 mt-1"
+                                                 value={albumNames.newappleartist}
+                                                name='newappleartist'
+                                                onChange={handleSongChange} />
                                             </div>
                                         </div>
                                         {/* Song Credits */}
@@ -492,8 +507,9 @@ export default function ReleaseNewAlbum() {
                                             <div>
                                                 <label className="font-medium">Producer Name</label>
                                                 <input type="text" placeholder="Enter Producer Name(s)" className="w-full border rounded px-4 py-2 mt-1"
-                                                    value={song.producer}
-                                                    onChange={e => handleSongChange(idx, 'producer', e.target.value)}
+                                                    value={albumNames.producername}
+                                                   onChange={handleSongChange}
+                                                   name='producername'
                                                 />
                                             </div>
                                             <div>
