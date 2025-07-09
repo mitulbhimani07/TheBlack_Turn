@@ -114,3 +114,19 @@ export const CreateNOC=async(payload)=>{
         throw error;
     }
 }
+
+
+export const CreateSingleSongCT=async(payload)=>{
+    try{
+        const response=await axios.post('http://localhost:3001/singlesongCT/create',payload,{
+            headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        console.log("single song ct from",response.data)
+        return response.data;
+    }catch(error){
+         console.error("Error in single song ct create API:", error);
+        throw error;
+    }
+}
