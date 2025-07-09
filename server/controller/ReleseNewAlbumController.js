@@ -1,16 +1,51 @@
 const Album = require('../model/ReleseNewAlbumModel');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'upload/'); // Save to upload/ folder
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+module.exports.upload = upload;
+
+const normalizePath = (file) => {
+    return file ? file.path.replace(/\\/g, '/') : '';
+};
 
 // Create a new album
 module.exports.createAlbum = async (req, res) => {
-  try {
-    const album = await Album.create(req.body);
-    console.log(req.body);
-    await album.save();
-    res.status(201).json({ message: 'Album created successfully', data: album });
-  } catch (error) {
-    res.status(500).json({ message: 'Error creating album', error: error.message });
-  }
+    try {
+        const { body, files } = req;
+
+        // Convert all file paths to forward slashes
+        const albumArtwork = normalizePath(files['albumArtwork']?.[0]);
+        const audioFile = normalizePath(files['audioFile']?.[0]);
+
+        const AlbumData = {
+          userId:req.user,
+            ...body,
+            albumArtwork,
+            audioFile,
+        };
+
+        const data = await Album.create(AlbumData);
+
+        res.status(200).json({
+            status: "Relese New Album Successfully add",
+            data
+        });
+    } catch (error) {
+        console.error('Error adding NOC Information:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 };
+
 
 // Get all albums
 module.exports.getAllAlbums = async (req, res) => {

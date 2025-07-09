@@ -3,7 +3,10 @@ const route = express.Router();
 const AlbumController = require('../controller/ReleseNewAlbumController');
 
 // Create album
-route.post('/create', AlbumController.createAlbum);
+route.post('/create',AlbumController.upload.fields([
+     { name: 'albumArtwork', maxCount: 1 },
+    { name: 'audioFile', maxCount: 1 },
+]) ,AlbumController.createAlbum);
 
 // Get all albums
 route.get('/all', AlbumController.getAllAlbums);
