@@ -9,5 +9,7 @@ route.post('/create', NOCController.upload.fields([
     { name: 'cancelledPassbook', maxCount: 1 },
     { name: 'Signature', maxCount: 1 }
 ]), NOCController.createNoc);
+route.get('/viewNoc', NOCController.viewNoc);
+route.get('/noc/:id', NOCController.singleViewNoc);
 
 module.exports = route
