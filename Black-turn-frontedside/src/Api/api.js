@@ -75,6 +75,7 @@ export const signin = async (payload) => {
         const response = await axios.post('https://theblack-turn-2.onrender.com/user/login', payload)
 
         console.log("signin----", response.data)
+        console.log("token--",response.token)
         return response.data
 
     } catch (error) {
@@ -83,8 +84,14 @@ export const signin = async (payload) => {
     }
 }
 export const CreateAlbum = async (payload) => {
+    const token = localStorage.getItem("Token");
     try {
-        const response = await axios.post('http://localhost:3001/ReleseNewAlbum/create', payload);
+        const response = await axios.post('http://localhost:3001/ReleseNewAlbum/create', payload,{
+             headers: {
+                // "Content-Type": "application/json",
+                 "Authorization": `Bearer ${token}`
+              },
+        });
         console.log("album create----", response.data);
         return response.data;
     } catch (error) {
@@ -104,6 +111,22 @@ export const CreateNOC = async (payload) => {
         return response.data;
     } catch (error) {
         console.error("Error in Noc create API:", error);
+        throw error;
+    }
+}
+
+
+export const CreateSingleSongCT=async(payload)=>{
+    try{
+        const response=await axios.post('http://localhost:3001/singlesongCT/create',payload,{
+            headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        console.log("single song ct from",response.data)
+        return response.data;
+    }catch(error){
+         console.error("Error in single song ct create API:", error);
         throw error;
     }
 }

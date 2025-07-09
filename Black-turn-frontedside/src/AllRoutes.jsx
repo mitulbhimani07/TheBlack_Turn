@@ -41,6 +41,7 @@ import Complaint from './Dashboard/Pages/Complaint'
 import ManageYourProfile from './Dashboard/Pages/ManageYourProfile'
 import CreateANewArtistProfile from './Dashboard/Pages/ARTISTPROFILES/CreateANewArtistProfile'
 import ArtistProfileLinkGeneration from './Dashboard/Pages/ARTISTPROFILES/ArtistProfileLinkGeneration'
+import ViewSingleRelese from './Dashboard/Pages/ViewSingleRelese'
 
 function AllRoutes() {
   return (
@@ -85,6 +86,7 @@ function AllRoutes() {
               <Route path='/profile' element={<ManageYourProfile/>}/>
               <Route path='/artistprofile' element={<CreateANewArtistProfile/>}/>
               <Route path='/artistprofilelink' element={<ArtistProfileLinkGeneration/>}/>
+              <Route path="/viewSingleRelese" element={<ViewSingleRelese/>}/>
         </Routes>
 
 

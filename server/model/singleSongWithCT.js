@@ -58,7 +58,15 @@ const SingleSongCT = new mongoose.Schema({
     },
     description: {
         type: String
+    },
+     originalWork: {
+        type: String
+    },
+    agreeTerms: {
+        type: String
     }
+
+
 
 
 

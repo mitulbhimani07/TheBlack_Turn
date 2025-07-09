@@ -36,6 +36,9 @@ export default function Signin() {
     try {
       const response = await signin(formData);
       console.log("Signup success:", response.data);
+      console.log("token",response.token)
+      const token=response.token
+      localStorage.setItem('Token',token)
       // alert("Signup successful!");
       toast.success("SignIn Successfully!!")
       navigate('/dashboard');
