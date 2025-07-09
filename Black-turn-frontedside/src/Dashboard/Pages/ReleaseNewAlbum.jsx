@@ -131,43 +131,43 @@ export default function ReleaseNewAlbum() {
     };
 
     // Form Submit Handler
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
-        setSuccess('');
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess('');
 
-        try {
-            const formData = new FormData();
+    try {
+      const formData = new FormData();
 
-            for (const key in albumData) {
-                formData.append(key, albumData[key]);
-            }
+      // Append album data
+      formData.append('albumName', albumData.albumName);
+      formData.append('couponCode', albumData.couponCode);
+      formData.append('price', albumData.price);
+      formData.append('albumArtwork', albumData.albumArtwork);
 
+      // Append songs data
       songs.forEach((song, idx) => {
-  for (const key in song) {
-    if (key !== 'audioFile') {
-      formData.append(`songs[${idx}][${key}]`, song[key]);
-    }
-  }
-  // Send audioFile with indexed name
-  formData.append(`audioFile-${idx}`, song.audioFile);
-});
-
-        // formData.append('audioFile', songs.audioFile); // for each song
-
-            const result = await CreateAlbum(formData);
-            setSuccess('Album created successfully!');
-            setAlbumData({ albumName: '', albumArtwork: '', couponCode: '', price: 1999 });
-            setSongs([getEmptySong()]);
-            scrollToTop();
-        } catch (err) {
-            setError('Something went wrong while creating the album.');
-            console.error(err);
-        } finally {
-            setLoading(false);
+        for (const key in song) {
+          if (key !== 'audioFile') {
+            formData.append(`songs[${idx}][${key}]`, song[key]);
+          }
         }
-    };
+        formData.append(`songs[${idx}][audioFile]`, song.audioFile);
+      });
+
+      const result = await CreateAlbum(formData);
+      setSuccess('Album created successfully!');
+      setAlbumData({ albumName: '', albumArtwork: '', couponCode: '', price: 1999 });
+      setSongs([getEmptySong()]);
+      scrollToTop();
+    } catch (err) {
+      setError('Something went wrong while creating the album.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
     return (
         <div className="min-h-screen flex bg-gray-50 relative">
