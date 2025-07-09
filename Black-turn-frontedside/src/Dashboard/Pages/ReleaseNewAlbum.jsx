@@ -23,40 +23,40 @@ export default function ReleaseNewAlbum() {
 
     // Album state
     const [albumNames, setAlbumNames] = useState({
-            albumName:'',
-            albumArtwork:'',
-            songName: '',
-            releaseDate: '',
-            audioFile: null,
-            singers: '',
-            composers: '',
-            lyricists: '',
-            language: '',
-            genre: '',
-            subgenre: '',
-            explicitContent: 'No',
-            contentId: 'No',
-            callerTuneStart: '',
-            spotifyArtistIds: '',
-            newspotifyartist:'',
-            appleArtistIds: '',
-            newappleartist:'',
-            producername: '',
-            featuredArtist: '',
-            editors: '',
-            composerAppleId: '',
-            composerSpotifyId: '',
-            lyricistAppleId: '',
-            lyricistSpotifyId: '',
-            guitarist: '',
-            bassPlayer: '',
-            drummer: '',
-            harmonicaPlayer: '',
-            facebookArtistId: '',
-            composerFacebookId: '',
-            lyricistFacebookId: '',
-            couponCode:'',
-            price:''
+        albumName: '',
+        albumArtwork: '',
+        songName: '',
+        releaseDate: '',
+        audioFile: null,
+        singers: '',
+        composers: '',
+        lyricists: '',
+        language: '',
+        genre: '',
+        subgenre: '',
+        explicitContent: 'No',
+        contentId: 'No',
+        callerTuneStart: '',
+        spotifyArtistIds: '',
+        newspotifyartist: '',
+        appleArtistIds: '',
+        newappleartist: '',
+        producername: '',
+        featuredArtist: '',
+        editors: '',
+        composerAppleId: '',
+        composerSpotifyId: '',
+        lyricistAppleId: '',
+        lyricistSpotifyId: '',
+        guitarist: '',
+        bassPlayer: '',
+        drummer: '',
+        harmonicaPlayer: '',
+        facebookArtistId: '',
+        composerFacebookId: '',
+        lyricistFacebookId: '',
+        couponCode: '',
+        price: 1999
     });
     // const [couponCode, setCouponCode] = useState('');
     // const [price, setPrice] = useState(1999);
@@ -126,28 +126,82 @@ export default function ReleaseNewAlbum() {
     // const handleCouponChange = (e) => setCouponCode(e.target.value);
 
     // Song Handlers
-    const handleSongChange = (idx, field, value) => {
-        
+    const handleSongChange = (e) => {
+        const { name, value } = e.target;
+        setAlbumNames((prev) => ({ ...prev, [name]: value }));
     };
-    const handleSongFileChange = (idx, file) => {
-       ;
+    const handleSongFileChange = (e) => {
+        const { name, files } = e.target;
+        if (files.length > 0) {
+            setAlbumNames((prev) => ({ ...prev, [name]: files[0] }));
+        }
     };
-    const addSong = () => setSongs([...songs, getEmptySong()]);
-    const removeSong = (idx) => {
-        if (songs.length === 1) return;
-        setSongs(songs.filter((_, i) => i !== idx));
-    };
+    // const addSong = () => setSongs([...songs, getEmptySong()]);
+    // const removeSong = (idx) => {
+    //     if (songs.length === 1) return;
+    //     setSongs(songs.filter((_, i) => i !== idx));
+    // };
 
     // Form Submit Handler
-   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess('');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+        setSuccess('');
 
-   
-};
+        try {
+            const formData = new FormData();
 
+            // Append all album fields to formData
+            for (const key in albumNames) {
+                formData.append(key, albumNames[key]);
+            }
+
+            const result = await CreateAlbum(formData);
+            setSuccess('Album created successfully!');
+            setAlbumNames({
+                albumName: '',
+                albumArtwork: '',
+                songName: '',
+                releaseDate: '',
+                audioFile: null,
+                singers: '',
+                composers: '',
+                lyricists: '',
+                language: '',
+                genre: '',
+                subgenre: '',
+                explicitContent: 'No',
+                contentId: 'No',
+                callerTuneStart: '',
+                spotifyArtistIds: '',
+                newspotifyartist: '',
+                appleArtistIds: '',
+                newappleartist: '',
+                producername: '',
+                featuredArtist: '',
+                editors: '',
+                composerAppleId: '',
+                composerSpotifyId: '',
+                lyricistAppleId: '',
+                lyricistSpotifyId: '',
+                guitarist: '',
+                bassPlayer: '',
+                drummer: '',
+                harmonicaPlayer: '',
+                facebookArtistId: '',
+                composerFacebookId: '',
+                lyricistFacebookId: '',
+                couponCode: '',
+                price: ''
+            });
+        } catch (err) {
+            setError('Something went wrong while creating the album.');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen flex bg-gray-50 relative">
@@ -238,10 +292,10 @@ export default function ReleaseNewAlbum() {
                                     <input
                                         type="file"
                                         accept=".jpg,.png"
-                                        className="block w-full text-sm border border-gray-300 rounded  px-4 py-2"
-                                        onChange={handleSongChange}
+                                        className="..."
+                                        onChange={handleSongFileChange}
                                         required
-                                        name='albumArtwork'
+                                        name="albumArtwork"
                                     />
                                     <p className="text-xs text-gray-500 mt-1">Size must be 3000x3000px (.jpg or .png only)</p>
                                 </div>
@@ -249,9 +303,9 @@ export default function ReleaseNewAlbum() {
                         </div>
 
                         {/* Songs */}
-                        {songs.map((song, idx) => (
-                            <div key={idx}>
-                                <h2 className="text-xl font-semibold text-blue-800">Song No. {idx + 1}</h2>
+
+                        <div >
+                                <h2 className="text-xl font-semibold text-blue-800">Song No</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                                     <div>
                                         <label className="block font-medium mb-1">Song Name<span className="text-red-500">*</span></label>
@@ -282,10 +336,10 @@ export default function ReleaseNewAlbum() {
                                         <input
                                             type="file"
                                             accept=".mp3,.wav"
-                                            name='audioFile'
-                                            className="block w-full text-sm border px-4 py-2 border-gray-300 rounded"
-                                            onChange={e => handleSongFileChange(idx, e.target.files[0])}
-                                            
+                                            className="..."
+                                            onChange={handleSongFileChange}
+                                            required
+                                            name="audioFile"
                                         />
                                         <p className="text-xs text-gray-500 mt-1">Max size 2GB (.mp3, .wav only)</p>
                                     </div>
@@ -448,15 +502,19 @@ export default function ReleaseNewAlbum() {
                                 <div className="border border-gray-200 rounded overflow-hidden transition-all duration-500">
                                     <button
                                         type="button"
-                                        onClick={() => toggleAccordion('artistCredits' + idx)}
+                                        // onClick={() => toggleAccordion('artistCredits' + idx)}
+                                        onClick={() => toggleAccordion('artistCredits' )}
+
                                         className="w-full flex justify-between items-center px-4 py-3 bg-gray-100 hover:bg-gray-200 text-left"
                                     >
                                         <span className="font-medium text-[#005d71]">
                                             Do you want to add Apple and Spotify Artist ID Link or more Song Credits? (Optional)
                                         </span>
-                                        {openAccordion === 'artistCredits' + idx ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                                        {/* {openAccordion === 'artistCredits' + idx ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />} */}
+                                        {openAccordion === 'artistCredits'  ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                                        
                                     </button>
-                                    <div className={`transition-all duration-500 ease-in-out overflow-hidden px-4 bg-white text-sm text-gray-700 ${openAccordion === 'artistCredits' + idx ? 'max-h-[1500px] opacity-100 py-6' : 'max-h-0 opacity-0 py-0'}`}>
+                                    <div className={`transition-all duration-500 ease-in-out overflow-hidden px-4 bg-white text-sm text-gray-700 ${openAccordion === 'artistCredits'  ? 'max-h-[1500px] opacity-100 py-6' : 'max-h-0 opacity-0 py-0'}`}>
                                         {/* Spotify */}
                                         <div className="flex items-center gap-3 mb-6">
                                             <User className="w-6 h-6 text-[#005f73]" />
@@ -473,10 +531,10 @@ export default function ReleaseNewAlbum() {
                                             </div>
                                             <div>
                                                 <label className="font-medium">Add a New Spotify Artist (Manually)</label>
-                                                <input type="text" placeholder="Enter new Spotify artist name..." className="w-full border rounded px-4 py-2 mt-1" 
-                                                value={albumNames.newspotifyartist}
-                                                name='newspotifyartist'
-                                                onChange={handleSongChange}
+                                                <input type="text" placeholder="Enter new Spotify artist name..." className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.newspotifyartist}
+                                                    name='newspotifyartist'
+                                                    onChange={handleSongChange}
                                                 />
                                             </div>
                                         </div>
@@ -490,16 +548,16 @@ export default function ReleaseNewAlbum() {
                                                 <label className="font-medium">Primary Artist Apple IDs</label>
                                                 <input type="text" placeholder="Artist IDs (comma separated)" className="w-full border rounded px-4 py-2 mt-1"
                                                     value={albumNames.appleArtistIds}
-                                                   onChange={handleSongChange}
-                                                   name='appleArtistIds'
+                                                    onChange={handleSongChange}
+                                                    name='appleArtistIds'
                                                 />
                                             </div>
                                             <div>
                                                 <label className="font-medium">Add a New Apple Artist (Manually)</label>
                                                 <input type="text" placeholder="Enter new Apple artist name..." className="w-full border rounded px-4 py-2 mt-1"
-                                                 value={albumNames.newappleartist}
-                                                name='newappleartist'
-                                                onChange={handleSongChange} />
+                                                    value={albumNames.newappleartist}
+                                                    name='newappleartist'
+                                                    onChange={handleSongChange} />
                                             </div>
                                         </div>
                                         {/* Song Credits */}
@@ -508,8 +566,8 @@ export default function ReleaseNewAlbum() {
                                                 <label className="font-medium">Producer Name</label>
                                                 <input type="text" placeholder="Enter Producer Name(s)" className="w-full border rounded px-4 py-2 mt-1"
                                                     value={albumNames.producername}
-                                                   onChange={handleSongChange}
-                                                   name='producername'
+                                                    onChange={handleSongChange}
+                                                    name='producername'
                                                 />
                                             </div>
                                             <div>
@@ -629,12 +687,20 @@ export default function ReleaseNewAlbum() {
                                     <button
                                         type="button"
                                         className="w-full md:w-1/2 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded"
-                                        onClick={() => removeSong(idx)}
-                                        disabled={songs.length === 1}
+                                        onClick={() => removeSong()}
+                                        // disabled={songs.length === 1}
                                     >
                                         Remove Song
                                     </button>
-                                    {idx === songs.length - 1 && (
+
+                                     <button
+                                            type="button"
+                                            className="w-full md:w-1/2 bg-[#005f73] hover:bg-[#2c313a] text-white font-semibold py-3 rounded"
+                                            // onClick={addSong}
+                                        >
+                                            + Add New Song
+                                        </button>
+                                    {/* {idx === songs.length - 1 && (
                                         <button
                                             type="button"
                                             className="w-full md:w-1/2 bg-[#005f73] hover:bg-[#2c313a] text-white font-semibold py-3 rounded"
@@ -642,21 +708,428 @@ export default function ReleaseNewAlbum() {
                                         >
                                             + Add New Song
                                         </button>
-                                    )}
+                                    )} */}
                                 </div>
                             </div>
-                        ))}
+
+
+
+                        {/* {songs.map((song, idx) => (
+                            <div key={idx}>
+                                <h2 className="text-xl font-semibold text-blue-800">Song No. {idx + 1}</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                                    <div>
+                                        <label className="block font-medium mb-1">Song Name<span className="text-red-500">*</span></label>
+                                        <input
+                                            type="text"
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.songName}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='songName'
+                                        />
+                                        <p className="text-xs text-gray-500 mt-1">Don't use special characters (max 10 words)</p>
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Release Date<span className="text-red-500">*</span></label>
+                                        <input
+                                            type="date"
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.releaseDate}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='releaseDate'
+                                        />
+                                        <p className="text-xs text-gray-500 mt-1">Present or future date</p>
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Upload Your Audio<span className="text-red-500">*</span></label>
+                                        <input
+                                            type="file"
+                                            accept=".mp3,.wav"
+                                            className="..."
+                                            onChange={handleSongFileChange}
+                                            required
+                                            name="audioFile"
+                                        />
+                                        <p className="text-xs text-gray-500 mt-1">Max size 2GB (.mp3, .wav only)</p>
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                                    <div>
+                                        <label className="block font-medium mb-1">Singers / Primary Artist<span className="text-red-500">*</span></label>
+                                        <input
+                                            type="text"
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.singers}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='singers'
+                                        />
+                                        <p className="text-xs text-gray-500 mt-1">Use comma for multiple</p>
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Music Composer(s)<span className="text-red-500">*</span></label>
+                                        <input
+                                            type="text"
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.composers}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='composers'
+                                        />
+                                        <p className="text-xs text-gray-500 mt-1">Use comma for multiple</p>
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Song Writer / Lyricist(s)<span className="text-red-500">*</span></label>
+                                        <input
+                                            type="text"
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.lyricists}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='lyricists'
+                                        />
+                                        <p className="text-xs text-gray-500 mt-1">Use comma for multiple</p>
+                                    </div>
+                                </div>
+                                {/* Language, Genre, Subgenre 
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                                    <div>
+                                        <label className="block font-medium mb-1">Language<span className="text-red-500">*</span></label>
+                                        <select
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.language}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='language'
+                                        >
+                                            <option value="">Select Language</option>
+                                            <option>English</option>
+                                            <option>Hindi</option>
+                                            <option>Gujarati</option>
+                                            <option>Punjabi</option>
+                                            <option>Marathi</option>
+                                            <option>Tamil</option>
+                                            <option>Telugu</option>
+                                            <option>Malayalam</option>
+                                            <option>Bengali</option>
+                                            <option>Kannada</option>
+                                            <option>Urdu</option>
+                                            <option>Odia</option>
+                                            <option>Assamese</option>
+                                            <option>Rajasthani</option>
+                                            <option>Nepali</option>
+                                            <option>Bhojpuri</option>
+                                            <option>Sanskrit</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Genre<span className="text-red-500">*</span></label>
+                                        <select
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.genre}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='genre'
+                                        >
+                                            <option value="">Select Genre</option>
+                                            <option>Pop</option>
+                                            <option>Rock</option>
+                                            <option>Hip Hop</option>
+                                            <option>Classical</option>
+                                            <option>Electronic</option>
+                                            <option>Jazz</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Subgenre<span className="text-red-500">*</span></label>
+                                        <select
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.subgenre}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='subgenre'
+                                        >
+                                            <option value="">Select Subgenre</option>
+                                            <option>House</option>
+                                            <option>Trance</option>
+                                            <option>Dubstep</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                {/* Explicit, Content ID, CallerTune 
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                                    <div>
+                                        <label className="block font-medium mb-1">Explicit Content<span className="text-red-500">*</span></label>
+                                        <select
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.explicitContent}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='explicitContent'
+                                        >
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                        <p className="text-xs text-gray-500 mt-1">
+                                            Select Yes if the lyrics contain strong language or any reference to violence, language nudity, or sexual content.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">Content ID<span className="text-red-500">*</span></label>
+                                        <select
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.contentId}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='contentId'
+                                        >
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                        <p className="text-xs text-gray-500 mt-1">
+                                            Select Yes if you also want Content ID for Your Song.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium mb-1">CallerTune Start Timing<span className="text-red-500">*</span></label>
+                                        <input
+                                            type="text"
+                                            placeholder="hh:mm:ss"
+                                            className="w-full border border-gray-300 rounded px-4 py-2"
+                                            value={albumNames.callerTuneStart}
+                                            onChange={handleSongChange}
+                                            required
+                                            name='callerTuneStart'
+                                        />
+                                        <p className="text-xs text-gray-500 mt-1">
+                                            Caller tune start timing in (hh:min:sec) <span className="font-medium">Maximum 45 sec.</span><br />
+                                            Make sure it remains under the full song length.
+                                        </p>
+                                    </div>
+                                </div>
+                                {/* Apple & Spotify Artist ID Accordion (DO NOT REMOVE, bind to state) 
+                                <div className="border border-gray-200 rounded overflow-hidden transition-all duration-500">
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleAccordion('artistCredits' + idx)}
+                                        className="w-full flex justify-between items-center px-4 py-3 bg-gray-100 hover:bg-gray-200 text-left"
+                                    >
+                                        <span className="font-medium text-[#005d71]">
+                                            Do you want to add Apple and Spotify Artist ID Link or more Song Credits? (Optional)
+                                        </span>
+                                        {openAccordion === 'artistCredits' + idx ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                                    </button>
+                                    <div className={`transition-all duration-500 ease-in-out overflow-hidden px-4 bg-white text-sm text-gray-700 ${openAccordion === 'artistCredits' + idx ? 'max-h-[1500px] opacity-100 py-6' : 'max-h-0 opacity-0 py-0'}`}>
+                                        {/* Spotify 
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <User className="w-6 h-6 text-[#005f73]" />
+                                            <h2 className="text-xl font-semibold text-[#005f73]">Spotify Artist Search (Search by name or paste Spotify link)</h2>
+                                        </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shadow-md rounded-lg p-6 my-4">
+                                            <div>
+                                                <label className="font-medium">Primary Artist Spotify IDs</label>
+                                                <input type="text" placeholder="Artist IDs (comma separated)" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.spotifyArtistIds}
+                                                    onChange={handleSongChange}
+                                                    name='spotifyArtistIds'
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Add a New Spotify Artist (Manually)</label>
+                                                <input type="text" placeholder="Enter new Spotify artist name..." className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.newspotifyartist}
+                                                    name='newspotifyartist'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        {/* Apple 
+                                        <div className="flex items-center gap-3">
+                                            <User className="w-6 h-6 text-[#005f73]" />
+                                            <h2 className="text-xl font-semibold text-[#005f73]">Apple Artist Search (Exact Name Match + IDs)</h2>
+                                        </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shadow-md rounded-lg p-6 my-4">
+                                            <div>
+                                                <label className="font-medium">Primary Artist Apple IDs</label>
+                                                <input type="text" placeholder="Artist IDs (comma separated)" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.appleArtistIds}
+                                                    onChange={handleSongChange}
+                                                    name='appleArtistIds'
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Add a New Apple Artist (Manually)</label>
+                                                <input type="text" placeholder="Enter new Apple artist name..." className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.newappleartist}
+                                                    name='newappleartist'
+                                                    onChange={handleSongChange} />
+                                            </div>
+                                        </div>
+                                        {/* Song Credits 
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 shadow-md rounded-lg p-6 my-4">
+                                            <div>
+                                                <label className="font-medium">Producer Name</label>
+                                                <input type="text" placeholder="Enter Producer Name(s)" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.producername}
+                                                    onChange={handleSongChange}
+                                                    name='producername'
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Featured Artist</label>
+                                                <input type="text" placeholder="Enter Featured Artist" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.featuredArtist}
+                                                    name='featuredArtist'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Editors</label>
+                                                <input type="text" placeholder="Enter Editors Name" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.editors}
+                                                    name='editors'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Composer's Apple ID</label>
+                                                <input type="text" placeholder="Enter Composer's Apple ID" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.composerAppleId}
+                                                    name='composerAppleId'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Composer's Spotify ID</label>
+                                                <input type="text" placeholder="Enter Composer's Spotify ID" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.composerSpotifyId}
+                                                    name='composerSpotifyId'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Lyricist's Apple ID</label>
+                                                <input type="text" placeholder="Enter Lyricist's Apple ID" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.lyricistAppleId}
+                                                    name='lyricistAppleId'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Lyricist's Spotify ID</label>
+                                                <input type="text" placeholder="Enter Lyricist's Spotify ID" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.lyricistSpotifyId}
+                                                    name='lyricistSpotifyId'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Guitarist(s)</label>
+                                                <input type="text" placeholder="Enter Guitarist Name(s)" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.guitarist}
+                                                    name='guitarist'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Bass Player(s)</label>
+                                                <input type="text" placeholder="Enter Bass Player Name(s)" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.bassPlayer}
+                                                    name='bassPlayer'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Drummer(s)</label>
+                                                <input type="text" placeholder="Enter Drummer Name(s)" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.drummer}
+                                                    name='drummer'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="font-medium">Harmonica Player(s)</label>
+                                                <input type="text" placeholder="Enter Harmonica Player Name(s)" className="w-full border rounded px-4 py-2 mt-1"
+                                                    value={albumNames.harmonicaPlayer}
+                                                    name='harmonicaPlayer'
+                                                    onChange={handleSongChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        {/* Facebook IDs 
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <User className="w-6 h-6 text-[#005f73]" />
+                                            <h2 className="text-xl font-semibold text-[#005f73]">Facebook Artist ID's</h2>
+                                        </div>
+                                        <div>
+                                            <label className="font-medium">Primary Artist's Facebook ID</label>
+                                            <input type="text" placeholder="Enter Primary Artist's Facebook ID" className="w-full border rounded px-4 py-2 mt-1"
+                                                value={albumNames.facebookArtistId}
+                                                name='facebookArtistId'
+                                                onChange={handleSongChange}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="font-medium">Composer's Facebook ID</label>
+                                            <input type="text" placeholder="Enter Composer's Facebook ID" className="w-full border rounded px-4 py-2 mt-1"
+                                                value={albumNames.composerFacebookId}
+                                                name='composerFacebookId'
+                                                onChange={handleSongChange}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="font-medium">Lyricist's Facebook ID</label>
+                                            <input type="text" placeholder="Enter Lyricist's Facebook ID" className="w-full border rounded px-4 py-2 mt-1"
+                                                value={albumNames.lyricistFacebookId}
+                                                name='lyricistFacebookId'
+                                                onChange={handleSongChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* Add/Remove Song Controls 
+                                <div className="flex flex-col md:flex-row gap-4 mt-10">
+                                    <button
+                                        type="button"
+                                        className="w-full md:w-1/2 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded"
+                                        onClick={() => removeSong(idx)}
+                                        // disabled={songs.length === 1}
+                                    >
+                                        Remove Song
+                                    </button>
+
+                                     <button
+                                            type="button"
+                                            className="w-full md:w-1/2 bg-[#005f73] hover:bg-[#2c313a] text-white font-semibold py-3 rounded"
+                                            onClick={addSong}
+                                        >
+                                            + Add New Song
+                                        </button>
+                                    {/* {idx === songs.length - 1 && (
+                                        <button
+                                            type="button"
+                                            className="w-full md:w-1/2 bg-[#005f73] hover:bg-[#2c313a] text-white font-semibold py-3 rounded"
+                                            onClick={addSong}
+                                        >
+                                            + Add New Song
+                                        </button>
+                                    )} 
+                                </div>
+                            </div>
+                        ))} */}
 
                         {/* Payment Summary */}
                         <div className="mt-8 border-t pt-6">
                             <h2 className="text-lg font-semibold mb-4">Your Order</h2>
                             <div className="flex flex-col md:flex-row items-center justify-between bg-gray-100 p-4 rounded-md mb-4">
                                 <span className="font-medium">Complete Album (All Stores + CallerTune)</span>
-                                <span className="font-bold text-lg">₹{price}</span>
+                                <span className="font-bold text-lg">₹{albumNames.price}</span>
                             </div>
                             <div className="flex items-center justify-between border-t pt-4">
                                 <span className="font-semibold text-gray-800 text-lg">Total Amount Payable</span>
-                                <span className="font-bold text-xl text-green-600">₹{price}</span>
+                                <span className="font-bold text-xl text-green-600">₹{albumNames.price}</span>
                             </div>
                             <div className="mt-4 flex flex-wrap items-center justify-start gap-3">
                                 <img src={visa} alt="Visa" className="h-10" />

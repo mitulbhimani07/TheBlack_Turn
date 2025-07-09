@@ -88,7 +88,7 @@ export const CreateAlbum = async (payload) => {
     try {
         const response = await axios.post('http://localhost:3001/ReleseNewAlbum/create', payload,{
              headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                  "Authorization": `Bearer ${token}`
               },
         });
