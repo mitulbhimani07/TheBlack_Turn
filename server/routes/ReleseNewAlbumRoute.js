@@ -1,12 +1,13 @@
 const express = require('express');
 const route = express.Router();
 const AlbumController = require('../controller/ReleseNewAlbumController');
+const Auth =require('../Middleware/jwt')
 
 // Create album
 route.post('/create',AlbumController.upload.fields([
      { name: 'albumArtwork', maxCount: 1 },
     { name: 'audioFile', maxCount: 1 },
-]) ,AlbumController.createAlbum);
+]) ,Auth,AlbumController.createAlbum);
 
 // Get all albums
 route.get('/all', AlbumController.getAllAlbums);
