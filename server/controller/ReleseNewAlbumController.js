@@ -1,51 +1,58 @@
 const Album = require('../model/ReleseNewAlbumModel');
 const multer = require('multer');
+const qs = require('qs'); // for nested parsing
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'upload/'); // Save to upload/ folder
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
+  destination: (req, file, cb) => {
+    cb(null, 'upload/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
 });
-
-const upload = multer({ storage: storage });
-
+const upload = multer({ storage });
 module.exports.upload = upload;
 
+// Normalize file path
 const normalizePath = (file) => {
-    return file ? file.path.replace(/\\/g, '/') : '';
+  return file ? file.path.replace(/\\\\/g, '/') : '';
 };
 
-// Create a new album
 module.exports.createAlbum = async (req, res) => {
-    try {
-        const { body, files } = req;
+  try {
+    // Parse nested fields correctly
+    const parsedBody = qs.parse(req.body);
 
-        // Convert all file paths to forward slashes
-        const albumArtwork = normalizePath(files['albumArtwork']?.[0]);
-        const audioFile = normalizePath(files['audioFile']?.[0]);
+    const albumArtwork = normalizePath(req.files?.albumArtwork?.[0]);
+    const audioFiles = req.files?.audioFile || [];
 
-        const AlbumData = {
-          userId:req.user,
-            ...body,
-            albumArtwork,
-            audioFile,
-        };
-
-        const data = await Album.create(AlbumData);
-
-        res.status(200).json({
-            status: "Relese New Album Successfully add",
-            data
-        });
-    } catch (error) {
-        console.error('Error adding NOC Information:', error);
-        res.status(500).json({ message: 'Internal server error' });
+    // parsedBody.songs is an array of song objects
+    if (!Array.isArray(parsedBody.songs)) {
+      return res.status(400).json({ message: 'Invalid songs format' });
     }
-};
 
+    const songs = parsedBody.songs.map((song, idx) => ({
+      ...song,
+      albumName: parsedBody.albumName,
+      albumArtwork: albumArtwork,
+      couponCode: parsedBody.couponCode,
+      price: parsedBody.price,
+      audioFile: normalizePath(audioFiles[idx]), // match index to file
+      userId: req.user,
+    }));
+
+    const saved = await Album.insertMany(songs);
+
+    res.status(200).json({
+      status: 'Success',
+      message: 'Album created with multiple songs',
+      data: saved,
+    });
+  } catch (error) {
+    console.error('Error in createAlbum:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 // Get all albums
 module.exports.getAllAlbums = async (req, res) => {
