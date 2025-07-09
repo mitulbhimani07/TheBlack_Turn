@@ -33,6 +33,11 @@ app.use('/ReleseNewAlbum', require('./routes/ReleseNewAlbumRoute'));
 app.use('/NOC', require('./routes/Noc'));
 // singlesongwithct
 app.use("/singlesongCT",require("./routes/singleSongCTRoutes"))
+
+// singlesongwitoutct
+app.use("/singlesongWithoutCT",require("./routes/singleSongWithoutCTRoutes"))
+
+
 app.listen(port, (err) => {
     if (err) {
         console.error('Error starting server:', err);
