@@ -51,3 +51,49 @@ module.exports.createNoc = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+module.exports.viewNoc = async (req, res) => {
+    try {
+        const viewNocData = await NOCModel.find();
+
+        res.status(200).json({
+            status: true,
+            message: "Fetched all NOC data successfully",
+            data: viewNocData,
+        });
+
+    } catch (error) {
+        console.error('Error fetching NOC data:', error);
+
+        res.status(500).json({
+            status: false,
+            message: 'Internal Server Error',
+            error: error.message
+        });
+    }
+};
+module.exports.singleViewNoc = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const nocData = await NOCModel.findById(id);
+
+        if (!nocData) {
+            return res.status(404).json({
+                status: false,
+                message: "NOC data not found"
+            });
+        }
+
+        res.status(200).json({
+            status: true,
+            message: "Fetched NOC data successfully",
+            data: nocData,
+        });
+    } catch (error) {
+        console.error('Error fetching NOC data:', error);
+        res.status(500).json({
+            status: false,
+            message: 'Internal Server Error',
+            error: error.message
+        });
+    }
+};

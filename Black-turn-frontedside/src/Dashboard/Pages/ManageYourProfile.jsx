@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './header-sidebar/Sidebar';
 import Navbar from './header-sidebar/Header';
+import { singleViewNoc } from '../../Api/api';
 
 export default function ManageYourProfile() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -12,24 +13,24 @@ export default function ManageYourProfile() {
 
   const [profile, setProfile] = useState({
     fullName: 'Mitul Bhimani',
-  about: 'Your Default Bio',
-  label: 'mitul',
-  street: 'Your Street Address',
-  city: 'Surat',
-  state: 'Gujarat',
-  pincode: '395010',
-  country: 'India',
-  phone: '07984268670',
-  email: 'mitulbhimani281@gmail.com',
-  profilePic: null,
-  payment: {
-    adhar: '1234 5678 9123',
-    pan: 'ABCDE1234F',
-    bankName: 'State Bank of India',
-    accountHolder: 'Mitul Bhimani',
-    ifsc: 'SBIN0001234',
-    accountNumber: '123456789012'
-  }
+    about: 'Your Default Bio',
+    label: 'mitul',
+    street: 'Your Street Address',
+    city: 'Surat',
+    state: 'Gujarat',
+    pincode: '395010',
+    country: 'India',
+    phone: '07984268670',
+    email: 'mitulbhimani281@gmail.com',
+    profilePic: null,
+    payment: {
+      adhar: '1234 5678 9123',
+      pan: 'ABCDE1234F',
+      bankName: 'State Bank of India',
+      accountHolder: 'Mitul Bhimani',
+      ifsc: 'SBIN0001234',
+      accountNumber: '123456789012'
+    }
   });
 
   const [passwords, setPasswords] = useState({
@@ -58,17 +59,55 @@ export default function ManageYourProfile() {
   const handleImageChange = (e) => {
     setProfile({ ...profile, profilePic: URL.createObjectURL(e.target.files[0]) });
   };
+useEffect(() => {
+  const handleResize = () => {
+    const mobile = window.innerWidth < 1024;
+    setIsMobile(mobile);
+    setIsSidebarOpen(!mobile);
+  };
 
-  useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth < 1024;
-      setIsMobile(mobile);
-      setIsSidebarOpen(!mobile);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const fetchNocProfile = async () => {
+    try {
+      const result = await singleViewNoc();
+      // result.data is the whole axios response, so use result.data.data for the actual NOC object
+      const userData = result.data.data;
+      if (userData) {
+        setProfile((prev) => ({
+          ...prev,
+          fullName: userData.fullname || prev.fullName,
+          label: userData.labelname || prev.label,
+          phone: userData.phoneno || prev.phone,
+          email: userData.email || prev.email,
+          payment: {
+            ...prev.payment,
+            adhar: userData.AadhaarCardNo || '',
+            pan: userData.PANCardNo || '',
+            bankName: userData.bankName || '',
+            accountHolder: userData.accountholdername || '',
+            accountNumber: userData.accountNo || '',
+            ifsc: userData.IFSCcode || ''
+          },
+          aadharFront: userData.AadharCardFront || '',
+          aadharBack: userData.AadharCardBack || '',
+          panPhoto: userData.PANCardphoto || '',
+          cancelledPassbook: userData.cancelledPassbook || '',
+          signature: userData.Signature || ''
+        }));
+      } else {
+        console.warn("No NOC data found");
+      }
+    } catch (err) {
+      console.error("❌ Error loading NOC data:", err);
+    }
+  };
+
+  handleResize();
+  fetchNocProfile();
+
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
@@ -82,15 +121,15 @@ export default function ManageYourProfile() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Navbar */}
-       <div className="sticky top-0 z-50">
-                <Navbar
-                  toggleSidebar={toggleSidebar}
-                  sidebarOpen={isSidebarOpen}
-                  notifications={notifications}
-                  unreadCount={unreadCount}
-                  markAsRead={markAsRead}
-                />
-              </div>
+        <div className="sticky top-0 z-50">
+          <Navbar
+            toggleSidebar={toggleSidebar}
+            sidebarOpen={isSidebarOpen}
+            notifications={notifications}
+            unreadCount={unreadCount}
+            markAsRead={markAsRead}
+          />
+        </div>
         <div className="p-6">
           {/* Page Header */}
           <div className="bg-white shadow mt-2">
@@ -117,87 +156,85 @@ export default function ManageYourProfile() {
           {/* Main profile content */}
           <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row mt-6 gap-6">
             {/* Left: Profile Summary */}
-           <div className="bg-white rounded-lg shadow-md p-6 md:p-8 w-full max-w-md mx-auto lg:mx-0">
-  {/* Profile Header */}
-  <div className="flex flex-col items-center text-center">
-    <img
-      src={profile.profilePic || "https://ui-avatars.com/api/?name=Mitul+Bhimani&background=004d66&color=fff"}
-      alt="Profile"
-      className="w-24 h-24 rounded-full mb-3"
-    />
-    <h2 className="text-xl font-semibold text-[#004d66] mb-1">{profile.fullName}</h2>
-    <p className="text-sm text-gray-500 mb-4">
-      <span className="font-semibold text-[#004d66]">About:</span> {profile.about}
-    </p>
-  </div>
+            <div className="bg-white rounded-lg shadow-md p-6 md:p-8 w-full max-w-md mx-auto lg:mx-0">
+              {/* Profile Header */}
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src={profile.profilePic || "https://ui-avatars.com/api/?name=Mitul+Bhimani&background=004d66&color=fff"}
+                  alt="Profile"
+                  className="w-24 h-24 rounded-full mb-3"
+                />
+                <h2 className="text-xl font-semibold text-[#004d66] mb-1">{profile.fullName}</h2>
+                <p className="text-sm text-gray-500 mb-4">
+                  <span className="font-semibold text-[#004d66]">About:</span> {profile.about}
+                </p>
+              </div>
 
-  {/* Profile Details */}
-  <div className="mb-5">
-    <h3 className="text-base font-bold text-[#004d66] mb-2">Profile Details</h3>
-    <div className="text-sm text-gray-700 space-y-1">
-      <div><span className="font-semibold">Full Name:</span> {profile.fullName}</div>
-      <div><span className="font-semibold">Label Name:</span> {profile.label}</div>
-      <div>
-        <span className="font-semibold">Address:</span><br />
-        {profile.street}, {profile.city}, {profile.state}, {profile.pincode}, {profile.country}
-      </div>
-      <div><span className="font-semibold">Phone:</span> {profile.phone}</div>
-      <div><span className="font-semibold">Email:</span> {profile.email}</div>
-    </div>
-  </div>
+              {/* Profile Details */}
+              <div className="mb-5">
+                <h3 className="text-base font-bold text-[#004d66] mb-2">Profile Details</h3>
+                <div className="text-sm text-gray-700 space-y-1">
+                  <div><span className="font-semibold">Full Name:</span> {profile.fullName}</div>
+                  <div><span className="font-semibold">Label Name:</span> {profile.label}</div>
+                  <div>
+                    <span className="font-semibold">Address:</span><br />
+                    {profile.street}, {profile.city}, {profile.state}, {profile.pincode}, {profile.country}
+                  </div>
+                  <div><span className="font-semibold">Phone:</span> {profile.phone}</div>
+                  <div><span className="font-semibold">Email:</span> {profile.email}</div>
+                </div>
+              </div>
 
-  {/* Payment Details */}
-  <div>
-    <h3 className="text-base font-bold text-[#004d66] mb-2">Payment Details</h3>
-    <div className="text-sm text-gray-700 space-y-1">
-      <div><span className="font-semibold">Adhar Number:</span> {profile.payment.adhar}</div>
-      <div><span className="font-semibold">Pan Number:</span> {profile.payment.pan}</div>
-      <div><span className="font-semibold">Bank Name:</span> {profile.payment.bankName}</div>
-      <div><span className="font-semibold">Account Holder:</span> {profile.payment.accountHolder}</div>
-      <div><span className="font-semibold">IFSC Code:</span> {profile.payment.ifsc}</div>
-      <div><span className="font-semibold">Account Number:</span> {profile.payment.accountNumber}</div>
-    </div>
-  </div>
-
-  {/* Button */}
-  <button className="mt-6 w-full bg-[#004d66] hover:bg-[#00394d] text-white font-semibold py-2 px-4 rounded transition duration-200">
-    Update Payment Details
-  </button>
+              {/* Payment Details */}
+              <div>
+                <h3 className="text-base font-bold text-[#004d66] mb-2">Payment Details</h3>
+                <div className="text-sm text-gray-700 space-y-1">
+  <div><span className="font-semibold">Adhar Number:</span> {profile.payment.adhar}</div>
+  <div><span className="font-semibold">Pan Number:</span> {profile.payment.pan}</div>
+  <div><span className="font-semibold">Bank Name:</span> {profile.payment.bankName}</div>
+  <div><span className="font-semibold">Account Holder:</span> {profile.payment.accountHolder}</div>
+  <div><span className="font-semibold">IFSC Code:</span> {profile.payment.ifsc}</div>
+  <div><span className="font-semibold">Account Number:</span> {profile.payment.accountNumber}</div>
 </div>
+              </div>
+
+              {/* Button */}
+              <button className="mt-6 w-full bg-[#004d66] hover:bg-[#00394d] text-white font-semibold py-2 px-4 rounded transition duration-200">
+                Update Payment Details
+              </button>
+            </div>
 
 
             {/* Right: Edit Profile Form */}
             <div className="bg-white rounded-lg shadow p-8 flex-1">
               {/* Tabs */}
-             <div className="flex flex-wrap gap-2 mb-4 items-center">
-  <button
-    className={`px-4 py-2 font-semibold rounded transition-colors ${
-      activeSection === 'view'
-        ? 'bg-[#004d66] text-white'
-        : 'bg-gray-100 text-[#004d66]'
-    }`}
-    onClick={() => setActiveSection('view')}
-  >
-    Edit Profile
-  </button>
-  <button
-    className={`px-4 py-2 font-semibold rounded transition-colors ${
-      activeSection === 'password'
-        ? 'bg-[#004d66] text-white'
-        : 'bg-gray-100 text-[#004d66]'
-    }`}
-    onClick={() => setActiveSection('password')}
-  >
-    Change Password
-  </button>
- <button
-  className="px-4 py-2 bg-red-600 text-white font-semibold rounded transition-colors hover:bg-red-700 ml-0 lg:ml-auto"
->
-  Close Account
-</button>
+              <div className="flex flex-wrap gap-2 mb-4 items-center">
+                <button
+                  className={`px-4 py-2 font-semibold rounded transition-colors ${activeSection === 'view'
+                    ? 'bg-[#004d66] text-white'
+                    : 'bg-gray-100 text-[#004d66]'
+                    }`}
+                  onClick={() => setActiveSection('view')}
+                >
+                  Edit Profile
+                </button>
+                <button
+                  className={`px-4 py-2 font-semibold rounded transition-colors ${activeSection === 'password'
+                    ? 'bg-[#004d66] text-white'
+                    : 'bg-gray-100 text-[#004d66]'
+                    }`}
+                  onClick={() => setActiveSection('password')}
+                >
+                  Change Password
+                </button>
+                <button
+                  className="px-4 py-2 bg-red-600 text-white font-semibold rounded transition-colors hover:bg-red-700 ml-0 lg:ml-auto"
+                >
+                  Close Account
+                </button>
 
 
-</div>
+              </div>
 
 
               {/* Edit Profile Form */}
