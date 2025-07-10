@@ -99,7 +99,32 @@ export const CreateAlbum = async (payload) => {
         throw error;
     }
 };
+export const ViewAlbum = async (payload) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/ReleseNewAlbum/all`, payload);
+        console.log('✅ NOC Data fetched successfully:', response.data);
+        return {
+            status: true,
+            message: 'Data fetched successfully',
+            data: response.data
+        };
+    } catch (error) {
+        console.error('❌ Error fetching NOC data:', error.message);
+        throw error;
+    }
+}
+export const SingleViewAlbum = async (id) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/ReleseNewAlbum/${id}`)
 
+        console.log("blog by id----", response.data.data)
+        return response.data
+
+    } catch (error) {
+        console.error("Error in signup API:", error);
+        throw error;
+    }
+}
 export const CreateNOC = async (payload) => {
     try {
         const response = await axios.post('http://localhost:3001/NOC/create', payload, {
