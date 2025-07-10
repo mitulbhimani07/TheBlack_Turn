@@ -2,6 +2,10 @@
 const mongoose = require("mongoose")
 
 const SingleSongCT = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     songName: {
         type: String
     },
@@ -59,7 +63,7 @@ const SingleSongCT = new mongoose.Schema({
     description: {
         type: String
     },
-     originalWork: {
+    originalWork: {
         type: String
     },
     agreeTerms: {

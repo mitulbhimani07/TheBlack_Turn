@@ -1,50 +1,73 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const SingleSongWithoutCT = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     couponCode: {
-        type: String
+        type: String,
+        default: ""
     },
     songName: {
-        type: String
+        type: String,
+        required: true
     },
-    aboutName: {
-        type: String
+    albumName: {
+        type: String,
+        required: true
     },
-    releseDate: {
-        type: String
+    releaseDate: {  // Fixed typo from releseDate
+        type: Date,
+        required: true
     },
     songPoster: {
-        type: String
+        type: String,
+        required: true
     },
     audio: {
-        type: String
+        type: String,
+        required: true
     },
     singer: {
-        type: String
+        type: String,
+        required: true
     },
     language: {
-        type: String
+        type: String,
+        required: true
     },
     explicitContent: {
-        type: String
+        type: String,
+        enum: ['Yes', 'No'],
+        default: 'No'
     },
     genre: {
-        type: String
+        type: String,
+        required: true
     },
     musicComposer: {
-        type: String
+        type: String,
+        required: true
     },
     youTubeContentID: {
-        type: String
+        type: String,
+        enum: ['Yes', 'No'],
+        default: 'Yes'
     },
     songWriter: {
-        type: String
+        type: String,
+        required: true
     },
     subGenre: {
-        type: String
+        type: String,
+        required: true
     },
     useAI: {
-        type: String
+        type: String,
+        enum: ['Yes', 'No'],
+        default: 'No'
     },
     additionalCredit: {
         type: String
@@ -52,15 +75,14 @@ const SingleSongWithoutCT = new mongoose.Schema({
     description: {
         type: String
     },
-    explicitContent: {
-        type: String
-    },
     originalWork: {
-        type: String
+        type: Boolean,
+        default: false
     },
     agreeTerms: {
-        type: String
+        type: Boolean,
+        default: false
     }
-})
+}, { timestamps: true });
 
-module.exports = mongoose.model("SingleSongWithoutCT", SingleSongWithoutCT)
+module.exports = mongoose.model("SingleSongWithoutCT", SingleSongWithoutCT);

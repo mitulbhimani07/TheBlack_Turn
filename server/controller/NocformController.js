@@ -37,7 +37,11 @@ module.exports.createNoc = async (req, res) => {
             AadharCardFront,
             AadharCardBack,
             cancelledPassbook,
-            Signature
+            Signature,
+            userId: req.user
+
+            
+
         };
 
         const data = await NOCModel.create(nocData);

@@ -1,6 +1,7 @@
 const express = require('express');
 const route = express.Router();
 const NOCController=require('../controller/NocformController')
+const Auth=require("../Middleware/jwt")
 
 route.post('/create', NOCController.upload.fields([
     { name: 'PANCardphoto', maxCount: 1 },
@@ -8,7 +9,7 @@ route.post('/create', NOCController.upload.fields([
     { name: 'AadharCardBack', maxCount: 1 },
     { name: 'cancelledPassbook', maxCount: 1 },
     { name: 'Signature', maxCount: 1 }
-]), NOCController.createNoc);
+]), Auth,NOCController.createNoc);
 route.get('/viewNoc', NOCController.viewNoc);
 route.get('/noc/:id', NOCController.singleViewNoc);
 
