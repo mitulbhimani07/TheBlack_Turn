@@ -24,7 +24,7 @@ export default function Allreleases() {
   // 1. Album data state
   const [releases, setReleases] = useState([]);
   const [loading, setLoading] = useState(true);
-  const BASE_URL = "http://localhost:3001";
+  const BASE_URL = "https://theblack-turn-2.onrender.com";
 
   // 3. Filtering and pagination logic
   const filteredReleases = releases.filter(release =>

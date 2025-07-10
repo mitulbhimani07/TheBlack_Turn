@@ -5,7 +5,7 @@
   import { ArrowLeft, Play, Pause, Volume2, MoreHorizontal } from 'lucide-react';
   import { SingleViewAlbum } from '../../Api/api';
 
-  const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3001";
+  const BASE_URL = import.meta.env.VITE_BASE_URL || "https://theblack-turn-2.onrender.com";
 
   // Left column skeleton
   function CardLoading() {
@@ -151,7 +151,7 @@
 
     // Helper for image path
     const getImageUrl = (artwork) => {
-      if (!artwork) return "http://localhost:3001";
+      if (!artwork) return "https://theblack-turn-2.onrender.com";
       return artwork.startsWith('http')
         ? artwork
         : `${BASE_URL}/${artwork.replace(/^\/+/, '')}`;
