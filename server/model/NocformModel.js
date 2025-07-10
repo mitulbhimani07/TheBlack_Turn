@@ -1,51 +1,55 @@
 const mongoose = require('mongoose');
 
-const NOCForm=new mongoose.Schema({
-    fullname:{
-        type:String
+const NOCForm = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
-    labelname:{
-        type:String
+    fullname: {
+        type: String
     },
-    email:{
-        type:String
+    labelname: {
+        type: String
     },
-    phoneno:{
-        type:String
+    email: {
+        type: String
     },
-    accountholdername:{
-        type:String
+    phoneno: {
+        type: String
     },
-    bankName:{
-        type:String
+    accountholdername: {
+        type: String
     },
-    accountNo:{
-        type:String
+    bankName: {
+        type: String
     },
-    IFSCcode:{
-        type:String
+    accountNo: {
+        type: String
     },
-    PANCardNo:{
-        type:String
+    IFSCcode: {
+        type: String
     },
-    AadhaarCardNo:{
-        type:String
+    PANCardNo: {
+        type: String
     },
-    PANCardphoto:{
-        type:String
+    AadhaarCardNo: {
+        type: String
     },
-    AadharCardFront:{
-        type:String
+    PANCardphoto: {
+        type: String
     },
-    AadharCardBack:{
-        type:String
+    AadharCardFront: {
+        type: String
     },
-    cancelledPassbook:{
-        type:String
+    AadharCardBack: {
+        type: String
     },
-    Signature:{
-        type:String
+    cancelledPassbook: {
+        type: String
+    },
+    Signature: {
+        type: String
     }
 })
 
-module.exports=mongoose.model('NOCForm',NOCForm)
+module.exports = mongoose.model('NOCForm', NOCForm)

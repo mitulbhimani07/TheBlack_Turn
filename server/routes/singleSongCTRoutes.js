@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const SingleSongCTController = require("../controller/singleSongCTController");
+const Auth=require("../Middleware/jwt")
 
 // Multer setup (all uploads in one folder)
 const storage = multer.diskStorage({
@@ -23,7 +24,7 @@ router.post(
     { name: "songPoster", maxCount: 1 },
     { name: "audio", maxCount: 1 }
   ]),
-  SingleSongCTController.createSingleSongCt
+  Auth,SingleSongCTController.createSingleSongCt
 );
 
 // Get all songs

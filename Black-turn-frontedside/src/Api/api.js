@@ -75,7 +75,7 @@ export const signin = async (payload) => {
         const response = await axios.post('http://localhost:3001/user/login', payload)
 
         console.log("signin----", response.data)
-        console.log("token--",response.token)
+        console.log("token--", response.token)
         return response.data
 
     } catch (error) {
@@ -86,11 +86,11 @@ export const signin = async (payload) => {
 export const CreateAlbum = async (payload) => {
     const token = localStorage.getItem("Token");
     try {
-        const response = await axios.post('http://localhost:3001/ReleseNewAlbum/create', payload,{
-             headers: {
+        const response = await axios.post('http://localhost:3001/ReleseNewAlbum/create', payload, {
+            headers: {
                 // "Content-Type": "application/json",
-                 "Authorization": `Bearer ${token}`
-              },
+                "Authorization": `Bearer ${token}`
+            },
         });
         console.log("album create----", response.data);
         return response.data;
@@ -126,11 +126,14 @@ export const SingleViewAlbum = async (id) => {
     }
 }
 export const CreateNOC = async (payload) => {
+    const token = localStorage.getItem("Token");
+
     try {
         const response = await axios.post('http://localhost:3001/NOC/create', payload, {
             headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+                // "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
         })
         console.log("NOC from", response.data)
         return response.data;
@@ -141,17 +144,20 @@ export const CreateNOC = async (payload) => {
 }
 
 
-export const CreateSingleSongCT=async(payload)=>{
-    try{
-        const response=await axios.post('http://localhost:3001/singlesongCT/create',payload,{
+export const CreateSingleSongCT = async (payload) => {
+    const token = localStorage.getItem("Token");
+
+    try {
+        const response = await axios.post('http://localhost:3001/singlesongCT/create', payload, {
             headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+                // "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
         })
-        console.log("single song ct from",response.data)
+        console.log("single song ct from", response.data)
         return response.data;
-    }catch(error){
-         console.error("Error in single song ct create API:", error);
+    } catch (error) {
+        console.error("Error in single song ct create API:", error);
         throw error;
     }
 }

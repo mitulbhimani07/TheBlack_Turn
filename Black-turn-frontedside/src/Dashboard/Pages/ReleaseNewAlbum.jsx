@@ -12,6 +12,7 @@ import netbanking from '../../assets/images/payment-platform/netbanking.png';
 import phonepe from '../../assets/images/payment-platform/phonepe.png';
 import googlepay from '../../assets/images/payment-platform/gpay.png';
 import { CreateAlbum } from '../../Api/api';
+import toast from 'react-hot-toast';
 
 export default function ReleaseNewAlbum() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -131,43 +132,48 @@ export default function ReleaseNewAlbum() {
     };
 
     // Form Submit Handler
-   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess('');
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+  setSuccess('');
 
-    try {
-      const formData = new FormData();
+  try {
+    const formData = new FormData();
 
-      // Append album data
-      formData.append('albumName', albumData.albumName);
-      formData.append('couponCode', albumData.couponCode);
-      formData.append('price', albumData.price);
-      formData.append('albumArtwork', albumData.albumArtwork);
+    // Album info
+    formData.append('albumName', albumData.albumName);
+    formData.append('couponCode', albumData.couponCode);
+    formData.append('price', albumData.price);
+    formData.append('albumArtwork', albumData.albumArtwork);
 
-      // Append songs data
-      songs.forEach((song, idx) => {
-        for (const key in song) {
-          if (key !== 'audioFile') {
-            formData.append(`songs[${idx}][${key}]`, song[key]);
-          }
+    // Songs (metadata)
+    songs.forEach((song, idx) => {
+      for (const key in song) {
+        if (key !== 'audioFile') {
+          formData.append(`songs[${idx}][${key}]`, song[key]);
         }
-        formData.append(`songs[${idx}][audioFile]`, song.audioFile);
-      });
+      }
+      // Important: match exactly the backend's expected key
+      formData.append('audioFile', song.audioFile);
+    });
 
-      const result = await CreateAlbum(formData);
-      setSuccess('Album created successfully!');
-      setAlbumData({ albumName: '', albumArtwork: '', couponCode: '', price: 1999 });
-      setSongs([getEmptySong()]);
-      scrollToTop();
-    } catch (err) {
-      setError('Something went wrong while creating the album.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const result = await CreateAlbum(formData);
+
+    // setSuccess('Album created successfully!');
+    toast.success('Album created successfully!')
+    setAlbumData({ albumName: '', albumArtwork: '', couponCode: '', price: 1999 });
+    setSongs([getEmptySong()]);
+    scrollToTop();
+  } catch (err) {
+    // setError('Something went wrong while creating the album.');
+    toast.error('Something went wrong while creating the album.')
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
     return (
         <div className="min-h-screen flex bg-gray-50 relative">
