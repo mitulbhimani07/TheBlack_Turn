@@ -14,49 +14,59 @@ const normalizePath = (file) => file ? file.path.replace(/\\\\/g, '/').replace(/
 
 module.exports.createAlbum = async (req, res) => {
   try {
-    const parsedBody = qs.parse(req.body); // deep parse nested form-data
+    const parsedBody = qs.parse(req.body); // Deep parse nested form-data
     const albumArtwork = normalizePath(req.files?.albumArtwork?.[0]);
     const audioFiles = req.files?.audioFile || [];
-    console.log("audio---",req.files)
 
-//     req.files.forEach(file => {
-//   console.log(`[${file.fieldname}]`); // wrap with [] to see whitespace
-// });
+    // Debug logging
+    console.log('Total songs sent:', parsedBody.songs ? Object.keys(parsedBody.songs).length : 0);
+    console.log('Total audio files uploaded:', audioFiles.length);
+
     const rawSongs = parsedBody.songs;
 
-    // Convert songs to array format
+    // Convert songs to array
     const songsArray = Array.isArray(rawSongs)
       ? rawSongs
       : typeof rawSongs === 'object' && rawSongs !== null
-      ? Object.values(rawSongs)
-      : [];
+        ? Object.values(rawSongs)
+        : [];
 
     if (!songsArray.length || songsArray.length !== audioFiles.length) {
-      return res.status(400).json({ message: 'Invalid songs format or mismatched audio files' });
+      return res.status(400).json({
+        message: 'Invalid songs format or mismatched audio files'
+      });
     }
 
-    const songsToSave = songsArray.map((song, index) => ({
+    // Combine each song with its corresponding audio file
+    const songs = songsArray.map((song, idx) => ({
       ...song,
+      audioFile: normalizePath(audioFiles[idx])
+    }));
+
+    // Create the album with one record and nested songs
+    const album = await Album.create({
       albumName: parsedBody.albumName,
       albumArtwork,
       couponCode: parsedBody.couponCode,
       price: parsedBody.price,
-      audioFile: normalizePath(audioFiles[index]),
-      userId: req.user
-    }));
-
-    const savedSongs = await Album.insertMany(songsToSave);
+      userId: req.user,
+      songs
+    });
 
     res.status(201).json({
       status: 'Success',
       message: 'Album and songs uploaded successfully',
-      data: savedSongs
+      data: album
     });
   } catch (error) {
     console.error('Upload error:', error);
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res.status(500).json({
+      message: 'Internal server error',
+      error: error.message
+    });
   }
 };
+
 
 
 // Get all albums

@@ -1,117 +1,112 @@
 const mongoose = require('mongoose');
 
 const SongSchema = new mongoose.Schema({
-   albumName: { 
-    type: String 
-  },
-  albumArtwork: { 
-    type: String
-  },
-  songName: { 
-    type: String 
+  songName:{
+    type:String
   },
   releaseDate: {
-     type: Date
-  },
+  type:Date
+},
   audioFile: {
-     type: String 
-  }, // file path or URL
-  singers: {
-     type: String 
+    type:String
   },
-  composers: { 
-    type: String
+  singers: {
+    type:String
+  },
+  composers: {
+    type:String
   },
   lyricists: {
-     type: String 
-  },
-  language: { 
-    type: String 
-  },
-  genre: { 
-    type: String 
-  },
-  subgenre: { 
-    type: String 
-  },
-  explicitContent: { 
-    type: String 
-  },
-  contentId: { 
-    type: String 
-  },
-  callerTuneStart: { 
-    type: String 
-  },
-  spotifyArtistIds: { 
-    type: String 
-  },
-  newspotifyartist:{
     type:String
   },
-  appleArtistIds: { 
-    type: String 
-  },
-  newappleartist:{
+  language: {
     type:String
   },
-  producername: { 
-    type: String 
+  genre: {
+    type:String
   },
-  featuredArtist: { 
-    type: String 
+  subgenre: {
+    type:String
   },
-  editors: { 
-    type: String 
+  explicitContent: {
+    type:String
   },
-  composerAppleId: { 
-    type: String 
+  contentId: {
+    type:String
   },
-  composerSpotifyId: { 
-    type: String 
+  callerTuneStart: {
+    type:String
   },
-  lyricistAppleId: { 
-    type: String 
+  spotifyArtistIds: {
+    type:String
   },
-  lyricistSpotifyId: { 
-    type: String 
+  newspotifyartist: {
+    type:String
   },
-  guitarist: { 
-    type: String 
+  appleArtistIds: {
+    type:String
   },
-  bassPlayer: { 
-    type: String 
+  newappleartist: {
+    type:String
   },
-  drummer: { 
-    type: String 
+  producername: {
+    type:String
   },
-  harmonicaPlayer: { 
-    type: String 
+  featuredArtist:{
+    type:String
   },
-  facebookArtistId: { 
-    type: String 
+  editors: {
+    type:String
   },
-  composerFacebookId: { 
-    type: String 
+  composerAppleId: {
+    type:String
   },
-  lyricistFacebookId: { 
-    type: String 
+  composerSpotifyId:{ 
+    type:String
   },
-  // file path or URL
-  couponCode: { 
-    type: String 
+  lyricistAppleId: {
+    type:String
   },
-   price: { 
-    type: Number, 
-    default: 1999 
+  lyricistSpotifyId: {
+    type:String
   },
-  userId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User' 
+  guitarist: {
+    type:String
   },
+  bassPlayer: {
+    type:String
+  },
+  drummer: {
+    type:String
+  },
+  harmonicaPlayer: {
+    type:String
+  },
+  facebookArtistId: {
+    type:String
+  },
+  composerFacebookId: {
+    type:String
+  },
+  lyricistFacebookId: {
+    type:String
+  },
+});
+
+const AlbumSchema = new mongoose.Schema({
+  albumName: {
+    type:String
+  },
+  albumArtwork: {
+    type:String
+  },
+  couponCode: {
+    type:String
+  },
+  price: { type: Number, default: 1999 },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  songs: [SongSchema],
   createdAt: { type: Date, default: Date.now }
 });
 
-
-
-module.exports = mongoose.model('ReleaseNewAlbum', SongSchema);
+module.exports = mongoose.model('ReleaseNewAlbum', AlbumSchema);
