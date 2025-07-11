@@ -150,3 +150,22 @@ export const singleViewNoc = async (payload) => {
         throw error;
     }
 }
+
+
+export const CreateSingleSongWithoutCt = async (payload) => {
+    const token = localStorage.getItem("Token");
+
+    try {
+        const response = await axios.post('http://localhost:3001/singlesongWithoutCT/create', payload, {
+            headers: {
+                // "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+        })
+        console.log("single song without ct from", response.data)
+        return response.data;
+    } catch (error) {
+        console.error("Error in single song  without ct create API:", error);
+        throw error;
+    }
+}
