@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import Navbar from '../Pages/header-sidebar/Header';
 import Sidebar from '../Pages/header-sidebar/Sidebar';
 import { Upload, Music, FileText, Clock, CheckCircle, Star, User } from 'lucide-react';
@@ -11,12 +12,20 @@ import emi from '../../assets/images/payment-platform/emi.png';
 import upi from '../../assets/images/payment-platform/upi.png';
 import gpay from '../../assets/images/payment-platform/gpay.png';
 import phonepe from '../../assets/images/payment-platform/phonepe.png';
+import { OnlyCallerTuneData } from '../../Api/api';
 
 function OnlyCallerTune() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
     const [activeTab, setActiveTab] = useState('onlyCallerTune');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [error, setError] = useState(null);
+
+    // Create refs for file inputs
+    const artworkInputRef = useRef(null);
+    const audioInputRef = useRef(null);
 
     const [formData, setFormData] = useState({
         songName: '',
@@ -73,12 +82,84 @@ function OnlyCallerTune() {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form submitted:', formData);
-        // Handle form submission
+    const resetForm = () => {
+        setFormData({
+            songName: '',
+            albumName: '',
+            releaseDate: '',
+            artwork: null,
+            audio: null,
+            primaryArtist: '',
+            language: '',
+            musicComposer: '',
+            genre: '',
+            callerTuneName1: '',
+            callerTuneStart1: '',
+            callerTuneName2: '',
+            callerTuneStart2: '',
+            explicitContent: 'No',
+            youtubeContentId: 'Yes',
+            usedAI: 'Yes',
+            originalWork: false,
+            agreeTerms: false,
+            appleSpotifyLinks: '',
+            oldISRCUPC: ''
+        });
+
+        // Clear file inputs
+        if (artworkInputRef.current) artworkInputRef.current.value = '';
+        if (audioInputRef.current) audioInputRef.current.value = '';
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setError(null);
+        setSubmitSuccess(false);
+
+        try {
+            const formDataToSend = new FormData();
+
+            // Append all form fields
+            Object.keys(formData).forEach(key => {
+                if (key === 'artwork' || key === 'audio') {
+                    if (formData[key]) {
+                        formDataToSend.append(key, formData[key]);
+                    }
+                } else {
+                    formDataToSend.append(key, formData[key]);
+                }
+            });
+
+            // Using the imported API function
+            const response = await OnlyCallerTuneData(formDataToSend);
+
+            console.log('API Response:', response.data);
+            setSubmitSuccess(true);
+            resetForm();
+
+        } catch (err) {
+            console.error('Full error:', err);
+            console.error('Response data:', err.response?.data);
+
+            let errorMessage = 'Failed to submit form';
+            if (err.response) {
+                if (err.response.status === 404) {
+                    errorMessage = 'API endpoint not found (404). Please check the URL.';
+                } else if (err.response.data?.message) {
+                    errorMessage = err.response.data.message;
+                } else {
+                    errorMessage = `Server error: ${err.response.status}`;
+                }
+            } else if (err.message) {
+                errorMessage = err.message;
+            }
+
+            setError(errorMessage);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
     const paymentplatform = [
         { img: visa },
         { img: MasterCard },
@@ -108,14 +189,14 @@ function OnlyCallerTune() {
 
                 <div className="flex-1 flex flex-col min-h-screen">
                     <div className="sticky top-0 z-50">
-          <Navbar
-            toggleSidebar={toggleSidebar}
-            sidebarOpen={isSidebarOpen}
-            notifications={notifications}
-            unreadCount={unreadCount}
-            markAsRead={markAsRead}
-          />
-        </div>
+                        <Navbar
+                            toggleSidebar={toggleSidebar}
+                            sidebarOpen={isSidebarOpen}
+                            notifications={notifications}
+                            unreadCount={unreadCount}
+                            markAsRead={markAsRead}
+                        />
+                    </div>
 
                     {/* main */}
                     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
@@ -231,6 +312,7 @@ function OnlyCallerTune() {
                                                     onChange={(e) => handleFileSelect(e, 'artwork')}
                                                     className="hidden"
                                                     id="artwork-upload"
+                                                    ref={artworkInputRef}
                                                 />
                                                 <label
                                                     htmlFor="artwork-upload"
@@ -267,6 +349,7 @@ function OnlyCallerTune() {
                                                     onChange={(e) => handleFileSelect(e, 'audio')}
                                                     className="hidden"
                                                     id="audio-upload"
+                                                    ref={audioInputRef}
                                                 />
                                                 <label
                                                     htmlFor="audio-upload"
@@ -535,7 +618,7 @@ function OnlyCallerTune() {
                                 {/* Optional Fields */}
                                 <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-[#005f73]">
                                     <h2 className="text-2xl font-bold text-[#005f73] mb-6">Additional Information (Optional)</h2>
-                                    
+
                                     <div className="space-y-6">
                                         <div className="space-y-2">
                                             <label className="block text-sm font-semibold text-gray-700">
@@ -549,7 +632,7 @@ function OnlyCallerTune() {
                                                 placeholder="Enter links or additional credits"
                                             />
                                         </div>
-                                        
+
                                         <div className="space-y-2">
                                             <label className="block text-sm font-semibold text-gray-700">
                                                 Enter your Old ISRC and UPC (Or Anything More?)
@@ -624,17 +707,40 @@ function OnlyCallerTune() {
                                             ))}
                                         </div>
                                     </div>
-
+                                    {/* Error Message (Conditionally shown) */}
+                                    {error && (
+                                        <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+                                            <div className="flex items-center gap-3">
+                                                <CheckCircle className="w-8 h-8 text-red-600" />
+                                                <div>
+                                                    <h3 className="text-lg font-semibold text-red-800">Submission Error</h3>
+                                                    <p className="text-red-700">{error}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {submitSuccess && (
+                                        <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+                                            <div className="flex items-center gap-3">
+                                                <CheckCircle className="w-8 h-8 text-green-600" />
+                                                <div>
+                                                    <h3 className="text-lg font-semibold text-green-800">Song Submitted Successfully!</h3>
+                                                    <p className="text-green-700">Your song has been submitted for review. You will receive updates via email.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                     {/* Submit Button */}
+                                    {/* Modify your submit button to show loading state */}
                                     <button
                                         type="submit"
-                                        disabled={!formData.originalWork || !formData.agreeTerms}
+                                        disabled={!formData.originalWork || !formData.agreeTerms || isSubmitting}
                                         className={`w-full py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-[1.02] ${formData.originalWork && formData.agreeTerms
                                             ? 'bg-gradient-to-r from-[#005f73] to-[#0a7c91] text-white hover:shadow-lg'
                                             : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                             }`}
                                     >
-                                        Submit Song
+                                        {isSubmitting ? 'Submitting...' : 'Submit Song'}
                                     </button>
                                 </div>
                             </form>

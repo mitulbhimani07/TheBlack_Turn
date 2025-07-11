@@ -175,3 +175,28 @@ export const singleViewNoc = async (payload) => {
         throw error;
     }
 }
+export const OnlyCallerTuneData = async (payload) => {
+    try {
+        const response = await axios.post(`http://localhost:3001/OnlyCallerTune/create`, payload, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        
+        console.log('✅ Caller Tune submitted successfully:', response.data);
+        return {
+            status: true,
+            message: 'Submission successful',
+            data: response.data
+        };
+    } catch (error) {
+        console.error('❌ Error submitting caller tune:', error);
+        
+        // Return a consistent error structure
+        return {
+            status: false,
+            message: error.response?.data?.message || error.message || 'Failed to submit caller tune',
+            error: error.response?.data || error
+        };
+    }
+};
