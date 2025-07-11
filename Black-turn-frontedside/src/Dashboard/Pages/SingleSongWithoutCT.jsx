@@ -11,38 +11,101 @@ import emi from '../../assets/images/payment-platform/emi.png';
 import upi from '../../assets/images/payment-platform/upi.png';
 import gpay from '../../assets/images/payment-platform/gpay.png';
 import phonepe from '../../assets/images/payment-platform/phonepe.png';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { CreateSingleSongWithoutCt } from '../../Api/api';
 
 function SingleSongWithoutCT() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
     const [activeTab, setActiveTab] = useState('singleSongwithoutCT');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errors, setErrors] = useState({});
 
-    const [formData, setFormData] = useState({
+    const initialFormState = {
         songName: '',
-        aboutName: '',
+        albumName: '',
         releaseDate: '',
         artwork: null,
         audio: null,
-        primaryArtist: '',
-        musicComposer: '',
-        songWriter: '',
+        singer: '',
         language: '',
-        genre: '',
-        subGenre: '',
         explicitContent: 'No',
-        youtubeContentId: 'Yes',
-        usedAI: 'No',
-        releaseDescription: '',
+        genre: '',
+        musicComposer: '',
+        youtubeContentID: 'Yes',
+        songWriter: '',
+        subGenre: '',
+        useAI: 'No',
+        description: '',
         originalWork: false,
         agreeTerms: false,
         couponCode: ''
-    });
+    };
 
+    const [formData, setFormData] = useState(initialFormState);
     const [dragActive, setDragActive] = useState({ artwork: false, audio: false });
 
-    const handleInputChange = (field, value) => {
-        setFormData(prev => ({ ...prev, [field]: value }));
+    const validateForm = () => {
+        const newErrors = {};
+        
+        // Required fields validation
+        if (!formData.songName.trim()) newErrors.songName = 'Song name is required';
+        if (!formData.albumName.trim()) newErrors.albumName = 'Album name is required';
+        if (!formData.releaseDate) newErrors.releaseDate = 'Release date is required';
+        if (!formData.artwork) newErrors.artwork = 'Artwork is required';
+        if (!formData.audio) newErrors.audio = 'Audio file is required';
+        if (!formData.singer.trim()) newErrors.singer = 'Singer is required';
+        if (!formData.language) newErrors.language = 'Language is required';
+        if (!formData.genre) newErrors.genre = 'Genre is required';
+        if (!formData.musicComposer.trim()) newErrors.musicComposer = 'Music composer is required';
+        if (!formData.songWriter.trim()) newErrors.songWriter = 'Song writer is required';
+        if (!formData.subGenre) newErrors.subGenre = 'Sub genre is required';
+        if (!formData.originalWork) newErrors.originalWork = 'You must confirm this is original work';
+        if (!formData.agreeTerms) newErrors.agreeTerms = 'You must agree to the terms';
+        
+        // File type validation
+        if (formData.artwork) {
+            const validArtworkTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!validArtworkTypes.includes(formData.artwork.type)) {
+                newErrors.artwork = 'Only JPG, PNG, JPEG files are allowed';
+            }
+        }
+        
+        if (formData.audio) {
+            const validAudioTypes = ['audio/mpeg', 'audio/wav'];
+            if (!validAudioTypes.includes(formData.audio.type)) {
+                newErrors.audio = 'Only MP3, WAV files are allowed';
+            }
+        }
+        
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value, type, checked, files } = e.target;
+        
+        if (type === 'file') {
+            setFormData(prev => ({ ...prev, [name]: files[0] }));
+            // Clear error when file is selected
+            if (files[0]) {
+                setErrors(prev => ({ ...prev, [name]: '' }));
+            }
+        } else if (type === 'checkbox') {
+            setFormData(prev => ({ ...prev, [name]: checked }));
+            // Clear error when checkbox is checked
+            if (checked) {
+                setErrors(prev => ({ ...prev, [name]: '' }));
+            }
+        } else {
+            setFormData(prev => ({ ...prev, [name]: value }));
+            // Clear error when input changes
+            if (value) {
+                setErrors(prev => ({ ...prev, [name]: '' }));
+            }
+        }
     };
 
     const handleDragOver = (e, type) => {
@@ -60,21 +123,43 @@ function SingleSongWithoutCT() {
         setDragActive(prev => ({ ...prev, [type]: false }));
         const files = e.dataTransfer.files;
         if (files.length > 0) {
-            handleInputChange(type, files[0]);
+            setFormData(prev => ({ ...prev, [type]: files[0] }));
+            // Clear error when file is dropped
+            setErrors(prev => ({ ...prev, [type]: '' }));
         }
     };
 
-    const handleFileSelect = (e, type) => {
-        const file = e.target.files[0];
-        if (file) {
-            handleInputChange(type, file);
-        }
+    const resetForm = () => {
+        setFormData(initialFormState);
+        setErrors({});
+        // Reset file inputs
+        document.getElementById('artwork-upload').value = '';
+        document.getElementById('audio-upload').value = '';
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
-        // Handle form submission
+        
+        if (!validateForm()) {
+            toast.error('Please fill all required fields correctly');
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            await CreateSingleSongWithoutCt(formData);
+            toast.success("Song created successfully!");
+            
+            // Reset form after successful submission
+            resetForm();
+            
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            toast.error(error.response?.data?.message || "Error creating song");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const paymentplatform = [
@@ -106,14 +191,14 @@ function SingleSongWithoutCT() {
 
                 <div className="flex-1 flex flex-col min-h-screen">
                     <div className="sticky top-0 z-50">
-          <Navbar
-            toggleSidebar={toggleSidebar}
-            sidebarOpen={isSidebarOpen}
-            notifications={notifications}
-            unreadCount={unreadCount}
-            markAsRead={markAsRead}
-          />
-        </div>
+                        <Navbar
+                            toggleSidebar={toggleSidebar}
+                            sidebarOpen={isSidebarOpen}
+                            notifications={notifications}
+                            unreadCount={unreadCount}
+                            markAsRead={markAsRead}
+                        />
+                    </div>
 
                     {/* main */}
                     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
@@ -130,6 +215,12 @@ function SingleSongWithoutCT() {
                                             <p className="text-gray-600 mt-1">Share your musical creation with the world</p>
                                         </div>
                                     </div>
+                                    <button 
+                                        onClick={resetForm}
+                                        className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+                                    >
+                                        Reset Form
+                                    </button>
                                 </div>
                             </div>
 
@@ -152,8 +243,9 @@ function SingleSongWithoutCT() {
                                 <div className="flex gap-3">
                                     <input
                                         type="text"
+                                        name="couponCode"
                                         value={formData.couponCode}
-                                        onChange={(e) => handleInputChange('couponCode', e.target.value)}
+                                        onChange={handleInputChange}
                                         className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                         placeholder="Enter coupon code"
                                     />
@@ -178,25 +270,29 @@ function SingleSongWithoutCT() {
                                             </label>
                                             <input
                                                 type="text"
+                                                name="songName"
                                                 value={formData.songName}
-                                                onChange={(e) => handleInputChange('songName', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.songName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
                                                 placeholder="Enter song name"
                                             />
+                                            {errors.songName && <p className="text-xs text-red-500">{errors.songName}</p>}
                                             <p className="text-xs text-gray-500">Don't Use Special Characters (Max 10 Words)</p>
                                         </div>
 
                                         <div className="space-y-2">
                                             <label className="block text-sm font-semibold text-gray-700">
-                                                About Name <span className="text-red-500">*</span>
+                                                Album Name <span className="text-red-500">*</span>
                                             </label>
                                             <input
                                                 type="text"
-                                                value={formData.aboutName}
-                                                onChange={(e) => handleInputChange('aboutName', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
-                                                placeholder="Enter about name"
+                                                name="albumName"
+                                                value={formData.albumName}
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.albumName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
+                                                placeholder="Enter album name"
                                             />
+                                            {errors.albumName && <p className="text-xs text-red-500">{errors.albumName}</p>}
                                             <p className="text-xs text-gray-500">In case of a single song, write the song name here</p>
                                         </div>
 
@@ -206,10 +302,12 @@ function SingleSongWithoutCT() {
                                             </label>
                                             <input
                                                 type="date"
+                                                name="releaseDate"
                                                 value={formData.releaseDate}
-                                                onChange={(e) => handleInputChange('releaseDate', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.releaseDate ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
                                             />
+                                            {errors.releaseDate && <p className="text-xs text-red-500">{errors.releaseDate}</p>}
                                             <p className="text-xs text-gray-500">Choose Any (Past, Present or Future) Date of Your Music Release</p>
                                         </div>
                                     </div>
@@ -255,15 +353,18 @@ function SingleSongWithoutCT() {
                                                     onDrop={(e) => handleDrop(e, 'artwork')}
                                                     className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${dragActive.artwork
                                                         ? 'border-[#005f73] bg-blue-50'
-                                                        : 'border-gray-300 hover:border-[#005f73] hover:bg-gray-50'
+                                                        : errors.artwork 
+                                                            ? 'border-red-500 bg-red-50'
+                                                            : 'border-gray-300 hover:border-[#005f73] hover:bg-gray-50'
                                                         }`}
                                                 >
                                                     <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                                                     <p className="text-gray-600 mb-2">Click or Drag & Drop to upload your artwork</p>
                                                     <input
                                                         type="file"
+                                                        name="artwork"
                                                         accept=".jpg,.png,.jpeg"
-                                                        onChange={(e) => handleFileSelect(e, 'artwork')}
+                                                        onChange={handleInputChange}
                                                         className="hidden"
                                                         id="artwork-upload"
                                                     />
@@ -277,6 +378,7 @@ function SingleSongWithoutCT() {
                                                         <p className="text-sm text-green-600 mt-2">✓ {formData.artwork.name}</p>
                                                     )}
                                                 </div>
+                                                {errors.artwork && <p className="text-xs text-red-500">{errors.artwork}</p>}
                                                 <p className="text-xs text-gray-500">Size must be 3000x3000px. Choose (.jpg, .png, .jpeg) Only</p>
                                             </div>
 
@@ -291,15 +393,18 @@ function SingleSongWithoutCT() {
                                                     onDrop={(e) => handleDrop(e, 'audio')}
                                                     className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${dragActive.audio
                                                         ? 'border-[#005f73] bg-blue-50'
-                                                        : 'border-gray-300 hover:border-[#005f73] hover:bg-gray-50'
+                                                        : errors.audio 
+                                                            ? 'border-red-500 bg-red-50'
+                                                            : 'border-gray-300 hover:border-[#005f73] hover:bg-gray-50'
                                                         }`}
                                                 >
                                                     <Music className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                                                     <p className="text-gray-600 mb-2">Click or Drag & Drop to upload your audio</p>
                                                     <input
                                                         type="file"
+                                                        name="audio"
                                                         accept=".mp3,.wav"
-                                                        onChange={(e) => handleFileSelect(e, 'audio')}
+                                                        onChange={handleInputChange}
                                                         className="hidden"
                                                         id="audio-upload"
                                                     />
@@ -313,6 +418,7 @@ function SingleSongWithoutCT() {
                                                         <p className="text-sm text-green-600 mt-2">✓ {formData.audio.name}</p>
                                                     )}
                                                 </div>
+                                                {errors.audio && <p className="text-xs text-red-500">{errors.audio}</p>}
                                             </div>
                                         </div>
                                     </div>
@@ -332,11 +438,13 @@ function SingleSongWithoutCT() {
                                             </label>
                                             <input
                                                 type="text"
-                                                value={formData.primaryArtist}
-                                                onChange={(e) => handleInputChange('primaryArtist', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                name="singer"
+                                                value={formData.singer}
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.singer ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
                                                 placeholder="Main Singer/Artist"
                                             />
+                                            {errors.singer && <p className="text-xs text-red-500">{errors.singer}</p>}
                                             <p className="text-xs text-gray-500">Main Singer/Artist of Your Song (Use comma for multiple)</p>
                                         </div>
 
@@ -345,9 +453,10 @@ function SingleSongWithoutCT() {
                                                 Language <span className="text-red-500">*</span>
                                             </label>
                                             <select
+                                                name="language"
                                                 value={formData.language}
-                                                onChange={(e) => handleInputChange('language', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.language ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
                                             >
                                                 <option value="">Select Language</option>
                                                 <option value="hindi">Hindi</option>
@@ -357,6 +466,7 @@ function SingleSongWithoutCT() {
                                                 <option value="telugu">Telugu</option>
                                                 <option value="other">Other</option>
                                             </select>
+                                            {errors.language && <p className="text-xs text-red-500">{errors.language}</p>}
                                         </div>
 
                                         <div className="space-y-2">
@@ -364,8 +474,9 @@ function SingleSongWithoutCT() {
                                                 Explicit Content <span className="text-red-500">*</span>
                                             </label>
                                             <select
+                                                name="explicitContent"
                                                 value={formData.explicitContent}
-                                                onChange={(e) => handleInputChange('explicitContent', e.target.value)}
+                                                onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                             >
                                                 <option value="No">No</option>
@@ -379,9 +490,10 @@ function SingleSongWithoutCT() {
                                                 Genre <span className="text-red-500">*</span>
                                             </label>
                                             <select
+                                                name="genre"
                                                 value={formData.genre}
-                                                onChange={(e) => handleInputChange('genre', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.genre ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
                                             >
                                                 <option value="">Select Genre</option>
                                                 <option value="pop">Pop</option>
@@ -391,6 +503,7 @@ function SingleSongWithoutCT() {
                                                 <option value="folk">Folk</option>
                                                 <option value="electronic">Electronic</option>
                                             </select>
+                                            {errors.genre && <p className="text-xs text-red-500">{errors.genre}</p>}
                                         </div>
 
                                         <div className="space-y-2">
@@ -399,11 +512,13 @@ function SingleSongWithoutCT() {
                                             </label>
                                             <input
                                                 type="text"
+                                                name="musicComposer"
                                                 value={formData.musicComposer}
-                                                onChange={(e) => handleInputChange('musicComposer', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.musicComposer ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
                                                 placeholder="Music composer name"
                                             />
+                                            {errors.musicComposer && <p className="text-xs text-red-500">{errors.musicComposer}</p>}
                                             <p className="text-xs text-gray-500">Use comma for Multiple</p>
                                         </div>
 
@@ -412,8 +527,9 @@ function SingleSongWithoutCT() {
                                                 YouTube Content ID <span className="text-red-500">*</span>
                                             </label>
                                             <select
-                                                value={formData.youtubeContentId}
-                                                onChange={(e) => handleInputChange('youtubeContentId', e.target.value)}
+                                                name="youtubeContentID"
+                                                value={formData.youtubeContentID}
+                                                onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                             >
                                                 <option value="Yes">Yes</option>
@@ -428,11 +544,13 @@ function SingleSongWithoutCT() {
                                             </label>
                                             <input
                                                 type="text"
+                                                name="songWriter"
                                                 value={formData.songWriter}
-                                                onChange={(e) => handleInputChange('songWriter', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.songWriter ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
                                                 placeholder="Lyricist name"
                                             />
+                                            {errors.songWriter && <p className="text-xs text-red-500">{errors.songWriter}</p>}
                                             <p className="text-xs text-gray-500">Song Writer / Lyricist. Use comma for multiple</p>
                                         </div>
 
@@ -441,9 +559,10 @@ function SingleSongWithoutCT() {
                                                 Sub Genre <span className="text-red-500">*</span>
                                             </label>
                                             <select
+                                                name="subGenre"
                                                 value={formData.subGenre}
-                                                onChange={(e) => handleInputChange('subGenre', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                onChange={handleInputChange}
+                                                className={`w-full px-4 py-3 border ${errors.subGenre ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors`}
                                             >
                                                 <option value="">Select Sub Genre</option>
                                                 <option value="romantic">Romantic</option>
@@ -452,6 +571,7 @@ function SingleSongWithoutCT() {
                                                 <option value="devotional">Devotional</option>
                                                 <option value="party">Party</option>
                                             </select>
+                                            {errors.subGenre && <p className="text-xs text-red-500">{errors.subGenre}</p>}
                                         </div>
 
                                         <div className="space-y-2">
@@ -459,8 +579,9 @@ function SingleSongWithoutCT() {
                                                 Did you use AI in your song? <span className="text-red-500">*</span>
                                             </label>
                                             <select
-                                                value={formData.usedAI}
-                                                onChange={(e) => handleInputChange('usedAI', e.target.value)}
+                                                name="useAI"
+                                                value={formData.useAI}
+                                                onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                             >
                                                 <option value="No">No</option>
@@ -474,7 +595,7 @@ function SingleSongWithoutCT() {
                                 {/* Optional Fields */}
                                 <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-[#005f73]">
                                     <h2 className="text-2xl font-bold text-[#005f73] mb-6">Additional Information (Optional)</h2>
-                                    
+
                                     <div className="space-y-4">
                                         <div className="space-y-2">
                                             <label className="block text-sm font-semibold text-gray-700">
@@ -482,18 +603,22 @@ function SingleSongWithoutCT() {
                                             </label>
                                             <input
                                                 type="text"
+                                                name="additionalCredit"
+                                                value={formData.additionalCredit}
+                                                onChange={handleInputChange}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                                 placeholder="Add any additional credits or links"
                                             />
                                         </div>
-                                        
+
                                         <div className="space-y-2">
                                             <label className="block text-sm font-semibold text-gray-700">
                                                 Release Description
                                             </label>
                                             <textarea
-                                                value={formData.releaseDescription}
-                                                onChange={(e) => handleInputChange('releaseDescription', e.target.value)}
+                                                name="description"
+                                                value={formData.description}
+                                                onChange={handleInputChange}
                                                 rows={4}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors resize-none"
                                                 placeholder="Tell us more about your song..."
@@ -510,27 +635,31 @@ function SingleSongWithoutCT() {
                                             <input
                                                 type="checkbox"
                                                 id="originalWork"
+                                                name="originalWork"
                                                 checked={formData.originalWork}
-                                                onChange={(e) => handleInputChange('originalWork', e.target.checked)}
-                                                className="w-5 h-5 text-[#005f73] border-gray-300 rounded focus:ring-[#005f73] mt-1"
+                                                onChange={handleInputChange}
+                                                className={`w-5 h-5 text-[#005f73] ${errors.originalWork ? 'border-red-500' : 'border-gray-300'} rounded focus:ring-[#005f73] mt-1`}
                                             />
                                             <label htmlFor="originalWork" className="text-sm text-gray-700 leading-relaxed">
                                                 I agree and confirm that the song uploaded by me is original in composition, lyrics, and music, and I own the copyright. If the stores request documents for the song, I am responsible for providing them. Failure to provide the necessary documents will result in no refund, and the song will either not be processed or may be taken down from the stores.
                                             </label>
                                         </div>
+                                        {errors.originalWork && <p className="text-xs text-red-500">{errors.originalWork}</p>}
 
                                         <div className="flex items-start gap-3">
                                             <input
                                                 type="checkbox"
                                                 id="agreeTerms"
+                                                name="agreeTerms"
                                                 checked={formData.agreeTerms}
-                                                onChange={(e) => handleInputChange('agreeTerms', e.target.checked)}
-                                                className="w-5 h-5 text-[#005f73] border-gray-300 rounded focus:ring-[#005f73] mt-1"
+                                                onChange={handleInputChange}
+                                                className={`w-5 h-5 text-[#005f73] ${errors.agreeTerms ? 'border-red-500' : 'border-gray-300'} rounded focus:ring-[#005f73] mt-1`}
                                             />
                                             <label htmlFor="agreeTerms" className="text-sm text-gray-700 leading-relaxed">
                                                 I have read and agree to the website terms and conditions. I Confirm, This is not a cover song, if this is a cover song then cancel this order with no refund. I have the copyright, and I'm not giving it to Theblackturn. They're just helping monetizing and distributing my song worldwide. This is not a cover song. In case of any third party claim, I have documentary evidence to prove my ownership of the song.
                                             </label>
                                         </div>
+                                        {errors.agreeTerms && <p className="text-xs text-red-500">{errors.agreeTerms}</p>}
                                     </div>
                                 </div>
 
@@ -569,13 +698,23 @@ function SingleSongWithoutCT() {
                                     {/* Submit Button */}
                                     <button
                                         type="submit"
-                                        disabled={!formData.originalWork || !formData.agreeTerms}
-                                        className={`w-full py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-[1.02] ${formData.originalWork && formData.agreeTerms
+                                        disabled={isSubmitting}
+                                        className={`w-full py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-[1.02] ${Object.keys(errors).length === 0
                                             ? 'bg-gradient-to-r from-[#005f73] to-[#0a7c91] text-white hover:shadow-lg'
                                             : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                             }`}
                                     >
-                                        Submit Song
+                                        {isSubmitting ? (
+                                            <>
+                                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Processing...
+                                            </>
+                                        ) : (
+                                            'Submit Song'
+                                        )}
                                     </button>
                                 </div>
                             </form>
