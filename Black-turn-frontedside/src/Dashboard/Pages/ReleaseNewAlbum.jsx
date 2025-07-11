@@ -5,13 +5,14 @@ import { ChevronDown, ChevronUp, User, Wallet } from 'lucide-react';
 import visa from '../../assets/images/payment-platform/Visa.png';
 import mastercard from '../../assets/images/payment-platform/mastercard.png';
 import maestro from '../../assets/images/payment-platform/maestro.png';
-import rupay from '../../assets/images/payment-platform/rupay.png';
+import rupay from '../../assets/images/payment-platform/Rupay.png';
 import emi from '../../assets/images/payment-platform/emi.png';
 import upi from '../../assets/images/payment-platform/upi.png';
 import netbanking from '../../assets/images/payment-platform/netbanking.png';
 import phonepe from '../../assets/images/payment-platform/phonepe.png';
 import googlepay from '../../assets/images/payment-platform/gpay.png';
 import { CreateAlbum } from '../../Api/api';
+import toast from 'react-hot-toast';
 
 export default function ReleaseNewAlbum() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -159,12 +160,14 @@ export default function ReleaseNewAlbum() {
 
     const result = await CreateAlbum(formData);
 
-    setSuccess('Album created successfully!');
+    // setSuccess('Album created successfully!');
+    toast.success('Album created successfully!')
     setAlbumData({ albumName: '', albumArtwork: '', couponCode: '', price: 1999 });
     setSongs([getEmptySong()]);
     scrollToTop();
   } catch (err) {
-    setError('Something went wrong while creating the album.');
+    // setError('Something went wrong while creating the album.');
+    toast.error('Something went wrong while creating the album.')
     console.error(err);
   } finally {
     setLoading(false);

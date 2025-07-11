@@ -7,6 +7,9 @@ import { GiSandsOfTime, GiSettingsKnobs } from "react-icons/gi";
 import { FaWindowClose } from "react-icons/fa";
 import { MdOutlineWarning, MdVerifiedUser } from "react-icons/md";
 import { PiWarningDiamondFill } from "react-icons/pi";
+import { ViewAlbum } from "../../Api/api";
+// import {SingleViewAlbum} from "../../Api/api"
+import { Link } from 'react-router-dom';
 
 export default function Allreleases() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -18,123 +21,15 @@ export default function Allreleases() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState(''); // <-- Added for button group
   const itemsPerPage = 9;
+  // 1. Album data state
+  const [releases, setReleases] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const BASE_URL = "https://theblack-turn-2.onrender.com";
 
-  const releases = [
-    {
-      id: 1,
-      title: "Euphoria Nights",
-      isrc: "USUM72500001",
-      liveDate: "2025-01-15",
-      qcStatus: "Approved",
-      payment: "Completed",
-      poster: "https://i.pinimg.com/736x/67/0a/a0/670aa0f33a730e74e4312417d3ce1af3.jpg"
-    },
-    {
-      id: 2,
-      title: "Midnight Mirage",
-      isrc: "USRC12500235",
-      liveDate: "2025-02-28",
-      qcStatus: "Approved",
-      payment: "Pending",
-      poster: "https://www.bollywoodhelpline.com/upload/articles/gfzp3ygb0aabri79830541.jpg"
-    },
-    {
-      id: 3,
-      title: "Midnight Mirage",
-      isrc: "USRC12500235",
-      liveDate: "2025-02-28",
-      qcStatus: "Approved",
-      payment: "Pending",
-      poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrojoIhhA6KUX20nlt-8cd75z8HIUZoLtJmQ&s"
-    },
-    {
-      id: 4,
-      title: "Midnight Mirage",
-      isrc: "USRC12500235",
-      liveDate: "2025-02-28",
-      qcStatus: "Approved",
-      payment: "Pending",
-      poster: "https://c.saavncdn.com/025/Bollywood-Item-Songs-Hindi-2025-20250320082159-500x500.jpg"
-    },
-    {
-      id: 5,
-      title: "Midnight Mirage",
-      isrc: "USRC12500235",
-      liveDate: "2025-02-28",
-      qcStatus: "Approved",
-      payment: "Pending",
-      poster: "https://i.scdn.co/image/ab67616d0000b2731e49ac58003becd2447bd10f"
-    },
-    {
-      id: 6,
-      title: "Digital Love",
-      isrc: "UKSWR2500123",
-      liveDate: "2025-04-10",
-      qcStatus: "In Review",
-      payment: "Pending",
-      poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmKek2wjz1eGPIaRa_qjI5q2t9Z9018G-dDA&s"
-    },
-    {
-      id: 7,
-      title: "City of Echoes",
-      isrc: "INH512030209",
-      liveDate: "2025-06-01",
-      qcStatus: "Cancelled",
-      payment: "Failed",
-      poster: "https://aniportalimages.s3.amazonaws.com/media/details/ANI-20231218162158.jpg"
-    },
-    {
-      id: 8,
-      title: "Midnight Mirage",
-      isrc: "USRC12500235",
-      liveDate: "2025-02-28",
-      qcStatus: "Approved",
-      payment: "Pending",
-      poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR9gHxWXNMUr3lMJr4W8rWpVh6vwyjriJ6bQ&s"
-    },
-    {
-      id: 9,
-      title: "Digital Love",
-      isrc: "UKSWR2500123",
-      liveDate: "2025-04-10",
-      qcStatus: "On Hold",
-      payment: "Pending",
-      poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStfpL4gzYt9Y1swvSHXINTwLhXY-0EbN7tyg&s"
-    },
-    {
-      id: 10,
-      title: "City of Echoes",
-      isrc: "INH512030209",
-      liveDate: "2025-06-01",
-      qcStatus: "Takedown",
-      payment: "Failed",
-      poster: "https://cdn.gulte.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-18-at-12.24.05_589265fd.jpg"
-    },
-    {
-      id: 11,
-      title: "Starlight Remedy",
-      isrc: "USUM72500078",
-      liveDate: "2025-07-20",
-      qcStatus: "NOCRequired",
-      payment: "Completed",
-      poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLft9H6AWvhObZUNcUmFTYuSHxxgJ8nuslSBLP_yvB_CaJ5yqtPjPKZKwzwaiklUvPviA&usqp=CAU"
-    },
-    {
-      id: 12,
-      title: "Starlight Remedy",
-      isrc: "USUM72500078",
-      liveDate: "2025-07-20",
-      qcStatus: "Matched",
-      payment: "Completed",
-      poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVkHxpSEjCny6ZBJs8KpmGEFIyKthBOeWmz4FMXWJ6FRRIZ4xFlw4SXzBQK4dUV-mjEr8&usqp=CAU"
-    }
-  ];
-
-  // Filter and paginate releases
+  // 3. Filtering and pagination logic
   const filteredReleases = releases.filter(release =>
-    release.title.toLowerCase().includes(searchQuery.toLowerCase())
+    (release.albumName || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   const totalPages = Math.ceil(filteredReleases.length / itemsPerPage);
   const paginatedReleases = filteredReleases.slice(
     (currentPage - 1) * itemsPerPage,
@@ -149,15 +44,25 @@ export default function Allreleases() {
   };
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = async () => {
       const mobile = window.innerWidth < 1024;
       setIsMobile(mobile);
       setIsSidebarOpen(!mobile);
+      try {
+        const res = await ViewAlbum();
+        setReleases(Array.isArray(res.data) ? res.data : (res.data.data || []));
+      } catch (err) {
+        console.error("Failed to fetch albums", err);
+        setReleases([]); // fallback to empty array on error
+      } finally {
+        setLoading(false); // ✅ stop showing loading cards
+      }
     };
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
 
   const statusCards = [
     {
@@ -239,39 +144,55 @@ export default function Allreleases() {
       </div>
     </div>
   );
+  const CardLoading = () => (
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden animate-pulse">
+      <div className="flex flex-col lg:flex-row gap-4 p-4">
+        <div className="w-full lg:w-32 h-32 bg-gray-200 rounded"></div>
+        <div className="flex-1 space-y-2">
+          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+          <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+          <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+          <div className="h-3 bg-gray-200 rounded w-1/3"></div>
+          <div className="h-8 bg-gray-300 rounded w-24 mt-3"></div>
+        </div>
+      </div>
+    </div>
+  );
+
 
   const ReleaseCard = ({ release }) => (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="flex flex-col lg:flex-row gap-4 p-4">
         <div className="w-full lg:w-32 h-32 flex-shrink-0 flex items-center justify-center relative bg-gray-100 rounded">
           <img
-            src={release.poster}
-            alt={release.poster}
+            src={
+              release.albumArtwork
+                ? release.albumArtwork.startsWith("http")
+                  ? release.albumArtwork
+                  : `${BASE_URL}/${release.albumArtwork.replace(/^\/+/, "")}`
+                : "https://via.placeholder.com/150"
+            }
+            alt={release.albumName || "Album Poster"}
             className="object-cover w-full h-full rounded"
           />
         </div>
         <div className="flex-1">
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-[#005d71]">{release.title}</h3>
+            <h3 className="text-lg font-semibold text-[#005d71]">{release.albumName}</h3>
             <div className="space-y-1 text-sm text-gray-600">
-              <div><span className="font-medium">ISRC:</span> {release.isrc}</div>
-              <div><span className="font-medium">Live Date:</span> {release.liveDate}</div>
-              <div className="flex items-center">
-                <span className="font-medium">QC:</span>
-                <span
-                  className={`ml-2 px-2 py-1 rounded text-xs font-medium ${release.qcStatus === 'Cancelled'
-                    ? 'bg-red-100 text-red-800'
-                    : 'bg-green-100 text-green-800'
-                    }`}
-                >
-                  {release.qcStatus}
-                </span>
+              <div><span className="font-medium">ISRC:</span> {release.couponCode}</div>
+              <div><span className="font-medium">Release Date:</span> {release.createdAt ? release.createdAt.slice(0, 10) : ''}</div>
+              <div><span className="font-medium">Payment:</span> <span className='ml-2 px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-800'>₹{release.price}</span></div>
+              <div>
+                <span className="font-medium">QC:</span> <span className={`ml-2 px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-800 `}>{release.songs ? release.songs.length : 0}</span>
               </div>
-              <div><span className="font-medium">Payment:</span> <span className="text-orange-600">{release.payment}</span></div>
             </div>
-            <button className="bg-[#005d71] text-white px-4 py-2 rounded text-sm hover:bg-gray-700 transition-colors">
+            <Link
+               to={`/viewSingleRelese/${release._id}`}
+              className="bg-[#005d71] text-white px-4 py-2 rounded text-sm hover:bg-gray-700 transition-colors"
+            >
               View Details
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -422,11 +343,17 @@ export default function Allreleases() {
               ))}
             </div>
 
+            {/* Add this below status cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {paginatedReleases.map((release) => (
-                <ReleaseCard key={release.id} release={release} />
-              ))}
+              {loading ? (
+                Array.from({ length: 6 }).map((_, i) => <CardLoading key={i} />)
+              ) : (
+                paginatedReleases.map((release, idx) => (
+                  <ReleaseCard key={release._id || idx} release={release} />
+                ))
+              )}
             </div>
+
             <div className="flex justify-center">
               <Pagination />
             </div>

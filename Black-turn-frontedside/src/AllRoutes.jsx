@@ -86,7 +86,7 @@ function AllRoutes() {
               <Route path='/profile' element={<ManageYourProfile/>}/>
               <Route path='/artistprofile' element={<CreateANewArtistProfile/>}/>
               <Route path='/artistprofilelink' element={<ArtistProfileLinkGeneration/>}/>
-              <Route path="/viewSingleRelese" element={<ViewSingleRelese/>}/>
+              <Route path="/viewSingleRelese/:id" element={<ViewSingleRelese/>}/>
         </Routes>
 
 

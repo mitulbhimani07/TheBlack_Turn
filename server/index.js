@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;
+const path = require('path');
 // const db = require('./config/db');
 // Connect to the database
 require('dotenv').config();
@@ -10,7 +11,7 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 const cors = require('cors');
 app.use(cors());
-app.use("/upload", express.static("upload"));
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 
 // Database connection
