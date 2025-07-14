@@ -20,7 +20,12 @@ const OnlyCallerTuneSchema = new mongoose.Schema({
   originalWork: { type: Boolean, default: false },
   agreeTerms: { type: Boolean, default: false },
   appleSpotifyLinks: { type: String },
-  oldISRCUPC: { type: String }
+  oldISRCUPC: { type: String },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('OnlyCallerTune', OnlyCallerTuneSchema);

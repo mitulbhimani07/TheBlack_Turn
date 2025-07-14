@@ -17,6 +17,11 @@ app.use('/upload', express.static(path.join(__dirname, 'upload')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Set view engine
+app.set('view engine', 'ejs');
+
+// Set the views directory (optional if using default `/views`)
+app.set('views', path.join(__dirname, 'views'));
 
 // Database connection
 const mongoose = require('mongoose');
@@ -29,7 +34,8 @@ mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.
 
 // Middleware to parse JSON and URL-encoded data
 app.get('/', (req, res) => {
-    res.send('Welcome to the API');
+  console.log('Welcome to the API');
+  res.render('Home'); // views/Home.ejs
 });
 
 // Import routes
