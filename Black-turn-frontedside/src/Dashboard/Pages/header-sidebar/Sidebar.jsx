@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Album } from 'lucide-react';
 import {
@@ -14,6 +14,19 @@ import logo1 from '../../../assets/images/logo.png';
 const Sidebar = ({ isOpen = true }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const token=localStorage.getItem("Token")
+
+  useEffect(()=>{
+    if(!token){
+      navigate('/signin')
+
+    }
+  },[token,navigate])
+
+  const LogOut=()=>{
+    localStorage.removeItem("Token")
+    navigate('/signin')
+  }
   
   // Get current active tab from URL
   const getCurrentActiveTab = () => {
@@ -281,7 +294,7 @@ const Sidebar = ({ isOpen = true }) => {
             {bottomItems.map(item => renderMenuItem(item))}
           </div>
           
-          <button className="w-full flex items-center space-x-3 px-3 py-3 rounded-lg transition-all duration-200 text-gray-700 hover:bg-red-50 hover:text-red-600">
+          <button className="w-full flex items-center space-x-3 px-3 py-3 rounded-lg transition-all duration-200 text-gray-700 hover:bg-red-50 hover:text-red-600" onClick={LogOut}>
             <FiLogOut size={20} />
             {isOpen && <span className="font-medium">Logout</span>}
           </button>
