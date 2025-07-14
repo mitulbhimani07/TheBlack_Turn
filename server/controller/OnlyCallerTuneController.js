@@ -39,3 +39,16 @@ module.exports.createOnlyCallerTune = async (req, res) => {
         });
     }
 };
+module.exports.viewOnlyCallerTuneData = async (req, res) => {
+    try {
+        const viewData = await OnlyCallerTune.find()
+        
+        res.status(200).json({
+            message: 'OnlyCallerTune data retrieved successfully',
+            data: viewData
+        });
+
+    } catch (error) {
+
+    }
+}
