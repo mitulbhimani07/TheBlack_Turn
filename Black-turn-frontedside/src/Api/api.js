@@ -86,7 +86,7 @@ export const signin = async (payload) => {
 export const CreateAlbum = async (payload) => {
     const token = localStorage.getItem("Token");
     try {
-        const response = await axios.post('https://theblack-turn-2.onrender.com/ReleseNewAlbum/create', payload, {
+        const response = await axios.post('http://localhost:3001/ReleseNewAlbum/create', payload, {
             headers: {
                 // "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
