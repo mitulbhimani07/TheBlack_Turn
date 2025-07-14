@@ -1,28 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const fs = require("fs");
 const path = require("path");
+
 const singleSongWithoutCTController = require("../controller/singleSongWithoutCTController");
 const Auth = require("../Middleware/jwt");
 
-// Multer setup
+// Ensure uploads folder exists
+const uploadDir = "uploads";
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+
+// Multer storage
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads"); // Make sure this directory exists
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  }
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
 });
 
-const upload = multer({ 
-  storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB limit
-  }
-});
+const upload = multer({ storage });
 
-// Create a new song without caller tune
+// Create song route
 router.post(
   "/create",
   Auth,
@@ -30,10 +27,10 @@ router.post(
     { name: "songPoster", maxCount: 1 },
     { name: "audio", maxCount: 1 }
   ]),
-  singleSongWithoutCTController.createSingleSongWithoutCt // Fixed function name
+  singleSongWithoutCTController.createSingleSongWithoutCt
 );
 
-// Get all songs
+// Get all songs route
 router.get("/all", singleSongWithoutCTController.getAllSongs);
 
 module.exports = router;
