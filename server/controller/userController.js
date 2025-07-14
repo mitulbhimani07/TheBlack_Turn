@@ -174,3 +174,12 @@ module.exports.googleSignin = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
+module.exports.SingleUser=async(req,res)=>{
+    try{
+
+    }catch(error){
+        console.error("single Error:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
