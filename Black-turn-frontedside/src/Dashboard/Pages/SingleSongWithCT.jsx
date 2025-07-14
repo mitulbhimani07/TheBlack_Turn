@@ -22,7 +22,7 @@ function SingleSongWithCT() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [errors, setErrors] = useState({});
-    
+
     const initialFormData = {
         songName: '',
         albumName: '',
@@ -59,7 +59,7 @@ function SingleSongWithCT() {
     // Form validation
     const validateForm = () => {
         const newErrors = {};
-        
+
         // Required fields validation
         if (!formData.songName.trim()) newErrors.songName = 'Song name is required';
         if (!formData.albumName.trim()) newErrors.albumName = 'Album name is required';
@@ -78,14 +78,14 @@ function SingleSongWithCT() {
         } else if (!validateTimeFormat(formData.firstCallerTuneTime)) {
             newErrors.firstCallerTuneTime = 'Invalid time format (use mm:ss)';
         }
-        
+
         // Optional fields validation
         if (formData.secondCallerTune.trim() && !formData.secondCallerTuneTime.trim()) {
             newErrors.secondCallerTuneTime = 'Second caller tune time is required when name is provided';
         } else if (formData.secondCallerTuneTime.trim() && !validateTimeFormat(formData.secondCallerTuneTime)) {
             newErrors.secondCallerTuneTime = 'Invalid time format (use mm:ss)';
         }
-        
+
         // Terms validation
         if (!formData.originalWork) newErrors.originalWork = 'You must confirm this is original work';
         if (!formData.agreeTerms) newErrors.agreeTerms = 'You must agree to the terms and conditions';
@@ -122,44 +122,44 @@ function SingleSongWithCT() {
     };
 
     const handleFileSelect = (e, type) => {
-    const file = e.target.files[0];
-    if (file) {
-        let isValid = true;
-        let errorMessage = '';
-        
-        if (type === 'songPoster') {
-            const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            const maxSize = 5 * 1024 * 1024; // 5MB
-            
-            if (!validTypes.includes(file.type)) {
-                isValid = false;
-                errorMessage = 'Only JPG, PNG files are allowed';
-            } else if (file.size > maxSize) {
-                isValid = false;
-                errorMessage = 'File size must be less than 5MB';
+        const file = e.target.files[0];
+        if (file) {
+            let isValid = true;
+            let errorMessage = '';
+
+            if (type === 'songPoster') {
+                const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                const maxSize = 5 * 1024 * 1024; // 5MB
+
+                if (!validTypes.includes(file.type)) {
+                    isValid = false;
+                    errorMessage = 'Only JPG, PNG files are allowed';
+                } else if (file.size > maxSize) {
+                    isValid = false;
+                    errorMessage = 'File size must be less than 5MB';
+                }
+            } else if (type === 'audio') {
+                const validTypes = ['audio/mpeg', 'audio/wav'];
+                const maxSize = 200 * 1024 * 1024; // 200MB
+
+                if (!validTypes.includes(file.type)) {
+                    isValid = false;
+                    errorMessage = 'Only MP3, WAV files are allowed';
+                } else if (file.size > maxSize) {
+                    isValid = false;
+                    errorMessage = 'File size must be less than 200MB';
+                }
             }
-        } else if (type === 'audio') {
-            const validTypes = ['audio/mpeg', 'audio/wav'];
-            const maxSize = 200 * 1024 * 1024; // 200MB
-            
-            if (!validTypes.includes(file.type)) {
-                isValid = false;
-                errorMessage = 'Only MP3, WAV files are allowed';
-            } else if (file.size > maxSize) {
-                isValid = false;
-                errorMessage = 'File size must be less than 200MB';
+
+            if (isValid) {
+                handleInputChange(type, file);
+                // Clear any previous error
+                setErrors(prev => ({ ...prev, [type]: undefined }));
+            } else {
+                setErrors(prev => ({ ...prev, [type]: errorMessage }));
             }
         }
-        
-        if (isValid) {
-            handleInputChange(type, file);
-            // Clear any previous error
-            setErrors(prev => ({ ...prev, [type]: undefined }));
-        } else {
-            setErrors(prev => ({ ...prev, [type]: errorMessage }));
-        }
-    }
-};
+    };
 
     const resetForm = () => {
         setFormData(initialFormData);
@@ -168,81 +168,81 @@ function SingleSongWithCT() {
     };
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    if (!validateForm()) {
-        toast.error('Please fix the errors in the form');
-        return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-        const formDataToSend = new FormData();
-        
-        // Required fields
-        formDataToSend.append('songName', formData.songName);
-        formDataToSend.append('albumName', formData.albumName);
-        formDataToSend.append('releseDate', formData.releseDate);
-        
-        // File handling - ensure files exist
-        if (formData.songPoster) {
-            formDataToSend.append('songPoster', formData.songPoster, formData.songPoster.name);
-        }
-        if (formData.audio) {
-            formDataToSend.append('audio', formData.audio, formData.audio.name);
-        }
-        
-        // Other required fields
-        formDataToSend.append('singer', formData.singer);
-        formDataToSend.append('musicComposer', formData.musicComposer);
-        formDataToSend.append('songWriter', formData.songWriter);
-        formDataToSend.append('language', formData.language);
-        formDataToSend.append('genre', formData.genre);
-        formDataToSend.append('subGenre', formData.subGenre);
-        formDataToSend.append('firstCallerTune', formData.firstCallerTune);
-        formDataToSend.append('firstCallerTuneTime', formData.firstCallerTuneTime);
-        
-        // Optional fields - only append if they have values
-        if (formData.secondCallerTune) {
-            formDataToSend.append('secondCallerTune', formData.secondCallerTune);
-        }
-        if (formData.secondCallerTuneTime) {
-            formDataToSend.append('secondCallerTuneTime', formData.secondCallerTuneTime);
-        }
-        
-        // Other fields
-        formDataToSend.append('explicitContent', String(formData.explicitContent));
-formDataToSend.append('youTubeContentID', String(formData.youTubeContentID));
-formDataToSend.append('useAI', String(formData.useAI));
-formDataToSend.append('description', String(formData.description || ""));
-formDataToSend.append('originalWork', formData.originalWork.toString());
-formDataToSend.append('agreeTerms', formData.agreeTerms.toString());
-
-
-
-        // Debug: Log FormData contents
-        for (let [key, value] of formDataToSend.entries()) {
-            console.log(key, value);
+        if (!validateForm()) {
+            toast.error('Please fix the errors in the form');
+            return;
         }
 
-        const response = await CreateSingleSongCT(formDataToSend);
-        
-        if (response.success) {
-            setSubmitSuccess(true);
-            toast.success('Song created successfully');
-            resetForm();
-        } else {
-            toast.error(response.message || 'Error submitting form');
+        setIsSubmitting(true);
+
+        try {
+            const formDataToSend = new FormData();
+
+            // Required fields
+            formDataToSend.append('songName', formData.songName);
+            formDataToSend.append('albumName', formData.albumName);
+            formDataToSend.append('releseDate', formData.releseDate);
+
+            // File handling - ensure files exist
+            if (formData.songPoster) {
+                formDataToSend.append('songPoster', formData.songPoster, formData.songPoster.name);
+            }
+            if (formData.audio) {
+                formDataToSend.append('audio', formData.audio, formData.audio.name);
+            }
+
+            // Other required fields
+            formDataToSend.append('singer', formData.singer);
+            formDataToSend.append('musicComposer', formData.musicComposer);
+            formDataToSend.append('songWriter', formData.songWriter);
+            formDataToSend.append('language', formData.language);
+            formDataToSend.append('genre', formData.genre);
+            formDataToSend.append('subGenre', formData.subGenre);
+            formDataToSend.append('firstCallerTune', formData.firstCallerTune);
+            formDataToSend.append('firstCallerTuneTime', formData.firstCallerTuneTime);
+
+            // Optional fields - only append if they have values
+            if (formData.secondCallerTune) {
+                formDataToSend.append('secondCallerTune', formData.secondCallerTune);
+            }
+            if (formData.secondCallerTuneTime) {
+                formDataToSend.append('secondCallerTuneTime', formData.secondCallerTuneTime);
+            }
+
+            // Other fields
+            formDataToSend.append('explicitContent', String(formData.explicitContent));
+            formDataToSend.append('youTubeContentID', String(formData.youTubeContentID));
+            formDataToSend.append('useAI', String(formData.useAI));
+            formDataToSend.append('description', String(formData.description || ""));
+            formDataToSend.append('originalWork', formData.originalWork.toString());
+            formDataToSend.append('agreeTerms', formData.agreeTerms.toString());
+
+
+
+            // Debug: Log FormData contents
+            for (let [key, value] of formDataToSend.entries()) {
+                console.log(key, value);
+            }
+
+            const response = await CreateSingleSongCT(formDataToSend);
+
+            if (response.success) {
+                setSubmitSuccess(true);
+                toast.success('Song created successfully');
+                resetForm();
+            } else {
+                toast.error(response.message || 'Error submitting form');
+            }
+
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            toast.error(error.response?.data?.message || 'Error submitting form. Please try again.');
+        } finally {
+            setIsSubmitting(false);
         }
-        
-    } catch (error) {
-        console.error('Error submitting form:', error);
-        toast.error(error.response?.data?.message || 'Error submitting form. Please try again.');
-    } finally {
-        setIsSubmitting(false);
-    }
-};
+    };
 
     const paymentplatform = [
         { img: visa },
@@ -321,7 +321,7 @@ formDataToSend.append('agreeTerms', formData.agreeTerms.toString());
                                         <div>
                                             <h3 className="text-lg font-semibold text-green-800">Song Submitted Successfully!</h3>
                                             <p className="text-green-700">Your song has been submitted for review. You will receive updates via email.</p>
-                                            <button 
+                                            <button
                                                 onClick={() => resetForm()}
                                                 className="mt-4 px-4 py-2 bg-[#005f73] text-white rounded-lg hover:bg-[#004a5a] transition-colors"
                                             >
@@ -331,7 +331,7 @@ formDataToSend.append('agreeTerms', formData.agreeTerms.toString());
                                     </div>
                                 </div>
                             ) : (
-                                <form onSubmit={handleSubmit}  className="space-y-8">
+                                <form onSubmit={handleSubmit} className="space-y-8">
                                     {/* Basic Information */}
                                     <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-[#005f73]">
                                         <h2 className="text-2xl font-bold text-[#005f73] mb-6 flex items-center gap-3">
