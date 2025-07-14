@@ -2,23 +2,45 @@ const UserModel = require("../model/userModel");
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 const SALT_ROUNDS = 10;
+const multer = require('multer');
+
+// Multer setup
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'upload/'),
+  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+});
+const upload = multer({ storage });
+module.exports.upload = upload;
+
+const normalizePath = (file) => file ? file.path.replace(/\\\\/g, '/').replace(/\\/g, '/') : '';
 
 module.exports.signup = async (req, res) => {
-    try {
-
-         if (req.body.password) {
-            req.body.password = await bcrypt.hash(req.body.password, SALT_ROUNDS);
-        }
-        var data=await UserModel.create(req.body)
-
-        res.status(200).json({
-            status:"Signup Successfully.",
-            data
-        })
-    } catch (error) {
-        console.error('Error adding blog:', error);
-        res.status(500).json({ message: 'Internal server error' });
+  try {
+    // 1. Extract the file (profile pic)
+    const profilePicPath = req.file ? `uploads/${req.file.filename}` : '';
+    req.body.name=req.body.fname +" "+req.body.lname
+    
+    // 2. Hash the password
+    if (req.body.password) {
+      req.body.password = await bcrypt.hash(req.body.password, SALT_ROUNDS);
     }
+
+    // 3. Create user with profilepic path
+    const newUser = new UserModel({
+      ...req.body,
+      profilepic: profilePicPath, // ✅ Correct full path
+    });
+
+    const savedUser = await newUser.save();
+
+    res.status(200).json({
+      status: "Signup Successfully.",
+      data: savedUser,
+    });
+  } catch (error) {
+    console.error('Signup Error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 };
 
 module.exports.Login = async (req, res) => {
@@ -152,9 +174,3 @@ module.exports.googleSignin = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
-
-
-
-
-
-

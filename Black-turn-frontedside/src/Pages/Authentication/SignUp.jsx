@@ -22,16 +22,21 @@ export default function SignUp() {
   }
 }, []);
   const [formData, setFormData] = useState({
-    username: '',
+    fname: '',
+    lname:'',
     email: '',
     password: '',
     conPassword: ''
   });
   const validateSignUp = () => {
-  const { username, email, password, conPassword } = formData;
+  const { fname,lname, email, password, conPassword } = formData;
 
-  if (username.trim() === '') {
-    alert("Username is required");
+  if (fname.trim() === '') {
+    alert("First Name is required");
+    return false;
+  }
+  if (lname.trim() === '') {
+    alert("Last Name is required");
     return false;
   }
   if (email.trim() === '') {
@@ -102,19 +107,38 @@ export default function SignUp() {
             <div className="space-y-4 sm:space-y-6">
               <form action="" method='post' onSubmit={handleSubmit}>
                 {/* Username Field */}
-              <div className="relative mb-3">
-                <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
-                  <User className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
-                </div>
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-orange-400 focus:bg-white transition-all duration-200 text-gray-700 placeholder-gray-500 text-sm sm:text-base"
-                />
-              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-3">
+  {/* First Name */}
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+      <User className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+    </div>
+    <input
+      type="text"
+      name="fname"
+      placeholder="First Name"
+      value={formData.fname}
+      onChange={handleChange}
+      className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-orange-400 focus:bg-white transition-all duration-200 text-gray-700 placeholder-gray-500 text-sm sm:text-base"
+    />
+  </div>
+
+  {/* Last Name */}
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+      <User className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+    </div>
+    <input
+      type="text"
+      name="lname"
+      placeholder="Last Name"
+      value={formData.lname}
+      onChange={handleChange}
+      className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-orange-400 focus:bg-white transition-all duration-200 text-gray-700 placeholder-gray-500 text-sm sm:text-base"
+    />
+  </div>
+</div>
+
 
               {/* Email Field */}
               <div className="relative mb-3">
