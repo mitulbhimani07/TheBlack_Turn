@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './header-sidebar/Sidebar';
 import Navbar from './header-sidebar/Header';
-import { singleViewNoc } from '../../Api/api';
+import { getLoggedInUser, singleViewNoc } from '../../Api/api';
 
 export default function ManageYourProfile() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -9,27 +9,29 @@ export default function ManageYourProfile() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [activeTab, setActiveTab] = useState('manage-profile');
   const [isMobile, setIsMobile] = useState(false);
-  const [activeSection, setActiveSection] = useState('view'); // view | edit | password
+  const [activeSection, setActiveSection] = useState('view');
 
   const [profile, setProfile] = useState({
-    fullName: 'Mitul Bhimani',
-    about: 'Your Default Bio',
-    label: 'mitul',
-    street: 'Your Street Address',
-    city: 'Surat',
-    state: 'Gujarat',
-    pincode: '395010',
-    country: 'India',
-    phone: '07984268670',
-    email: 'mitulbhimani281@gmail.com',
-    profilePic: null,
+    fullName: '',
+    fname: '',
+    lname: '',
+    about: '',
+    label: '',
+    street: '',
+    city: '',
+    state: '',
+    pincode: '',
+    country: '',
+    phone: '',
+    email: '',
+    profilePic: '',
     payment: {
-      adhar: '1234 5678 9123',
-      pan: 'ABCDE1234F',
-      bankName: 'State Bank of India',
-      accountHolder: 'Mitul Bhimani',
-      ifsc: 'SBIN0001234',
-      accountNumber: '123456789012'
+      adhar: '',
+      pan: '',
+      bankName: '',
+      accountHolder: '',
+      ifsc: '',
+      accountNumber: ''
     }
   });
 
@@ -59,23 +61,42 @@ export default function ManageYourProfile() {
   const handleImageChange = (e) => {
     setProfile({ ...profile, profilePic: URL.createObjectURL(e.target.files[0]) });
   };
-useEffect(() => {
-  const handleResize = () => {
-    const mobile = window.innerWidth < 1024;
-    setIsMobile(mobile);
-    setIsSidebarOpen(!mobile);
-  };
 
+  // ✅ 1. Fetch Logged-in user (name, email, phone, profile pic)
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await getLoggedInUser();
+        const userData = res.data.data;
+
+        setProfile((prev) => ({
+          ...prev,
+          fullName: userData.name || '',
+          fname: userData.fname || '',
+          lname: userData.lname || '',
+          email: userData.email || '',
+          phone: userData.phone || '',
+          profilePic: userData.profilepic || '',
+          label: userData.fname || '',
+        }));
+      } catch (err) {
+        console.error('❌ Error fetching logged-in user:', err);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+   useEffect(() => {
   const fetchNocProfile = async () => {
     try {
-      const result = await singleViewNoc();
-      // result.data is the whole axios response, so use result.data.data for the actual NOC object
-      const userData = result.data.data;
+      const result = await singleViewNoc(); // automatically uses logged-in userId from token
+      const userData = result.data;
+
       if (userData) {
         setProfile((prev) => ({
           ...prev,
-          fullName: userData.fullname || prev.fullName,
-          label: userData.labelname || prev.label,
+          label: userData.labelname || prev.fname,
           phone: userData.phoneno || prev.phone,
           email: userData.email || prev.email,
           payment: {
@@ -93,20 +114,35 @@ useEffect(() => {
           cancelledPassbook: userData.cancelledPassbook || '',
           signature: userData.Signature || ''
         }));
-      } else {
-        console.warn("No NOC data found");
       }
+
+      console.log("userData---",userData)
     } catch (err) {
-      console.error("❌ Error loading NOC data:", err);
+      console.error('❌ Error loading NOC data:', err);
     }
   };
 
-  handleResize();
   fetchNocProfile();
-
-  window.addEventListener('resize', handleResize);
-  return () => window.removeEventListener('resize', handleResize);
 }, []);
+
+
+  // ✅ 2. Fetch NOC Payment Details
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      setIsSidebarOpen(!mobile);
+    };
+
+    
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+ 
 
 
   return (
@@ -144,7 +180,7 @@ useEffect(() => {
           {/* Success message */}
           <div className="max-w-7xl mx-auto w-full mt-4">
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded">
-              Hey Mitul Bhimani, Welcome to <span className="font-bold text-[#004d66]">The BLACK TURN</span> Family
+              Hey {profile.fullName || 'User'}, Welcome to <span className="font-bold text-[#004d66]">The BLACK TURN</span> Family
             </div>
           </div>
 
@@ -159,8 +195,12 @@ useEffect(() => {
             <div className="bg-white rounded-lg shadow-md p-6 md:p-8 w-full max-w-md mx-auto lg:mx-0">
               {/* Profile Header */}
               <div className="flex flex-col items-center text-center">
-                <img
-                  src={profile.profilePic || "https://ui-avatars.com/api/?name=Mitul+Bhimani&background=004d66&color=fff"}
+                 <img
+                  src={
+                    profile.profilePic
+                      ? profile.profilePic
+                      : `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.fullName || "User")}&background=004d66&color=fff`
+                  }
                   alt="Profile"
                   className="w-24 h-24 rounded-full mb-3"
                 />

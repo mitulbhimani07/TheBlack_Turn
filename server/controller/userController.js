@@ -175,11 +175,30 @@ module.exports.googleSignin = async (req, res) => {
     }
 };
 
-module.exports.SingleUser=async(req,res)=>{
-    try{
-
-    }catch(error){
-        console.error("single Error:", error);
-        return res.status(500).json({ message: "Internal server error" });
+module.exports.SingleUser = async (req, res) => {
+  try {
+    // Get token from headers
+    const token = req.headers.authorization?.split(' ')[1]; // Bearer <token>
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized: No token provided' });
     }
-}
+
+    // Decode token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.userId;
+
+    // Fetch user by ID
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({
+      message: 'User fetched successfully',
+      data: user,
+    });
+  } catch (error) {
+    console.error('SingleUser Error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};

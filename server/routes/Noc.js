@@ -11,6 +11,6 @@ route.post('/create', NOCController.upload.fields([
     { name: 'Signature', maxCount: 1 }
 ]), Auth,NOCController.createNoc);
 route.get('/viewNoc', NOCController.viewNoc);
-route.get('/noc/:id', NOCController.singleViewNoc);
+route.get('/singleNoc',Auth, NOCController.singleViewNoc);
 
 module.exports = route

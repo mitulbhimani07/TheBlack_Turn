@@ -76,28 +76,29 @@ module.exports.viewNoc = async (req, res) => {
     }
 };
 module.exports.singleViewNoc = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const nocData = await NOCModel.findById(id);
+  try {
+    const userId = req.user; // from middleware
 
-        if (!nocData) {
-            return res.status(404).json({
-                status: false,
-                message: "NOC data not found"
-            });
-        }
+    const nocData = await NOCModel.findOne({ userId });
 
-        res.status(200).json({
-            status: true,
-            message: "Fetched NOC data successfully",
-            data: nocData,
-        });
-    } catch (error) {
-        console.error('Error fetching NOC data:', error);
-        res.status(500).json({
-            status: false,
-            message: 'Internal Server Error',
-            error: error.message
-        });
+    if (!nocData) {
+      return res.status(404).json({
+        status: false,
+        message: "NOC data not found for this user"
+      });
     }
+
+    res.status(200).json({
+      status: true,
+      message: "Fetched NOC data successfully",
+      data: nocData,
+    });
+  } catch (error) {
+    console.error('Error fetching NOC data:', error);
+    res.status(500).json({
+      status: false,
+      message: 'Internal Server Error',
+      error: error.message
+    });
+  }
 };

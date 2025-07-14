@@ -38,7 +38,7 @@ export const GetBlogById = async (id) => {
 }
 export const Signup = async (payload) => {
     try {
-        const response = await axios.post('https://theblack-turn-2.onrender.com/user/signup', payload)
+        const response = await axios.post('http://localhost:3001/user/signup', payload)
 
         console.log("signup----", response.data)
         return response.data
@@ -161,20 +161,16 @@ export const CreateSingleSongCT = async (payload) => {
         throw error;
     }
 }
-export const singleViewNoc = async (payload) => {
-    try {
-        const response = await axios.get(`https://theblack-turn-2.onrender.com/NOC/noc/${id}`, payload);
-        console.log('✅ NOC Data fetched successfully:', response.data);
-        return {
-            status: true,
-            message: 'Data fetched successfully',
-            data: response.data
-        };
-    } catch (error) {
-        console.error('❌ Error fetching NOC data:', error.message);
-        throw error;
+export const singleViewNoc = async () => {
+  const token = localStorage.getItem('Token');
+  const response=await axios.get('http://localhost:3001/NOC/singleNoc', {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
-}
+  });
+  console.log("singleviewNoc",response)
+  return response.data
+};
 
 
 export const CreateSingleSongWithoutCt = async (payload) => {
@@ -218,4 +214,14 @@ export const OnlyCallerTuneData = async (payload) => {
             error: error.response?.data || error
         };
     }
+};
+
+
+export const getLoggedInUser = async () => {
+  const token = localStorage.getItem('Token');
+  return axios.get('http://localhost:3001/user/singleUser', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 };

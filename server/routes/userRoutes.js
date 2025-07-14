@@ -5,6 +5,7 @@ userRoutes.post("/signup",userController.upload.single('profilepic'),userControl
 userRoutes.post("/login",userController.Login)
 userRoutes.post("/googleSignup",userController.googleSignup)
 userRoutes.post("/googleSignin",userController.googleSignin)
+userRoutes.get('/singleUser', userController.SingleUser);
 
 
 
