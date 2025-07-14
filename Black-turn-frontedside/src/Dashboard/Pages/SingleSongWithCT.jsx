@@ -122,26 +122,44 @@ function SingleSongWithCT() {
     };
 
     const handleFileSelect = (e, type) => {
-        const file = e.target.files[0];
-        if (file) {
-            // Validate file types
-            if (type === 'songPoster') {
-                const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-                if (!validTypes.includes(file.type)) {
-                    setErrors(prev => ({ ...prev, songPoster: 'Only JPG, PNG files are allowed' }));
-                    return;
-                }
-            } else if (type === 'audio') {
-                const validTypes = ['audio/mpeg', 'audio/wav'];
-                if (!validTypes.includes(file.type)) {
-                    setErrors(prev => ({ ...prev, audio: 'Only MP3, WAV files are allowed' }));
-                    return;
-                }
-            }
+    const file = e.target.files[0];
+    if (file) {
+        let isValid = true;
+        let errorMessage = '';
+        
+        if (type === 'songPoster') {
+            const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            const maxSize = 5 * 1024 * 1024; // 5MB
             
-            handleInputChange(type, file);
+            if (!validTypes.includes(file.type)) {
+                isValid = false;
+                errorMessage = 'Only JPG, PNG files are allowed';
+            } else if (file.size > maxSize) {
+                isValid = false;
+                errorMessage = 'File size must be less than 5MB';
+            }
+        } else if (type === 'audio') {
+            const validTypes = ['audio/mpeg', 'audio/wav'];
+            const maxSize = 200 * 1024 * 1024; // 200MB
+            
+            if (!validTypes.includes(file.type)) {
+                isValid = false;
+                errorMessage = 'Only MP3, WAV files are allowed';
+            } else if (file.size > maxSize) {
+                isValid = false;
+                errorMessage = 'File size must be less than 200MB';
+            }
         }
-    };
+        
+        if (isValid) {
+            handleInputChange(type, file);
+            // Clear any previous error
+            setErrors(prev => ({ ...prev, [type]: undefined }));
+        } else {
+            setErrors(prev => ({ ...prev, [type]: errorMessage }));
+        }
+    }
+};
 
     const resetForm = () => {
         setFormData(initialFormData);
@@ -150,51 +168,81 @@ function SingleSongWithCT() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        if (!validateForm()) {
-            toast.error('Please fix the errors in the form');
-            return;
+    if (!validateForm()) {
+        toast.error('Please fix the errors in the form');
+        return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+        const formDataToSend = new FormData();
+        
+        // Required fields
+        formDataToSend.append('songName', formData.songName);
+        formDataToSend.append('albumName', formData.albumName);
+        formDataToSend.append('releseDate', formData.releseDate);
+        
+        // File handling - ensure files exist
+        if (formData.songPoster) {
+            formDataToSend.append('songPoster', formData.songPoster, formData.songPoster.name);
+        }
+        if (formData.audio) {
+            formDataToSend.append('audio', formData.audio, formData.audio.name);
+        }
+        
+        // Other required fields
+        formDataToSend.append('singer', formData.singer);
+        formDataToSend.append('musicComposer', formData.musicComposer);
+        formDataToSend.append('songWriter', formData.songWriter);
+        formDataToSend.append('language', formData.language);
+        formDataToSend.append('genre', formData.genre);
+        formDataToSend.append('subGenre', formData.subGenre);
+        formDataToSend.append('firstCallerTune', formData.firstCallerTune);
+        formDataToSend.append('firstCallerTuneTime', formData.firstCallerTuneTime);
+        
+        // Optional fields - only append if they have values
+        if (formData.secondCallerTune) {
+            formDataToSend.append('secondCallerTune', formData.secondCallerTune);
+        }
+        if (formData.secondCallerTuneTime) {
+            formDataToSend.append('secondCallerTuneTime', formData.secondCallerTuneTime);
+        }
+        
+        // Other fields
+        formDataToSend.append('explicitContent', String(formData.explicitContent));
+formDataToSend.append('youTubeContentID', String(formData.youTubeContentID));
+formDataToSend.append('useAI', String(formData.useAI));
+formDataToSend.append('description', String(formData.description || ""));
+formDataToSend.append('originalWork', formData.originalWork.toString());
+formDataToSend.append('agreeTerms', formData.agreeTerms.toString());
+
+
+
+        // Debug: Log FormData contents
+        for (let [key, value] of formDataToSend.entries()) {
+            console.log(key, value);
         }
 
-        setIsSubmitting(true);
-
-        try {
-            const formDataToSend = new FormData();
-            
-            // Append all fields to formData
-            formDataToSend.append('songName', formData.songName);
-            formDataToSend.append('albumName', formData.albumName);
-            formDataToSend.append('releseDate', formData.releseDate);
-            if (formData.songPoster) formDataToSend.append('songPoster', formData.songPoster);
-            if (formData.audio) formDataToSend.append('audio', formData.audio);
-            formDataToSend.append('singer', formData.singer);
-            formDataToSend.append('musicComposer', formData.musicComposer);
-            formDataToSend.append('songWriter', formData.songWriter);
-            formDataToSend.append('language', formData.language);
-            formDataToSend.append('genre', formData.genre);
-            formDataToSend.append('subGenre', formData.subGenre);
-            formDataToSend.append('firstCallerTune', formData.firstCallerTune);
-            formDataToSend.append('firstCallerTuneTime', formData.firstCallerTuneTime);
-            formDataToSend.append('secondCallerTune', formData.secondCallerTune);
-            formDataToSend.append('secondCallerTuneTime', formData.secondCallerTuneTime);
-            formDataToSend.append('explicitContent', formData.explicitContent);
-            formDataToSend.append('youTubeContentID', formData.youTubeContentID);
-            formDataToSend.append('useAI', formData.useAI);
-            formDataToSend.append('description', formData.description);
-
-            await CreateSingleSongCT(formDataToSend);
+        const response = await CreateSingleSongCT(formDataToSend);
+        
+        if (response.success) {
             setSubmitSuccess(true);
             toast.success('Song created successfully');
             resetForm();
-            
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            toast.error('Error submitting form. Please try again.');
-        } finally {
-            setIsSubmitting(false);
+        } else {
+            toast.error(response.message || 'Error submitting form');
         }
-    };
+        
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        toast.error(error.response?.data?.message || 'Error submitting form. Please try again.');
+    } finally {
+        setIsSubmitting(false);
+    }
+};
 
     const paymentplatform = [
         { img: visa },
@@ -283,7 +331,7 @@ function SingleSongWithCT() {
                                     </div>
                                 </div>
                             ) : (
-                                <form onSubmit={handleSubmit} className="space-y-8">
+                                <form onSubmit={handleSubmit}  className="space-y-8">
                                     {/* Basic Information */}
                                     <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-[#005f73]">
                                         <h2 className="text-2xl font-bold text-[#005f73] mb-6 flex items-center gap-3">

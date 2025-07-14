@@ -170,10 +170,10 @@ export default function Allreleases() {
                 ? release.albumArtwork.startsWith("http")
                   ? release.albumArtwork
                   : `${BASE_URL}/${release.albumArtwork.replace(/^\/+/, "")}`
-                : "https://via.placeholder.com/150"
+                : "http://localhost:3001/"
             }
             alt={release.albumName || "Album Poster"}
-            className="object-cover w-full h-full rounded"
+            className="object-cover w-full h-full rounded-lg"
           />
         </div>
         <div className="flex-1">
