@@ -148,9 +148,10 @@ export const CreateSingleSongCT = async (payload) => {
     const token = localStorage.getItem("Token");
 
     try {
-        const response = await axios.post('https://theblack-turn-2.onrender.com/singlesongCT/create', payload, {
+        const response = await axios.post('http://localhost:3001/singlesongCT/create', payload, {
             headers: {
                 // "Content-Type": "application/json",
+                'Content-Type': 'multipart/form-data',
                 "Authorization": `Bearer ${token}`
             },
         })

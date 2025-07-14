@@ -3,18 +3,20 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;
 const path = require('path');
-const fileUpload = require('express-fileupload');
 
 // const db = require('./config/db');
 // Connect to the database
 require('dotenv').config();
 
-app.use(fileUpload());
+// app.use(fileUpload());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 const cors = require('cors');
 app.use(cors());
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 // Database connection
 const mongoose = require('mongoose');
@@ -25,7 +27,7 @@ mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.
         console.log('Error connecting to the database:', err);
     });
 
-    // Middleware to parse JSON and URL-encoded data
+// Middleware to parse JSON and URL-encoded data
 app.get('/', (req, res) => {
     res.send('Welcome to the API');
 });
@@ -37,13 +39,13 @@ app.use('/user', require('./routes/userRoutes'));
 // ReleseNewAlbum
 app.use('/ReleseNewAlbum', require('./routes/ReleseNewAlbumRoute'));
 app.use('/NOC', require('./routes/Noc'));
-app.use('/OnlyCallerTune',require('./routes/OnlyCallerTuneRoutes'))
+app.use('/OnlyCallerTune', require('./routes/OnlyCallerTuneRoutes'))
 
 // singlesongwithct
-app.use("/singlesongCT",require("./routes/singleSongCTRoutes"))
+app.use("/singlesongCT", require("./routes/singleSongCTRoutes"))
 
 // singlesongwitoutct
-app.use("/singlesongWithoutCT",require("./routes/singleSongWithoutCTRoutes"))
+app.use("/singlesongWithoutCT", require("./routes/singleSongWithoutCTRoutes"))
 
 
 app.listen(port, (err) => {
