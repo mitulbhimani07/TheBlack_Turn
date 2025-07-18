@@ -36,9 +36,9 @@ export default function Signin() {
     try {
       const response = await signin(formData);
       console.log("Signup success:", response.data);
-      console.log("token",response.token)
-      const token=response.token
-      localStorage.setItem('Token',token)
+      console.log("token", response.token)
+      const token = response.token
+      localStorage.setItem('Token', token)
       // alert("Signup successful!");
       toast.success("SignIn Successfully!!")
       navigate('/dashboard');
@@ -51,7 +51,7 @@ export default function Signin() {
 
   return (
     <div className="min-h-screen bg-[#EBF4F5] flex items-center justify-center p-3 sm:p-6 relative overflow-hidden">
-      
+
       {/* Main Card */}
       <div className="bg-white rounded-xl sm:rounded-3xl shadow-2xl max-w-6xl w-full overflow-hidden flex flex-col lg:flex-row">
         {/* Left - Login Form */}
@@ -99,10 +99,16 @@ export default function Signin() {
               >
                 SIGN IN
               </button>
+              {/* Forgot Password Link */}
+              <div className="text-right">
+                <Link to="/verify-email" className="text-sm text-blue-500 hover:underline">
+                  Forgot Password?
+                </Link>
+              </div>
             </form>
 
             {/* Divider */}
-            <div className="mt-6 sm:mt-8 mb-4 sm:mb-6">
+            <div className="mt-6 sm:mt-3 mb-4 sm:mb-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300"></div>

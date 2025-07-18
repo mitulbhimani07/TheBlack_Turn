@@ -42,6 +42,9 @@ import ManageYourProfile from './Dashboard/Pages/ManageYourProfile'
 import CreateANewArtistProfile from './Dashboard/Pages/ARTISTPROFILES/CreateANewArtistProfile'
 import ArtistProfileLinkGeneration from './Dashboard/Pages/ARTISTPROFILES/ArtistProfileLinkGeneration'
 import ViewSingleRelese from './Dashboard/Pages/ViewSingleRelese'
+import VerifyEmail from './Pages/Authentication/VerifyEmail'
+import OtpVerification from './Pages/Authentication/OTPVerification'
+import ForgotPassword from './Pages/Authentication/ForgotPassword'
 
 function AllRoutes() {
   return (
@@ -64,6 +67,9 @@ function AllRoutes() {
               <Route path='/Signin' element={<Signin/>} />
               <Route path='*' element={<Pagenotfound/>} />
               <Route path='/Signup' element={<Signp/>} />
+              <Route path='/verify-email' element={<VerifyEmail/>} />
+              <Route path='/OtpVerification' element={<OtpVerification/>} />
+              <Route path='/forgotpassword' element={<ForgotPassword/>} />
 
               {/* Dashboard */}
               <Route path="/dashboard" element={<Dashboard/>}/>

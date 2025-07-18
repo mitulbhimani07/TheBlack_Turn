@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './header-sidebar/Sidebar';
 import Navbar from './header-sidebar/Header';
-import { getLoggedInUser, singleViewNoc } from '../../Api/api';
+import { getLoggedInUser, singleViewNoc, changePassword } from '../../Api/api';
 
 export default function ManageYourProfile() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -10,6 +10,8 @@ export default function ManageYourProfile() {
   const [activeTab, setActiveTab] = useState('manage-profile');
   const [isMobile, setIsMobile] = useState(false);
   const [activeSection, setActiveSection] = useState('view');
+  const [passwordChangeMsg, setPasswordChangeMsg] = useState('');
+  const [passwordChangeError, setPasswordChangeError] = useState('');
 
   const [profile, setProfile] = useState({
     fullName: '',
@@ -62,6 +64,21 @@ export default function ManageYourProfile() {
     setProfile({ ...profile, profilePic: URL.createObjectURL(e.target.files[0]) });
   };
 
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    setPasswordChangeMsg('');
+    setPasswordChangeError('');
+
+    try {
+      const res = await changePassword(passwords);
+      setPasswordChangeMsg(res.message || "Password changed successfully");
+      setPasswords({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    } catch (err) {
+      setPasswordChangeError(err.message || "Something went wrong");
+    }
+  };
+
+
   // ✅ 1. Fetch Logged-in user (name, email, phone, profile pic)
   useEffect(() => {
     const fetchUser = async () => {
@@ -83,47 +100,46 @@ export default function ManageYourProfile() {
         console.error('❌ Error fetching logged-in user:', err);
       }
     };
-
     fetchUser();
   }, []);
 
-   useEffect(() => {
-  const fetchNocProfile = async () => {
-    try {
-      const result = await singleViewNoc(); // automatically uses logged-in userId from token
-      const userData = result.data;
+  useEffect(() => {
+    const fetchNocProfile = async () => {
+      try {
+        const result = await singleViewNoc(); // automatically uses logged-in userId from token
+        const userData = result.data;
 
-      if (userData) {
-        setProfile((prev) => ({
-          ...prev,
-          label: userData.labelname || prev.fname,
-          phone: userData.phoneno || prev.phone,
-          email: userData.email || prev.email,
-          payment: {
-            ...prev.payment,
-            adhar: userData.AadhaarCardNo || '',
-            pan: userData.PANCardNo || '',
-            bankName: userData.bankName || '',
-            accountHolder: userData.accountholdername || '',
-            accountNumber: userData.accountNo || '',
-            ifsc: userData.IFSCcode || ''
-          },
-          aadharFront: userData.AadharCardFront || '',
-          aadharBack: userData.AadharCardBack || '',
-          panPhoto: userData.PANCardphoto || '',
-          cancelledPassbook: userData.cancelledPassbook || '',
-          signature: userData.Signature || ''
-        }));
+        if (userData) {
+          setProfile((prev) => ({
+            ...prev,
+            label: userData.labelname || prev.fname,
+            phone: userData.phoneno || prev.phone,
+            email: userData.email || prev.email,
+            payment: {
+              ...prev.payment,
+              adhar: userData.AadhaarCardNo || '',
+              pan: userData.PANCardNo || '',
+              bankName: userData.bankName || '',
+              accountHolder: userData.accountholdername || '',
+              accountNumber: userData.accountNo || '',
+              ifsc: userData.IFSCcode || ''
+            },
+            aadharFront: userData.AadharCardFront || '',
+            aadharBack: userData.AadharCardBack || '',
+            panPhoto: userData.PANCardphoto || '',
+            cancelledPassbook: userData.cancelledPassbook || '',
+            signature: userData.Signature || ''
+          }));
+        }
+
+        console.log("userData---", userData)
+      } catch (err) {
+        console.error('❌ Error loading NOC data:', err);
       }
+    };
 
-      console.log("userData---",userData)
-    } catch (err) {
-      console.error('❌ Error loading NOC data:', err);
-    }
-  };
-
-  fetchNocProfile();
-}, []);
+    fetchNocProfile();
+  }, []);
 
 
   // ✅ 2. Fetch NOC Payment Details
@@ -134,16 +150,13 @@ export default function ManageYourProfile() {
       setIsSidebarOpen(!mobile);
     };
 
-    
+
 
     handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
- 
-
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
@@ -195,7 +208,7 @@ export default function ManageYourProfile() {
             <div className="bg-white rounded-lg shadow-md p-6 md:p-8 w-full max-w-md mx-auto lg:mx-0">
               {/* Profile Header */}
               <div className="flex flex-col items-center text-center">
-                 <img
+                <img
                   src={
                     profile.profilePic
                       ? profile.profilePic
@@ -229,13 +242,13 @@ export default function ManageYourProfile() {
               <div>
                 <h3 className="text-base font-bold text-[#004d66] mb-2">Payment Details</h3>
                 <div className="text-sm text-gray-700 space-y-1">
-  <div><span className="font-semibold">Adhar Number:</span> {profile.payment.adhar}</div>
-  <div><span className="font-semibold">Pan Number:</span> {profile.payment.pan}</div>
-  <div><span className="font-semibold">Bank Name:</span> {profile.payment.bankName}</div>
-  <div><span className="font-semibold">Account Holder:</span> {profile.payment.accountHolder}</div>
-  <div><span className="font-semibold">IFSC Code:</span> {profile.payment.ifsc}</div>
-  <div><span className="font-semibold">Account Number:</span> {profile.payment.accountNumber}</div>
-</div>
+                  <div><span className="font-semibold">Adhar Number:</span> {profile.payment.adhar}</div>
+                  <div><span className="font-semibold">Pan Number:</span> {profile.payment.pan}</div>
+                  <div><span className="font-semibold">Bank Name:</span> {profile.payment.bankName}</div>
+                  <div><span className="font-semibold">Account Holder:</span> {profile.payment.accountHolder}</div>
+                  <div><span className="font-semibold">IFSC Code:</span> {profile.payment.ifsc}</div>
+                  <div><span className="font-semibold">Account Number:</span> {profile.payment.accountNumber}</div>
+                </div>
               </div>
 
               {/* Button */}
@@ -398,7 +411,7 @@ export default function ManageYourProfile() {
 
               {/* Change Password Form */}
               {activeSection === 'password' && (
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handlePasswordSubmit}>
                   <div>
                     <label className="block text-[#004d66] font-semibold">Current Password</label>
                     <input
@@ -435,6 +448,13 @@ export default function ManageYourProfile() {
                   >
                     Change Password
                   </button>
+
+                  {passwordChangeMsg && (
+                    <div className="text-green-600 text-sm mt-2">{passwordChangeMsg}</div>
+                  )}
+                  {passwordChangeError && (
+                    <div className="text-red-600 text-sm mt-2">{passwordChangeError}</div>
+                  )}
                 </form>
               )}
             </div>
