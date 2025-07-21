@@ -28,3 +28,11 @@ module.exports.getAllSongs = async (req, res) => {
         res.status(500).json({ success: false, message: "Error fetching songs", error: error.message });
     }
 };
+module.exports.getSingleSongCTById = async (req, res) => {
+    try {
+        const song = await SingleSongCT.findById(req.params.id);
+        res.status(200).json({ success: true, data: song });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Error fetching song", error: error.message });
+    }
+};

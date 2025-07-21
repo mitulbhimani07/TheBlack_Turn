@@ -14,6 +14,10 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 const cors = require('cors');
 app.use(cors());
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/default-song-poster.jpg', express.static(path.join(__dirname, 'upload', 'default-song-poster.jpg')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

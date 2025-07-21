@@ -1,8 +1,8 @@
 import axios from 'axios';
-
+const API_URL = import.meta.env.OFFLINE_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:3001';
 export const AddBlog = async (payload) => {
     try {
-        const response = await axios.post('https://theblack-turn-2.onrender.com/blogs/create', payload)
+        const response = await axios.post(`${API_URL}/blogs/create`, payload)
 
         console.log("blog----", response.data)
         return response.data
@@ -14,7 +14,7 @@ export const AddBlog = async (payload) => {
 }
 export const GetAllBlogs = async () => {
     try {
-        const response = await axios.get('https://theblack-turn-2.onrender.com/blogs/all')
+        const response = await axios.get(`${API_URL}/blogs/all`)
 
         console.log("blogs----", response.data)
         return response.data
@@ -26,7 +26,7 @@ export const GetAllBlogs = async () => {
 }
 export const GetBlogById = async (id) => {
     try {
-        const response = await axios.get(`https://theblack-turn-2.onrender.com/blogs/all/${id}`)
+        const response = await axios.get(`${API_URL}/blogs/all/${id}`)
 
         console.log("blog by id----", response.data.data)
         return response.data
@@ -38,7 +38,7 @@ export const GetBlogById = async (id) => {
 }
 export const Signup = async (payload) => {
     try {
-        const response = await axios.post('http://localhost:3001/user/signup', payload)
+        const response = await axios.post(`${API_URL}/user/signup`, payload)
 
         console.log("signup----", response.data)
         return response.data
@@ -51,7 +51,7 @@ export const Signup = async (payload) => {
 
 export const Googlesignup = async (payload) => {
     try {
-        const response = await axios.post('https://theblack-turn-2.onrender.com/user/googleSignup', payload)
+        const response = await axios.post(`${API_URL}/user/googleSignup`, payload)
 
         return response.data
     } catch (error) {
@@ -62,8 +62,7 @@ export const Googlesignup = async (payload) => {
 
 export const Googlesignin = async (payload) => {
     try {
-        const response = await axios.post('https://theblack-turn-2.onrender.com/user/googleSignin', payload)
-
+        const response = await axios.post(`${API_URL}/user/googleSignin`, payload)
         return response.data
     } catch (error) {
         console.error("Error in signin API:", error);
@@ -72,7 +71,7 @@ export const Googlesignin = async (payload) => {
 }
 export const signin = async (payload) => {
     try {
-        const response = await axios.post('http://localhost:3001/user/login', payload)
+        const response = await axios.post(`${API_URL}/user/login`, payload)
 
         console.log("signin----", response.data)
         console.log("token--", response.token)
@@ -86,7 +85,7 @@ export const signin = async (payload) => {
 export const CreateAlbum = async (payload) => {
     const token = localStorage.getItem("Token");
     try {
-        const response = await axios.post('http://localhost:3001/ReleseNewAlbum/create', payload, {
+        const response = await axios.post(`${API_URL}/ReleseNewAlbum/create`, payload, {
             headers: {
                 // "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -101,7 +100,7 @@ export const CreateAlbum = async (payload) => {
 };
 export const ViewAlbum = async (payload) => {
     try {
-        const response = await axios.get(`https://theblack-turn-2.onrender.com/ReleseNewAlbum/all`, payload);
+        const response = await axios.get(`${API_URL}/ReleseNewAlbum/all`, payload);
         console.log('✅ NOC Data fetched successfully:', response.data);
         return {
             status: true,
@@ -113,9 +112,21 @@ export const ViewAlbum = async (payload) => {
         throw error;
     }
 }
+export const ViewSingleSongCT = async (payload) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/singlesongCT/all`, payload);
+
+        console.log("single song ct by id----", response.data.data)
+        return response.data
+
+    } catch (error) {
+        console.error("Error in single song ct API:", error);
+        throw error;
+    }
+}
 export const SingleViewAlbum = async (id) => {
     try {
-        const response = await axios.get(`https://theblack-turn-2.onrender.com/ReleseNewAlbum/${id}`)
+        const response = await axios.get(`${API_URL}/ReleseNewAlbum/${id}`)
 
         console.log("blog by id----", response.data.data)
         return response.data
@@ -129,7 +140,7 @@ export const CreateNOC = async (payload) => {
     const token = localStorage.getItem("Token");
 
     try {
-        const response = await axios.post('https://theblack-turn-2.onrender.com/NOC/create', payload, {
+        const response = await axios.post(`${API_URL}/NOC/create`, payload, {
             headers: {
                 // "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -148,7 +159,7 @@ export const CreateSingleSongCT = async (payload) => {
     const token = localStorage.getItem("Token");
 
     try {
-        const response = await axios.post('https://theblack-turn-2.onrender.com/singlesongCT/create', payload, {
+        const response = await axios.post(`${API_URL}/singlesongCT/create`, payload, {
             headers: {
                 // "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -163,7 +174,7 @@ export const CreateSingleSongCT = async (payload) => {
 }
 export const singleViewNoc = async () => {
     const token = localStorage.getItem('Token');
-    const response = await axios.get('http://localhost:3001/NOC/singleNoc', {
+    const response = await axios.get(`${API_URL}/NOC/singleNoc`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -177,7 +188,7 @@ export const CreateSingleSongWithoutCt = async (payload) => {
     const token = localStorage.getItem("Token");
 
     try {
-        const response = await axios.post('http://localhost:3001/singlesongWithoutCT/create', payload, {
+        const response = await axios.post(`${API_URL}/singlesongWithoutCT/create`, payload, {
             headers: {
                 // "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -192,7 +203,7 @@ export const CreateSingleSongWithoutCt = async (payload) => {
 }
 export const OnlyCallerTuneData = async (payload) => {
     try {
-        const response = await axios.post(`http://localhost:3001/OnlyCallerTune/create`, payload, {
+        const response = await axios.post(`${API_URL}/OnlyCallerTune/create`, payload, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -219,7 +230,7 @@ export const OnlyCallerTuneData = async (payload) => {
 
 export const getLoggedInUser = async () => {
     const token = localStorage.getItem('Token');
-    return axios.get('http://localhost:3001/user/singleUser', {
+    return axios.get(`${API_URL}/user/singleUser`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -230,7 +241,7 @@ export const changePassword = async (payload) => {
     const token = localStorage.getItem("Token");
     try {
         const response = await axios.post(
-            'http://localhost:3001/user/change-password',
+            `${API_URL}/user/change-password`,
             payload,
             {
                 headers: {
@@ -248,7 +259,7 @@ export const changePassword = async (payload) => {
 
 export const forgotPassword = async (payload) => {
     try {
-        const response = await axios.post('http://localhost:3001/user/forgot-password', payload);
+        const response = await axios.post(`${API_URL}/user/forgot-password`, payload);
         console.log("Forgot password response:", response.data);
         return response.data;
     } catch (error) {
@@ -259,7 +270,7 @@ export const forgotPassword = async (payload) => {
 
 export const verifyOtp = async (payload) => {
     try {
-        const response = await axios.post('http://localhost:3001/user/verify-Otp', payload);
+        const response = await axios.post(`${API_URL}/user/verify-Otp`, payload);
         console.log("OTP verification response:", response.data);
         return response.data;
     } catch (error) {
@@ -276,7 +287,7 @@ export const resetPasswordWithOtp = async (payload) => {
             email: payload.email.trim().toLowerCase()
         };
 
-        const response = await axios.post('http://localhost:3001/user/reset-password', finalPayload, {
+        const response = await axios.post(`${API_URL}/user/reset-password`, finalPayload, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -286,6 +297,20 @@ export const resetPasswordWithOtp = async (payload) => {
         return response.data;
     } catch (error) {
         console.error("Error in reset password API:", error.response?.data || error.message);
+        throw error;
+    }
+};
+export const ViewSingleSongCTById = async (id) => {
+    const token = localStorage.getItem("Token");
+    try {
+        const response = await axios.get(`${API_URL}/singlesongCT/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error in view single song ct by id API:', error);
         throw error;
     }
 };

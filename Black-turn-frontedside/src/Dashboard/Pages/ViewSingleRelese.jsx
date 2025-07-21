@@ -3,7 +3,7 @@
   import Sidebar from './header-sidebar/Sidebar';
   import Navbar from './header-sidebar/Header';
   import { ArrowLeft, Play, Pause, Volume2, MoreHorizontal } from 'lucide-react';
-  import { SingleViewAlbum } from '../../Api/api';
+  import { SingleViewAlbum , ViewSingleSongCTById } from '../../Api/api';
 
   const BASE_URL = import.meta.env.VITE_BASE_URL || "https://theblack-turn-2.onrender.com";
 

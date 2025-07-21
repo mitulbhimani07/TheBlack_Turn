@@ -150,7 +150,7 @@ module.exports.googleSignin = async (req, res) => {
 
         var user = await UserModel.findOne({ email });
 
-        if (!user) {
+        if (user) {
             return res.status(404).json({ message: "User not found. Please sign up first." });
         }
 
@@ -285,10 +285,37 @@ module.exports.sendOtpToEmail = async (req, res) => {
         });
 
         const mailOptions = {
-            from: `"Your App Name" <${process.env.EMAIL_USER}>`,
+            from: `"The Blck Turn" <${process.env.EMAIL_USER}>`,
             to: normalizedEmail,
-            subject: "Your OTP for Password Reset",
-            html: `<h3>Your OTP: <b>${otp}</b></h3><p>Valid for 5 minutes.</p>`,
+            subject: "Your One-Time Password (OTP) for Secure Access",
+            html: `
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
+        <div style="background: #004D5F; padding: 20px; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 24px;">SecureAuth Verification</h1>
+        </div>
+        
+        <div style="padding: 30px;">
+            <h2 style="color: #333; margin-top: 0;">Your One-Time Password</h2>
+            <p style="color: #666; font-size: 16px;">To authenticate your account, please use the following verification code:</p>
+            
+            <div style="background: #f8f9fa; border-radius: 6px; padding: 15px; text-align: center; margin: 25px 0; font-size: 32px; letter-spacing: 5px; color: #004D5F; font-weight: bold;">
+                ${otp}
+            </div>
+            
+            <p style="color: #666; font-size: 14px;">This code is valid for <strong>5 minutes</strong> and can only be used once.</p>
+            
+            <div style="background: #f0f4ff; border-left: 4px solid #004D5F; padding: 12px; margin: 20px 0;">
+                <p style="color: #333; margin: 0; font-size: 14px;">For your security, never share this code with anyone, including our support team.</p>
+            </div>
+            
+            <p style="color: #999; font-size: 12px; border-top: 1px solid #eee; padding-top: 20px; margin-bottom: 0;">If you didn't request this code, please ignore this email or contact support if you have concerns.</p>
+        </div>
+        
+        <div style="background: #f9f9f9; padding: 15px; text-align: center; font-size: 12px; color: #999;">
+            <p style="margin: 0;">© ${new Date().getFullYear()} SecureAuth. All rights reserved.</p>
+        </div>
+    </div>
+    `,
         };
 
         await transporter.sendMail(mailOptions);
@@ -296,9 +323,9 @@ module.exports.sendOtpToEmail = async (req, res) => {
 
     } catch (err) {
         console.error("OTP Send Error:", err);
-        res.status(500).json({ 
-            message: "Failed to send OTP", 
-            error: err.message 
+        res.status(500).json({
+            message: "Failed to send OTP",
+            error: err.message
         });
     }
 };
@@ -310,42 +337,42 @@ module.exports.verifyOtp = async (req, res) => {
         const normalizedEmail = email.toLowerCase().trim();
 
         // Find the most recent OTP for this email
-        const otpRecord = await OtpModel.findOne({ 
-            email: normalizedEmail 
+        const otpRecord = await OtpModel.findOne({
+            email: normalizedEmail
         }).sort({ createdAt: -1 });
 
         if (!otpRecord) {
-            return res.status(400).json({ 
-                message: "No OTP request found for this email" 
+            return res.status(400).json({
+                message: "No OTP request found for this email"
             });
         }
 
         // Check if OTP matches
         if (otp !== otpRecord.otp) {
-            return res.status(400).json({ 
-                message: "Invalid OTP" 
+            return res.status(400).json({
+                message: "Invalid OTP"
             });
         }
 
         // Check if OTP is expired
         if (otpRecord.expiresAt < new Date()) {
             await OtpModel.deleteMany({ email: normalizedEmail });
-            return res.status(400).json({ 
-                message: "OTP has expired" 
+            return res.status(400).json({
+                message: "OTP has expired"
             });
         }
 
         // OTP is valid
-        res.status(200).json({ 
+        res.status(200).json({
             message: "OTP verified successfully",
-            email: normalizedEmail 
+            email: normalizedEmail
         });
 
     } catch (err) {
         console.error("OTP Verification Error:", err);
-        res.status(500).json({ 
-            message: "Failed to verify OTP", 
-            error: err.message 
+        res.status(500).json({
+            message: "Failed to verify OTP",
+            error: err.message
         });
     }
 };
@@ -358,48 +385,48 @@ module.exports.resetPasswordWithOtp = async (req, res) => {
         const normalizedEmail = email.trim().toLowerCase();
 
         // Verify OTP first
-        const otpRecord = await OtpModel.findOne({ 
-            email: normalizedEmail 
+        const otpRecord = await OtpModel.findOne({
+            email: normalizedEmail
         }).sort({ createdAt: -1 });
 
         if (!otpRecord) {
-            return res.status(400).json({ 
-                message: "No OTP request found or OTP expired" 
+            return res.status(400).json({
+                message: "No OTP request found or OTP expired"
             });
         }
 
         if (otp !== otpRecord.otp) {
-            return res.status(400).json({ 
-                message: "Invalid OTP" 
+            return res.status(400).json({
+                message: "Invalid OTP"
             });
         }
 
         if (otpRecord.expiresAt < new Date()) {
             await OtpModel.deleteMany({ email: normalizedEmail });
-            return res.status(400).json({ 
-                message: "OTP has expired" 
+            return res.status(400).json({
+                message: "OTP has expired"
             });
         }
 
         // Update password
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         await UserModel.findOneAndUpdate(
-            { email: normalizedEmail }, 
+            { email: normalizedEmail },
             { password: hashedPassword }
         );
 
         // Clean up OTP
         await OtpModel.deleteMany({ email: normalizedEmail });
 
-        res.status(200).json({ 
-            message: "Password reset successfully" 
+        res.status(200).json({
+            message: "Password reset successfully"
         });
 
     } catch (err) {
         console.error("Reset Password Error:", err);
-        res.status(500).json({ 
-            message: "Failed to reset password", 
-            error: err.message 
+        res.status(500).json({
+            message: "Failed to reset password",
+            error: err.message
         });
     }
 };

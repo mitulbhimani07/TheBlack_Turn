@@ -45,6 +45,8 @@ import ViewSingleRelese from './Dashboard/Pages/ViewSingleRelese'
 import VerifyEmail from './Pages/Authentication/VerifyEmail'
 import OtpVerification from './Pages/Authentication/OTPVerification'
 import ForgotPassword from './Pages/Authentication/ForgotPassword'
+import SingleSongCTView from './Dashboard/Pages/SingleSongCTView'
+import ViewSingleSongCT from './Dashboard/Pages/ViewSingleSongCT'
 
 function AllRoutes() {
   return (
@@ -92,7 +94,8 @@ function AllRoutes() {
               <Route path='/profile' element={<ManageYourProfile/>}/>
               <Route path='/artistprofile' element={<CreateANewArtistProfile/>}/>
               <Route path='/artistprofilelink' element={<ArtistProfileLinkGeneration/>}/>
-              <Route path="/viewSingleRelese/:id" element={<ViewSingleRelese/>}/>
+              <Route path="/viewSingleRelese/:id  " element={<ViewSingleRelese/>}/>
+              <Route path="/ViewSingleSongCT/:id  " element={<ViewSingleSongCT/>}/>
         </Routes>
 
 
