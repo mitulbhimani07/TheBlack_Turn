@@ -51,24 +51,24 @@ import ViewSingleSongCT from './Dashboard/Pages/ViewSingleSongCT'
 function AllRoutes() {
   return (
     <div>
-        <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/pricing" element={<Pricing/>} />
-            <Route path="/contact" element={<Contact/>}/>
-            <Route path='/about' element={<Aboutus/>}/>
-            <Route path='/Refund' element={<Refunds/>}/>
-            <Route path='/privacy' element={<Privacy/>}/>
-            <Route path="/blog" element={<Blog/>} />
-            <Route path='/blogform' element={<Blogform/>}/>
-            <Route path='/singleblog/:id' element={<SingleBlog/>}/>
-            <Route path='/terms&conditions' element={<TermsandConditions/>}/>
-            <Route path="/services/music-distribution" element={<MusicDistribution/>} />
-            <Route path="/services/music-video-distribution" element={<MusicVideoDistributionInIndia/>} />
-            <Route path="/services/caller-tune-distribution" element={<CallerTuneDistribution/>} />
-            {/* signin  */}
-              <Route path='/Signin' element={<Signin/>} />
-              <Route path='*' element={<Pagenotfound/>} />
-              <Route path='/Signup' element={<Signp/>} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path='/about' element={<Aboutus />} />
+        <Route path='/Refund' element={<Refunds />} />
+        <Route path='/privacy' element={<Privacy />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path='/blogform' element={<Blogform />} />
+        <Route path='/singleblog/:id' element={<SingleBlog />} />
+        <Route path='/terms&conditions' element={<TermsandConditions />} />
+        <Route path="/services/music-distribution" element={<MusicDistribution />} />
+        <Route path="/services/music-video-distribution" element={<MusicVideoDistributionInIndia />} />
+        <Route path="/services/caller-tune-distribution" element={<CallerTuneDistribution />} />
+        {/* signin  */}
+        <Route path='/Signin' element={<Signin />} />
+        <Route path='*' element={<Pagenotfound />} />
+        <Route path='/Signup' element={<Signp />} />
               <Route path='/verify-email' element={<VerifyEmail/>} />
               <Route path='/OtpVerification' element={<OtpVerification/>} />
               <Route path='/forgotpassword' element={<ForgotPassword/>} />
@@ -99,7 +99,7 @@ function AllRoutes() {
         </Routes>
 
 
-        <Toaster
+      <Toaster
         position="top-right"
         toastOptions={{
           duration: 1000,

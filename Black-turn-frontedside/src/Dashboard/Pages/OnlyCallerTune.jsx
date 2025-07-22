@@ -78,10 +78,33 @@ function OnlyCallerTune() {
     const handleFileSelect = (e, type) => {
         const file = e.target.files[0];
         if (file) {
+            // Validate file type and size
+            if (type === 'artwork') {
+                const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (!validTypes.includes(file.type)) {
+                    setError('Invalid artwork file type. Please upload a JPEG, JPG, or PNG file.');
+                    return;
+                }
+                if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                    setError('Artwork file is too large. Maximum size is 5MB.');
+                    return;
+                }
+            } else if (type === 'audio') {
+                const validTypes = ['audio/mpeg', 'audio/wav', 'audio/mp3'];
+                if (!validTypes.includes(file.type)) {
+                    setError('Invalid audio file type. Please upload an MP3 or WAV file.');
+                    return;
+                }
+                if (file.size > 200 * 1024 * 1024) { // 200MB limit
+                    setError('Audio file is too large. Maximum size is 200MB.');
+                    return;
+                }
+            }
+
             handleInputChange(type, file);
+            setError(null);
         }
     };
-
     const resetForm = () => {
         setFormData({
             songName: '',
@@ -117,45 +140,53 @@ function OnlyCallerTune() {
         setError(null);
         setSubmitSuccess(false);
 
+        // Validate required fields
+        if (!formData.originalWork || !formData.agreeTerms) {
+            setError('You must agree to the terms and conditions');
+            setIsSubmitting(false);
+            return;
+        }
+
         try {
             const formDataToSend = new FormData();
 
-            // Append all form fields
+            // Log form data before sending
+            console.log('Form data before conversion:', formData);
+
+            // Append all fields systematically
             Object.keys(formData).forEach(key => {
-                if (key === 'artwork' || key === 'audio') {
-                    if (formData[key]) {
-                        formDataToSend.append(key, formData[key]);
+                const value = formData[key];
+
+                if (value !== null && value !== undefined) {
+                    if (key === 'artwork' || key === 'audio') {
+                        if (value instanceof File) {
+                            formDataToSend.append(key, value, value.name);
+                        }
+                    } else if (typeof value === 'boolean') {
+                        formDataToSend.append(key, value.toString());
+                    } else {
+                        formDataToSend.append(key, value);
                     }
-                } else {
-                    formDataToSend.append(key, formData[key]);
                 }
             });
 
-            // Using the imported API function
-            const response = await OnlyCallerTuneData(formDataToSend);
-
-            console.log('API Response:', response.data);
-            setSubmitSuccess(true);
-            resetForm();
-
-        } catch (err) {
-            console.error('Full error:', err);
-            console.error('Response data:', err.response?.data);
-
-            let errorMessage = 'Failed to submit form';
-            if (err.response) {
-                if (err.response.status === 404) {
-                    errorMessage = 'API endpoint not found (404). Please check the URL.';
-                } else if (err.response.data?.message) {
-                    errorMessage = err.response.data.message;
-                } else {
-                    errorMessage = `Server error: ${err.response.status}`;
-                }
-            } else if (err.message) {
-                errorMessage = err.message;
+            // Verify FormData contents
+            console.log('FormData entries:');
+            for (let [key, value] of formDataToSend.entries()) {
+                console.log(key, value);
             }
 
-            setError(errorMessage);
+            const response = await OnlyCallerTuneData(formDataToSend);
+
+            if (response.status) {
+                setSubmitSuccess(true);
+                resetForm();
+            } else {
+                setError(response.message || 'Submission failed');
+            }
+        } catch (err) {
+            console.error('Submission error:', err);
+            setError(err.message || 'An unexpected error occurred');
         } finally {
             setIsSubmitting(false);
         }
