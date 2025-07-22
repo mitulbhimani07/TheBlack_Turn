@@ -430,3 +430,65 @@ module.exports.resetPasswordWithOtp = async (req, res) => {
         });
     }
 };
+
+module.exports.updateUser = async (req, res) => {
+    try {
+        const { userId } = req.body;
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+        }
+
+        // Get update fields
+        const updateFields = {
+            fname: req.body.fname,
+            lname: req.body.lname,
+            name: req.body.name,
+            email: req.body.email,
+            About: req.body.About,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            pincode: req.body.pincode,
+            country: req.body.country,
+            phone: req.body.phone,
+        };
+
+        // Optional profile picture upload
+        if (req.file) {
+            updateFields.profilepic = req.file.filename; // or req.file.path depending on multer setup
+        }
+
+        // Remove undefined or empty fields
+        Object.keys(updateFields).forEach(key => {
+            if (updateFields[key] === undefined || updateFields[key] === "") {
+                delete updateFields[key];
+            }
+        });
+
+        const updatedUser = await UserModel.findByIdAndUpdate(
+            userId,
+            { $set: updateFields },
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({
+            message: "User updated successfully",
+            user: updatedUser
+        });
+
+    } catch (error) {
+        console.error("Error in update user:", error);
+        res.status(500).json({
+            message: "Failed to update user",
+            error: error.message
+        });
+    }
+};
+
+
+
