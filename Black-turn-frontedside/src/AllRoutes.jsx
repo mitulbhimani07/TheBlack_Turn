@@ -96,6 +96,7 @@ function AllRoutes() {
         <Route path='/artistprofilelink' element={<ArtistProfileLinkGeneration />} />
         <Route path="/viewSingleRelese/:id" element={<ViewSingleRelese />} />
         <Route path="/ViewSingleSongCT/:id" element={<ViewSingleSongCT />} />
+              <Route path="/ViewSingleSongCT/:id" element={<ViewSingleSongCT/>}/>
       </Routes>
 
 
