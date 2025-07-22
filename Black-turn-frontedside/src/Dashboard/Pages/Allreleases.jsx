@@ -319,9 +319,9 @@ export default function Allreleases() {
                   </span>
                 </div>
               </div>
-              <Link to={`/ViewSingleSongCT/${song._id}`}
+              <Link
+                to={`/ViewSingleSongCT/${song._id}`}
                 className="bg-[#005d71] text-white px-4 py-2 rounded text-sm hover:bg-gray-700 transition-colors"
-                onClick={() => navigate(`/ViewSingleSongCT/${song._id}`)}
               >
                 View CT Details
               </Link>

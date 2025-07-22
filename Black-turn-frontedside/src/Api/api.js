@@ -301,16 +301,17 @@ export const resetPasswordWithOtp = async (payload) => {
     }
 };
 export const ViewSingleSongCTById = async (id) => {
-    const token = localStorage.getItem("Token");
-    try {
-        const response = await axios.get(`${API_URL}/singlesongCT/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error in view single song ct by id API:', error);
-        throw error;
-    }
+  const token = localStorage.getItem("Token");
+  try {
+    const response = await axios.get(`${API_URL}/singlesongCT/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log('Raw API Response:', response); // Debug
+    return response.data;
+  } catch (error) {
+    console.error('Error in view single song ct by id API:', error);
+    throw error;
+  }
 };
