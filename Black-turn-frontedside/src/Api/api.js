@@ -196,12 +196,20 @@ export const CreateSingleSongWithoutCt = async (payload) => {
 }
 export const OnlyCallerTuneData = async (payload) => {
     try {
-        const response = await axios.post(`http://localhost:3001/OnlyCallerTune/create`, payload, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+        console.log('Sending payload:', payload);
+
+        const response = await axios.post(
+            `http://localhost:3001/OnlyCallerTune/create`,
+            payload,
+            {
+                // DO NOT set 'Content-Type' for FormData; Axios handles it
+                headers: {
+                    'Accept': 'application/json'
+                },
+                timeout: 30000
             }
-        });
-        
+        );
+
         console.log('✅ Caller Tune submitted successfully:', response.data);
         return {
             status: true,
@@ -209,13 +217,28 @@ export const OnlyCallerTuneData = async (payload) => {
             data: response.data
         };
     } catch (error) {
-        console.error('❌ Error submitting caller tune:', error);
-        
-        // Return a consistent error structure
+        console.error('❌ Full error object:', error);
+        console.error('❌ Error response data:', error.response?.data);
+        console.error('❌ Error config:', error.config);
+
+        let errorMessage = 'Failed to submit caller tune';
+        let errorData = null;
+
+        if (error.response) {
+            errorData = error.response.data;
+            errorMessage = error.response.data?.message ||
+                           error.response.statusText ||
+                           `Server responded with status ${error.response.status}`;
+        } else if (error.request) {
+            errorMessage = 'No response received from server - it might be down';
+        } else {
+            errorMessage = error.message || 'Request setup failed';
+        }
+
         return {
             status: false,
-            message: error.response?.data?.message || error.message || 'Failed to submit caller tune',
-            error: error.response?.data || error
+            message: errorMessage,
+            error: errorData || error.message
         };
     }
 };
