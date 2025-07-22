@@ -69,34 +69,35 @@ function AllRoutes() {
         <Route path='/Signin' element={<Signin />} />
         <Route path='*' element={<Pagenotfound />} />
         <Route path='/Signup' element={<Signp />} />
-              <Route path='/verify-email' element={<VerifyEmail/>} />
-              <Route path='/OtpVerification' element={<OtpVerification/>} />
-              <Route path='/forgotpassword' element={<ForgotPassword/>} />
+        <Route path='/verify-email' element={<VerifyEmail />} />
+        <Route path='/OtpVerification' element={<OtpVerification />} />
+        <Route path='/forgotpassword' element={<ForgotPassword />} />
 
-              {/* Dashboard */}
-              <Route path="/dashboard" element={<Dashboard/>}/>
-              <Route path="/nocForm" element={<NOCform/>}/>
-              <Route path="/BecomeAMembar" element={<BecomeAMembar/>}/>
-              <Route path="/allreleases" element={<Allreleases/>}/>
-              <Route path="/singleSongWithCT" element={<SingleSongWithCT/>}/>
-              <Route path="/singleSongwithoutCT" element={<SingleSongWithoutCT/>}/>
-              <Route path="/onlyCallerTune" element={<OnlyCallerTune/>}/>
-              <Route path="/overview" element={<Overview/>}/>
-              <Route path="/upload_album" element={<ReleaseNewAlbum/>}/>
-              <Route path="/youtubeClaim" element={<YoutubeClaim/>}/>
-              <Route path="/helpAndSupport" element={<HelpAndSupport/>}/>
-              <Route path='/downloadreports' element={<DownloadRecipets/>}/>
-              <Route path="/yearlyearnings" element={<EarningsTrends/>}/>
-              <Route path="/yearlyplays" element={<StreamingTrends/>}/>
-              <Route path="/pagewhitelist" element={<FBInstaPageWhitelist/>}/>
-              <Route path="/takedownrequest" element={<TakedownRequest/>}/>
-              <Route path='/complaint' element={<Complaint/>}/>
-              <Route path='/profile' element={<ManageYourProfile/>}/>
-              <Route path='/artistprofile' element={<CreateANewArtistProfile/>}/>
-              <Route path='/artistprofilelink' element={<ArtistProfileLinkGeneration/>}/>
-              <Route path="/viewSingleRelese/:id" element={<ViewSingleRelese/>}/>
+        {/* Dashboard */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/nocForm" element={<NOCform />} />
+        <Route path="/BecomeAMembar" element={<BecomeAMembar />} />
+        <Route path="/allreleases" element={<Allreleases />} />
+        <Route path="/singleSongWithCT" element={<SingleSongWithCT />} />
+        <Route path="/singleSongwithoutCT" element={<SingleSongWithoutCT />} />
+        <Route path="/onlyCallerTune" element={<OnlyCallerTune />} />
+        <Route path="/overview" element={<Overview />} />
+        <Route path="/upload_album" element={<ReleaseNewAlbum />} />
+        <Route path="/youtubeClaim" element={<YoutubeClaim />} />
+        <Route path="/helpAndSupport" element={<HelpAndSupport />} />
+        <Route path='/downloadreports' element={<DownloadRecipets />} />
+        <Route path="/yearlyearnings" element={<EarningsTrends />} />
+        <Route path="/yearlyplays" element={<StreamingTrends />} />
+        <Route path="/pagewhitelist" element={<FBInstaPageWhitelist />} />
+        <Route path="/takedownrequest" element={<TakedownRequest />} />
+        <Route path='/complaint' element={<Complaint />} />
+        <Route path='/profile' element={<ManageYourProfile />} />
+        <Route path='/artistprofile' element={<CreateANewArtistProfile />} />
+        <Route path='/artistprofilelink' element={<ArtistProfileLinkGeneration />} />
+        <Route path="/viewSingleRelese/:id" element={<ViewSingleRelese />} />
+        <Route path="/ViewSingleSongCT/:id" element={<ViewSingleSongCT />} />
               <Route path="/ViewSingleSongCT/:id" element={<ViewSingleSongCT/>}/>
-        </Routes>
+      </Routes>
 
 
       <Toaster
