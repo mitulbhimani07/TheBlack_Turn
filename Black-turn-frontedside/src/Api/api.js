@@ -3,10 +3,10 @@ const API_URL = import.meta.env.OFFLINE_API_URL || import.meta.env.VITE_API_URL 
 export const AddBlog = async (payload) => {
     try {
         const response = await axios.post(`${API_URL}/blogs/create`, payload)
-
+ 
         console.log("blog----", response.data)
         return response.data
-
+ 
     } catch (error) {
         console.error("Error in signup API:", error);
         throw error;
@@ -15,10 +15,10 @@ export const AddBlog = async (payload) => {
 export const GetAllBlogs = async () => {
     try {
         const response = await axios.get(`${API_URL}/blogs/all`)
-
+ 
         console.log("blogs----", response.data)
         return response.data
-
+ 
     } catch (error) {
         console.error("Error in signup API:", error);
         throw error;
@@ -27,10 +27,10 @@ export const GetAllBlogs = async () => {
 export const GetBlogById = async (id) => {
     try {
         const response = await axios.get(`${API_URL}/blogs/all/${id}`)
-
+ 
         console.log("blog by id----", response.data.data)
         return response.data
-
+ 
     } catch (error) {
         console.error("Error in signup API:", error);
         throw error;
@@ -39,27 +39,27 @@ export const GetBlogById = async (id) => {
 export const Signup = async (payload) => {
     try {
         const response = await axios.post(`${API_URL}/user/signup`, payload)
-
+ 
         console.log("signup----", response.data)
         return response.data
-
+ 
     } catch (error) {
         console.error("Error in signup API:", error);
         throw error;
     }
 }
-
+ 
 export const Googlesignup = async (payload) => {
     try {
         const response = await axios.post(`${API_URL}/user/googleSignup`, payload)
-
+ 
         return response.data
     } catch (error) {
         console.error("Error in signin API:", error);
         throw error;
     }
 }
-
+ 
 export const Googlesignin = async (payload) => {
     try {
         const response = await axios.post(`${API_URL}/user/googleSignin`, payload)
@@ -72,11 +72,11 @@ export const Googlesignin = async (payload) => {
 export const signin = async (payload) => {
     try {
         const response = await axios.post(`${API_URL}/user/login`, payload)
-
+ 
         console.log("signin----", response.data)
         console.log("token--", response.token)
         return response.data
-
+ 
     } catch (error) {
         console.error("Error in signin API:", error);
         throw error;
@@ -115,10 +115,10 @@ export const ViewAlbum = async (payload) => {
 export const ViewSingleSongCT = async (payload) => {
     try {
         const response = await axios.get(`http://localhost:3001/singlesongCT/all`, payload);
-
+ 
         console.log("single song ct by id----", response.data.data)
         return response.data
-
+ 
     } catch (error) {
         console.error("Error in single song ct API:", error);
         throw error;
@@ -127,10 +127,10 @@ export const ViewSingleSongCT = async (payload) => {
 export const SingleViewAlbum = async (id) => {
     try {
         const response = await axios.get(`${API_URL}/ReleseNewAlbum/${id}`)
-
+ 
         console.log("blog by id----", response.data.data)
         return response.data
-
+ 
     } catch (error) {
         console.error("Error in signup API:", error);
         throw error;
@@ -138,7 +138,7 @@ export const SingleViewAlbum = async (id) => {
 }
 export const CreateNOC = async (payload) => {
     const token = localStorage.getItem("Token");
-
+ 
     try {
         const response = await axios.post(`${API_URL}/NOC/create`, payload, {
             headers: {
@@ -153,11 +153,11 @@ export const CreateNOC = async (payload) => {
         throw error;
     }
 }
-
-
+ 
+ 
 export const CreateSingleSongCT = async (payload) => {
     const token = localStorage.getItem("Token");
-
+ 
     try {
         const response = await axios.post(`${API_URL}/singlesongCT/create`, payload, {
             headers: {
@@ -182,11 +182,11 @@ export const singleViewNoc = async () => {
     console.log("singleviewNoc", response)
     return response.data
 };
-
-
+ 
+ 
 export const CreateSingleSongWithoutCt = async (payload) => {
     const token = localStorage.getItem("Token");
-
+ 
     try {
         const response = await axios.post(`${API_URL}/singlesongWithoutCT/create`, payload, {
             headers: {
@@ -203,22 +203,12 @@ export const CreateSingleSongWithoutCt = async (payload) => {
 }
 export const OnlyCallerTuneData = async (payload) => {
     try {
-        console.log('Sending payload:', payload);
-
-        const response = await axios.post(
-            `${API_URL}/OnlyCallerTune/create`,
-            payload,
-            {
-                // DO NOT set 'Content-Type' for FormData; Axios handles it
-                headers: {
-                    'Accept': 'application/json'
-                },
-                timeout: 30000
+        const response = await axios.post(`${API_URL}/OnlyCallerTune/create`, payload, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
             }
         });
-
-        );
-
+ 
         console.log('✅ Caller Tune submitted successfully:', response.data);
         return {
             status: true,
@@ -226,34 +216,18 @@ export const OnlyCallerTuneData = async (payload) => {
             data: response.data
         };
     } catch (error) {
-        console.error('❌ Full error object:', error);
-        console.error('❌ Error response data:', error.response?.data);
-        console.error('❌ Error config:', error.config);
-
-        let errorMessage = 'Failed to submit caller tune';
-        let errorData = null;
-
-if (error.response) {
-            errorData = error.response.data;
-            errorMessage = error.response.data?.message ||
-                           error.response.statusText ||
-                           `Server responded with status ${error.response.status}`;
-        } else if (error.request) {
-            errorMessage = 'No response received from server - it might be down';
-        } else {
-            errorMessage = error.message || 'Request setup failed';
-        }
-
+        console.error('❌ Error submitting caller tune:', error);
+ 
+        // Return a consistent error structure
         return {
             status: false,
-            message: errorMessage,
-            error: errorData || error.message
+            message: error.response?.data?.message || error.message || 'Failed to submit caller tune',
+            error: error.response?.data || error
         };
     }
 };
-
-
-
+ 
+ 
 export const getLoggedInUser = async () => {
     const token = localStorage.getItem('Token');
     return axios.get(`${API_URL}/user/singleUser`, {
@@ -262,7 +236,7 @@ export const getLoggedInUser = async () => {
         }
     });
 };
-
+ 
 export const changePassword = async (payload) => {
     const token = localStorage.getItem("Token");
     try {
@@ -282,7 +256,7 @@ export const changePassword = async (payload) => {
         throw error;
     }
 };
-
+ 
 export const forgotPassword = async (payload) => {
     try {
         const response = await axios.post(`${API_URL}/user/forgot-password`, payload);
@@ -293,7 +267,7 @@ export const forgotPassword = async (payload) => {
         throw error;
     }
 }
-
+ 
 export const verifyOtp = async (payload) => {
     try {
         const response = await axios.post(`${API_URL}/user/verify-Otp`, payload);
@@ -304,7 +278,7 @@ export const verifyOtp = async (payload) => {
         throw error;
     }
 }
-
+ 
 export const resetPasswordWithOtp = async (payload) => {
     try {
         // Ensure email is normalized
@@ -312,13 +286,13 @@ export const resetPasswordWithOtp = async (payload) => {
             ...payload,
             email: payload.email.trim().toLowerCase()
         };
-
+ 
         const response = await axios.post(`${API_URL}/user/reset-password`, finalPayload, {
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-
+ 
         console.log("Password reset response:", response.data);
         return response.data;
     } catch (error) {
@@ -327,16 +301,18 @@ export const resetPasswordWithOtp = async (payload) => {
     }
 };
 export const ViewSingleSongCTById = async (id) => {
-    const token = localStorage.getItem("Token");
-    try {
-        const response = await axios.get(`${API_URL}/singlesongCT/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error in view single song ct by id API:', error);
-        throw error;
-    }
+  const token = localStorage.getItem("Token");
+  try {
+    const response = await axios.get(`${API_URL}/singlesongCT/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log('Raw API Response:', response); // Debug
+    return response.data;
+  } catch (error) {
+    console.error('Error in view single song ct by id API:', error);
+    throw error;
+  }
 };
+ 
