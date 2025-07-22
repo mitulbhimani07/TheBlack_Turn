@@ -44,3 +44,26 @@ module.exports.viewOnlyCallerTuneData = async (req, res) => {
         });
     }
 };
+
+module.exports.getSingleOnlyCallerTune = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const singleData = await OnlyCallerTune.findById(id);
+
+        if (!singleData) {
+            return res.status(404).json({
+                message: 'OnlyCallerTune not found'
+            });
+        }
+
+        res.status(200).json({
+            message: 'OnlyCallerTune data retrieved successfully',
+            data: singleData
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error retrieving OnlyCallerTune data',
+            error: error.message
+        });
+    }
+}

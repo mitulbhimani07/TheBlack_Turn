@@ -15,12 +15,36 @@ const ViewSingleSongCT = () => {
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
 
+    // Image states
+    const [imageError, setImageError] = useState(false);
+    const [currentImageUrl, setCurrentImageUrl] = useState('');
+    const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
+    const [imageLoading, setImageLoading] = useState(true);
+
+    // Image URL construction
+    const constructImageUrl = (path) => {
+        if (!path) return `${BASE_URL}/upload/default-song-poster.jpg`;
+        if (path.startsWith('http')) return path;
+        const cleanPath = path.replace(/^\/+/, '');
+        const possiblePatterns = [
+            `${BASE_URL}/upload/${cleanPath}`,
+            `${BASE_URL}/uploads/${cleanPath}`,
+            `${BASE_URL}/images/${cleanPath}`,
+            `${BASE_URL}/assets/${cleanPath}`,
+            `${BASE_URL}/${cleanPath}`
+        ];
+        return possiblePatterns[0];
+    };
+
     useEffect(() => {
         const fetchSong = async () => {
             try {
                 const response = await ViewSingleSongCTById(id);
                 if (response.success) {
                     setSong(response.data);
+                    // Initialize image URL when song data is loaded
+                    const url = constructImageUrl(response.data.songPoster);
+                    setCurrentImageUrl(url);
                 } else {
                     console.error('Failed to fetch song:', response.message);
                 }
@@ -34,11 +58,95 @@ const ViewSingleSongCT = () => {
         fetchSong();
     }, [id]);
 
+    // Image loading and error handling
+    useEffect(() => {
+        if (song?.songPoster) {
+            setImageLoading(true);
+            setImageError(false);
+            const img = new window.Image();
+            img.src = currentImageUrl;
+            img.onload = () => setImageLoading(false);
+            img.onerror = () => {
+                if (currentPatternIndex < 4) {
+                    // Try next possible pattern
+                    const cleanPath = song.songPoster.replace(/^\/+/, '');
+                    const patterns = [
+                        `${BASE_URL}/upload/${cleanPath}`,
+                        `${BASE_URL}/uploads/${cleanPath}`,
+                        `${BASE_URL}/images/${cleanPath}`,
+                        `${BASE_URL}/assets/${cleanPath}`,
+                        `${BASE_URL}/${cleanPath}`
+                    ];
+                    setCurrentPatternIndex(currentPatternIndex + 1);
+                    setCurrentImageUrl(patterns[currentPatternIndex + 1]);
+                } else {
+                    setImageError(true);
+                    setImageLoading(false);
+                    setCurrentImageUrl(`${BASE_URL}/upload/default-song-poster.jpg`);
+                }
+            };
+        }
+    }, [song?.songPoster, currentImageUrl, currentPatternIndex]);
+
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const markAsRead = (id) => {
         setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
         setUnreadCount(prev => prev - 1);
     };
+
+    // Loading Skeleton Component
+    const CardLoading = () => (
+        <div className="bg-white rounded-lg shadow-sm p-6 animate-pulse">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Left column - Song poster loading */}
+                <div className="md:col-span-1">
+                    <div className="aspect-square bg-gray-200 rounded-lg"></div>
+                </div>
+                
+                {/* Right column - Song details loading */}
+                <div className="md:col-span-2 space-y-4">
+                    <div className="h-8 bg-gray-200 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {[...Array(8)].map((_, i) => (
+                            <div key={i} className="space-y-2">
+                                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                                <div className="h-4 bg-gray-200 rounded w-full"></div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            
+            {/* Caller Tune Section loading */}
+            <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[...Array(2)].map((_, i) => (
+                        <div key={i} className="bg-gray-100 p-4 rounded-lg space-y-2">
+                            <div className="h-4 bg-gray-200 rounded w-1/3"></div>
+                            <div className="h-4 bg-gray-200 rounded w-full"></div>
+                            <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            
+            {/* Additional Details loading */}
+            <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[...Array(3)].map((_, i) => (
+                        <div key={i} className="space-y-2">
+                            <div className="h-4 bg-gray-200 rounded w-1/3"></div>
+                            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 
     if (loading) {
         return (
@@ -52,8 +160,14 @@ const ViewSingleSongCT = () => {
                         unreadCount={unreadCount}
                         markAsRead={markAsRead}
                     />
-                    <div className="min-h-screen bg-gray-50 p-6 flex justify-center items-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#005f73]"></div>
+                    <div className="min-h-screen bg-gray-50 p-6">
+                        <div className="max-w-4xl mx-auto">
+                            <div className="flex items-center justify-between mb-6">
+                                <div className="h-10 bg-gray-200 rounded w-32"></div>
+                                <div className="h-6 bg-gray-200 rounded w-48"></div>
+                            </div>
+                            <CardLoading />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,7 +192,7 @@ const ViewSingleSongCT = () => {
                             <h3 className="text-lg font-medium text-gray-900">Song not found</h3>
                             <p className="text-gray-500 mt-2">The requested song could not be loaded</p>
                             <Link
-                                to="/releases"
+                                to="/allreleases"
                                 className="mt-4 inline-flex items-center px-4 py-2 bg-[#005f73] text-white rounded-md hover:bg-[#004a5c]"
                             >
                                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -108,7 +222,7 @@ const ViewSingleSongCT = () => {
                     <div className="max-w-4xl mx-auto">
                         <div className="flex items-center justify-between mb-6">
                             <Link
-                                to="/releases"
+                                to="/allreleases"
                                 className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
                             >
                                 <ArrowLeft className="w-4 h-4" />
@@ -117,33 +231,45 @@ const ViewSingleSongCT = () => {
                             <h2 className="text-lg font-semibold text-gray-800">Single Song with Caller Tune</h2>
                         </div>
 
-                        <div className="bg-white rounded-lg shadow-sm p-6">
+                        <div className="bg-white rounded-lg shadow-sm p-6"> 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {/* Left column - Song poster */}
                                 <div className="md:col-span-1">
-                                    <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                                        {song.songPoster ? (
+                                    <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center relative">
+                                        {imageLoading && (
+                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#005d71]"></div>
+                                            </div>
+                                        )}
+                                        {!imageError ? (
                                             <img
-                                                src={
-                                                    song.songPoster
-                                                        ? song.songPoster.startsWith('http')
-                                                            ? song.songPoster
-                                                            : song.songPoster.startsWith('/uploads')
-                                                                ? `${BASE_URL}${song.songPoster}`
-                                                                : `${BASE_URL}/uploads/${song.songPoster.replace(/^\/+/, '')}`
-                                                        : `${BASE_URL}/placeholder.jpg`
-                                                }
-                                                alt={song.songName}
-                                                className="object-cover w-full h-full"
-                                                onError={(e) => {
-                                                    e.target.onerror = null;
-                                                    e.target.src = `${BASE_URL}/placeholder.jpg`;
+                                                src={currentImageUrl}
+                                                alt={song.songName || "Song Poster"}
+                                                className={`object-cover w-full h-full rounded-lg ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
+                                                onLoad={() => setImageLoading(false)}
+                                                onError={() => {
+                                                    if (currentPatternIndex < 4) {
+                                                        const cleanPath = song.songPoster.replace(/^\/+/, '');
+                                                        const patterns = [
+                                                            `${BASE_URL}/upload/${cleanPath}`,
+                                                            `${BASE_URL}/uploads/${cleanPath}`,
+                                                            `${BASE_URL}/images/${cleanPath}`,
+                                                            `${BASE_URL}/assets/${cleanPath}`,
+                                                            `${BASE_URL}/${cleanPath}`
+                                                        ];
+                                                        setCurrentPatternIndex(currentPatternIndex + 1);
+                                                        setCurrentImageUrl(patterns[currentPatternIndex + 1]);
+                                                    } else {
+                                                        setImageError(true);
+                                                        setCurrentImageUrl(`${BASE_URL}/upload/default-song-poster.jpg`);
+                                                    }
                                                 }}
                                             />
                                         ) : (
-                                            <Music className="w-16 h-16 text-gray-400" />
+                                            <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                                                <Music className="w-12 h-12 text-gray-400" />
+                                            </div>
                                         )}
-                                        
                                     </div>
                                 </div>
 

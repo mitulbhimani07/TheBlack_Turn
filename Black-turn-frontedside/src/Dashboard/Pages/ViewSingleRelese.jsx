@@ -1,5 +1,5 @@
   import React, { useState, useEffect, useRef } from 'react';
-  import { useParams } from 'react-router-dom';
+  import { Link, useParams } from 'react-router-dom';
   import Sidebar from './header-sidebar/Sidebar';
   import Navbar from './header-sidebar/Header';
   import { ArrowLeft, Play, Pause, Volume2, MoreHorizontal } from 'lucide-react';
@@ -236,10 +236,10 @@
             <div className="max-w-6xl mx-auto">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
+                  <Link to={'/allreleases'} className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
                     <ArrowLeft className="w-4 h-4" />
                     All Releases
-                  </button>
+                  </Link>
                   <button className="px-4 py-2 bg-[#005f73] text-white rounded-md hover:bg-[#004a5c]">Update</button>
                 </div>
                 <h2 className="text-lg font-semibold text-gray-800">Platform Links</h2>
