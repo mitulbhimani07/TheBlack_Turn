@@ -48,6 +48,7 @@ import ForgotPassword from './Pages/Authentication/ForgotPassword'
 import SingleSongCTView from './Dashboard/Pages/SingleSongCTView'
 import ViewSingleSongCT from './Dashboard/Pages/ViewSingleSongCT'
 import ViewSingleOnlyCallerTune from './Dashboard/Pages/ViewSingleOnlyCallerTune '
+import ViewSingleSongWithoutCT from './Dashboard/Pages/ViewSingleSongWithoutCT'
 
 function AllRoutes() {
   return (
@@ -97,8 +98,8 @@ function AllRoutes() {
         <Route path='/artistprofilelink' element={<ArtistProfileLinkGeneration />} />
         <Route path="/viewSingleRelese/:id" element={<ViewSingleRelese />} />
         <Route path="/ViewSingleSongCT/:id" element={<ViewSingleSongCT />} />
-              <Route path="/ViewSingleSongCT/:id" element={<ViewSingleSongCT/>}/>
-              <Route path="/ViewSingleOnlyCallerTune/:id" element={<ViewSingleOnlyCallerTune/>}/>
+        <Route path="/ViewSingleOnlyCallerTune/:id" element={<ViewSingleOnlyCallerTune />} />
+        <Route path="/ViewSingleSongWithoutCT/:id" element={<ViewSingleSongWithoutCT />} />
       </Routes>
 
 

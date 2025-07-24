@@ -352,3 +352,17 @@ export const viewSingleSongWithoutCT = async () => {
   const response = await axios.get('http://localhost:3001/singlesongWithoutCT/all');
   return response.data;
 };
+export const viewSingleSongWithoutCTById = async (id) => {
+  const token = localStorage.getItem("Token");
+  try {
+    const response = await axios.get(`http://localhost:3001/singlesongWithoutCT/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching single song:', error);
+    throw error;
+  }
+};

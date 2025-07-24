@@ -29,7 +29,7 @@ export default function Allreleases() {
   const [onlyCallerLoading, setOnlyCallerLoading] = useState(false);
   const [singleSongWithoutCTData, setSingleSongWithoutCTData] = useState([]);
   const [withoutCTLoading, setWithoutCTLoading] = useState(false);
-  const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/singlesongWithoutCT/all';
+  const BASE_URL = import.meta.env.VITE_API_URL || 'https://theblack-turn-2.onrender.com';
 
   // Get current data based on selected option
   const getCurrentData = () => {
