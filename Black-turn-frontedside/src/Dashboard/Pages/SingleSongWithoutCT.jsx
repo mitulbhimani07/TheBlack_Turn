@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../Pages/header-sidebar/Header';
 import Sidebar from '../Pages/header-sidebar/Sidebar';
-import { Upload, Music, Calendar, User, FileText, CheckCircle } from 'lucide-react';
+import { Upload, Music, Calendar, User, FileText } from 'lucide-react';
 import visa from "../../assets/images/payment-platform/Visa.png";
 import MasterCard from '../../assets/images/payment-platform/mastercard.png';
 import maestro from '../../assets/images/payment-platform/maestro.png';
@@ -14,6 +14,7 @@ import phonepe from '../../assets/images/payment-platform/phonepe.png';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { CreateSingleSongWithoutCt } from '../../Api/api';
+import { useNavigate } from 'react-router-dom';
 
 function SingleSongWithoutCT() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -22,6 +23,8 @@ function SingleSongWithoutCT() {
     const [activeTab, setActiveTab] = useState('singleSongwithoutCT');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
+    const [serverError, setServerError] = useState(null);
+    const navigate = useNavigate();
 
     const initialFormState = {
         songName: '',
@@ -39,10 +42,10 @@ function SingleSongWithoutCT() {
         subGenre: '',
         useAI: 'No',
         description: '',
-        additionalCredit:'',
         originalWork: false,
         agreeTerms: false,
-        couponCode: ''
+        couponCode: '',
+        additionalCredit: '' // Added missing field
     };
 
     const [formData, setFormData] = useState(initialFormState);
@@ -69,14 +72,24 @@ function SingleSongWithoutCT() {
         // File type validation
         if (formData.artwork) {
             const validArtworkTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            if (!validArtworkTypes.includes(formData.artwork.type)) {
+            const fileExtension = formData.artwork.name.split('.').pop().toLowerCase();
+            
+            if (
+                !validArtworkTypes.includes(formData.artwork.type) && 
+                !['jpg', 'jpeg', 'png'].includes(fileExtension)
+            ) {
                 newErrors.artwork = 'Only JPG, PNG, JPEG files are allowed';
             }
         }
         
         if (formData.audio) {
             const validAudioTypes = ['audio/mpeg', 'audio/wav'];
-            if (!validAudioTypes.includes(formData.audio.type)) {
+            const fileExtension = formData.audio.name.split('.').pop().toLowerCase();
+            
+            if (
+                !validAudioTypes.includes(formData.audio.type) && 
+                !['mp3', 'wav'].includes(fileExtension)
+            ) {
                 newErrors.audio = 'Only MP3, WAV files are allowed';
             }
         }
@@ -107,6 +120,9 @@ function SingleSongWithoutCT() {
                 setErrors(prev => ({ ...prev, [name]: '' }));
             }
         }
+        
+        // Clear server error when user makes changes
+        if (serverError) setServerError(null);
     };
 
     const handleDragOver = (e, type) => {
@@ -133,60 +149,94 @@ function SingleSongWithoutCT() {
     const resetForm = () => {
         setFormData(initialFormState);
         setErrors({});
+        setServerError(null);
         // Reset file inputs
         document.getElementById('artwork-upload').value = '';
         document.getElementById('audio-upload').value = '';
     };
 
-   const handleSubmit = async (e) => {
-  e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-  if (!validateForm()) {
-    toast.error("Please fill all required fields correctly");
-    return;
-  }
+        if (!validateForm()) {
+            toast.error("Please fill all required fields correctly");
+            return;
+        }
 
-  setIsSubmitting(true);
+        setIsSubmitting(true);
+        setServerError(null);
 
-  try {
-    const form = new FormData();
-    
-    // Append all fields except files and booleans
-    form.append('songName', formData.songName);
-    form.append('albumName', formData.albumName);
-    form.append('releaseDate', formData.releaseDate);
-    form.append('singer', formData.singer);
-    form.append('language', formData.language);
-    form.append('explicitContent', formData.explicitContent);
-    form.append('genre', formData.genre);
-    form.append('musicComposer', formData.musicComposer);
-    form.append('youtubeContentID', formData.youtubeContentID);
-    form.append('songWriter', formData.songWriter);
-    form.append('subGenre', formData.subGenre);
-    form.append('useAI', formData.useAI);
-    form.append('description', formData.description);
-    form.append('couponCode', formData.couponCode);
-    form.append('additionalCredit', formData.additionalCredit);
-    
-    // Append booleans as actual booleans
-    form.append('originalWork', formData.originalWork);
-    form.append('agreeTerms', formData.agreeTerms);
-    
-    // Append files
-    form.append('artwork', formData.artwork);
-    form.append('audio', formData.audio);
+        try {
+            const form = new FormData();
+            
+            // Append all text fields
+            form.append('songName', formData.songName);
+            form.append('albumName', formData.albumName);
+            form.append('releaseDate', formData.releaseDate);
+            form.append('singer', formData.singer);
+            form.append('language', formData.language);
+            form.append('explicitContent', formData.explicitContent);
+            form.append('genre', formData.genre);
+            form.append('musicComposer', formData.musicComposer);
+            form.append('youtubeContentID', formData.youtubeContentID);
+            form.append('songWriter', formData.songWriter);
+            form.append('subGenre', formData.subGenre);
+            form.append('useAI', formData.useAI);
+            form.append('description', formData.description);
+            form.append('couponCode', formData.couponCode);
+            form.append('additionalCredit', formData.additionalCredit);
+            
+            // Append booleans as strings
+            form.append('originalWork', String(formData.originalWork));
+            form.append('agreeTerms', String(formData.agreeTerms));
+            
+            // Append files
+            form.append('artwork', formData.artwork);
+            form.append('audio', formData.audio);
 
-    await CreateSingleSongWithoutCt(form);
-    toast.success("Song created successfully!");
-    resetForm();
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    toast.error(error.response?.data?.message || "Error creating song");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+            // Debugging: Log FormData contents
+            for (const [key, value] of form.entries()) {
+                if (value instanceof File) {
+                    console.log(key, value.name, value.type, value.size);
+                } else {
+                    console.log(key, value);
+                }
+            }
 
+            await CreateSingleSongWithoutCt(form);
+            toast.success("Song created successfully!");
+            resetForm();
+            // navigate('/success'); // Redirect to success page
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                console.error("Response data:", error.response.data);
+                console.error("Response status:", error.response.status);
+                console.error("Response headers:", error.response.headers);
+                
+                // Show detailed error message
+                const errorMsg = error.response.data?.message || 
+                                error.response.data?.error || 
+                                `Server error: ${error.response.status}`;
+                setServerError(errorMsg);
+                toast.error(errorMsg);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error("Request data:", error.request);
+                setServerError("No response from server. Please check your connection.");
+                toast.error("No response from server");
+            } else {
+                // Something happened in setting up the request
+                console.error("Error message:", error.message);
+                setServerError(error.message);
+                toast.error("Request setup error");
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     const paymentplatform = [
         { img: visa },
@@ -229,6 +279,18 @@ function SingleSongWithoutCT() {
                     {/* main */}
                     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
                         <div className="max-w-6xl mx-auto">
+                            {/* Server Error Display */}
+                            {serverError && (
+                                <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                                    <p className="text-red-700 font-medium">
+                                        Server Error: {serverError}
+                                    </p>
+                                    <p className="text-red-600 text-sm mt-1">
+                                        Please check your input and try again. If the problem persists, contact support.
+                                    </p>
+                                </div>
+                            )}
+
                             {/* Header */}
                             <div className="bg-white rounded-xl shadow-lg p-6 mb-8 border-l-4 border-[#005f73]">
                                 <div className="flex items-center justify-between">
@@ -724,11 +786,14 @@ function SingleSongWithoutCT() {
                                     {/* Submit Button */}
                                     <button
                                         type="submit"
-                                        disabled={isSubmitting}
-                                        className={`w-full py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-[1.02] ${Object.keys(errors).length === 0
-                                            ? 'bg-gradient-to-r from-[#005f73] to-[#0a7c91] text-white hover:shadow-lg'
-                                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                            }`}
+                                        // disabled={isSubmitting || Object.keys(errors).length > 0}
+                                        className={`w-full py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-[1.02] ${
+                                            isSubmitting 
+                                                ? 'bg-gray-400 text-gray-700 cursor-not-allowed' 
+                                                : Object.keys(errors).length === 0
+                                                    ? 'bg-gradient-to-r from-[#005f73] to-[#0a7c91] text-white hover:shadow-lg'
+                                                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                        }`}
                                     >
                                         {isSubmitting ? (
                                             <>
