@@ -95,6 +95,14 @@ export default function ManageYourProfile() {
           phone: userData.phone || '',
           profilePic: userData.profilepic || '',
           label: userData.fname || '',
+          city: userData.city || '',
+          street: userData.address || '',
+          about: userData.About || '',
+          state: userData.state || '',
+          pincode: userData.pincode || '',
+          country: userData.country || '',
+
+
         }));
       } catch (err) {
         console.error('❌ Error fetching logged-in user:', err);
