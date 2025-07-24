@@ -14,6 +14,7 @@ module.exports.createOnlyCallerTune = async (req, res) => {
             audio: audioPath,
             originalWork: req.body.originalWork === 'true',
             agreeTerms: req.body.agreeTerms === 'true',
+            userId:req.user
         });
 
         res.status(201).json({
