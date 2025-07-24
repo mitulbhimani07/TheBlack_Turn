@@ -27,3 +27,15 @@ exports.getAllSongs = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to fetch songs", error: error.message });
   }
 };
+
+exports.viewSingleSongWithoutCT = async (req, res) => {
+  try {
+    const song = await SingleSongWithoutCT.findById(req.params.id);
+    if (!song) {
+      return res.status(404).json({ success: false, message: "Song not found" });
+    }
+    res.status(200).json({ success: true, data: song });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to fetch song", error: error.message });
+  }
+}

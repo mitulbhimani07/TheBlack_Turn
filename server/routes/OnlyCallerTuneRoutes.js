@@ -39,5 +39,7 @@ router.post(
     ]),
     OnlyCallerTuneCTR.createOnlyCallerTune
 );
+router.get('/all', OnlyCallerTuneCTR.viewOnlyCallerTuneData);
+router.get('/:id', OnlyCallerTuneCTR.getSingleOnlyCallerTune);
 
 module.exports = router;
