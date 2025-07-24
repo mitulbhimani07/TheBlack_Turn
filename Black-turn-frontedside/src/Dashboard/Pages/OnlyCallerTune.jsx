@@ -12,7 +12,7 @@ import emi from '../../assets/images/payment-platform/emi.png';
 import upi from '../../assets/images/payment-platform/upi.png';
 import gpay from '../../assets/images/payment-platform/gpay.png';
 import phonepe from '../../assets/images/payment-platform/phonepe.png';
-import { OnlyCallerTuneData } from '../../Api/api';
+import { OnlyCallerTunedata } from '../../Api/api';
 
 function OnlyCallerTune() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -71,40 +71,51 @@ function OnlyCallerTune() {
         setDragActive(prev => ({ ...prev, [type]: false }));
         const files = e.dataTransfer.files;
         if (files.length > 0) {
-            handleInputChange(type, files[0]);
+            handleFileSelect({ target: { files } }, type);
         }
     };
 
     const handleFileSelect = (e, type) => {
         const file = e.target.files[0];
-        if (file) {
-            // Validate file type and size
+        if (!file) return;
+
+        setError(null);
+
+        try {
             if (type === 'artwork') {
                 const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
                 if (!validTypes.includes(file.type)) {
-                    setError('Invalid artwork file type. Please upload a JPEG, JPG, or PNG file.');
-                    return;
+                    throw new Error('Invalid artwork file type. Please upload a JPEG, JPG, or PNG file.');
                 }
-                if (file.size > 5 * 1024 * 1024) { // 5MB limit
-                    setError('Artwork file is too large. Maximum size is 5MB.');
-                    return;
+                if (file.size > 5 * 1024 * 1024) {
+                    throw new Error('Artwork file is too large. Maximum size is 5MB.');
                 }
             } else if (type === 'audio') {
                 const validTypes = ['audio/mpeg', 'audio/wav', 'audio/mp3'];
                 if (!validTypes.includes(file.type)) {
-                    setError('Invalid audio file type. Please upload an MP3 or WAV file.');
-                    return;
+                    throw new Error('Invalid audio file type. Please upload an MP3 or WAV file.');
                 }
-                if (file.size > 200 * 1024 * 1024) { // 200MB limit
-                    setError('Audio file is too large. Maximum size is 200MB.');
-                    return;
+                if (file.size > 200 * 1024 * 1024) {
+                    throw new Error('Audio file is too large. Maximum size is 200MB.');
                 }
             }
 
-            handleInputChange(type, file);
-            setError(null);
+            setFormData(prev => ({
+                ...prev,
+                [type]: file
+            }));
+
+        } catch (err) {
+            setError(err.message);
+            if (type === 'artwork' && artworkInputRef.current) {
+                artworkInputRef.current.value = '';
+            }
+            if (type === 'audio' && audioInputRef.current) {
+                audioInputRef.current.value = '';
+            }
         }
     };
+
     const resetForm = () => {
         setFormData({
             songName: '',
@@ -129,68 +140,68 @@ function OnlyCallerTune() {
             oldISRCUPC: ''
         });
 
-        // Clear file inputs
         if (artworkInputRef.current) artworkInputRef.current.value = '';
         if (audioInputRef.current) audioInputRef.current.value = '';
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setError(null);
-        setSubmitSuccess(false);
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+    setSubmitSuccess(false);
 
-        // Validate required fields
-        if (!formData.originalWork || !formData.agreeTerms) {
-            setError('You must agree to the terms and conditions');
-            setIsSubmitting(false);
-            return;
-        }
+    // Validate required fields
+    if (!formData.originalWork || !formData.agreeTerms) {
+        setError('You must agree to the terms and conditions');
+        setIsSubmitting(false);
+        return;
+    }
 
-        try {
-            const formDataToSend = new FormData();
+    if (!formData.artwork || !formData.audio) {
+        setError('Please upload both artwork and audio files');
+        setIsSubmitting(false);
+        return;
+    }
 
-            // Log form data before sending
-            console.log('Form data before conversion:', formData);
-
-            // Append all fields systematically
-            Object.keys(formData).forEach(key => {
-                const value = formData[key];
-
-                if (value !== null && value !== undefined) {
-                    if (key === 'artwork' || key === 'audio') {
-                        if (value instanceof File) {
-                            formDataToSend.append(key, value, value.name);
-                        }
-                    } else if (typeof value === 'boolean') {
-                        formDataToSend.append(key, value.toString());
-                    } else {
-                        formDataToSend.append(key, value);
-                    }
+    try {
+        // Prepare FormData payload
+        const formDataToSend = new FormData();
+        
+        // Append all form data to FormData object
+        Object.entries(formData).forEach(([key, value]) => {
+            if (value !== null && value !== undefined) {
+                if (value instanceof File) {
+                    formDataToSend.append(key, value);
+                } else {
+                    formDataToSend.append(key, typeof value === 'boolean' ? value.toString() : value);
                 }
-            });
-
-            // Verify FormData contents
-            console.log('FormData entries:');
-            for (let [key, value] of formDataToSend.entries()) {
-                console.log(key, value);
             }
+        });
 
-            const response = await OnlyCallerTuneData(formDataToSend);
+        // Call the API function
+        const response = await OnlyCallerTunedata(formDataToSend);
 
-            if (response.status) {
-                setSubmitSuccess(true);
-                resetForm();
-            } else {
-                setError(response.message || 'Submission failed');
+        if (response.status) {
+            setSubmitSuccess(true);
+            resetForm();
+        } else {
+            setError(response.message || 'Submission failed');
+            
+            // Handle specific error cases
+            if (response.message.includes('Session expired') || 
+                (response.error && response.error.status === 401)) {
+                localStorage.removeItem('token');
+                // Optionally redirect to login page
             }
-        } catch (err) {
-            console.error('Submission error:', err);
-            setError(err.message || 'An unexpected error occurred');
-        } finally {
-            setIsSubmitting(false);
         }
-    };
+    } catch (err) {
+        console.error('Submission error:', err);
+        setError(err.message || 'An unexpected error occurred');
+    } finally {
+        setIsSubmitting(false);
+    }
+};
+
     const paymentplatform = [
         { img: visa },
         { img: MasterCard },
@@ -280,6 +291,7 @@ function OnlyCallerTune() {
                                                 onChange={(e) => handleInputChange('songName', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                                 placeholder="Enter song name"
+                                                required
                                             />
                                             <p className="text-xs text-gray-500">Don't Use Special Characters (Max 10 Words)</p>
                                         </div>
@@ -294,6 +306,7 @@ function OnlyCallerTune() {
                                                 onChange={(e) => handleInputChange('albumName', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                                 placeholder="Enter album name"
+                                                required
                                             />
                                             <p className="text-xs text-gray-500">In case of a single song, write the song name here</p>
                                         </div>
@@ -307,6 +320,7 @@ function OnlyCallerTune() {
                                                 value={formData.releaseDate}
                                                 onChange={(e) => handleInputChange('releaseDate', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                required
                                             />
                                             <p className="text-xs text-gray-500">Choose Any (Past, Present or Future) Date of Your Music Release</p>
                                         </div>
@@ -336,7 +350,12 @@ function OnlyCallerTune() {
                                                     }`}
                                             >
                                                 <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                                                <p className="text-gray-600 mb-2">Click or Drag & Drop to upload your artwork</p>
+                                                <p className="text-gray-600 mb-2">
+                                                    {formData.artwork 
+                                                        ? `Selected: ${formData.artwork.name}` 
+                                                        : 'Click or Drag & Drop to upload your artwork'
+                                                    }
+                                                </p>
                                                 <input
                                                     type="file"
                                                     accept=".jpg,.png,.jpeg"
@@ -344,16 +363,14 @@ function OnlyCallerTune() {
                                                     className="hidden"
                                                     id="artwork-upload"
                                                     ref={artworkInputRef}
+                                                    required
                                                 />
                                                 <label
                                                     htmlFor="artwork-upload"
                                                     className="inline-block px-4 py-2 bg-[#005f73] text-white rounded-lg cursor-pointer hover:bg-[#004a5a] transition-colors"
                                                 >
-                                                    Choose File
+                                                    {formData.artwork ? 'Change File' : 'Choose File'}
                                                 </label>
-                                                {formData.artwork && (
-                                                    <p className="text-sm text-green-600 mt-2">✓ {formData.artwork.name}</p>
-                                                )}
                                             </div>
                                             <p className="text-xs text-gray-500">Size must be 3000x3000px. Choose (.jpg, .png, .jpeg) Only</p>
                                         </div>
@@ -373,7 +390,12 @@ function OnlyCallerTune() {
                                                     }`}
                                             >
                                                 <Music className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                                                <p className="text-gray-600 mb-2">Click or Drag & Drop to upload your audio</p>
+                                                <p className="text-gray-600 mb-2">
+                                                    {formData.audio 
+                                                        ? `Selected: ${formData.audio.name}` 
+                                                        : 'Click or Drag & Drop to upload your audio'
+                                                    }
+                                                </p>
                                                 <input
                                                     type="file"
                                                     accept=".mp3,.wav"
@@ -381,18 +403,16 @@ function OnlyCallerTune() {
                                                     className="hidden"
                                                     id="audio-upload"
                                                     ref={audioInputRef}
+                                                    required
                                                 />
                                                 <label
                                                     htmlFor="audio-upload"
                                                     className="inline-block px-4 py-2 bg-[#005f73] text-white rounded-lg cursor-pointer hover:bg-[#004a5a] transition-colors"
                                                 >
-                                                    Choose File
+                                                    {formData.audio ? 'Change File' : 'Choose File'}
                                                 </label>
-                                                {formData.audio && (
-                                                    <p className="text-sm text-green-600 mt-2">✓ {formData.audio.name}</p>
-                                                )}
                                             </div>
-                                            <p className="text-xs text-gray-500">Max Upload Size 2GB. Choose (.mp3, .wav) Only</p>
+                                            <p className="text-xs text-gray-500">Max Upload Size 200MB. Choose (.mp3, .wav) Only</p>
                                         </div>
                                     </div>
                                 </div>
@@ -415,6 +435,7 @@ function OnlyCallerTune() {
                                                 onChange={(e) => handleInputChange('primaryArtist', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                                 placeholder="Main Singer/Artist"
+                                                required
                                             />
                                             <p className="text-xs text-gray-500">Main Singer/Artist of Your Song (Use comma for multiple)</p>
                                         </div>
@@ -429,6 +450,7 @@ function OnlyCallerTune() {
                                                 onChange={(e) => handleInputChange('musicComposer', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                                 placeholder="Music composer name"
+                                                required
                                             />
                                             <p className="text-xs text-gray-500">Use comma for Multiple</p>
                                         </div>
@@ -441,6 +463,7 @@ function OnlyCallerTune() {
                                                 value={formData.language}
                                                 onChange={(e) => handleInputChange('language', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                required
                                             >
                                                 <option value="">Select Language</option>
                                                 <option value="hindi">Hindi</option>
@@ -460,6 +483,7 @@ function OnlyCallerTune() {
                                                 value={formData.genre}
                                                 onChange={(e) => handleInputChange('genre', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                required
                                             >
                                                 <option value="">Select Genre</option>
                                                 <option value="pop">Pop</option>
@@ -492,6 +516,7 @@ function OnlyCallerTune() {
                                                     onChange={(e) => handleInputChange('callerTuneName1', e.target.value)}
                                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
                                                     placeholder="First three words of lyrics"
+                                                    required
                                                 />
                                                 <p className="text-xs text-gray-500">Max 3 Words It should be the first three words of lyrics of the callertune</p>
                                             </div>
@@ -522,6 +547,7 @@ function OnlyCallerTune() {
                                                     onChange={(e) => handleInputChange('callerTuneStart1', e.target.value)}
                                                     placeholder="mm:ss"
                                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#005f73] focus:border-[#005f73] transition-colors"
+                                                    required
                                                 />
                                                 <p className="text-xs text-gray-500">Caller tune start timing in (min:sec). Maximum 45 sec. Make sure it remains under the full song length</p>
                                             </div>
@@ -564,6 +590,7 @@ function OnlyCallerTune() {
                                                         checked={formData.explicitContent === 'No'}
                                                         onChange={(e) => handleInputChange('explicitContent', e.target.value)}
                                                         className="w-4 h-4 text-[#005f73] border-gray-300 focus:ring-[#005f73]"
+                                                        required
                                                     />
                                                     <span className="text-sm text-gray-700">No</span>
                                                 </label>
@@ -595,6 +622,7 @@ function OnlyCallerTune() {
                                                         checked={formData.youtubeContentId === 'Yes'}
                                                         onChange={(e) => handleInputChange('youtubeContentId', e.target.value)}
                                                         className="w-4 h-4 text-[#005f73] border-gray-300 focus:ring-[#005f73]"
+                                                        required
                                                     />
                                                     <span className="text-sm text-gray-700">Yes</span>
                                                 </label>
@@ -626,6 +654,7 @@ function OnlyCallerTune() {
                                                         checked={formData.usedAI === 'Yes'}
                                                         onChange={(e) => handleInputChange('usedAI', e.target.value)}
                                                         className="w-4 h-4 text-[#005f73] border-gray-300 focus:ring-[#005f73]"
+                                                        required
                                                     />
                                                     <span className="text-sm text-gray-700">Yes</span>
                                                 </label>
@@ -689,6 +718,7 @@ function OnlyCallerTune() {
                                                 checked={formData.originalWork}
                                                 onChange={(e) => handleInputChange('originalWork', e.target.checked)}
                                                 className="w-5 h-5 text-[#005f73] border-gray-300 rounded focus:ring-[#005f73] mt-1"
+                                                required
                                             />
                                             <label htmlFor="originalWork" className="text-sm text-gray-700 leading-relaxed">
                                                 I agree and confirm that the song uploaded by me is original in composition, lyrics, and music, and I own the copyright. If the stores request documents for the song, I am responsible for providing them. Failure to provide the necessary documents will result in no refund, and the song will either not be processed or may be taken down from the stores.
@@ -702,6 +732,7 @@ function OnlyCallerTune() {
                                                 checked={formData.agreeTerms}
                                                 onChange={(e) => handleInputChange('agreeTerms', e.target.checked)}
                                                 className="w-5 h-5 text-[#005f73] border-gray-300 rounded focus:ring-[#005f73] mt-1"
+                                                required
                                             />
                                             <label htmlFor="agreeTerms" className="text-sm text-gray-700 leading-relaxed">
                                                 I have read and agree to the website <span className="text-blue-600 underline cursor-pointer">terms and conditions</span>. I Confirm, This is not a cover song, if this is a cover song then cancel this order with no refund. I have the copyright, and I'm not giving it to TheBlackturn. They're just helping monetizing and distributing my song worldwide. This is not a cover song. In case of any third party claim, I have documentary evidence to prove my ownership of the song.
@@ -762,7 +793,6 @@ function OnlyCallerTune() {
                                         </div>
                                     )}
                                     {/* Submit Button */}
-                                    {/* Modify your submit button to show loading state */}
                                     <button
                                         type="submit"
                                         disabled={!formData.originalWork || !formData.agreeTerms || isSubmitting}
@@ -775,17 +805,6 @@ function OnlyCallerTune() {
                                     </button>
                                 </div>
                             </form>
-
-                            {/* Success Message (Hidden by default) */}
-                            <div className="hidden bg-green-50 border border-green-200 rounded-lg p-6 mt-8">
-                                <div className="flex items-center gap-3">
-                                    <CheckCircle className="w-8 h-8 text-green-600" />
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-green-800">Song Submitted Successfully!</h3>
-                                        <p className="text-green-700">Your song has been submitted for review. You will receive updates via email.</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

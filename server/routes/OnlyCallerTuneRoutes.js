@@ -3,6 +3,8 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
+const Auth=require("../Middleware/jwt")
+
 
 // ✅ Require controller (DO NOT change this path)
 const OnlyCallerTuneCTR = require('../controller/OnlyCallerTuneController');
@@ -37,7 +39,7 @@ router.post(
         { name: 'artwork', maxCount: 1 },
         { name: 'audio', maxCount: 1 }
     ]),
-    OnlyCallerTuneCTR.createOnlyCallerTune
+    Auth,OnlyCallerTuneCTR.createOnlyCallerTune
 );
 router.get('/all', OnlyCallerTuneCTR.viewOnlyCallerTuneData);
 router.get('/:id', OnlyCallerTuneCTR.getSingleOnlyCallerTune);

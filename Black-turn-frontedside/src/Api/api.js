@@ -204,12 +204,15 @@ export const CreateSingleSongWithoutCt = async (payload) => {
     throw error;
   }
 };
-export const OnlyCallerTuneData = async (payload) => {
+export const OnlyCallerTunedata = async (payload) => {
+        const token = localStorage.getItem("Token");
+
     try {
-        const response = await axios.post(`${API_URL}/OnlyCallerTune/create`, payload, {
+        const response = await axios.post("http://localhost:3001/OnlyCallerTune/create", payload, {
             headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+                // "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
         });
  
         console.log('✅ Caller Tune submitted successfully:', response.data);
