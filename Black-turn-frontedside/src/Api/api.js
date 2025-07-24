@@ -319,7 +319,7 @@ export const ViewSingleSongCTById = async (id) => {
 export const viewOnlyCallerTuneData = async () => {
   const token = localStorage.getItem("Token");
   try {
-    const response = await axios.get(`http://localhost:3001/OnlyCallerTune/all`, {
+    const response = await axios.get(`${API_URL}/OnlyCallerTune/all`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -335,16 +335,20 @@ export const viewOnlyCallerTuneData = async () => {
 export const viewSingleOnlyCallerTune = async (id) => {
   const token = localStorage.getItem("Token");
   try {
-    const response = await axios.get(`http://localhost:3001/OnlyCallerTune/${id}`, {
+    const response = await axios.get(`${API_URL}/OnlyCallerTune/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log('Raw API Response:', response); // Debug
-    return response.data;
+    console.log('API Response Data:', response.data);
+    return response.data.data;
   } catch (error) {
-    console.error('Error in view single only caller tune API:', error);
+    console.error('API Error:', error.response?.data || error.message);
     throw error;
   }
 };
- 
+
+export const viewSingleSongWithoutCT = async () => {
+  const response = await axios.get('http://localhost:3001/singlesongWithoutCT/all');
+  return response.data;
+};

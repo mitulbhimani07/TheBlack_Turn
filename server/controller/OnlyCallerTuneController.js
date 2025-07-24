@@ -52,16 +52,19 @@ module.exports.getSingleOnlyCallerTune = async (req, res) => {
 
         if (!singleData) {
             return res.status(404).json({
+                success: false,
                 message: 'OnlyCallerTune not found'
             });
         }
 
         res.status(200).json({
+            success: true,
             message: 'OnlyCallerTune data retrieved successfully',
-            data: singleData
+            data: singleData.toObject() // Convert Mongoose document to plain object
         });
     } catch (error) {
         res.status(500).json({
+            success: false,
             message: 'Error retrieving OnlyCallerTune data',
             error: error.message
         });

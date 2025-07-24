@@ -9,86 +9,57 @@ const BASE_URL = import.meta.env.VITE_API_URL || 'https://theblack-turn-2.onrend
 
 const ViewSingleOnlyCallerTune = () => {
     const { id } = useParams();
-
     const [callerTune, setCallerTune] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [notifications, setNotifications] = useState([]);
-    const [unreadCount, setUnreadCount] = useState(0);
-
-    // Image state & indexes for fallback patterns
-    const [imageError, setImageError] = useState(false);
-    const [currentImageUrl, setCurrentImageUrl] = useState('');
-    const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
-    const [imageLoading, setImageLoading] = useState(true);
-
-    // Construct image URL with multiple fallback patterns
-    const constructImageUrl = (path) => {
-        if (!path) return `${BASE_URL}/upload/default-song-poster.jpg`;
-        if (path.startsWith('http')) return path;
-        const cleanPath = path.replace(/^\/+/, '');
-        const patterns = [
-            `${BASE_URL}/upload/${cleanPath}`,
-            `${BASE_URL}/uploads/${cleanPath}`,
-            `${BASE_URL}/images/${cleanPath}`,
-            `${BASE_URL}/assets/${cleanPath}`,
-            `${BASE_URL}/${cleanPath}`
-        ];
-        return patterns[currentPatternIndex] || `${BASE_URL}/upload/default-song-poster.jpg`;
-    };
+    const [imageUrl, setImageUrl] = useState('');
 
     // Fetch caller tune data by id
     useEffect(() => {
+        // In your fetchData function within useEffect:
+        // In your fetchData function within useEffect:
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const res = await viewSingleOnlyCallerTune(id);
-                setCallerTune(res);
-                if (res?.artwork) {
-                    setCurrentImageUrl(constructImageUrl(res.artwork));
-                    setImageLoading(true);
-                    setImageError(false);
-                    setCurrentPatternIndex(0);
+                console.log('API Data:', res); // Debug log
+
+                if (!res) {
+                    throw new Error('No data received from server');
                 }
-            } catch (error) {
-                console.error("Error fetching caller tune:", error);
+
+                setCallerTune(res);
+
+                // Improved image URL handling
+                let finalImageUrl = '';
+                if (res.artwork) {
+                    if (res.artwork.startsWith('http')) {
+                        finalImageUrl = res.artwork;
+                    } else {
+                        // Remove leading slash if present
+                        const cleanPath = res.artwork.replace(/^\/+/, '');
+                        // Try multiple possible paths
+                        finalImageUrl = `${BASE_URL}/uploads/${cleanPath}`;
+                        // Alternative path if the above doesn't work
+                        // finalImageUrl = `${BASE_URL}/upload/${cleanPath}`;
+                    }
+                } else {
+                    // Use a reliable placeholder image
+                    finalImageUrl = 'https://via.placeholder.com/500?text=No+Image+Available';
+                }
+                console.log('Image URL:', finalImageUrl); // Debug the image URL
+                setImageUrl(finalImageUrl);
+
+            } catch (err) {
+                console.error("Fetch Error:", err);
+                setError(err.response?.data?.message || err.message || 'Failed to load caller tune');
             } finally {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, [id]);
-
-    // Image loading and error handling fallback loop
-    useEffect(() => {
-        if (!callerTune?.artwork) {
-            setCurrentImageUrl(`${BASE_URL}/upload/default-song-poster.jpg`);
-            setImageLoading(false);
-            return;
-        }
-
-        setImageLoading(true);
-        setImageError(false);
-        const img = new Image();
-        img.src = currentImageUrl;
-        img.onload = () => setImageLoading(false);
-        img.onerror = () => {
-            if (currentPatternIndex < 4) {
-                setCurrentPatternIndex((prev) => prev + 1);
-            } else {
-                setImageError(true);
-                setImageLoading(false);
-                setCurrentImageUrl(`${BASE_URL}/upload/default-song-poster.jpg`);
-            }
-        };
-    }, [currentImageUrl, currentPatternIndex, callerTune]);
-
-    // Sidebar toggle and notifications handlers
-    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-    const markAsRead = (id) => {
-        setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
-        setUnreadCount(prev => prev - 1);
-    };
 
     // Loading skeleton component
     const CardLoading = () => (
@@ -113,13 +84,7 @@ const ViewSingleOnlyCallerTune = () => {
             <div className="min-h-screen flex bg-gray-50 relative">
                 <Sidebar isOpen={isSidebarOpen} activeTab="releases" />
                 <div className="flex-1 flex flex-col min-h-screen">
-                    <Navbar
-                        toggleSidebar={toggleSidebar}
-                        sidebarOpen={isSidebarOpen}
-                        notifications={notifications}
-                        unreadCount={unreadCount}
-                        markAsRead={markAsRead}
-                    />
+                    <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
                     <div className="min-h-screen bg-gray-50 p-6">
                         <CardLoading />
                     </div>
@@ -128,23 +93,21 @@ const ViewSingleOnlyCallerTune = () => {
         );
     }
 
-    if (!callerTune) {
+    if (error || !callerTune) {
         return (
             <div className="min-h-screen flex bg-gray-50 relative">
                 <Sidebar isOpen={isSidebarOpen} activeTab="releases" />
                 <div className="flex-1 flex flex-col min-h-screen">
-                    <Navbar
-                        toggleSidebar={toggleSidebar}
-                        sidebarOpen={isSidebarOpen}
-                        notifications={notifications}
-                        unreadCount={unreadCount}
-                        markAsRead={markAsRead}
-                    />
+                    <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
                     <div className="min-h-screen bg-gray-50 p-6 flex justify-center items-center">
                         <div className="text-center">
                             <Music className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                            <h3 className="text-lg font-medium text-gray-900">Caller Tune Not Found</h3>
-                            <p className="text-gray-500 mt-2">The requested caller tune could not be loaded.</p>
+                            <h3 className="text-lg font-medium text-gray-900">
+                                {error || 'Caller Tune Not Found'}
+                            </h3>
+                            <p className="text-gray-500 mt-2">
+                                {error ? 'There was an error loading the caller tune' : 'The requested caller tune could not be loaded.'}
+                            </p>
                             <Link
                                 to="/allreleases"
                                 className="mt-4 inline-flex items-center px-4 py-2 bg-[#005f73] text-white rounded-md hover:bg-[#004a5c]"
@@ -163,13 +126,7 @@ const ViewSingleOnlyCallerTune = () => {
         <div className="min-h-screen flex bg-gray-50 relative">
             <Sidebar isOpen={isSidebarOpen} activeTab="releases" />
             <div className="flex-1 flex flex-col min-h-screen">
-                <Navbar
-                    toggleSidebar={toggleSidebar}
-                    sidebarOpen={isSidebarOpen}
-                    notifications={notifications}
-                    unreadCount={unreadCount}
-                    markAsRead={markAsRead}
-                />
+                <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
                 <div className="min-h-screen bg-gray-50 p-6">
                     <div className="max-w-4xl mx-auto">
@@ -188,68 +145,46 @@ const ViewSingleOnlyCallerTune = () => {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {/* Left column - Artwork */}
                                 <div className="md:col-span-1">
-                                    <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center relative">
-                                        {imageLoading && (
-                                            <div className="absolute inset-0 flex items-center justify-center">
-                                                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#005d71]"></div>
-                                            </div>
-                                        )}
-                                        {!imageError ? (
-                                            <img
-                                                src={currentImageUrl}
-                                                alt={callerTune.songName || "Caller Tune Poster"}
-                                                className={`object-cover w-full h-full rounded-lg ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
-                                            />
-                                        ) : (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-                                                <Music className="w-12 h-12 text-gray-400" />
-                                            </div>
-                                        )}
+                                    <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
+                                        <img
+                                            src={imageUrl}
+                                            alt={callerTune.songName || "Caller Tune Poster"}
+                                            className="object-cover w-full h-full rounded-lg"
+                                            onError={(e) => {
+                                                e.target.onerror = null; // Prevent infinite loop
+                                                // Fallback to a working placeholder image
+                                                e.target.src = 'https://theblack-turn-2.onrender.com';
+                                            }}
+                                        />
                                     </div>
                                 </div>
 
                                 {/* Right column - Details */}
                                 <div className="md:col-span-2">
-                                    <h1 className="text-2xl font-bold text-[#005f73] mb-2">{callerTune.songName}</h1>
-                                    <p className="text-gray-600 mb-4">{callerTune.albumName}</p>
+                                    <h1 className="text-2xl font-bold text-[#005f73] mb-2">
+                                        {callerTune.songName || 'Untitled Song'}
+                                    </h1>
+                                    <p className="text-gray-600 mb-4">
+                                        {callerTune.albumName || 'No album specified'}
+                                    </p>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">Primary Artist</h3>
-                                            <p className="text-gray-900">{callerTune.primaryArtist}</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">Music Composer</h3>
-                                            <p className="text-gray-900">{callerTune.musicComposer}</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">Song Writer</h3>
-                                            <p className="text-gray-900">{callerTune.songWriter}</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">Release Date</h3>
-                                            <p className="text-gray-900">{callerTune.releaseDate?.slice(0, 10)}</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">Language</h3>
-                                            <p className="text-gray-900">{callerTune.language}</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">Genre</h3>
-                                            <p className="text-gray-900">{callerTune.genre}</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">Explicit Content</h3>
-                                            <p className="text-gray-900">{callerTune.explicitContent}</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">YouTube Content ID</h3>
-                                            <p className="text-gray-900">{callerTune.youtubeContentId}</p>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-medium text-gray-700">AI Used</h3>
-                                            <p className="text-gray-900">{callerTune.usedAI}</p>
-                                        </div>
+                                        {[
+                                            { label: 'Primary Artist', value: callerTune.primaryArtist },
+                                            { label: 'Music Composer', value: callerTune.musicComposer },
+                                            { label: 'Song Writer', value: callerTune.songWriter },
+                                            { label: 'Release Date', value: callerTune.releaseDate?.slice(0, 10) },
+                                            { label: 'Language', value: callerTune.language },
+                                            { label: 'Genre', value: callerTune.genre },
+                                            { label: 'Explicit Content', value: callerTune.explicitContent },
+                                            { label: 'YouTube Content ID', value: callerTune.youtubeContentId },
+                                            { label: 'AI Used', value: callerTune.usedAI },
+                                        ].map((item, index) => (
+                                            <div key={index}>
+                                                <h3 className="font-medium text-gray-700">{item.label}</h3>
+                                                <p className="text-gray-900">{item.value || 'N/A'}</p>
+                                            </div>
+                                        ))}
                                     </div>
 
                                     {/* Caller Tune Details */}
@@ -258,17 +193,75 @@ const ViewSingleOnlyCallerTune = () => {
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="bg-gray-50 p-4 rounded-lg">
                                                 <h3 className="font-medium text-gray-700 mb-2">First Caller Tune</h3>
-                                                <p className="text-gray-900 font-medium">{callerTune.callerTuneName1}</p>
-                                                <p className="text-gray-600 text-sm mt-1">Start Time: {callerTune.callerTuneStart1}</p>
+                                                <p className="text-gray-900 font-medium">
+                                                    {callerTune.callerTuneName1 || 'N/A'}
+                                                </p>
+                                                <p className="text-gray-600 text-sm mt-1">
+                                                    Start Time: {callerTune.callerTuneStart1 || 'N/A'}
+                                                </p>
                                             </div>
                                             <div className="bg-gray-50 p-4 rounded-lg">
                                                 <h3 className="font-medium text-gray-700 mb-2">Second Caller Tune</h3>
-                                                <p className="text-gray-900 font-medium">{callerTune.callerTuneName2 || 'N/A'}</p>
+                                                <p className="text-gray-900 font-medium">
+                                                    {callerTune.callerTuneName2 || 'N/A'}
+                                                </p>
                                                 {callerTune.callerTuneStart2 && (
-                                                    <p className="text-gray-600 text-sm mt-1">Start Time: {callerTune.callerTuneStart2}</p>
+                                                    <p className="text-gray-600 text-sm mt-1">
+                                                        Start Time: {callerTune.callerTuneStart2}
+                                                    </p>
                                                 )}
                                             </div>
                                         </div>
+                                        {/* Optional Description */}
+                                        {callerTune.description && (
+                                            <div className="mt-8 pt-6 border-t border-gray-200">
+                                                <h2 className="text-xl font-bold text-[#005f73] mb-4">Description</h2>
+                                                <p className="text-gray-900">{callerTune.description}</p>
+                                            </div>
+                                        )}
+
+                                        {/* Additional Metadata */}
+                                        <div className="mt-8 pt-6 border-t border-gray-200">
+                                            <h2 className="text-xl font-bold text-[#005f73] mb-4">Additional Info</h2>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div>
+                                                    <h3 className="font-medium text-gray-700">Original Work</h3>
+                                                    <p className="text-gray-900">{callerTune.originalWork ? 'Yes' : 'No'}</p>
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-medium text-gray-700">Agreed to Terms</h3>
+                                                    <p className="text-gray-900">{callerTune.agreeTerms ? 'Yes' : 'No'}</p>
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-medium text-gray-700">Apple/Spotify Links</h3>
+                                                    {callerTune.appleSpotifyLinks ? (
+                                                        <a
+                                                            href={callerTune.appleSpotifyLinks}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-blue-600 underline break-all"
+                                                        >
+                                                            {callerTune.appleSpotifyLinks}
+                                                        </a>
+                                                    ) : (
+                                                        <p className="text-gray-900">N/A</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-medium text-gray-700">Old ISRC/UPC</h3>
+                                                    <p className="text-gray-900">{callerTune.oldISRCUPC || 'N/A'}</p>
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-medium text-gray-700">Created At</h3>
+                                                    <p className="text-gray-900">{new Date(callerTune.createdAt).toLocaleString()}</p>
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-medium text-gray-700">Last Updated</h3>
+                                                    <p className="text-gray-900">{new Date(callerTune.updatedAt).toLocaleString()}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                     {/* Optional Description */}
@@ -278,7 +271,6 @@ const ViewSingleOnlyCallerTune = () => {
                                             <p className="text-gray-900">{callerTune.description}</p>
                                         </div>
                                     )}
-
                                 </div>
                             </div>
                         </div>

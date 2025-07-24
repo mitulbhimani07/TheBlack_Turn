@@ -26,7 +26,8 @@ app.set('view engine', 'ejs');
 
 // Set the views directory (optional if using default `/views`)
 app.set('views', path.join(__dirname, 'views'));
-
+// Serve static files from uploads directory
+app.use('/uploads', express.static('uploads'));
 // Database connection
 const mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res) => {
