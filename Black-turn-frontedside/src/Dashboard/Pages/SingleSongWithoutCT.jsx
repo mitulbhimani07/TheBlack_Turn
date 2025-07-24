@@ -27,8 +27,8 @@ function SingleSongWithoutCT() {
         songName: '',
         albumName: '',
         releaseDate: '',
-        artwork: null,
-        audio: null,
+        artwork: '',
+        audio: '',
         singer: '',
         language: '',
         explicitContent: 'No',
@@ -39,6 +39,7 @@ function SingleSongWithoutCT() {
         subGenre: '',
         useAI: 'No',
         description: '',
+        additionalCredit:'',
         originalWork: false,
         agreeTerms: false,
         couponCode: ''
@@ -137,30 +138,55 @@ function SingleSongWithoutCT() {
         document.getElementById('audio-upload').value = '';
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        if (!validateForm()) {
-            toast.error('Please fill all required fields correctly');
-            return;
-        }
+   const handleSubmit = async (e) => {
+  e.preventDefault();
 
-        setIsSubmitting(true);
+  if (!validateForm()) {
+    toast.error("Please fill all required fields correctly");
+    return;
+  }
 
-        try {
-            await CreateSingleSongWithoutCt(formData);
-            toast.success("Song created successfully!");
-            
-            // Reset form after successful submission
-            resetForm();
-            
-        } catch (error) {
-            console.error("Error submitting form:", error);
-            toast.error(error.response?.data?.message || "Error creating song");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+  setIsSubmitting(true);
+
+  try {
+    const form = new FormData();
+    
+    // Append all fields except files and booleans
+    form.append('songName', formData.songName);
+    form.append('albumName', formData.albumName);
+    form.append('releaseDate', formData.releaseDate);
+    form.append('singer', formData.singer);
+    form.append('language', formData.language);
+    form.append('explicitContent', formData.explicitContent);
+    form.append('genre', formData.genre);
+    form.append('musicComposer', formData.musicComposer);
+    form.append('youtubeContentID', formData.youtubeContentID);
+    form.append('songWriter', formData.songWriter);
+    form.append('subGenre', formData.subGenre);
+    form.append('useAI', formData.useAI);
+    form.append('description', formData.description);
+    form.append('couponCode', formData.couponCode);
+    form.append('additionalCredit', formData.additionalCredit);
+    
+    // Append booleans as actual booleans
+    form.append('originalWork', formData.originalWork);
+    form.append('agreeTerms', formData.agreeTerms);
+    
+    // Append files
+    form.append('artwork', formData.artwork);
+    form.append('audio', formData.audio);
+
+    await CreateSingleSongWithoutCt(form);
+    toast.success("Song created successfully!");
+    resetForm();
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    toast.error(error.response?.data?.message || "Error creating song");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
     const paymentplatform = [
         { img: visa },

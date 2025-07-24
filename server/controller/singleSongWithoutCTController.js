@@ -4,6 +4,7 @@ exports.createSingleSongWithoutCt = async (req, res) => {
   try {
     const artwork = req.files?.artwork?.[0]?.filename || "";
     const audio = req.files?.audio?.[0]?.filename || "";
+    console.log('FILES:', req.files);
 
     const newSong = new SingleSongWithoutCT({
       ...req.body,

@@ -6,7 +6,7 @@ const SingleSongWithoutCTSchema = new mongoose.Schema({
   songName: { type: String },
   albumName: { type: String },
   releaseDate: { type: String },
-  arwork: { type: String },
+  artwork: { type: String },
   audio: { type: String },
   singer: { type: String },
   language: { type: String },
@@ -19,8 +19,8 @@ const SingleSongWithoutCTSchema = new mongoose.Schema({
   useAI: { type: String },
   additionalCredit: { type: String },
   description: { type: String },
-  originalWork: { type: String },
-  agreeTerms: { type: String }
+  originalWork: { type: Boolean },
+  agreeTerms: { type: Boolean }
 }, { timestamps: true });
 
 module.exports = mongoose.model("SingleSongWithoutCT", SingleSongWithoutCTSchema);

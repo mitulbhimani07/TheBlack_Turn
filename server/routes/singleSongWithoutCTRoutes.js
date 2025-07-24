@@ -8,7 +8,7 @@ const singleSongWithoutCTController = require("../controller/singleSongWithoutCT
 const Auth = require("../Middleware/jwt");
 
 // Ensure uploads folder exists
-const uploadDir = "uploads";
+const uploadDir = "upload";
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 // Multer storage
@@ -24,7 +24,7 @@ router.post(
   "/create",
   Auth,
   upload.fields([
-    { name: "songPoster", maxCount: 1 },
+    { name: "artwork", maxCount: 1 },
     { name: "audio", maxCount: 1 }
   ]),
   singleSongWithoutCTController.createSingleSongWithoutCt
