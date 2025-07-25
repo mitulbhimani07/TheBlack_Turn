@@ -31,8 +31,10 @@ module.exports.createOnlyCallerTune = async (req, res) => {
 };
 
 module.exports.viewOnlyCallerTuneData = async (req, res) => {
+    
     try {
-        const viewData = await OnlyCallerTune.find();
+        const userId=req.user;
+        const viewData = await OnlyCallerTune.find({userId});
 
         res.status(200).json({
             message: 'OnlyCallerTune data retrieved successfully',

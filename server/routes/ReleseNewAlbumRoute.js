@@ -10,9 +10,9 @@ route.post('/create', AlbumController.upload.fields([
 ]), Auth, AlbumController.createAlbum);
 
 // Get all albums
-route.get('/all', AlbumController.getAllAlbums);
+route.get('/all',Auth, AlbumController.getAllAlbums);
 
 // Get album by id
-route.get('/:id', AlbumController.getAlbumById);
+route.get('/:id',Auth, AlbumController.getAlbumById);
 
 module.exports = route

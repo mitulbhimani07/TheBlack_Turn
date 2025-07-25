@@ -20,13 +20,15 @@ module.exports.createSingleSongCt = async (req, res) => {
     }
 };
 
+
 module.exports.getAllSongs = async (req, res) => {
-    try {
-        const songs = await SingleSongCT.find();
-        res.status(200).json({ success: true, data: songs });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Error fetching songs", error: error.message });
-    }
+  try {
+    const userId = req.user;  // must be set by JWT middleware
+    const songs = await SingleSongCT.find({ userId });
+    res.status(200).json({ success: true, data: songs });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error fetching songs", error: error.message });
+  }
 };
 module.exports.getSingleSongCTById = async (req, res) => {
     try {

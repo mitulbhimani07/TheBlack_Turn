@@ -31,10 +31,10 @@ router.post(
 );
 
 // Get all songs route
-router.get("/all", singleSongWithoutCTController.getAllSongs);
+router.get("/all", Auth,singleSongWithoutCTController.getAllSongs);
 router.get(
   "/:id",
-  singleSongWithoutCTController.viewSingleSongWithoutCT
+  Auth,singleSongWithoutCTController.viewSingleSongWithoutCT
 );
 
 module.exports = router;

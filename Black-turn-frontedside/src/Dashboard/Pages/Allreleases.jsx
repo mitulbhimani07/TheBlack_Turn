@@ -113,6 +113,7 @@ export default function Allreleases() {
     try {
       const res = await viewSingleSongWithoutCT();
       setSingleSongWithoutCTData(Array.isArray(res.data) ? res.data : (res.data?.data || []));
+      console.log("view song with out CT",res)
     } catch (err) {
       console.error("Failed to fetch single song without CT data", err);
       setSingleSongWithoutCTData([]);
@@ -137,24 +138,27 @@ export default function Allreleases() {
 
 
   useEffect(() => {
-    const handleResize = async () => {
-      const mobile = window.innerWidth < 1024;
-      setIsMobile(mobile);
-      setIsSidebarOpen(!mobile);
-      try {
-        const res = await ViewAlbum();
-        setReleases(Array.isArray(res.data) ? res.data : (res.data.data || []));
-      } catch (err) {
-        console.error("Failed to fetch albums", err);
-        setReleases([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const handleResize = async () => {
+    const mobile = window.innerWidth < 1024;
+    setIsMobile(mobile);
+    setIsSidebarOpen(!mobile);
+    
+    try {
+      const res = await ViewAlbum();
+      // Set releases directly to res.data (which is now the albums array)
+      setReleases(Array.isArray(res.data) ? res.data : []);
+    } catch (err) {
+      console.error("Failed to fetch albums", err);
+      setReleases([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
   const statusCards = [
     {
@@ -352,43 +356,53 @@ const SingleSongWithoutCTCard = ({ song }) => {
   const [currentImageUrl, setCurrentImageUrl] = useState('');
   const [imageLoading, setImageLoading] = useState(true);
 
+  // Properly construct image URL
   const constructImageUrl = (path) => {
-    // If no path is provided or it's empty, return default image
-    if (!path) return `${BASE_URL}/upload/default-song-poster.jpg`;
-    
-    // If path is already a full URL, return it
+    // Handle cases where no artwork is provided
+    if (!path || path === 'undefined' || path === 'null') {
+      return `${BASE_URL}/upload/default-song-poster.jpg`;
+    }
+
+    // Handle full URLs
     if (path.startsWith('http')) return path;
     
-    // Clean the path and try different patterns
+    // Handle various server path patterns
     const cleanPath = path.replace(/^\/+/, '');
-    const possiblePatterns = [
-      `${BASE_URL}/upload/${cleanPath}`,
-      `${BASE_URL}/uploads/${cleanPath}`,
-      `${BASE_URL}/images/${cleanPath}`,
-      `${BASE_URL}/assets/${cleanPath}`,
-      `${BASE_URL}/${cleanPath}`
-    ];
     
-    return possiblePatterns[0];
+    // Check if path already contains 'upload' directory
+    if (cleanPath.includes('upload/')) {
+      return `${BASE_URL}/${cleanPath}`;
+    }
+    
+    // Default to upload directory
+    return `${BASE_URL}/upload/${cleanPath}`;
   };
 
   useEffect(() => {
     setImageLoading(true);
     setImageError(false);
     
-    // Try to use audio path first, then fallback to default
-    const url = constructImageUrl(song.audio || song.songPoster);
+    // Use artwork for image (not audio)
+    const url = constructImageUrl(song.artwork);
     setCurrentImageUrl(url);
     
-    const img = new window.Image();
+    // Preload image to detect errors
+    const img = new Image();
     img.src = url;
-    img.onload = () => setImageLoading(false);
+    img.onload = () => {
+      setImageLoading(false);
+      // Double-check if image loaded correctly
+      if (img.naturalWidth === 0) {
+        setImageError(true);
+        setCurrentImageUrl(`${BASE_URL}/upload/default-song-poster.jpg`);
+      }
+    };
     img.onerror = () => {
       setImageError(true);
       setImageLoading(false);
       setCurrentImageUrl(`${BASE_URL}/upload/default-song-poster.jpg`);
     };
-  }, [song.audio, song.songPoster]);
+  }, [song.artwork]);
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
@@ -406,8 +420,10 @@ const SingleSongWithoutCTCard = ({ song }) => {
               alt={song.songName || "Song Poster"}
               className={`object-cover w-full h-full rounded-lg ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
               onError={() => {
-                setImageError(true);
-                setCurrentImageUrl(`${BASE_URL}/upload/default-song-poster.jpg`);
+                if (!imageError) {
+                  setImageError(true);
+                  setCurrentImageUrl(`${BASE_URL}/upload/default-song-poster.jpg`);
+                }
               }}
             />
           )}

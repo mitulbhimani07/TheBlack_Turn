@@ -98,32 +98,45 @@ export const CreateAlbum = async (payload) => {
         throw error;
     }
 };
-export const ViewAlbum = async (payload) => {
-    try {
-        const response = await axios.get(`${API_URL}/ReleseNewAlbum/all`, payload);
-        console.log('✅ NOC Data fetched successfully:', response.data);
-        return {
-            status: true,
-            message: 'Data fetched successfully',
-            data: response.data
-        };
-    } catch (error) {
-        console.error('❌ Error fetching NOC data:', error.message);
-        throw error;
-    }
-}
-export const ViewSingleSongCT = async (payload) => {
-    try {
-        const response = await axios.get(`http://localhost:3001/singlesongCT/all`, payload);
-  
-        console.log("single song ct by id----", response.data.data)
-        return response.data
-  
-    } catch (error) {
-        console.error("Error in single song ct API:", error);
-        throw error;
-    }
-}
+export const ViewAlbum = async () => {
+  const token = localStorage.getItem("Token");
+  try {
+    const response = await axios.get(`${API_URL}/ReleseNewAlbum/all`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    
+    // Extract albums array from response.data.data
+    const albums = response.data.data || [];
+    console.log('✅ Albums fetched successfully:', albums);
+    
+    return {
+      status: true,
+      message: 'Data fetched successfully',
+      data: albums // Return the actual array of albums
+    };
+  } catch (error) {
+    console.error('❌ Error fetching albums:', error.message);
+    throw error;
+  }
+};
+
+export const ViewSingleSongCT = async () => {
+  const token = localStorage.getItem("Token");
+  try {
+    const response = await axios.get(`http://localhost:3001/singlesongCT/all`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log("Fetched CT songs:", response.data.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching single song CT data:", error);
+    throw error;
+  }
+};
+
 export const SingleViewAlbum = async (id) => {
     try {
         const response = await axios.get(`${API_URL}/ReleseNewAlbum/${id}`)
@@ -355,8 +368,20 @@ export const viewSingleOnlyCallerTune = async (id) => {
 };
 
 export const viewSingleSongWithoutCT = async () => {
-  const response = await axios.get('http://localhost:3001/singlesongWithoutCT/all');
-  return response.data;
+    const token = localStorage.getItem("Token");
+    try{
+        const response = await axios.get('http://localhost:3001/singlesongWithoutCT/all',{
+             headers: {
+        Authorization: `Bearer ${token}`
+      }
+        });
+        console.log('view sinlge song without CT Response Data:', response.data);
+        return response.data;
+
+    }catch(error){
+         console.error('Error fetching single song without Ct:', error);
+    throw error;
+    }
 };
 export const viewSingleSongWithoutCTById = async (id) => {
   const token = localStorage.getItem("Token");

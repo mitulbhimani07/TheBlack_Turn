@@ -72,7 +72,8 @@ module.exports.createAlbum = async (req, res) => {
 // Get all albums
 module.exports.getAllAlbums = async (req, res) => {
   try {
-    const albums = await Album.find();
+    const userId=req.user;
+    const albums = await Album.find({userId});
     res.status(200).json({ message: 'Albums fetched successfully', data: albums });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching albums', error: error.message });

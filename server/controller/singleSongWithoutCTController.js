@@ -22,7 +22,8 @@ exports.createSingleSongWithoutCt = async (req, res) => {
 
 exports.getAllSongs = async (req, res) => {
   try {
-    const songs = await SingleSongWithoutCT.find();
+    const userId = req.user; 
+    const songs = await SingleSongWithoutCT.findOne({ userId });
     res.status(200).json({ success: true, data: songs });
   } catch (error) {
     res.status(500).json({ success: false, message: "Failed to fetch songs", error: error.message });

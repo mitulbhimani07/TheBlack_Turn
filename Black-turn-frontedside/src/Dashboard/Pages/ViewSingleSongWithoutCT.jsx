@@ -5,7 +5,7 @@ import Navbar from "./header-sidebar/Header";
 import { ArrowLeft, Music, Edit, Download, Play, Pause } from "lucide-react";
 import { viewSingleSongWithoutCTById } from "../../Api/api";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "https://theblack-turn-2.onrender.com";
+const BASE_URL = import.meta.env.VITE_API_URL || process.env.OFFLINE_API_URL;
 
 export default function ViewSingleSongWithoutCT() {
   const { id } = useParams();
@@ -24,29 +24,33 @@ export default function ViewSingleSongWithoutCT() {
       try {
         const res = await viewSingleSongWithoutCTById(id);
         console.log("API response:", res);
-        console.log("Song audio field:", res.data?.audio || res.audio);
+        console.log("Song audio field:", res.data?.audio );
         
         // Handle response data
         const songData = res.data || res;
         setSong(songData);
 
         // Set image URL
-        const imgUrl = songData.songPoster 
-          ? songData.songPoster.startsWith("http") 
-            ? songData.songPoster 
-            : `${BASE_URL}/${songData.songPoster.replace(/^\/+/, "")}`
-          : `${BASE_URL}/upload/default-song-poster.jpg`;
-        setImageUrl(imgUrl);
+       const imgUrl = songData.artwork
+  ? songData.artwork.startsWith("http")
+    ? songData.artwork
+    : `${BASE_URL}/upload/${songData.artwork.replace(/^\/+/, "")}`
+  : `${BASE_URL}/upload/default-song-poster.jpg`;
+
+setImageUrl(imgUrl);
+console.log("imgurl", imgUrl);
 
         // Set audio URL if available
-        if (songData.audio) {
-          const audioUrl = songData.audio.startsWith("http")
-            ? songData.audio
-            : `${BASE_URL}/upload/${songData.audio.replace(/^\/+/, "")}`;
-          setAudioUrl(audioUrl);
-        } else {
-          setAudioUrl("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
-        }
+       if (songData.audio) {
+  const audioUrl = songData.audio.startsWith("http")
+    ? songData.audio
+    : `${BASE_URL}/upload/${songData.audio.replace(/^\/+/, "")}`;
+  setAudioUrl(audioUrl);
+  console.log("audioUrl",audioUrl)
+} else {
+  setAudioUrl("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
+}
+
 
       } catch (err) {
         console.error("Error fetching song:", err);
@@ -214,16 +218,17 @@ function SongDetailsView({ song, imageUrl, audioUrl, isPlaying, setIsPlaying, to
         {/* Left Column - Artwork and Audio */}
         <div className="md:col-span-1 space-y-6">
           <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-            <img
-              src={imageUrl}
-              alt={song.songName || "Song Poster"}
-              className="object-cover w-full h-full"
-              onError={e => {
-                e.target.onerror = null;
-                e.target.src = `${BASE_URL}/upload/default-song-poster.jpg`;
-              }}
-            />
-          </div>
+  <img
+    src={imageUrl}
+    alt={song.songName || "Song Poster"}
+    className="object-cover w-full h-full"
+    onError={e => {
+      e.target.onerror = null;
+      e.target.src = `${BASE_URL}/upload/default-song-poster.jpg`;
+      console.error("Failed to load artwork:", imageUrl);
+    }}
+  />
+</div>
 
           {audioUrl && (
             <div className="bg-gray-100 rounded-lg p-4 space-y-4">

@@ -28,7 +28,7 @@ router.post(
 );
 
 // Get all songs
-router.get("/all", SingleSongCTController.getAllSongs);
-router.get("/:id", SingleSongCTController.getSingleSongCTById);
+router.get("/all", Auth, SingleSongCTController.getAllSongs);
+router.get("/:id",Auth, SingleSongCTController.getSingleSongCTById);
 
 module.exports = router;

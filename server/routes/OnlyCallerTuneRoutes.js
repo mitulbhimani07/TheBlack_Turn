@@ -41,7 +41,7 @@ router.post(
     ]),
     Auth,OnlyCallerTuneCTR.createOnlyCallerTune
 );
-router.get('/all', OnlyCallerTuneCTR.viewOnlyCallerTuneData);
-router.get('/:id', OnlyCallerTuneCTR.getSingleOnlyCallerTune);
+router.get('/all',Auth, OnlyCallerTuneCTR.viewOnlyCallerTuneData);
+router.get('/:id',Auth, OnlyCallerTuneCTR.getSingleOnlyCallerTune);
 
 module.exports = router;
