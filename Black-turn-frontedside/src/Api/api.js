@@ -20,7 +20,7 @@ export const GetAllBlogs = async () => {
         return response.data
   
     } catch (error) {
-        console.error("Error in signup API:", error);
+        console.error("Error in Get All Blogs API:", error);
         throw error;
     }
 }
@@ -32,7 +32,7 @@ export const GetBlogById = async (id) => {
         return response.data
   
     } catch (error) {
-        console.error("Error in signup API:", error);
+        console.error("Error in Get Blog By Id API:", error);
         throw error;
     }
 }
@@ -55,7 +55,7 @@ export const Googlesignup = async (payload) => {
   
         return response.data
     } catch (error) {
-        console.error("Error in signin API:", error);
+        console.error("Error in Google signup API:", error);
         throw error;
     }
 }
@@ -65,7 +65,7 @@ export const Googlesignin = async (payload) => {
         const response = await axios.post(`${API_URL}/user/googleSignin`, payload)
         return response.data
     } catch (error) {
-        console.error("Error in signin API:", error);
+        console.error("Error in Google signin API:", error);
         throw error;
     }
 }
@@ -145,7 +145,7 @@ export const SingleViewAlbum = async (id) => {
         return response.data
   
     } catch (error) {
-        console.error("Error in signup API:", error);
+        console.error("Error in Single View Album API:", error);
         throw error;
     }
 }
@@ -166,8 +166,6 @@ export const CreateNOC = async (payload) => {
         throw error;
     }
 }
-
-
 export const CreateSingleSongCT = async (payload) => {
     const token = localStorage.getItem("Token");
     
@@ -193,11 +191,9 @@ export const singleViewNoc = async () => {
             Authorization: `Bearer ${token}`
         }
     });
-    console.log("singleviewNoc", response)
+    console.log("single view Noc", response)
     return response.data
 };
-
-
 export const CreateSingleSongWithoutCt = async (payload) => {
   const token = localStorage.getItem("Token");
 
@@ -229,14 +225,14 @@ export const OnlyCallerTunedata = async (payload) => {
             },
         });
  
-        console.log('✅ Caller Tune submitted successfully:', response.data);
+        console.log('✅ Only Caller Tune data submitted successfully:', response.data);
         return {
             status: true,
             message: 'Submission successful',
             data: response.data
         };
     } catch (error) {
-        console.error('❌ Error submitting caller tune:', error);
+        console.error('❌ Error submitting Only Caller Tune data:', error);
  
         // Return a consistent error structure
         return {
@@ -246,9 +242,6 @@ export const OnlyCallerTunedata = async (payload) => {
         };
     }
 };
-
-
-
 export const getLoggedInUser = async () => {
     const token = localStorage.getItem('Token');
     return axios.get(`${API_URL}/user/singleUser`, {
@@ -363,7 +356,7 @@ export const viewSingleOnlyCallerTune = async (id) => {
     console.log('API Response Data:', response.data);
     return response.data.data;
   } catch (error) {
-    console.error('API Error:', error.response?.data || error.message);
+    console.error('API Error view Single Only Caller Tune:', error.response?.data || error.message);
     throw error;
   }
 };
@@ -394,7 +387,7 @@ export const viewSingleSongWithoutCTById = async (id) => {
     });
     return response.data;
   } catch (error) {
-    console.error('Error fetching single song:', error);
+    console.error('Error fetching view Single Song Without CT By Id song:', error);
     throw error;
   }
 };
