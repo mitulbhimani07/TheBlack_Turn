@@ -138,8 +138,13 @@ export const ViewSingleSongCT = async () => {
 };
 
 export const SingleViewAlbum = async (id) => {
+   const token = localStorage.getItem("Token");
     try {
-        const response = await axios.get(`${API_URL}/ReleseNewAlbum/${id}`)
+        const response = await axios.get(`${API_URL}/ReleseNewAlbum/${id}`,{
+           headers: {
+        Authorization: `Bearer ${token}`,
+      }
+        })
   
         console.log("blog by id----", response.data.data)
         return response.data
