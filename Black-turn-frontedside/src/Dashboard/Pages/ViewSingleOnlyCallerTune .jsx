@@ -449,7 +449,6 @@ const ViewSingleOnlyCallerTune = () => {
                                         {[
                                             { label: 'Primary Artist', value: callerTune.primaryArtist },
                                             { label: 'Music Composer', value: callerTune.musicComposer },
-                                            { label: 'Song Writer', value: callerTune.songWriter },
                                             { label: 'Release Date', value: callerTune.releaseDate?.slice(0, 10) },
                                             { label: 'Language', value: callerTune.language },
                                             { label: 'Genre', value: callerTune.genre },
