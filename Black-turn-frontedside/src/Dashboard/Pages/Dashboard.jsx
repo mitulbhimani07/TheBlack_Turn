@@ -18,6 +18,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import gsap from 'gsap';
 import SidebarDemo from '../Pages/header-sidebar/Sidebar';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -429,7 +430,7 @@ const Dashboard = () => {
       />
 
       <div className="flex-1 flex flex-col min-h-screen">
-         <div className="sticky top-0 z-50">
+        <div className="sticky top-0 z-50">
           <Navbar
             toggleSidebar={toggleSidebar}
             sidebarOpen={isSidebarOpen}
@@ -514,132 +515,144 @@ const Dashboard = () => {
 
           {/* Music Distribution Services Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-6">
-  {/* Upload Album */}
-  <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-    <div className="flex items-center mb-4">
-      <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
-        <FiUploadCloud size={24} />
-      </div>
-      <h3 className="text-xl font-bold text-[#005f73]">Upload Album</h3>
-    </div>
-    <p className="text-3xl font-bold mb-4">₹1999 <span className="text-sm font-normal">/ per Album</span></p>
-    <ul className="space-y-3 mb-6">
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>Release Upto 7 Songs at Once</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>All Stores with CallerTune</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>Multiple Artists</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>YouTube Content ID</span>
-      </li>
-    </ul>
-    <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-      Upload Album
-    </button>
-  </div>
+            {/* Upload Album */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                  <FiUploadCloud size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-[#005f73]">Upload Album</h3>
+              </div>
+              <p className="text-3xl font-bold mb-4">₹1999 <span className="text-sm font-normal">/ per Album</span></p>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>Release Upto 7 Songs at Once</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>All Stores with CallerTune</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>Multiple Artists</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                  <span>YouTube Content ID</span>
+                </li>
+              </ul>
+              <Link to={'/upload_album'} className="w-full py-3 lg:px-55 md:px-20 px-10 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+                Upload Album
+              </Link>
+            </div>
 
-  {/* Premium Membership */}
-  <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-  <div className="flex items-center mb-4">
-    <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
-      <FiUser size={24} />
-    </div>
-    <h3 className="text-xl font-bold text-[#005f73]">Become a Premium Member</h3>
-  </div>
+            {/* Premium Membership */}
+            <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                  <FiUser size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-[#005f73]">Become a Premium Member</h3>
+              </div>
 
-  <p className="text-3xl font-bold mb-6">₹4999 <span className="text-sm font-normal">/ per year</span></p>
+              <p className="text-3xl font-bold mb-6">₹4999 <span className="text-sm font-normal">/ per year</span></p>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 mb-6">
-    <ul className="space-y-3">
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>Unlimited Songs</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>Unlimited Artists</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>Bulk Uploads</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>Prioritise Approvals</span>
-      </li>
-    </ul>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 mb-6">
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                    <span>Unlimited Songs</span>
+                  </li>
+                  <li className="flex items-start">
+                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                    <span>Unlimited Artists</span>
+                  </li>
+                  <li className="flex items-start">
+                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                    <span>Bulk Uploads</span>
+                  </li>
+                  <li className="flex items-start">
+                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                    <span>Prioritise Approvals</span>
+                  </li>
+                </ul>
 
-    <ul className="space-y-3 mt-6 md:mt-0">
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>No Per Year Charges</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>All Stores with CallerTune</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>YouTube Content ID</span>
-      </li>
-      <li className="flex items-start">
-        <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-        <span>Lyrics Distribution</span>
-      </li>
-    </ul>
-  </div>
+                <ul className="space-y-3 mt-6 md:mt-0">
+                  <li className="flex items-start">
+                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                    <span>No Per Year Charges</span>
+                  </li>
+                  <li className="flex items-start">
+                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                    <span>All Stores with CallerTune</span>
+                  </li>
+                  <li className="flex items-start">
+                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                    <span>YouTube Content ID</span>
+                  </li>
+                  <li className="flex items-start">
+                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                    <span>Lyrics Distribution</span>
+                  </li>
+                </ul>
+              </div>
 
-  <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-    Buy or Renew Membership (One Year Plan)
-  </button>
-</div>
+              <div className="w-full flex justify-center">
+                <Link
+                  to="/BecomeAMembar"
+                  className="w-full max-w-[600px] py-3 px-6 md:px-10 lg:px-[120px] bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  Buy or Renew Membership (One Year Plan)
+                </Link>
+              </div>
+
+            </div>
 
 
-  {/* Single Songs — no changes mentioned in screenshot, keeping original content */}
-  
-</div>
+            {/* Single Songs — no changes mentioned in screenshot, keeping original content */}
+
+          </div>
 
 
-<div className="p-6 rounded-xl bg-white border border-gray-200 mb-6 hover:shadow-lg transition-all duration-200">
-    <div className="flex items-center justify-center mb-4">
-      <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
-        <FiMusic size={24} />
-      </div>
-      <h3 className="text-xl font-bold text-[#005f73]">Single Songs</h3>
-    </div>
+          <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6 hover:shadow-lg transition-all duration-200">
+            <div className="flex items-center justify-center mb-4">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white mr-4">
+                <FiMusic size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#005f73]">Single Songs</h3>
+            </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
 
-    <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-      <h4 className="font-semibold text-[#005f73] mb-1">With CallerTune</h4>
-      <p className="text-2xl font-bold mb-2">₹799 <span className="text-sm font-normal">/ per song</span></p>
-      <p className="text-sm text-gray-600 mb-1">Release on All Stores with CallerTune & Content ID</p>
-      <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
-    </div>
+              <Link to={'/singleSongWithCT'}>
+                <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <h4 className="font-semibold text-[#005f73] mb-1">With CallerTune</h4>
+                  <p className="text-2xl font-bold mb-2">₹799 <span className="text-sm font-normal">/ per song</span></p>
+                  <p className="text-sm text-gray-600 mb-1">Release on All Stores with CallerTune & Content ID</p>
+                  <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+                </div>
+              </Link>
 
-    <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-      <h4 className="font-semibold text-[#005f73] mb-1">Without CallerTune</h4>
-      <p className="text-2xl font-bold mb-2">₹599 <span className="text-sm font-normal">/ per song</span></p>
-      <p className="text-sm text-gray-600 mb-1">Release on All Stores without CallerTune & Content ID</p>
-      <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
-    </div>
+              <Link to={'/singleSongWithoutCT'}>
+                <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <h4 className="font-semibold text-[#005f73] mb-1">Without CallerTune</h4>
+                  <p className="text-2xl font-bold mb-2">₹599 <span className="text-sm font-normal">/ per song</span></p>
+                  <p className="text-sm text-gray-600 mb-1">Release on All Stores without CallerTune & Content ID</p>
+                  <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+                </div>
+              </Link>
 
-    <div className="p-4 mb-4 bg-gray-50 rounded-lg border border-gray-200">
-      <h4 className="font-semibold text-[#005f73] mb-1">CallerTune Only</h4>
-      <p className="text-2xl font-bold mb-2">₹499 <span className="text-sm font-normal">/ per CallerTune</span></p>
-      <p className="text-sm text-gray-600 mb-1">Release on All CallerTune Platforms</p>
-      <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
-    </div>
-    </div>
-  </div>
+              <Link to={'/onlyCallerTune'}>
+                <div className="p-4 mb-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <h4 className="font-semibold text-[#005f73] mb-1">CallerTune Only</h4>
+                  <p className="text-2xl font-bold mb-2">₹499 <span className="text-sm font-normal">/ per CallerTune</span></p>
+                  <p className="text-sm text-gray-600 mb-1">Release on All CallerTune Platforms</p>
+                  <p className="text-xs text-gray-500 italic">Pay Onetime, Earn for Lifetime</p>
+                </div>
+              </Link>
+            </div>
+          </div>
 
 
 
@@ -647,7 +660,7 @@ const Dashboard = () => {
           {/* YouTube Claim & Artist Services Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
 
-            
+
             {/* YouTube Claim Release */}
             <div className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
               <div className="flex items-center mb-4">
@@ -657,9 +670,15 @@ const Dashboard = () => {
                 <h3 className="text-xl font-bold text-[#005f73]">YouTube Claim Release</h3>
               </div>
               <p className="text-gray-600 mb-6">Remove Claim from Your video</p>
-              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-                Submit Link
-              </button>
+              <div className="w-full flex justify-center">
+                <Link
+                  to="/youtubeClaim"
+                  className="w-full max-w-[500px] py-3 px-6 sm:px-10 md:px-16 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  Submit Link
+                </Link>
+              </div>
+
             </div>
 
             {/* Artist Profile Link */}
@@ -671,9 +690,15 @@ const Dashboard = () => {
                 <h3 className="text-xl font-bold text-[#005f73]">Artist Profile Link</h3>
               </div>
               <p className="text-gray-600 mb-6">Link Your Correct Artist Profile</p>
-              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-                Request Now
-              </button>
+              <div className="w-full flex justify-center">
+                <Link
+                  to="/artistprofilelink"
+                  className="w-full max-w-[500px] py-3 px-6 sm:px-10 md:px-16 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  Request Now
+                </Link>
+              </div>
+
             </div>
 
             {/* FB/Insta Whitelist */}
@@ -685,9 +710,15 @@ const Dashboard = () => {
                 <h3 className="text-xl font-bold text-[#005f73]">FB/Insta Whitelist</h3>
               </div>
               <p className="text-gray-600 mb-6">Remove Claims from Reels</p>
-              <button className="w-full py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-                Submit Now
-              </button>
+              <div className="w-full flex justify-center">
+                <Link
+                  to="/pagewhitelist"
+                  className="w-full max-w-[500px] py-3 px-6 sm:px-10 md:px-16 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  Submit Now
+                </Link>
+              </div>
+
             </div>
           </div>
 
@@ -701,9 +732,14 @@ const Dashboard = () => {
               </div>
               <h3 className="text-lg font-bold text-[#005f73] mb-2">Raise a Complaint</h3>
               <p className="text-gray-600 mb-4">Any Issue or Help</p>
-              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
-                Submit Now
-              </button>
+              <div className="w-full flex justify-center">
+                <Link
+                  to="/complaint"
+                  className="w-full max-w-[500px] py-3 px-6 sm:px-10 md:px-16 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  Submit Now
+                </Link>
+              </div>
             </div>
 
             {/* YouTube Whitelist */}
@@ -713,9 +749,14 @@ const Dashboard = () => {
               </div>
               <h3 className="text-lg font-bold text-[#005f73] mb-2">YouTube Whitelist</h3>
               <p className="text-gray-600 mb-4">Whitelist Your Artist Channel</p>
-              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
-                Submit Now
-              </button>
+              <div className="w-full flex justify-center">
+                <Link
+                  to="/youtubeClaim"
+                  className="w-full max-w-[500px] py-3 px-6 sm:px-10 md:px-16 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  Submit Now
+                </Link>
+              </div>
             </div>
 
             {/* Song Takedown */}
@@ -725,12 +766,17 @@ const Dashboard = () => {
               </div>
               <h3 className="text-lg font-bold text-[#005f73] mb-2">Song Takedown</h3>
               <p className="text-gray-600 mb-4">Takedown Song from All Stores</p>
-              <button className="w-full py-2 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg transition-colors duration-200">
-                Submit Request
-              </button>
+             <div className="w-full flex justify-center">
+                <Link
+                  to="/takedownrequest"
+                  className="w-full max-w-[500px] py-3 px-6 sm:px-10 md:px-16 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                   Submit Request
+                </Link>
+              </div>
             </div>
 
-            
+
           </div>
 
           {/* Recent Songs & Updates Section */}
@@ -817,10 +863,10 @@ const Dashboard = () => {
             </div>
           </div>
 
-          
+
 
           {/* Sales Overview Section */}
-            
+
 
           {/* Footer Info */}
           <div className="p-6 rounded-xl bg-white border border-gray-200 text-center">
