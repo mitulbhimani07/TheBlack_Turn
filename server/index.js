@@ -58,6 +58,8 @@ app.use("/singlesongCT", require("./routes/singleSongCTRoutes"))
 // singlesongwitoutct
 app.use("/singlesongWithoutCT", require("./routes/singleSongWithoutCTRoutes"))
 
+// feedback
+app.use('/feedback', require('./routes/Help&Support'));
 
 app.listen(port, (err) => {
     if (err) {

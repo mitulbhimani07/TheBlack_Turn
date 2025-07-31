@@ -164,7 +164,6 @@ function AllRoutes() {
                     </span>
                   </div>
                 </div>
-
               );
             }}
           </ToastBar>
