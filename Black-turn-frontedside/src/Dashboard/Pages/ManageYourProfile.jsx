@@ -49,7 +49,7 @@ export default function ManageYourProfile() {
     setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
     setUnreadCount(prev => prev - 1);
   };
-
+    
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
