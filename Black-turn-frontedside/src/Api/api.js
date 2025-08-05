@@ -337,6 +337,8 @@ export const resetPasswordWithOtp = async (payload) => {
         throw error;
     }
 };
+
+
 export const ViewSingleSongCTById = async (id) => {
   const token = localStorage.getItem("Token");
   try {
@@ -387,7 +389,7 @@ export const viewSingleOnlyCallerTune = async (id) => {
 export const viewSingleSongWithoutCT = async () => {
     const token = localStorage.getItem("Token");
     try{
-        const response = await axios.get('http://localhost:3001/singlesongWithoutCT/all',{
+        const response = await axios.get(`${API_URL}/singlesongWithoutCT/all`,{
              headers: {
         Authorization: `Bearer ${token}`
       }
@@ -403,7 +405,7 @@ export const viewSingleSongWithoutCT = async () => {
 export const viewSingleSongWithoutCTById = async (id) => {
   const token = localStorage.getItem("Token");
   try {
-    const response = await axios.get(`http://localhost:3001/singlesongWithoutCT/${id}`, {
+    const response = await axios.get(`${API_URL}/singlesongWithoutCT/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -411,6 +413,32 @@ export const viewSingleSongWithoutCTById = async (id) => {
     return response.data;
   } catch (error) {
     console.error('Error fetching view Single Song Without CT By Id song:', error);
+    throw error;
+  }
+};
+
+export const feedbackcreate = async (subject, message) => {
+  const token = localStorage.getItem("Token"); // don't redeclare with const again
+
+  try {
+    const response = await fetch(`${API_URL}/feedback/feedbackcreate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}` // assuming this is your JWT token
+      },
+      body: JSON.stringify({ subject, message })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to submit feedback');
+    }
+
+    return data; // Contains success message and new feedback object
+  } catch (error) {
+    console.error('Feedback submission error:', error.message);
     throw error;
   }
 };

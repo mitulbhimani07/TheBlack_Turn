@@ -542,9 +542,14 @@ const Dashboard = () => {
                   <span>YouTube Content ID</span>
                 </li>
               </ul>
-              <Link to={'/upload_album'} className="w-full py-3 lg:px-55 md:px-20 px-10 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-                Upload Album
-              </Link>
+              <div className="w-full flex justify-center">
+                <Link
+                  to="/youtubeClaim"
+                  className="w-full max-w-[500px] py-3 px-6 sm:px-10 md:px-16 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  Upload Album
+                </Link>
+              </div>
             </div>
 
             {/* Premium Membership */}
@@ -600,8 +605,8 @@ const Dashboard = () => {
 
               <div className="w-full flex justify-center">
                 <Link
-                  to="/BecomeAMembar"
-                  className="w-full max-w-[600px] py-3 px-6 md:px-10 lg:px-[120px] bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
+                  to="/youtubeClaim"
+                  className="w-full max-w-[500px] py-3 px-6 sm:px-10 md:px-16 bg-gradient-to-r from-[#005f73] to-[#0a9396] hover:from-[#0a9396] hover:to-[#005f73] text-white rounded-lg font-medium text-center transition-all duration-300 transform hover:scale-[1.02]"
                 >
                   Buy or Renew Membership (One Year Plan)
                 </Link>

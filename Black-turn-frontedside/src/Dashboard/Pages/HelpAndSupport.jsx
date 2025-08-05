@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Sidebar from './header-sidebar/Sidebar';
 import Navbar from './header-sidebar/Header';
 import { Mail, Clock, ChevronDown, ChevronUp } from 'lucide-react';
+import { feedbackcreate } from '../../Api/api';
+import toast, { Toaster } from 'react-hot-toast'; // ✅ Import react-hot-toast
 
 function HelpAndSupport() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -9,6 +11,10 @@ function HelpAndSupport() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [activeTab, setActiveTab] = useState('help');
   const [openUploadFaqIndex, setOpenUploadFaqIndex] = useState(null);
+
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const userToken = localStorage.getItem("Token"); // ✅ Replace hardcoded token
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const markAsRead = (id) => {
@@ -31,7 +37,7 @@ function HelpAndSupport() {
     },
     {
       question: "Documents required for NOC?",
-      answer: "Adhar Card Pan Card, Cancelled Cheque or Passbook Front Page, Signature"
+      answer: "Adhar Card, Pan Card, Cancelled Cheque or Passbook Front Page, Signature"
     }
   ];
 
@@ -47,8 +53,25 @@ function HelpAndSupport() {
     setOpenUploadFaqIndex(openUploadFaqIndex === index ? null : index);
   };
 
+  const handleSubmit = async () => {
+    if (!subject || !message) {
+      toast.error("Both subject and message are required.");
+      return;
+    }
+
+    try {
+      const result = await feedbackcreate(subject, message, userToken);
+      toast.success(result.message || "Feedback submitted successfully!");
+      setSubject('');
+      setMessage('');
+    } catch (err) {
+      toast.error("Failed to send feedback: " + err.message);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
+      <Toaster position="top-center" reverseOrder={false} /> {/* ✅ Toast container */}
       <Sidebar
         isOpen={isSidebarOpen}
         activeTab={activeTab}
@@ -67,14 +90,11 @@ function HelpAndSupport() {
         </div>
 
         <div className="flex-1 p-4 sm:p-6 md:p-8 w-full max-w-6xl mx-auto">
-          {/* Page Header */}
           <div className="text-sm text-gray-600 mb-6">
             <span className="font-medium">Help & Support</span>
           </div>
 
-          {/* Contact Info and Feedback Form */}
           <div className="flex flex-col lg:flex-row gap-6 mb-10">
-            {/* Contact Info Cards */}
             <div className="flex-1 space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#005f73]">
                 <div className="flex items-center mb-3">
@@ -93,7 +113,6 @@ function HelpAndSupport() {
               </div>
             </div>
 
-            {/* Feedback Form */}
             <div className="flex-1">
               <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#005f73] h-full">
                 <h3 className="font-medium text-[16px] mb-4 text-[#005f73]">
@@ -104,6 +123,8 @@ function HelpAndSupport() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
                     <input
                       type="text"
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#005f73]"
                     />
                   </div>
@@ -111,15 +132,23 @@ function HelpAndSupport() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                     <textarea
                       rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#005f73]"
                     ></textarea>
                   </div>
                 </div>
+
+                <button
+                  onClick={handleSubmit}
+                  className="mt-4 bg-[#005f73] text-white px-4 py-2 rounded hover:bg-[#004056]"
+                >
+                  Submit Feedback
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Basic FAQs */}
           <div className="mb-10 bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#005f73]">
             <h3 className="font-medium text-xl mb-4 text-[#005f73]">Basic Questions</h3>
             <div className="space-y-4">
@@ -134,7 +163,6 @@ function HelpAndSupport() {
             </div>
           </div>
 
-          {/* Accordion Section */}
           <div className="mb-10 bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#005f73]">
             <h3 className="font-medium text-xl mb-4 text-[#005f73]">FAQs for Uploading Your Release</h3>
             <div className="space-y-2">
