@@ -31,15 +31,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/uploads', express.static('uploads'));
 // Database connection
 const mongoose = require('mongoose');
-
-// mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res) => {
-//     console.log('Database connected successfully');
-// })
-//     .catch((err) => {
-//         console.log('Error connecting to the database:', err);
-//     });
-
-mongoose.connect("mongodb+srv://coding092:WCEXO3jfcPWoWj4m@cluster0.0uvzdon.mongodb.net//TheBlackTurn").then((res) => {
+mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res) => {
     console.log('Database connected successfully');
 })
     .catch((err) => {
@@ -48,8 +40,8 @@ mongoose.connect("mongodb+srv://coding092:WCEXO3jfcPWoWj4m@cluster0.0uvzdon.mong
 
 // Middleware to parse JSON and URL-encoded data
 app.get('/', (req, res) => {
-    console.log('Welcome to the API');
-    res.render('Home'); // views/Home.ejs
+  console.log('Welcome to the API');
+  res.render('Home'); // views/Home.ejs
 });
 
 // Import routes

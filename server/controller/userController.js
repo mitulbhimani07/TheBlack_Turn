@@ -433,7 +433,7 @@ module.exports.resetPasswordWithOtp = async (req, res) => {
 
 module.exports.updateUser = async (req, res) => {
     try {
-        const { userId } = req.body;
+        const userId = req.params.id;  // get from URL params
 
         if (!userId) {
             return res.status(400).json({ message: "User ID is required" });
@@ -456,10 +456,10 @@ module.exports.updateUser = async (req, res) => {
 
         // Optional profile picture upload
         if (req.file) {
-            updateFields.profilepic = req.file.filename; // or req.file.path depending on multer setup
+            updateFields.profilepic = req.file.filename;
         }
 
-        // Remove undefined or empty fields
+        // Cleanup empty fields
         Object.keys(updateFields).forEach(key => {
             if (updateFields[key] === undefined || updateFields[key] === "") {
                 delete updateFields[key];
