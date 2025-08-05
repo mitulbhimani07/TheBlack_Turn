@@ -12,6 +12,7 @@ require('dotenv').config();
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 const cors = require('cors');
+
 app.use(cors());
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -30,7 +31,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/uploads', express.static('uploads'));
 // Database connection
 const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res) => {
+
+// mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res) => {
+//     console.log('Database connected successfully');
+// })
+//     .catch((err) => {
+//         console.log('Error connecting to the database:', err);
+//     });
+
+mongoose.connect("mongodb+srv://coding092:WCEXO3jfcPWoWj4m@cluster0.0uvzdon.mongodb.net//TheBlackTurn").then((res) => {
     console.log('Database connected successfully');
 })
     .catch((err) => {
@@ -39,8 +48,8 @@ mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.
 
 // Middleware to parse JSON and URL-encoded data
 app.get('/', (req, res) => {
-  console.log('Welcome to the API');
-  res.render('Home'); // views/Home.ejs
+    console.log('Welcome to the API');
+    res.render('Home'); // views/Home.ejs
 });
 
 // Import routes
@@ -55,7 +64,7 @@ app.use('/OnlyCallerTune', require('./routes/OnlyCallerTuneRoutes'))
 // singlesongwithct
 app.use("/singlesongCT", require("./routes/singleSongCTRoutes"))
 
-// singlesongwitoutct
+// singlesongwitoutct                                                                             
 app.use("/singlesongWithoutCT", require("./routes/singleSongWithoutCTRoutes"))
 
 // feedback

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './header-sidebar/Sidebar';
 import Navbar from './header-sidebar/Header';
-import { getLoggedInUser, singleViewNoc, changePassword } from '../../Api/api';
+import { getLoggedInUser, singleViewNoc, changePassword, UpdateUser } from '../../Api/api';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ManageYourProfile() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -12,6 +14,12 @@ export default function ManageYourProfile() {
   const [activeSection, setActiveSection] = useState('view');
   const [passwordChangeMsg, setPasswordChangeMsg] = useState('');
   const [passwordChangeError, setPasswordChangeError] = useState('');
+  
+  // Remove these states as we're using toastify now
+  // const [updateMsg, setUpdateMsg] = useState('');
+  // const [updateError, setUpdateError] = useState('');
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [userId, setUserId] = useState('');
 
   const [profile, setProfile] = useState({
     fullName: '',
@@ -61,23 +69,96 @@ export default function ManageYourProfile() {
   };
 
   const handleImageChange = (e) => {
-    setProfile({ ...profile, profilePic: URL.createObjectURL(e.target.files[0]) });
+    const file = e.target.files[0];
+    if (file) {
+      // You can handle file upload here
+      // For now, just creating a preview URL
+      setProfile({ ...profile, profilePic: URL.createObjectURL(file) });
+    }
+  };
+
+  // Handle Profile Update
+  const handleProfileSubmit = async (e) => {
+    e.preventDefault();
+    setIsUpdating(true);
+
+    try {
+      // Prepare payload for update
+      const updatePayload = {
+        name: profile.fullName,
+        fname: profile.fname || profile.fullName.split(' ')[0],
+        lname: profile.lname || profile.fullName.split(' ').slice(1).join(' '),
+        email: profile.email,
+        phone: profile.phone,
+        About: profile.about,
+        address: profile.street,
+        city: profile.city,
+        state: profile.state,
+        pincode: profile.pincode,
+        country: profile.country,
+        // Add profilepic if you handle file upload
+        // profilepic: profile.profilePic
+      };
+
+      const response = await UpdateUser(userId, updatePayload);
+      toast.success(response.message || "Profile updated successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      toast.error(error.response?.data?.message || "Failed to update profile. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
-    setPasswordChangeMsg('');
-    setPasswordChangeError('');
+
+    // Validation for password confirmation
+    if (passwords.newPassword !== passwords.confirmPassword) {
+      toast.error("New password and confirm password do not match!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
 
     try {
       const res = await changePassword(passwords);
-      setPasswordChangeMsg(res.message || "Password changed successfully");
+      toast.success(res.message || "Password changed successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       setPasswords({ currentPassword: '', newPassword: '', confirmPassword: '' });
     } catch (err) {
-      setPasswordChangeError(err.message || "Something went wrong");
+      toast.error(err.response?.data?.message || err.message || "Failed to change password", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
-
 
   // ✅ 1. Fetch Logged-in user (name, email, phone, profile pic)
   useEffect(() => {
@@ -85,6 +166,9 @@ export default function ManageYourProfile() {
       try {
         const res = await getLoggedInUser();
         const userData = res.data.data;
+
+        // Store user ID for updates
+        setUserId(userData._id || userData.id);
 
         setProfile((prev) => ({
           ...prev,
@@ -101,11 +185,13 @@ export default function ManageYourProfile() {
           state: userData.state || '',
           pincode: userData.pincode || '',
           country: userData.country || '',
-
-
         }));
       } catch (err) {
         console.error('❌ Error fetching logged-in user:', err);
+        toast.error("Failed to load user profile", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       }
     };
     fetchUser();
@@ -143,12 +229,15 @@ export default function ManageYourProfile() {
         console.log("userData---", userData)
       } catch (err) {
         console.error('❌ Error loading NOC data:', err);
+        toast.warn("Some profile data could not be loaded", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       }
     };
 
     fetchNocProfile();
   }, []);
-
 
   // ✅ 2. Fetch NOC Payment Details
   useEffect(() => {
@@ -157,8 +246,6 @@ export default function ManageYourProfile() {
       setIsMobile(mobile);
       setIsSidebarOpen(!mobile);
     };
-
-
 
     handleResize();
 
@@ -265,7 +352,6 @@ export default function ManageYourProfile() {
               </button>
             </div>
 
-
             {/* Right: Edit Profile Form */}
             <div className="bg-white rounded-lg shadow p-8 flex-1">
               {/* Tabs */}
@@ -293,14 +379,12 @@ export default function ManageYourProfile() {
                 >
                   Close Account
                 </button>
-
-
               </div>
-
 
               {/* Edit Profile Form */}
               {activeSection === 'view' && (
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleProfileSubmit}>
+
                   <div>
                     <label className="block text-[#004d66] font-semibold">Profile Pic</label>
                     <input type="file" onChange={handleImageChange} className="mt-1 block w-full border border-gray-300 rounded px-3 py-2" />
@@ -313,6 +397,7 @@ export default function ManageYourProfile() {
                       value={profile.fullName}
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+                      required
                     />
                   </div>
                   <div>
@@ -322,6 +407,7 @@ export default function ManageYourProfile() {
                       value={profile.about}
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+                      rows="3"
                     />
                   </div>
                   <div>
@@ -406,13 +492,19 @@ export default function ManageYourProfile() {
                       value={profile.email}
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+                      required
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-[#004d66] text-white py-2 rounded font-semibold hover:bg-[#00394d] mt-4"
+                    disabled={isUpdating}
+                    className={`w-full py-2 rounded font-semibold mt-4 transition duration-200 ${
+                      isUpdating 
+                        ? 'bg-gray-400 text-gray-200 cursor-not-allowed' 
+                        : 'bg-[#004d66] text-white hover:bg-[#00394d]'
+                    }`}
                   >
-                    Save Changes
+                    {isUpdating ? 'Updating...' : 'Save Changes'}
                   </button>
                 </form>
               )}
@@ -428,6 +520,7 @@ export default function ManageYourProfile() {
                       value={passwords.currentPassword}
                       onChange={handlePasswordChange}
                       className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+                      required
                     />
                   </div>
                   <div>
@@ -438,6 +531,7 @@ export default function ManageYourProfile() {
                       value={passwords.newPassword}
                       onChange={handlePasswordChange}
                       className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+                      required
                     />
                   </div>
                   <div>
@@ -448,6 +542,7 @@ export default function ManageYourProfile() {
                       value={passwords.confirmPassword}
                       onChange={handlePasswordChange}
                       className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+                      required
                     />
                   </div>
                   <button
@@ -456,13 +551,6 @@ export default function ManageYourProfile() {
                   >
                     Change Password
                   </button>
-
-                  {passwordChangeMsg && (
-                    <div className="text-green-600 text-sm mt-2">{passwordChangeMsg}</div>
-                  )}
-                  {passwordChangeError && (
-                    <div className="text-red-600 text-sm mt-2">{passwordChangeError}</div>
-                  )}
                 </form>
               )}
             </div>
@@ -474,6 +562,21 @@ export default function ManageYourProfile() {
           </footer>
         </div>
       </div>
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        toastClassName="custom-toast"
+      />
     </div>
   );
 }

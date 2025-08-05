@@ -82,6 +82,24 @@ export const signin = async (payload) => {
         throw error;
     }
 }
+
+export const UpdateUser = async (id, payload) => {
+  const token = localStorage.getItem("Token");
+  try {
+    const response = await axios.put(`${API_URL}/user/updateUser/${id}`, payload, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    console.log("User updated successfully:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error in update user API:", error);
+    throw error;
+  }
+};
+
 export const CreateAlbum = async (payload) => {
     const token = localStorage.getItem("Token");
     try {
@@ -246,7 +264,7 @@ export const OnlyCallerTunedata = async (payload) => {
             error: error.response?.data || error
         };
     }
-};
+}; 
 export const getLoggedInUser = async () => {
     const token = localStorage.getItem('Token');
     return axios.get(`${API_URL}/user/singleUser`, {
