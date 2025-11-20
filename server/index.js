@@ -31,7 +31,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/uploads', express.static('uploads'));
 // Database connection
 const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://mitulbhimani281:mF6u0wongMtNZE3l@cluster0.t7dse.mongodb.net/TheBlackTurn").then((res) => {
+mongoose.connect("mongodb+srv://coding092:adrsVbOT1I1ENMfX@cluster0.0uvzdon.mongodb.net/TheBlackTurn").then((res) => {
     console.log('Database connected successfully');
 })
     .catch((err) => {
