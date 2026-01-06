@@ -123,7 +123,7 @@ function Footer() {
         {/* Copyright */}
         <div className="flex flex-col md:flex-row items-center justify-between text-sm text-gray-600 mt-8 pt-4 border-t border-gray-300">
           <div className="mb-4 md:mb-0 text-center md:text-left">
-            © All rights reserved By The Black Turn Digital Private Limited | Parent Organization : Black Tum Digital Pvt. Ltd.
+            © All rights reserved By The Black Turn Digital Private Limited | Parent Organization : The Black turn Digital Private Limited
           </div>
           <div className="flex space-x-4">
             <a href="https://www.facebook.com/TheBlackTurnindia" target='_blank' rel="noopener noreferrer">
