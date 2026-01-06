@@ -288,7 +288,7 @@ export default function ManageYourProfile() {
           {/* Success message */}
           <div className="max-w-7xl mx-auto w-full mt-4">
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded">
-              Hey {profile.fullName || 'User'}, Welcome to <span className="font-bold text-[#004d66]">The BLACK TURN</span> Family
+              Hey {profile.fullName || 'User'}, Welcome to <span className="font-bold text-[#004d66]">The Black Turn Digital Private Limited</span> Family
             </div>
           </div>
 
@@ -558,7 +558,7 @@ export default function ManageYourProfile() {
 
           {/* Footer */}
           <footer className="w-full bg-[#222] text-gray-300 text-center py-3 mt-8 text-xs">
-            © Copyright The Black Turn. All Rights Reserved | <span className="underline">About Us</span> | <span className="underline">Contact Us</span> | <span className="underline">Privacy Policy</span> | <span className="underline">Terms & Conditions</span> | <span className="underline">Refund & Returns</span>
+            © Copyright The Black Turn Digital Private Limited. All Rights Reserved | <span className="underline">About Us</span> | <span className="underline">Contact Us</span> | <span className="underline">Privacy Policy</span> | <span className="underline">Terms & Conditions</span> | <span className="underline">Refund & Returns</span>
           </footer>
         </div>
       </div>

@@ -15,7 +15,7 @@ function TermsandConditions() {
 
         <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
           <p className="">
-            Welcome to <span className="font-semibold text-gray-900">The Black Turn</span> we By accessing or using our website, platform, tools, distribution services, payment gateway, or API services , you agree to the following Terms & Conditions and Policies.
+            Welcome to <span className="font-semibold text-gray-900">The Black Turn Digital Private Limited</span> we By accessing or using our website, platform, tools, distribution services, payment gateway, or API services , you agree to the following Terms & Conditions and Policies.
           </p>
 
 

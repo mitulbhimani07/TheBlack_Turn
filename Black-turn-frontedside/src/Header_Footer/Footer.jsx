@@ -18,7 +18,7 @@ function Footer() {
             </div>
             <div className="flex items-center">
               <Mail size={24} className="mr-2 text-white" />
-              <span>support@theblackturn.in</span>
+              <span>support@theblackturn.co.in</span>
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@ function Footer() {
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHa_WRP2WzpDAF6fFAZ2f4faUWU1ocWm27FY4OdG22jYnagGra32AwHMrj6kw4apI93p8&usqp=CAU" alt="app store" className="mb-4 w-50 h-12" />
             </a>
             </div>
-            <h3 className="text-lg font-semibold mb-4">Join - The Black Turn</h3>
+            <h3 className="text-lg font-semibold mb-4">Join - The Black Turn Digital Private Limited</h3>
             <p className="text-sm text-gray-600 mb-4 lowercase">
               BLOCK-A-602 TITANIUM BUSINESS PARK, MAKARBA RAILWAY CROSSING , B/H.DIVYA BHASKAR PRESS, AHMEDABAD - 380007.
             </p>
@@ -123,7 +123,7 @@ function Footer() {
         {/* Copyright */}
         <div className="flex flex-col md:flex-row items-center justify-between text-sm text-gray-600 mt-8 pt-4 border-t border-gray-300">
           <div className="mb-4 md:mb-0 text-center md:text-left">
-            © All rights reserved By The Black Turn | Parent Organization : Black Tum Digital Pvt. Ltd.
+            © All rights reserved By The Black Turn Digital Private Limited | Parent Organization : Black Tum Digital Pvt. Ltd.
           </div>
           <div className="flex space-x-4">
             <a href="https://www.facebook.com/TheBlackTurnindia" target='_blank' rel="noopener noreferrer">

@@ -93,7 +93,7 @@ export default function Signin() {
               </div>
 
               {/* Sign In */}
-              <button
+              <button 
                 type="submit"
                 className="w-full bg-gray-800 text-white py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-700 transition-colors duration-200 text-base sm:text-lg"
               >

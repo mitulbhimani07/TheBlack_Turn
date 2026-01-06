@@ -110,7 +110,7 @@ const CallerTuneDistribution = () => {
       number: "02",
       icon: <Upload />,
       title: "Earning & Payouts",
-      subtitle: "Whatever revenue you generate from playing or downloading your song or tune, the black turn collects it from all networks and DSP and transfers your royalty to your bank account. We keep collecting your royalty for lifetime and transfer it to you. You do not have to manually follow up or send mail. We have auto payment here, so whenever your payment comes, it will be received directly in your bank account. We are smart to make payment in all currencies like: USD, Euro etc.",
+      subtitle: "Whatever revenue you generate from playing or downloading your song or tune, The Black Turn Digital Private Limitedcollects it from all networks and DSP and transfers your royalty to your bank account. We keep collecting your royalty for lifetime and transfer it to you. You do not have to manually follow up or send mail. We have auto payment here, so whenever your payment comes, it will be received directly in your bank account. We are smart to make payment in all currencies like: USD, Euro etc.",
       isHover: false
     },
     {
@@ -179,7 +179,7 @@ const CallerTuneDistribution = () => {
       title: 'CRBT Distribution',
       icon: <Radio className="w-5 h-5" />,
       heading: 'CRBT Distribution India',
-      description: 'Caller Ring Back Tone (CRBT) solutions to enable your song for Caller Tune. If you are a singer and want your song to be made into Jio, Vi, Airtel, or BSNL caller tune, then you should take help of a call ring back tune solution provider company. The Black Turn uploads your song on all telecom networks and makes caller tune of your song and also generates CRBT codes.',
+      description: 'Caller Ring Back Tone (CRBT) solutions to enable your song for Caller Tune. If you are a singer and want your song to be made into Jio, Vi, Airtel, or BSNL caller tune, then you should take help of a call ring back tune solution provider company. The Black Turn Digital Private Limited uploads your song on all telecom networks and makes caller tune of your song and also generates CRBT codes.',
       features: [
         'Enable your song for CRBT/caller tune',
         'Get listed on Jio, Vi, Airtel, and BSNL',
@@ -635,7 +635,7 @@ const CallerTuneDistribution = () => {
                   <h3 className="text-lg sm:text-xl text-[#005f73] font-bold leading-tight">You keep 100% of your royalties!</h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  The Black Turn never takes a cut of your deals.
+                  The Black Turn Digital Private Limited never takes a cut of your deals.
                 </p>
               </div>
 

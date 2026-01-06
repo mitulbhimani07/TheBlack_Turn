@@ -22,7 +22,7 @@ const Contact = () => {
       title: "EMAIL & PHONE",
       description: (
         <div>
-          <div>support@theblackturn.in</div>
+          <div>support@theblackturn.co.in</div>
           <div>+91 9274466809</div>
         </div>
       ),
@@ -30,7 +30,7 @@ const Contact = () => {
     {
       icon: <Globe className="text-[#005f73] w-10 h-10 transition-transform duration-300 group-hover:scale-110" />,
       title: "FIND US ONLINE",
-      description: "www.theblackturn.in",
+      description: "www.theblackturn.co.in",
     },
   ];
 

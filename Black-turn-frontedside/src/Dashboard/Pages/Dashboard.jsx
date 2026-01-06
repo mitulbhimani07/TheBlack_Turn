@@ -465,7 +465,7 @@ const Dashboard = () => {
             <div className="flex flex-col lg:flex-row items-center justify-between">
               <div className="flex-1 mb-6 lg:mb-0">
                 <h1 className={`text-2xl md:text-3xl font-bold mb-2 ${isMobile ? 'text-[#005f73]' : 'text-[#005f73]'}`}>
-                  Welcome to The BLACK TURN Family
+                  Welcome to  The Black Turn Digital Private Limited Family
                 </h1>
                 <p className={`mb-4 ${isMobile ? 'text-[#005f73]' : 'text-[#005f73]'}`}>
                   Team on 9817889799 currently unavailable. For Urgent Inquiries WhatsApp us at 📞 9817889799.

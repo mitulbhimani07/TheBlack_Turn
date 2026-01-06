@@ -803,7 +803,7 @@ const MusicDistribution = () => {
               You keep 100% of your royalties!
             </h2>
             <p className="text-gray-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed">
-              The Black Turn never takes a cut of your deals. Each penny you gain is put right into you're the Black Turn account. At Black Turn, we know that your money matters and we respect your passion for music.Comprehensive Sales Data
+              The Black Turn Digital Private Limited never takes a cut of your deals. Each penny you gain is put right into you're the Black Turn Digital Private Limited account. At Black Turn, we know that your money matters and we respect your passion for music.Comprehensive Sales Data
             </p>
 
             <p className="text-gray-700 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">

@@ -75,7 +75,7 @@ function Aboutus() {
                       <div>
                         <h3 className="text-4xl font-bold text-slate-900 mb-5">About Us</h3>
                         <h2 className="text-xl md:text-xl  text-gray-900 leading-snug mb-6">
-                          <span className='font-medium'>The Black Turn</span> is built for independent musicians who want full control over their music. We help you distribute your songs to over 150 platforms like Spotify, Apple Music, JioSaavn, and more quickly and easily.
+                          <span className='font-medium'>The Black Turn Digital Private Limited</span> is built for independent musicians who want full control over their music. We help you distribute your songs to over 150 platforms like Spotify, Apple Music, JioSaavn, and more quickly and easily.
                         </h2>
 
                         <p className='text-xl mb-6'>Upload unlimited tracks, keep <span className='font-medium'>95% of your revenue</span>, and see your music go live within <span className='font-medium'>72 hours</span>. No middlemen. No hidden fees. Just a smooth and reliable way to reach a global audience.
@@ -83,7 +83,7 @@ function Aboutus() {
 
 <p className='text-xl mb-6'>Whether you're just starting out or already making waves, we’re here to support your journey.</p>
               
-                      <h4 className='text-2xl font-bold'>The Black Turn – where your music meets the world.</h4>
+                      <h4 className='text-2xl font-bold'>The Black Turn Digital Private Limited – where your music meets the world.</h4>
                       </div>
                     </div>
                   </section>
