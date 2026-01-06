@@ -4,186 +4,198 @@ import Footer from '../Header_Footer/Footer'
 
 function TermsandConditions() {
   return (
-
     <>
-
       <Header />
       <div className="max-w-6xl mx-auto p-8 bg-white shadow-lg mt-8 mb-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-8">
-          Terms & Conditions
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+          TERMS & CONDITIONS FOR ARTIST, CREATOR & MEDIA COMPANY PAYOUTS
         </h1>
 
-        <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
-          <p className="">
-            Welcome to <span className="font-semibold text-gray-900">The Black Turn Digital Private Limited</span> we By accessing or using our website, platform, tools, distribution services, payment gateway, or API services , you agree to the following Terms & Conditions and Policies.
+        <div className="space-y-8 text-gray-700 leading-relaxed text-base md:text-lg">
+          {/* Intro */}
+          <p>
+            These Terms & Conditions govern payout-related services provided by{' '}
+            <span className="font-semibold text-gray-900">The Black Turn Digital Private Limited</span> to artists,
+            creators, labels, and media companies. By using our payout and distribution
+            services, you agree to the terms outlined below.
           </p>
 
-
-
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
-              1.1 Definitions
+          {/* 1. Eligibility for Payouts */}
+          <section className="mt-4 pt-4 border-t border-gray-200">
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              1. Eligibility for Payouts
             </h2>
-            <p className=" text-gray-700">
-              <span className="font-semibold text-gray-900">•	Client/Artist/User </span>:- Any individual, label, or entity using our Services.
+            <p>
+              To be eligible to receive payouts, Clients must:
             </p>
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Complete KYC verification as required by law.</li>
+              <li>Provide accurate and valid bank account details.</li>
+              <li>Maintain an active and compliant account on our platform.</li>
+              <li>
+                Be legally entitled to receive earnings, royalties, or revenue generated
+                through their content or services.
+              </li>
+            </ul>
+          </section>
 
-            <p className=" text-gray-700">
-              <span className="font-semibold text-gray-900">•	Royalties  </span>:- Earnings generated from streaming, licensing, downloads, and digital distribution.
-            </p>
-
-            <p className=" text-gray-700">
-              <span className="font-semibold text-gray-900">•	API Services </span>:- Automated collection and payout solutions provided by us.
-            </p>
-
-            <p className=" text-gray-700">
-              <span className="font-semibold text-gray-900">• Wallet Balance  </span>:- Amount available in your dashboard for withdrawal.
-            </p>
-
-
-
-
-
-
-
-          </div>
-
-          <div className="mt-6">
-            <h2 className="text-xl uppercase font-medium text-gray-800 mb-4">
-              Section 2 - Scope of Services
+          {/* 2. Nature of Payouts */}
+          <section>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              2. Nature of Payouts
             </h2>
-            <p className=" text-gray-700">
-              <p className=" text-gray-700">
-                We provide:
-              </p>
+            <p>
+              Payouts made by us to Clients may include, but are not limited to:
             </p>
-            <p className="mt-4 text-gray-700">
-              •	Media & digital content distribution
-            </p>
-            <p className="mt-4 text-gray-700">
-               •	Royalty and earnings collection
-            </p>
-            <p className="mt-4 text-gray-700">
-              •	Payout services to artists, labels, and rights owners
-            </p>
-            <p className="mt-4 text-gray-700">
-              •	API-based automated collection and disbursement
-            </p>
-            <p className="mt-4 text-gray-700">
-              •	Dashboard to track statements and payments
-            </p>
-          </div>
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Service fees or platform fees payable to the Client.</li>
+              <li>Royalties from digital content, media, or music streams.</li>
+              <li>Engagement- or performance-based income (where applicable).</li>
+              <li>Revenue share from partners, platforms, or ad networks.</li>
+              <li>Any other approved earnings as per specific agreements or campaigns.</li>
+            </ul>
+          </section>
 
-          <div className="mt-6">
-            <h2 className=" text-xl uppercase font-medium text-gray-800 mb-4">
-              Section 3 - User Obligations
+          {/* 3. Payout Schedule & Timelines */}
+          <section>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              3. Payout Schedule & Timelines
             </h2>
-            <p className=" text-gray-700">
-              Users must:
+            <p>
+              Payout schedules are subject to the timelines of banks, payment gateways,
+              and our partners. While we strive to process payouts promptly, the actual
+              credit to the Client’s bank account may vary due to:
             </p>
-            <p className="mt-4 text-gray-700">
-              •	Provide accurate identity, KYC, and bank details.
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Bank processing times and holidays.</li>
+              <li>Delays from third-party partners or platforms.</li>
+              <li>Compliance checks or regulatory requirements.</li>
+              <li>Technical or operational issues beyond our control.</li>
+            </ul>
+            <p className="mt-2">
+              Any such delays shall not render us liable for penalties or damages, unless
+              explicitly agreed otherwise in writing.
             </p>
-            <p className="mt-4 text-gray-700">
-              •	Own or have legal rights to all submitted content.
-            </p>
-            <p className="mt-4 text-gray-700">
-              •	Not upload infringing, illegal, or misleading content.
-            </p>
-            <p className="mt-4 text-gray-700">
-              •	Maintain security of account credentials and API keys.
-            </p>
-          </div>
+          </section>
 
-          <div className="mt-6">
-            <h2 className=" text-xl font-medium text-gray-800 mb-4 ">
-              SECTION 4 – Payments, Royalties & Withdrawals
+          {/* 4. Fees, Deductions & Taxes */}
+          <section>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              4. Fees, Deductions & Taxes
             </h2>
-            <p className=" text-gray-700">
-              •	We collect revenue on behalf of Clients from platforms.
+            <p>
+              All payouts are subject to applicable platform fees, deductions, and taxes.
+              This may include:
             </p>
-            <p className="mt-4 text-gray-700">
-              •	Payouts are processed to the registered bank account via manual or API-driven release.
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Platform fees or commission as per agreed terms.</li>
+              <li>
+                Statutory taxes such as TDS, GST, or any other applicable government levies.
+              </li>
+              <li>Bank charges, payment gateway fees, or currency conversion charges.</li>
+            </ul>
+            <p className="mt-2">
+              Clients are responsible for providing accurate tax details (such as PAN, GSTIN,
+              etc.) and for complying with their own tax obligations under applicable law.
             </p>
-            <p className="mt-4 text-gray-700">
-              •	Minimum thresholds, settlement timelines, and charges may apply.
-            </p>
-             <p className="mt-4 text-gray-700">
-              •	Taxes, TDS, and statutory deductions will be applied as per law.
-            </p>
-             <p className="mt-4 text-gray-700">
-              •	Funds may be withheld for legal disputes, copyright claims, or suspicious activity.
-            </p>
-          </div>
+          </section>
 
-          <div className="mt-6">
-            <h2 className=" text-2xl font-medium text-gray-800 mb-4">
-              SECTION 5 – Intellectual Property
+          {/* 5. Client Responsibilities */}
+          <section>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              5. Client Responsibilities
             </h2>
-            <p className=" text-gray-700">
-             • Users retain 100% ownership of content.
+            <p>
+              To ensure smooth payout processing, Clients agree to:
             </p>
-            <p className="mt-4 text-gray-700">
-              • A limited license is granted to us for distribution.
-            </p>
-            <p className="mt-4 text-gray-700">
-              • Users are responsible for copyright or content-related disputes.
-            </p>
-       
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Provide accurate and up-to-date personal, business, and bank information.</li>
+              <li>Avoid any fraudulent, illegal, or suspicious activity on the platform.</li>
+              <li>Promptly update bank and contact details if they change.</li>
+              <li>
+                Review payout statements and report any discrepancies as soon as possible.
+              </li>
+            </ul>
+          </section>
 
-          </div>
-
-          <div className="mt-6">
-            <h2 className=" text-2xl font-medium text-gray-800 mb-4">
-              SECTION 6 – Liability Limitation
+          {/* 6. Payment Failures & Reversals */}
+          <section>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              6. Payment Failures & Reversals
             </h2>
-            <p className=" text-gray-700">
-              We are not liable for:
+            <p>
+              Payouts may fail or be reversed in situations such as:
             </p>
-            <p className="mt-4 text-gray-700">
-              • Delayed revenue reports from platforms
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Incorrect or invalid bank account details provided by the Client.</li>
+              <li>Compliance holds, sanctions, or KYC issues.</li>
+              <li>Ongoing disputes, chargebacks, or reversals from partners.</li>
+              <li>Legal orders or regulatory restrictions.</li>
+            </ul>
+            <p className="mt-2">
+              In such cases, funds may be kept on hold in the Client’s wallet or returned to
+              the originating source until the issue is resolved.
             </p>
-            <p className="mt-4 text-gray-700">
-              • Incorrect bank details submitted by clients
-            </p>
-             <p className="mt-4 text-gray-700">
-              • Loss of earnings due to content platform policy changes
-            </p>
-             <p className="mt-4 text-gray-700">
-              • Indirect or consequential damages
-            </p>
-             <p className="mt-4 text-gray-700">
-              Our maximum liability is limited to fees paid by the Client in the last 12 months.
-            </p>
-          </div>
+          </section>
 
-          <div className="mt-6">
-            <h2 className=" text-2xl font-medium text-gray-800 mb-4">
-              SECTION 7 – Termination
+          {/* 7. Dispute Resolution */}
+          <section>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              7. Dispute Resolution
             </h2>
-            <p className=" text-gray-700">
-              We may suspend or terminate services if:
+            <p>
+              Any dispute related to payouts, amounts, or statements must be raised within{' '}
+              <span className="font-semibold">10 business days</span> from the date of the
+              payout or statement. Clients must provide:
             </p>
-            <p className="mt-4 text-gray-700">
-              • Fraud or manipulation (e.g., artificial streaming) is detected
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Relevant screenshots, transaction IDs, or bank references.</li>
+              <li>Detailed description of the issue or discrepancy.</li>
+            </ul>
+            <p className="mt-2">
+              We will review and respond to such disputes on a best-effort basis in accordance
+              with our internal policies and partner guidelines.
             </p>
-            <p className="mt-4 text-gray-700">
-              • Legal or banking compliance requires it
-            </p>
-            <p className="mt-4 text-gray-700">
-              • User violates these Terms
-            </p>
-          </div>
+          </section>
 
-          <div className="mt-6">
-            <h2 className=" text-2xl font-medium text-gray-800 mb-4">
-              SECTION 8 – Governing Law
+          {/* 8. Account Holds & Suspension */}
+          <section>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              8. Account Holds & Suspension
             </h2>
-            <p className=" text-gray-700">
-              These Terms are governed by the laws of India, under the jurisdiction of [City] Courts.
+            <p>
+              We reserve the right to place holds on funds or suspend payout access if:
             </p>
-          
-          </div>
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Fraud, artificial activity, or policy violations are suspected.</li>
+              <li>There is non-compliance with KYC, tax, or regulatory requirements.</li>
+              <li>We receive legal, regulatory, or law-enforcement instructions.</li>
+              <li>
+                There are unresolved disputes, chargebacks, or claims from partners or
+                platforms.
+              </li>
+            </ul>
+            <p className="mt-2">
+              Any such action will be taken at our discretion to protect the ecosystem and
+              comply with applicable laws.
+            </p>
+          </section>
+
+          {/* 9. Changes to Terms */}
+          <section>
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              9. Changes to Terms
+            </h2>
+            <p>
+              These payout Terms & Conditions may be updated or modified from time to time.
+              Updated terms will be reflected on our platform or communicated through
+              appropriate channels.
+            </p>
+            <p className="mt-2">
+              Continued use of our services after such updates will be deemed as acceptance
+              of the revised terms. Clients are advised to review this page periodically.
+            </p>
+          </section>
         </div>
       </div>
       <Footer />

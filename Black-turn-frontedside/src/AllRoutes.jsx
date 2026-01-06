@@ -49,7 +49,7 @@ import SingleSongCTView from './Dashboard/Pages/SingleSongCTView'
 import ViewSingleSongCT from './Dashboard/Pages/ViewSingleSongCT'
 import ViewSingleOnlyCallerTune from './Dashboard/Pages/ViewSingleOnlyCallerTune '
 import ViewSingleSongWithoutCT from './Dashboard/Pages/ViewSingleSongWithoutCT'
-import ApiUsagePolicy from './Pages/ApiUsagePolicy'
+// import ApiUsagePolicy from './Pages/ApiUsagePolicy'
 
 function AllRoutes() {
   return (
@@ -61,7 +61,7 @@ function AllRoutes() {
         <Route path='/about' element={<Aboutus />} />
         <Route path='/Refund' element={<Refunds />} />
         <Route path='/privacy' element={<Privacy />} />
-        <Route path='/Api-Usage-Policy' element={<ApiUsagePolicy/>} />
+        {/* <Route path='/Api-Usage-Policy' element={<ApiUsagePolicy/>} /> */}
         <Route path="/blog" element={<Blog />} />
         <Route path='/blogform' element={<Blogform />} />
         <Route path='/singleblog/:id' element={<SingleBlog />} />
